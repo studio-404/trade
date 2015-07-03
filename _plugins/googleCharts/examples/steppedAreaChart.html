@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year',  'test1', 'test2', 'test3', 'test4', 'test5'],
+          ['1935', 105, 320, 530, 399, 400],
+          ['1936', 115, 420, 630, 400, 401],
+          ['1937', 125, 520, 730, 401, 402],
+          ['1938', 135, 620, 830, 402, 403],
+          ['1939', 145, 720, 930, 403, 404],
+        ]);
+
+        var options = {
+          title: 'The decline of \'The 39 Steps\'',
+          isStacked: true, 
+          colors:  ['#1279bb','#94bed7','#68a6cd','#3d90c4','#93bdd6']
+        };
+
+        var chart = new google.visualization.SteppedAreaChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 100%"></div>
+  </body>
+</html>

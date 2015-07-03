@@ -1,0 +1,45 @@
+[25-Jun-2015 13:40:22 America/Chicago] PHP Parse error:  syntax error, unexpected '$_GET' (T_VARIABLE) in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/barCharts.php on line 3
+[25-Jun-2015 13:40:25 America/Chicago] PHP Parse error:  syntax error, unexpected '$_GET' (T_VARIABLE) in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/barCharts.php on line 3
+[25-Jun-2015 13:52:15 America/Chicago] 0
+[25-Jun-2015 13:52:17 America/Chicago] 0
+[25-Jun-2015 13:52:53 America/Chicago] 0
+[25-Jun-2015 13:53:10 America/Chicago] 0
+[25-Jun-2015 13:53:23 America/Chicago] 0
+[25-Jun-2015 13:53:42 America/Chicago] 0
+[25-Jun-2015 14:08:11 America/Chicago] 0
+[25-Jun-2015 14:17:07 America/Chicago] 0
+[25-Jun-2015 14:17:27 America/Chicago] 0
+[25-Jun-2015 14:19:43 America/Chicago] 0
+[25-Jun-2015 14:20:59 America/Chicago] 0
+[25-Jun-2015 14:21:03 America/Chicago] 0
+[25-Jun-2015 14:21:08 America/Chicago] 0
+[25-Jun-2015 14:21:50 America/Chicago] 0
+[25-Jun-2015 14:21:57 America/Chicago] 0
+[26-Jun-2015 02:59:51 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/pieCharts.php on line 37
+[26-Jun-2015 02:59:51 America/Chicago] 0
+[26-Jun-2015 02:59:51 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/barCharts.php on line 36
+[26-Jun-2015 03:02:38 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/pieCharts.php on line 37
+[26-Jun-2015 03:02:43 America/Chicago] 0
+[26-Jun-2015 03:02:43 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/barCharts.php on line 36
+[26-Jun-2015 04:57:34 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/pieCharts.php on line 37
+[26-Jun-2015 04:57:34 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/pieCharts.php on line 37
+[26-Jun-2015 04:57:35 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/pieCharts.php on line 37
+[26-Jun-2015 04:57:38 America/Chicago] 0
+[26-Jun-2015 04:57:38 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/barCharts.php on line 36
+[26-Jun-2015 04:57:39 America/Chicago] 0
+[26-Jun-2015 04:57:39 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/barCharts.php on line 36
+[26-Jun-2015 04:57:39 America/Chicago] 0
+[26-Jun-2015 04:57:39 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/barCharts.php on line 36
+[26-Jun-2015 05:31:27 America/Chicago] 0
+[26-Jun-2015 05:31:27 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/barCharts.php on line 36
+[26-Jun-2015 05:31:27 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/pieCharts.php on line 37
+[26-Jun-2015 06:31:53 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/pieCharts.php on line 37
+[26-Jun-2015 06:31:54 America/Chicago] 0
+[26-Jun-2015 06:31:54 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/barCharts.php on line 36
+[26-Jun-2015 06:39:21 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/pieCharts.php on line 37
+[26-Jun-2015 06:39:22 America/Chicago] 0
+[26-Jun-2015 06:39:22 America/Chicago] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/googleCharts/barCharts.php on line 36
+[28-Jun-2015 13:33:05 America/Chicago] 0
+[29-Jun-2015 00:56:13 America/Chicago] 0
+[01-Jul-2015 04:00:27 America/Chicago] 0
+[01-Jul-2015 05:50:15 America/Chicago] 0

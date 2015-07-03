@@ -1,0 +1,39 @@
+ <html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   </head>
+  <body>
+ <script type="text/javascript">
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ["Element", "Density", { role: "style" } ],
+        ["Copper", 8.94, "#1279bb"],
+        ["Silver", 10.49, "#94bed7"],
+        ["Gold", 19.30, "#68a6cd"],
+        ["Platinum", 21.45, "#3d90c4"], 
+        ["Platinum", 2.45, "#93bdd6"] 
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "Density of Precious Metals, in g/cm^3",
+        width: '100%',
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+  </script>
+<div id="columnchart_values" style="width: 100%"></div>
+</body>
+</html>
