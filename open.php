@@ -121,7 +121,7 @@ define('PRE_GALLERY', $c["gallery.view.pre.slug"]);
 define('WEB_DIR', $c["website.directory"]);
 define('TEMPLATE', WEBSITE.$c["website.directory"].'/');
 define('MAIN_DIR', WEBSITE.LANG.'/');
-define('MAIN_PAGE', MAIN_DIR."home");
+define('MAIN_PAGE', MAIN_DIR.$c["welcome.page.slug"]);
 define('ADMIN_SLUG',$c['admin.slug']);
 /*
 ** Controller function

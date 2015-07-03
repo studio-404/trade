@@ -6,12 +6,10 @@ class homepage extends connection{
 
 	public function template($c){
 		$conn = $this->conn($c); // connection
-
 		$cache = new cache();
 		$data["homepage_general"] = $cache->index($c,"homepage_general");
 		$data["homepage_files"] = $cache->index($c,"homepage_files");
 
-		
 		/* languages */
 		$languages = $cache->index($c,"languages");
 		$data["languages"] = json_decode($languages); 
@@ -30,6 +28,7 @@ class homepage extends connection{
 			$data["main_menu"] = $model_template_main_menu->nav($menu_array,"header");
 			$data["footer_menu"] = $model_template_main_menu->nav($menu_array,"footer");
 		}
+
 		/* components */
 		$components = $cache->index($c,"components");
 		$data["components"] = json_decode($components); 
@@ -38,11 +37,8 @@ class homepage extends connection{
 		$multimedia = $cache->index($c,"multimedia");
 		$data["multimedia"] = json_decode($multimedia); 
 
-
-
 		$news = $cache->index($c,"news");
 		$data["news"] = json_decode($news);
-
 
 		$events = $cache->index($c,"events");
 		$data["events"] = json_decode($events);

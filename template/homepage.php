@@ -4,20 +4,33 @@
 
  <div id="home_slider" class="carousel slide" data-ride="carousel">
 	<div class="carousel-inner" role="listbox">
-        <div class="active item">
-			<img class="first-slide" src="<?=TEMPLATE?>img/slide_1.jpg" alt="First slide">
-				<div class="container">
-					<div class="carousel-caption">
-						<div class="col-sm-4">
-							<div class="slider_info">
-								<div class="title">Georgian Food Industry Is on the rise</div>
-								<div class="text">This website Is a must tool for the international bussines organisations to explore trading opportunities</div>
-								<div class="url"><a href="#">Company Profile</a></div>
-							</div>
+
+        <?php
+		$x=1;
+		$ctext = new ctext();
+		foreach($data["components"] as $val){
+			if($val->com_name != "Slider"){ continue; }
+		?>
+		<div class="<?=($x==1) ? 'active ' : ''?>item">
+			<img class="first-slide" src="<?=WEBSITE?>image?f=<?=WEBSITE_.$val->image?>&w=1600&h=435" alt="First slide">
+			<div class="container">
+				<div class="carousel-caption">
+					<div class="col-sm-4">
+						<div class="slider_info">
+							<div class="title"><?=$ctext->cut(strip_tags($val->title),55)?></div>
+							<div class="text"><?=$ctext->cut(strip_tags($val->desc),75)?></div>
+							<div class="url"><a href="<?=$val->url?>">Read more</a></div>
 						</div>
+					</div>
 				</div>
-			  </div>
+			</div>
         </div>
+		<?php
+			$x++;
+		}
+		?>
+
+
          
 		<a class="carousel-control left" href="#home_slider" data-slide="prev">
 			<div class="slider_arrow_left"></div>

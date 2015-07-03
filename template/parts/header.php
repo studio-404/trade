@@ -130,29 +130,23 @@ echo $header_data["title"];
 		<div id="header_line">
 			<div class="col-sm-12 text-right padding_0">			
 				<div id="members_area">					
-					<a href="#" data-toggle="modal" data-target="#register_popup">Register</a> | 
-					<a href="#" data-toggle="modal" data-target="#login_popup">Login</a>
-					<div class="btn-group">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <span class="caret"></span></a>	
-						<ul class="dropdown-menu pull-right">
-							<li><a href="#">Add Product</a></li>
-							<li><a href="#">Manage Account</a></li>
-						</ul>
-					</div>					
+					<a href="#" data-toggle="modal" data-target="#register_popup"><?=$data["language_data"]["register"]?></a> | 
+					<a href="#" data-toggle="modal" data-target="#login_popup"><?=$data["language_data"]["login"]?></a>
+					<a href="#"><?=$data["language_data"]["profile"]?></a>	
 				</div>
 			</div>
 		</div>
 		<div id="header_2">
 			<div class="col-sm-5 col-md-5 col-xs-5 col-lg-5 padding_0 logo_text">
-				<a href="home.html">
+				<a href="<?=MAIN_PAGE?>">
 					<img src="<?=TEMPLATE?>img/logo.png"/>
 				</a>
 			</div>
 			<div class="col-sm-5 head_contact text-right">
-				<div id="live_chat_div"><a href="#">Live Chat</a></div>
+				<div id="live_chat_div"><a href="#"><?=$data["language_data"]["livechart"]?></a></div>
 				<div id="header_contact">
-					<li>Call us 24/7 on Hotline</li>
-					<li><span>+995 32 2 96 00 10</span></li>
+					<li><?=$data["language_data"]["hotlinelabel"]?></li>
+					<li><span><?=$data["language_data"]["hotlinevalue"]?></span></li>
 				</div>
 			</div>
 			<div class="col-sm-2 header_map text-right">
@@ -176,14 +170,7 @@ echo $header_data["title"];
 			</a> 
 		 </div>
 		 <div id="slidemenu" class="dropdown">
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">START</a></li>
-				<li><a href="#">COUNTRY PROFILE</a></li>
-				<li><a href="#">EXPORT CATALOG</a></li>
-				<li><a href="#">BUSSINES ENQUIRES</a></li>
-				<li><a href="#">FOREIGN TRADE</a></li>
-				<li><a href="#">ABOUT</a></li>
-			</ul>          
+			<?php echo $data["main_menu"]; ?>         
 		 </div>
 		</div>
 	  </div>

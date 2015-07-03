@@ -1197,5 +1197,7 @@ height:25px; width:25px; z-index:999999999999999999999999999;
 	
 }
 
-
+/* gio */
+#content{ min-height: 460px; }
+.carousel-control{ width: 5%; }
 
