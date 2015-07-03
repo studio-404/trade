@@ -27,7 +27,7 @@ $c['date.timezone'] = 'Asia/Tbilisi';
 $c['date.format'] = 'Y-m-d H:i:s';
 
 $c['output.charset'] = 'UTF-8';
-$c['main.language'] = 'ge';
+$c['main.language'] = 'en';
 $c['time.limit'] = 300;
 $c['execution.time'] = 300;
 $c['post.max.size'] = "64M";
