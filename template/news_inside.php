@@ -1,22 +1,6 @@
 <?php @include("parts/header.php"); ?>
 <div class="container" id="container">
 	<div class="col-sm-3" id="sidebar">
-		<div class="breadcrumbs">
-			<div class="your_are_here"><?=$data["language_data"]["path"]?>: </div>
-			<li><a href="<?=MAIN_PAGE?>"><?=$data["language_data"]["mainpage"]?></a><li>  >
-			<?php 
-			$count = count($data["breadcrups"]); 
-			$x=1;
-			foreach($data["breadcrups"] as $val)
-			{
-				if($x<$count){ $seperarator = ">"; }else{ $seperarator=""; }
-			?>
-				<li><a href="<?=WEBSITE.LANG."/".$val->slug?>"><?=$val->title?></a><li>  <?=$seperarator?>
-			<?php
-				$x++;
-			}
-			?>  
-		</div>
 		<div class="sidebar_menu">
 			<ul>
 				<?=$data["left_menu"]?>
@@ -24,71 +8,58 @@
 		</div>
 	</div>
 	<div class="col-sm-9" id="content">
-		<div class="page_title_2">
-			<?php 
-			echo $data["language_data"]["newsheader"]; 
+		<div class="page_title_2"><?=$data["language_data"]["latestnews"]?></div>
+		<br>
+		<div class="page_title_3">
+			<div class="date"><span><?=date("d",$data["news_general"][0]["date"])?></span> <?=date("M",$data["news_general"][0]["date"])?></div>
+			<?=$data["news_general"][0]["title"]?>
+			<div class="icons">
+				<div class="share"></div>
+				<div class="print"></div>
+			</div>
+		</div>
+		
+		<div class="text_formats margin_top_20">
+			<img src="<?=WEBSITE?>image?f=<?=WEBSITE.$data["news_general"][0]["pic"]?>&w=270&h=130" class="img-responsive" alt="" />
+			<p>
+				The Business Excellence (BE) Briefing is suitable for companies &amp; organizations that are new to business excellence, and are interested in finding out how the Revised BE Framework can help strengthen management systems to deliver superior results. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen 
+				book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+			</p>
+		</div>
+		
+		<hr class="line_effect hr_margin">
+		
+		<div class="page_title_4">Other News</div>
+		
+		<div class="row news_div">
+			<?php
+			// echo "<pre>";
+			// print_r($data["news_list"]);  
+			// echo "</pre>"; 
+			$itemperpage = 10;
+			$path = WEBSITE.LANG."/".$data["text_general"][0]["slug"]; 
+			$model_template_pagination = new model_template_pagination();
+			$news_list = array_slice($data["news_list"],1);
+			$newslist = $model_template_pagination->pager($news_list,$itemperpage,$path);
+			$ctext = new ctext();
+			foreach ($newslist[0] as $val) {
+			?>
+
+				<div class="col-sm-4 col-md-3 col-xs-4 news_item">
+					<a href="<?=WEBSITE.LANG.'/'.$val->slug?>">
+						<div class="date"><span><?=date("d",$val->date)?></span> <?=date("M",$val->date)?></div>
+						<div class="text">
+							<?=$ctext->cut(strip_tags($val->title),55)?>
+						</div>
+					</a>	
+				</div>
+
+			<?php
+			}
 			?>
 		</div>
-		 
-		<div class="page_title_3">
-			<div class="row">
-				<div class="col-sm-10 padding_0"><?=$data["news_general"][0]["title"]?></div>
-				<div class="col-sm-2 padding_0">
-					<div class="icons">
-						<div class="share"></div>
-						<div class="print"></div>
-					</div>
-				</div>
-			</div>			
-		</div>
-	
-		<div class="news_date">
-			<?=date("d",$data["news_general"][0]["date"])." ".$data["language_data"][date("M",$data["news_general"][0]["date"])]." ".date("Y",$data["news_general"][0]["date"])?>
-		</div>
 		
-		<hr class="line_effect"/>
-		
-		<div class="text_formats">
-			
-		<?php
-		$first = array_slice($data["news_files"], 0, 1);
-		//$others = array_slice($data["text_files"], 1);
-		if($first[0]->file){
-		?>
-		<img src="<?=IMG?>ajax-loader.gif" class="img-responsive" id="mainimage" data-mainimage="<?=WEBSITE?>image?f=<?=WEBSITE.$first[0]->file?>&w=377&h=235" />		
-		<?php } ?>
-		<?=$data["news_general"][0]["long_description"]?> 
-		</div>
-		<div style="clear:both"></div>
-		<?php if(count($data["news_documents"]) > 0) : ?>
-		<hr class="line_effect" />
-		<div class="page_title_4">
-			<?=$data["language_data"]["attachedfiles"]?>
-		</div>
-		<?php
-		foreach($data["news_documents"] as $val){ 
-			$ext = explode(".",$val->file);
-			$ext = end($ext);
-			$ext = strtoupper($ext);
-		?>
-			<a href="<?=WEBSITE.$val->file?>" target="_blank" style="text-decoration:none">
-			<div class="attachment_div">
-				<div class="attach_img"><img src="<?=TEMPLATE?>img/document.png"></div>
-				<div class="attach_info">
-					<ul>
-						<!-- <li><?=$data["language_data"]["documenttype"]?>: <?=$ext?></li>
-						<li><?=$data["language_data"]["documentname"]?>: <?=$val->title?></li>
-						<li><?=$data["language_data"]["date"]?>: <?=date("d.m.Y",$val->date)?></li> -->
-						<li><?=$val->title?></li>
-						<li><?=$data["language_data"]["date"]?>: <?=date("d.m.Y",$val->date)?></li>
-					</ul>
-				</div>
-			</div>
-			</a><br />
-		<?php 
-		} 
-		endif;
-		?>
+		<a href="#" class="gray_link">View More News »</a>
 		
 	</div>
 </div>

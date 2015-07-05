@@ -23,6 +23,7 @@ echo $header_data["title"];
 <script src="<?php echo TEMPLATE;?>js/scripts.js"></script>
 </head>
 <body id="menu_responsive">
+	<div style="margin:0; padding:0; width:100%; text-align:center; background-color:#ffa100; color:white; line-height:25px; font-size:14px">Under Development</div>
 <!-- START LOGIN POPUP -->
 <div id="login_popup" class="modal fade" role="dialog">
   <div class="modal-dialog" style="width:340px;">
