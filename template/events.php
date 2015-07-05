@@ -1,4 +1,40 @@
 <?php @include("parts/header.php"); ?>
+<div id="register_for_event" class="modal fade" role="dialog">
+  <div class="modal-dialog" style="width:340px;">
+    <!-- Modal content-->
+    <div class="modal-content">
+		<div class="modal-body">
+			<h3 class="modal-title">Register For The Events <div style="margin-top:-10px;"><small style="float:none;display:inline-block;">Sial - Asian food market place</small></div></h3>			
+			<div class="form-group">
+				<label>Company Name</label>
+				<input type="text" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>Product</label>
+				<input type="text" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>Contact Person</label>
+				<input type="text" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>E-mail address</label>
+				<input type="text" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>Mobile Number</label>
+				<input type="text" class="form-control">
+			</div>
+			<div class="form-group">
+				<label>Phone Number</label>
+				<input type="text" class="form-control">
+			</div>
+			<div class="btn btn-block btn-yellow" style="font-size:19px; margin-top:35px;">REGISTER</div>
+		</div> 
+    </div>
+  </div>
+</div>
+
 <div class="container" id="container">
 	<div class="col-sm-3" id="sidebar">
 		<div class="sidebar_menu">
