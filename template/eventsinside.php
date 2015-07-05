@@ -1,22 +1,6 @@
 <?php @include("parts/header.php"); ?>
 <div class="container" id="container">
 	<div class="col-sm-3" id="sidebar">
-		<div class="breadcrumbs">
-			<div class="your_are_here"><?=$data["language_data"]["path"]?>: </div>
-			<li><a href="<?=MAIN_PAGE?>"><?=$data["language_data"]["mainpage"]?></a><li>  >
-			<?php 
-			$count = count($data["breadcrups"]); 
-			$x=1;
-			foreach($data["breadcrups"] as $val)
-			{
-				if($x<$count){ $seperarator = ">"; }else{ $seperarator=""; }
-			?>
-				<li><a href="<?=WEBSITE.LANG."/".$val->slug?>"><?=$val->title?></a><li>  <?=$seperarator?>
-			<?php
-				$x++;
-			}
-			?>  
-		</div>
 		<div class="sidebar_menu">
 			<ul>
 				<?=$data["left_menu"]?>
@@ -24,28 +8,40 @@
 		</div>
 	</div>
 	<div class="col-sm-9" id="content">
-		<div class="page_title_2">
-			<?=$data["language_data"]['eventsheader']?>
-		</div>
-		 
+		<?php
+			$first = $data["eventsinside_general"];
+		?>
 		<div class="page_title_3">
-			<div class="row">
-				<?php
-				$first = $data["eventsinside_general"];
-				?>
-				<div class="col-sm-10 padding_0"><?=$first[0]->title?></div>
-				<div class="col-sm-2 padding_0">
-					<div class="icons">
-						<div class="share"></div>
-						<div class="print"></div>
-					</div>
+			<?=$first[0]->title?>
+			<div class="icons">
+				<div class="share"></div>
+				<div class="print"></div>
+			</div>
+		</div>
+		
+		<div class="row" id="event_div">
+			<div class="col-sm-4">
+				<img src="<?=WEBSITE?>image?f=<?=WEBSITE.$first[0]->pic?>&w=270&h=130" class="img-responsive" alt="" />
+			</div>
+			<div class="col-sm-4 event_line_bg">
+				<div class="yellow_title">When:</div>
+				<div class="text_formats_blue">
+					<?=$first[0]->event_when?>	
+				</div>
+				<div class="yellow_title">Fee:</div>
+				<div class="text_formats_blue">
+					<?=$first[0]->event_fee?>	
+				</div>
+			</div>
+			<div class="col-sm-4 event_line_bg">
+				<div class="yellow_title">Venue:</div>
+				<div class="text_formats_blue">
+					<?=$first[0]->event_desc?>
 				</div>
 			</div>			
 		</div>
 
-		<hr class="line_effects"/>
-		
-		<div class="row" id="event_div">
+		<!-- <div class="row" id="event_div">
 			<div class="col-sm-4">
 				<div class="text_formats_blue">
 					<div class="col-sm-3 padding_0" style="width:45px;">
@@ -71,16 +67,14 @@
 					<?=$first[0]->event_fee?>	
 				</div>
 			</div>			
-		</div>
-		
-		<!-- <div class="text_formats">
-			<p><?=$data["website_text"]?></p>
 		</div> -->
 		
+		<div class="text_formats">
+			<p><?=$first[0]->short_description?></p>
+		</div> 
+		<div style="clear:both"></div>
 		<div class="event_prog" style="margin:0">
 			<div class="title" style="padding:10px 0;"><?=$data["language_data"]["programme"]?></div>
-		</div>
-		<div class="text_formats">
 			<?=$first[0]->long_description?>
 		</div>
 		

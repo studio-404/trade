@@ -1202,4 +1202,16 @@ height:25px; width:25px; z-index:999999999999999999999999999;
 .carousel-control{ width: 5%; }
 #events_items > .event_item .text{ min-height: 40px; max-height: 40px; }
 .news_div .news_item .text{ min-height: 50px; max-height: 50px; }
+.event_prog ul{ margin: 0; padding: 0; list-style-type: none; position: relative; }
+.event_prog ul li{ position: relative; }
+.event_prog ul li::after{
+  content: '';
+  width: 8px;
+  height: 8px;
+  background: #f25a0f;
+  margin-right: 10px;
+  position: absolute;
+  top: 5px;
+  left: 0;
+}
 

@@ -776,7 +776,7 @@ class cache extends connection{
 			break;
 			case "news":
 			$sql = 'SELECT 
-			`studio404_module_item`.* 
+			`studio404_module_item`.*
 			FROM 
 			`studio404_pages`,`studio404_module_attachment`, `studio404_module`, `studio404_module_item` 
 			WHERE 
@@ -846,8 +846,6 @@ class cache extends connection{
 			';	
 			$prepare = $conn->prepare($sql); 
 			$prepare->execute(array(
-				":media_type"=>'photo', 
-				":pagetype"=>'eventpage', 
 				":lang"=>LANG_ID, 
 				":status"=>1, 
 				":visibility"=>1, 
@@ -880,6 +878,8 @@ class cache extends connection{
 			';
 			$prepare = $conn->prepare($sql); 
 			$prepare->execute(array(
+				":pagetype"=>'eventpage', 
+				":media_type"=>'photo', 
 				":slug"=>$slug, 
 				":lang"=>LANG_ID,
 				":visibility"=>1,
@@ -891,9 +891,33 @@ class cache extends connection{
 			case "eventsinside_general": 
 			$get_slug_from_url = new get_slug_from_url();
 			$slug = $get_slug_from_url->slug();
-			$sql = 'SELECT * FROM `studio404_module_item` WHERE `slug`=:slug AND `lang`=:lang AND `visibility`!=:visibility AND `status`!=:status';
+			$sql = 'SELECT `studio404_module_item`.*,
+			( 
+				SELECT `studio404_gallery_file`.`file` FROM 
+				`studio404_gallery_attachment`,`studio404_gallery`,`studio404_gallery_file` 
+				WHERE 
+				`studio404_gallery_attachment`.`connect_idx`=`studio404_module_item`.`idx` AND 
+				`studio404_gallery_attachment`.`pagetype`=:pagetype AND 
+				`studio404_gallery_attachment`.`lang`=:lang AND 
+				`studio404_gallery_attachment`.`status`!=:status AND 
+				`studio404_gallery_attachment`.`idx`=`studio404_gallery`.`idx` AND 
+				`studio404_gallery`.`lang`=:lang AND 
+				`studio404_gallery`.`status`!=:status AND 
+				`studio404_gallery`.`idx`=`studio404_gallery_file`.`gallery_idx` AND 
+				`studio404_gallery_file`.`media_type`=:media_type AND 
+				`studio404_gallery_file`.`lang`=:lang AND 
+				`studio404_gallery_file`.`status`!=:status 
+				ORDER BY `studio404_gallery_file`.`position` ASC LIMIT 1
+			) AS pic 
+			FROM `studio404_module_item` WHERE 
+			`studio404_module_item`.`slug`=:slug AND 
+			`studio404_module_item`.`lang`=:lang AND 
+			`studio404_module_item`.`visibility`!=:visibility AND 
+			`studio404_module_item`.`status`!=:status';
 			$prepare = $conn->prepare($sql); 
 			$prepare->execute(array(
+				":pagetype"=>'eventpage', 
+				":media_type"=>'photo', 
 				":slug"=>$slug, 
 				":lang"=>LANG_ID, 
 				":visibility"=>1, 
