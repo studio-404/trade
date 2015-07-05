@@ -88,7 +88,7 @@ echo $header_data["title"];
 						</div>
 						
 						<input type="checkbox"  style="float:left; margin-right:5px; "/>
-						<div class="text_formats">By clicking Register, you agree that you have read and accepted the <a href="#">User Agreement.</a> </div>
+						<div class="text_formats">By clicking Register, you agree that you have read and accepted the <a href="<?=WEBSITE.LANG?>/user-agreement">User Agreement.</a> </div>
 						
 						<div class="btn btn-block btn-yellow" style="font-size:19px; margin-top:35px;">REGISTER</div>
 				</div>
