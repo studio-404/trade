@@ -20,7 +20,7 @@ function my_session_start()
    return true;
 }
 my_session_start();    
-try{
+// try{
 header('X-Frame-Options: DENY');
 header("Content-type: text/html; charset=utf-8");
 
@@ -128,7 +128,7 @@ define('ADMIN_SLUG',$c['admin.slug']);
 */
 $controller = new controller($c);
 $controller->loadpage($obj,$c);
-}catch(Exception $e){
-	echo "Critical error !";
-}
+// }catch(Exception $e){
+// 	echo "Critical error !";
+// }
 ?>

@@ -65,82 +65,44 @@
 
 
 <div class="container" id="container">	
-		<div class="page_title_4">Events Schedule</div>
-		
+		<div class="page_title_4"><?=$data["language_data"]["eventschedule"]?></div>
+		<?php 
+		$eventArray1 = array_slice($data["events"], 0, 6, true);
+		?>
 		<div class="row" id="events_items">
-			<div class="col-sm-4 col-md-2 col-xs-4 event_item">
-				<a href="#">
-					<div class="date">29 May</div>
-					<div class="image"><img src="<?=TEMPLATE?>img/event_1.jpg" class="img-responsive"/></div>
-					<div class="text">Georgian Cognac company is out in European market shelves...</div>
-				</a>	
-			</div>
-			<div class="col-sm-4 col-md-2 col-xs-4 event_item">
-				<div class="date">29 May</div>
-				<div class="image"><img src="<?=TEMPLATE?>img/event_2.jpg" class="img-responsive"/></div>
-				<div class="text">Georgian Cognac company is out in European market shelves...</div>
-			</div>
-			<div class="col-sm-4 col-md-2 col-xs-4 event_item">
-				<div class="date">29 May</div>
-				<div class="image"><img src="<?=TEMPLATE?>img/event_3.jpg" class="img-responsive"/></div>
-				<div class="text">Georgian Cognac company is out in European market shelves...</div>
-			</div>
-			<div class="col-sm-4 col-md-2 col-xs-4 event_item">
-				<div class="date">29 May</div>
-				<div class="image"><img src="<?=TEMPLATE?>img/event_4.jpg" class="img-responsive"/></div>
-				<div class="text">Georgian Cognac company is out in European market shelves...</div>
-			</div>
-			<div class="col-sm-4 col-md-2 col-xs-4 event_item">
-				<div class="date">29 May</div>
-				<div class="image"><img src="<?=TEMPLATE?>img/event_1.jpg" class="img-responsive"/></div>
-				<div class="text">Georgian Cognac company is out in European market shelves...</div>
-			</div>
-			<div class="col-sm-4 col-md-2 col-xs-4 event_item">
-				<div class="date">29 May</div>
-				<div class="image"><img src="<?=TEMPLATE?>img/event_2.jpg" class="img-responsive"/></div>
-				<div class="text">Georgian Cognac company is out in European market shelves...</div>
-			</div>
+			<?php 
+			foreach($eventArray1 as $val){
+			?>
+				<div class="col-sm-4 col-md-2 col-xs-4 event_item">
+					<a href="<?=WEBSITE.LANG."/".htmlentities($val->slug)?>">
+						<div class="date"><?=date("d M",$val->date)?></div>
+						<div class="image"><img src="<?=WEBSITE?>image?f=<?=WEBSITE.$val->pic?>&w=170&h=90" class="img-responsive" alt="" /></div>
+						<div class="text"><?=$val->title?></div>
+					</a>	
+				</div>
+			<?php
+			}
+			?>
 		</div>
 	
-		<div class="page_title_4">Latest News</div>
+		<div class="page_title_4"><?=$data["language_data"]["latestnews"]?></div>
 		
 		<div class="row news_div">
-			<div class="col-sm-4 col-md-2 col-xs-4 news_item">
-				<a href="#">
-					<div class="date"><span>01</span> May</div>
-					<div class="text">Trade with Georgia is the new website for international people.</div>
-				</a>	
-			</div>
-			<div class="col-sm-4 col-md-2 col-xs-4 news_item">
-				<a href="#">
-					<div class="date"><span>01</span> May</div>
-					<div class="text">Trade with Georgia is the new website for international people.</div>
-				</a>	
-			</div>
-			<div class="col-sm-4 col-md-2 col-xs-4 news_item">
-				<a href="#">
-					<div class="date"><span>01</span> May</div>
-					<div class="text">Trade with Georgia is the new website for international people.</div>
-				</a>	
-			</div>
-			<div class="col-sm-4 col-md-2 col-xs-4 news_item">
-				<a href="#">
-					<div class="date"><span>01</span> May</div>
-					<div class="text">Trade with Georgia is the new website for international people.</div>
-				</a>	
-			</div>
-			<div class="col-sm-4 col-md-2 col-xs-4 news_item">
-				<a href="#">
-					<div class="date"><span>01</span> May</div>
-					<div class="text">Trade with Georgia is the new website for international people.</div>
-				</a>	
-			</div>
-			<div class="col-sm-4 col-md-2 col-xs-4 news_item">
-				<a href="#">
-					<div class="date"><span>01</span> May</div>
-					<div class="text">Trade with Georgia is the new website for international people.</div>
-				</a>	
-			</div>
+
+			<?php 
+			$ctext = new ctext(); 
+			$newArray1 = array_slice($data["news"], 0, 6, true);
+			foreach($newArray1 as $val){
+			?>
+				<div class="col-sm-4 col-md-2 col-xs-4 news_item">
+					<a href="<?=WEBSITE.LANG."/".htmlentities($val->slug)?>">
+						<div class="date"><span><?=date("d",$val->date)?></span> <?=date("M",$val->date)?></div>
+						<div class="text"><?=$ctext->cut($val->title,35)?></div>
+					</a>	
+				</div>
+			<?php
+			}
+			?>
 		</div>
 		
 		<div class="home_div_3">

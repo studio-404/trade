@@ -23,13 +23,11 @@ class model_template_main_menu{
 			$o = '';
 				for($x=0;$x<count($menu_array->date);$x++){
 					
-					if($menu_array->sub[$x]){ 
-						$o .= '<div class="col-sm-2"><ul class="text_formats_blue">';						
-						$o .= '<li>';
-						$o .= '<a href="'.MAIN_DIR.$menu_array->slug[$x].'"><span>'.$menu_array->title[$x].'</span></a>';
-						$o .= '</li>'; 
-						$o .= $this->sub($menu_array->sub[$x],$slug,"footer"); 		
-						$o .= '</ul></div>';				
+					if($menu_array->sub[$x] && $menu_array->title[$x]!="Trade map"){ 						
+						$o .= '<ul>';
+						$o .= '<span>'.$menu_array->title[$x].': &nbsp;</span>';
+						$o .= $this->sub($menu_array->sub[$x],$slug,"footer"); 					
+						$o .= '</ul>'; 				
 					}
 					
 				}			
@@ -53,20 +51,21 @@ class model_template_main_menu{
 
 	public function sub($sub,$slug,$type){
 		$o = '';
-		// if($type=="header"){
-		// 	$o = '<ul class="dropdown-menu dropdown-menu-2">'; 
-		// 	for($x=0;$x<count($sub->date);$x++){
-		// 		$active = ($sub->slug[$x]==$slug) ? 'active' : '';
-		// 			$o .= '<li class="'.$active.'"><a href="'.MAIN_DIR.$sub->slug[$x].'">'.$sub->title[$x].'</a></li>'; 
-		// 	}
-		// 	$o .= '</ul>';
-		// }else if($type=="footer"){
-		// 	$o = ''; 
-		// 	for($x=0;$x<count($sub->date);$x++){
-		// 		$active = ($sub->slug[$x]==$slug) ? 'active' : '';
-		// 			$o .= '<li><a href="'.MAIN_DIR.$sub->slug[$x].'">'.$sub->title[$x].'</a></li>'; 
-		// 	}
-		// }
+		if($type=="header"){
+			$o = '<ul class="dropdown-menu dropdown-menu-2">'; 
+			for($x=0;$x<count($sub->date);$x++){
+				$active = ($sub->slug[$x]==$slug) ? 'active' : '';
+					$o .= '<li class="'.$active.'"><a href="'.MAIN_DIR.$sub->slug[$x].'">'.$sub->title[$x].'</a></li>'; 
+			}
+			$o .= '</ul>';
+		}else if($type=="footer"){
+			$o = ''; 
+			for($x=0;$x<count($sub->date);$x++){
+				$active = ($sub->slug[$x]==$slug) ? 'active' : '';
+				$slash = (count($sub->date)!=($x+1)) ? ' / ' : '';
+				$o .= '<li><a href="'.MAIN_DIR.$sub->slug[$x].'">'.$sub->title[$x].'</a></li>'.$slash; 
+			}
+		}
 		return $o;
 	}
 

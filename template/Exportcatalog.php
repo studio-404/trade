@@ -4,9 +4,9 @@
 <div class="container" id="container">
 	<div class="export_menu">
 		<ul>
-			<li<?=(Input::method("GET","catalog")=="companies" || !Input::method("GET","catalog")) ? ' class="active"' : ''?>><a href="?catalog=companies">COMPANIES</a></li>
-			<li<?=(Input::method("GET","catalog")=="products") ? ' class="active"' : ''?>><a href="?catalog=products">PRODUCTS</a></li>
-			<li<?=(Input::method("GET","catalog")=="services") ? ' class="active"' : ''?>><a href="?catalog=services">SERVICES</a></li>
+			<li<?=(Input::method("GET","view")=="companies" || !Input::method("GET","view")) ? ' class="active"' : ''?>><a href="?view=companies">COMPANIES</a></li>
+			<li<?=(Input::method("GET","view")=="products") ? ' class="active"' : ''?>><a href="?view=products">PRODUCTS</a></li>
+			<li<?=(Input::method("GET","view")=="services") ? ' class="active"' : ''?>><a href="?view=services">SERVICES</a></li>
 		</ul>
 	</div>
 	
@@ -20,7 +20,7 @@
 	</div>
 	
 	
-	<?php if(Input::method("GET","catalog")=="companies" || !Input::method("GET","catalog")) : ?>
+	<?php if(Input::method("GET","view")=="companies" || !Input::method("GET","view")) : ?>
 	<div class="export_companies">
 		<div class="filters_div">
 			<div class="col-sm-2">
@@ -79,7 +79,7 @@
 	</a>
 <?php endif; ?>
 
-<?php if(Input::method("GET","catalog")=="products") : ?>
+<?php if(Input::method("GET","view")=="products") : ?>
 	<div class="export_companies">
 		<div class="filters_div">
 			<div class="col-sm-2">
@@ -148,7 +148,7 @@
 	</div>
 <?php endif; ?>
 
-<?php if(Input::method("GET","catalog")=="services") : ?>
+<?php if(Input::method("GET","view")=="services") : ?>
 	<div class="export_companies">
 		<div class="filters_div">
 			<div class="col-sm-2">

@@ -807,7 +807,24 @@ class cache extends connection{
 			break;
 			case "events":
 			$sql = 'SELECT 
-			`studio404_module_item`.* 
+			`studio404_module_item`.*, 
+			( 
+				SELECT `studio404_gallery_file`.`file` FROM 
+				`studio404_gallery_attachment`,`studio404_gallery`,`studio404_gallery_file` 
+				WHERE 
+				`studio404_gallery_attachment`.`connect_idx`=`studio404_module_item`.`idx` AND 
+				`studio404_gallery_attachment`.`pagetype`=:pagetype AND 
+				`studio404_gallery_attachment`.`lang`=:lang AND 
+				`studio404_gallery_attachment`.`status`!=:status AND 
+				`studio404_gallery_attachment`.`idx`=`studio404_gallery`.`idx` AND 
+				`studio404_gallery`.`lang`=:lang AND 
+				`studio404_gallery`.`status`!=:status AND 
+				`studio404_gallery`.`idx`=`studio404_gallery_file`.`gallery_idx` AND 
+				`studio404_gallery_file`.`media_type`=:media_type AND 
+				`studio404_gallery_file`.`lang`=:lang AND 
+				`studio404_gallery_file`.`status`!=:status 
+				ORDER BY `studio404_gallery_file`.`position` ASC LIMIT 1
+			) AS pic 
 			FROM 
 			`studio404_pages`,`studio404_module_attachment`, `studio404_module`, `studio404_module_item` 
 			WHERE 
@@ -829,6 +846,7 @@ class cache extends connection{
 			';	
 			$prepare = $conn->prepare($sql); 
 			$prepare->execute(array(
+				":media_type"=>'photo', 
 				":pagetype"=>'eventpage', 
 				":lang"=>LANG_ID, 
 				":status"=>1, 
