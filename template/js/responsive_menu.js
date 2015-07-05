@@ -10,13 +10,13 @@ $(document).ready(function () {
     $("#slide-nav").on("click", toggler, function (e) {
         var selected = $(this).hasClass('slide-active');
         $('#slidemenu').stop().animate({
-            right: selected ? menuneg : '0px'
+            right: selected ? menuneg : '0'
         });
         $('#navbar-height-col').stop().animate({
             right: selected ? slideneg : '0px'
         });
         $(pagewrapper).stop().animate({
-            right: selected ? '0px' : slidewidth
+            right: selected ? '0' : slidewidth
         });
         $(navigationwrapper).stop().animate({
             right: selected ? '0px' : slidewidth

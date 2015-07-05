@@ -1,124 +1,49 @@
-<?php @include("parts/header.php"); ?>
-<div class="container" id="container">
-	<div class="page_title_2">
-		<?=$data["text_general"][0]["title"]?>
-	</div>
-	<div class="col-sm-3" id="sidebar">
-		<div class="text_formats">
-			<label><?=$data["text_general"][0]["shorttitle"]?></label>
-		</div>	
-		<div class="text_formats" style="line-height:1px;">
-			<?=$data["text_general"][0]["text"]?>
-			<p class="unclearemail"></p>
-		</div>
-		<div class="find_us_map">
-			<span>Find us on a map:</span>
-			<div class="image" style="height:120px; width:100%;">
-			<iframe src="https://www.google.com/maps/d/u/1/embed?mid=zoNh_VKUSO0k.kSOo8h81kK4E&z=16" width="100%" height="140" border="0" style="border:none"></iframe>
-			</div>
-		</div>
-
-
-	</div>
-	<div class="col-sm-9" id="content">	
-		 
-		<div class="text_formats">
-			<label><?=$data["language_data"]["contactformtitle"]?></label>
-		</div>
-		 
-	<div class="contact_page_div">	 
-		<div class="col-sm-12 padding_0">
-			<div class="col-sm-5 padding_0">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="<?=$data["language_data"]["contactformsubject"]?>"/>
-				</div>
-			</div>	
-		</div>	
-		<div class="col-sm-12 padding_0">
-			<div class="col-sm-5 padding_0">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="<?=$data["language_data"]["contactformnamelname"]?>"/>
-				</div>
-			</div>	
-		</div>
-		<div class="col-sm-12 padding_0">
-			<div class="col-sm-5 padding_0">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="<?=$data["language_data"]["contactformemail"]?>"/>
-				</div>
-			</div>	
-		</div>
-		<div class="col-sm-12 padding_0"> 
-			<div class="form-group">
-				<textarea class="form-control"></textarea>
-			</div> 
-		</div>
-		 
-		<div class="col-sm-12 padding_0">
-			<div class="text-right">		
-				<button class="btn btn-yellow"><?=$data["language_data"]["contactformbutton"]?></button>
-			</div>
-		</div> 
-	</div>	 
-	<?php
-		$cc=0;
-		foreach($data["components"] as $val){
-			if($val->com_name != "Career opportunities"){ continue; }
-			$cc++;
-		}
-	if($cc){
-	?>		 
-		<div class="career_opp">
-			<?=$data["language_data"]["careeropportunities"]?>
-		</div>
-		 <?php
-}
-		 ?>
- 
-		
-		
-<div class="contact_us_vakansy">
-    <div class="panel-group" id="accordion">
-
-    	<?php
-		$x=1;
-		foreach($data["components"] as $val){
-			if($val->com_name != "Career opportunities"){ continue; }
-		?>
-			<div class="panel">
-            <div>
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?=$x?>">
-						<div class="job_title_list">
-							<li>
-								<span><?=$data["language_data"]["careeropportunitiestitle"]?>:</span> <?=$val->title?>
-								<label>
-									<span><?=$data["language_data"]["careeropportunitiesapply"]?>:</span> <?=date("d.m.Y",$val->date)?>
-								</label>	
-							</li>
-						</div>
-					</a>
-                </h4>
-            </div>
-            <div id="collapse<?=$x?>" class="panel-collapse collapse">
-                <div class="panel-body">                   
-					<div class="text_formats">
-						<?=$val->desc?>
-					</div>				   
-                </div>
-            </div>
-        </div>	
-		<?php
-			$x++;
-		}
-		?>   
-		
-    </div>
-</div>
-
-				
-	</div>
-</div>
-
-
+<?php 
+	@include("parts/header.php"); 
+?>
+<div class="container" id="container">
+	<div class="col-sm-3" id="sidebar">
+		<div class="sidebar_menu">
+			<ul>
+				<?=$data["left_menu"]?>
+			</ul>
+		</div>
+	</div>
+
+	<div class="col-sm-9" id="content">
+		<div class="page_title_2">
+			Our Team
+		</div>
+		<div class="row contact_person">
+			<div class="col-sm-4 col-md-3 col-xs-4">
+				<div class="image"><img src="<?=TEMPLATE?>img/person_1.jpg" class="img-responsive"></div>
+				<div class="name">Liana Mezvrishvili</div>
+				<div class="work_position">Marketing Manager</div>
+				<div class="email">lmezvrishvil@enterprise.gov.ge</div>
+			</div>
+		</div>
+		
+		<div class="page_title_2">
+			Contact Details
+		</div>
+		<div class="contact_details">
+			<ul>
+				<li class="text_formats"><span>Tbilisi Office</span></li>
+				<li class="text_formats">Address: I.Chanturia street N12, Tbilisi Georgia 0190</li>
+				<li class="text_formats">Tel: +995 32 2 99 10 44; +995 32 2 99 11 28; Fax +995 32 2 99 11 29</li>
+				<li class="text_formats">Hotline; +995 32 99 99 99 ; E-mail; info@eda.ge</li>
+			</ul>
+		</div>
+		
+		<div class="page_title_2">
+			Find Us On A Map
+		</div>
+		
+		<div class="row col-sm-12">
+			<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7098.94326104394!2d78.0430654485247!3d27.172909818538997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1385710909804" width="100%" height="150" frameborder="0" style="border:0"></iframe>
+		</div>
+		
+	</div>
+
+</div>
 <?php @include("parts/footer.php"); ?>

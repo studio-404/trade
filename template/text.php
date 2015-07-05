@@ -3,22 +3,6 @@
 ?>
 <div class="container" id="container">
 	<div class="col-sm-3" id="sidebar">
-		<div class="breadcrumbs">
-			<div class="your_are_here"><?=$data["language_data"]["path"]?>: </div>
-			<li><a href="<?=MAIN_PAGE?>"><?=$data["language_data"]["mainpage"]?></a><li>  >
-			<?php 
-			$count = count($data["breadcrups"]); 
-			$x=1;
-			foreach($data["breadcrups"] as $val)
-			{
-				if($x<$count){ $seperarator = ">"; }else{ $seperarator=""; }
-			?>
-				<li><a href="<?=WEBSITE.LANG."/".$val->slug?>"><?=$val->title?></a><li>  <?=$seperarator?>
-			<?php
-				$x++;
-			}
-			?>  
-		</div>
 		<div class="sidebar_menu">
 			<ul>
 				<?=$data["left_menu"]?>
@@ -49,8 +33,12 @@
 		<div style="clear:both"></div>
 		<?php if(count($data["text_documents"]) > 0) : ?>
 		<hr class="line_effect" />
-		<div class="page_title_4">
+
+		<div class="page_title_2">
 			<?=$data["language_data"]["attachedfiles"]?>
+		</div>
+		<div class="text_formats">
+			<p>If you want to find out more about trading statistics with Georgia, Please download the following brochure documents.</p>
 		</div>
 		<?php
 		foreach($data["text_documents"] as $val){ 
@@ -59,17 +47,18 @@
 			$ext = strtoupper($ext);
 		?>
 			<a href="<?=WEBSITE.$val->file?>" target="_blank" style="text-decoration:none">
-			<div class="attachment_div">
-				<div class="attach_img"><img src="<?=TEMPLATE?>img/document.png" alt="" /></div>
-				<div class="attach_info">
-					<ul>
-						<!-- <li><?=$data["language_data"]["documenttype"]?>: <?=$ext?></li> -->
-						<!-- <li><?=$data["language_data"]["documentname"]?>: <?=$val->title?></li> -->
-						<li><?=$val->title?></li>
-						<li><?=$data["language_data"]["date"]?>: <?=date("d.m.Y",$val->date)?></li>
-					</ul>
+				<div class="attachment_div">
+					<div class="attach_img">
+						<img src="<?=TEMPLATE?>img/pdf.png" alt="" />
+					</div>
+					<div class="attach_info">
+						<ul>
+							<li><?=$data["language_data"]["documenttype"]?>: <?=$ext?></li>
+							<li><?=$data["language_data"]["documentname"]?>: <?=$val->title?></li>
+							<li><?=$data["language_data"]["date"]?>: <?=date("d.m.Y",$val->date)?></li>
+						</ul>
+					</div>
 				</div>
-			</div>
 			</a><br />
 		<?php 
 		} 

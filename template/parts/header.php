@@ -20,6 +20,7 @@ echo $header_data["title"];
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="<?php echo TEMPLATE;?>js/bootstrap.js"></script>
 <script src="<?php echo TEMPLATE;?>js/responsive_menu.js"></script>
+<script src="<?php echo TEMPLATE;?>js/scripts.js"></script>
 </head>
 <body id="menu_responsive">
 <!-- START LOGIN POPUP -->
@@ -28,17 +29,17 @@ echo $header_data["title"];
     <!-- Modal content-->
     <div class="modal-content">
 		<div class="modal-body">
-			<h3 class="modal-title">Login <small data-toggle="modal" data-target="#register_popup" onclick="$('#login_popup').modal('hide')">Register</small></h3>
+			<h3 class="modal-title"><?=$data["language_data"]["login"]?> <small data-toggle="modal" data-target="#register_popup" onclick="$('#login_popup').modal('hide')"><?=$data["language_data"]["register"]?></small></h3>
 			
 			<div class="form-group">
-				<label>E-mail Address</label>
+				<label><?=$data["language_data"]["emailaddress"]?></label>
 				<input type="text" class="form-control"/>
 			</div>
 			<div class="form-group">
-				<label>Password</label>
+				<label><?=$data["language_data"]["password"]?></label>
 				<input type="password" class="form-control"/>
 			</div>
-			<div class="btn btn-block btn-yellow" style="font-size:19px; margin-top:35px;">REGISTER</div>
+			<div class="btn btn-block btn-yellow" style="font-size:19px; margin-top:35px;"><?=strtoupper($data["language_data"]["register"])?></div>
 		</div> 
     </div>
   </div>
@@ -53,13 +54,13 @@ echo $header_data["title"];
     <!-- Modal content-->
     <div class="modal-content">
 		<div class="modal-body">
-			<h3 class="modal-title">Register in <small data-toggle="modal" data-target="#login_popup" onclick="$('#register_popup').modal('hide')">Login</small></h3>
+			<h3 class="modal-title"><?=$data["language_data"]["register"]?> <small data-toggle="modal" data-target="#login_popup" onclick="$('#register_popup').modal('hide')"><?=$data["language_data"]["login"]?></small></h3>
 			<ul class="" role="tablist">
 				<li class="btn btn-block btn-blue active">
-					<a href="#export_catalogue" aria-controls="export_catalogue" role="tab" data-toggle="tab">EXPORT CATALOGUE</a>
+					<a href="#export_catalogue" aria-controls="export_catalogue" role="tab" data-toggle="tab"><?=strtoupper($data["language_data"]["exportcatalog"])?></a>
 				</li>
 				<li class="btn btn-block btn-blue">
-					<a href="#bussines_enquires" aria-controls="bussines_enquires" role="tab" data-toggle="tab">BUSSINES ENQUIRES</a>
+					<a href="#bussines_enquires" aria-controls="bussines_enquires" role="tab" data-toggle="tab"><?=strtoupper($data["language_data"]["bussinesenquires"])?></a>
 				</li>
 			</ul>
 			 
@@ -70,6 +71,7 @@ echo $header_data["title"];
 							<label>Company Type</label>
 							<select class="form-control">
 								<option>Manufacturing</option>
+								<option>Service provider</option>
 							</select>
 						</div>
 						<div class="form-group">
@@ -95,6 +97,7 @@ echo $header_data["title"];
 						<div class="form-group">
 							<label>Register As</label>
 							<select class="form-control">
+								<option>Company</option>
 								<option>Individual</option>
 							</select>
 						</div>

@@ -117,7 +117,7 @@ ul {margin:0; padding:0;}
 
 /* START EXPORT MENU */
 
-.export_menu{margin-top:-18px; margin-bottom:18px;}
+.export_menu{margin-top:-10px; margin-bottom:10px;}
 .export_menu ul{display: table; width:100%;}
 .export_menu ul li{
 	display: table-cell;
@@ -154,7 +154,7 @@ ul {margin:0; padding:0;}
 
 
 
-.export_companies {margin-top:30px; }
+.export_companies {margin-top:20px; }
 .export_companies .filters_div {
 	background:#ffe3b2; 
 	display:inline-block;
@@ -559,13 +559,13 @@ ul {margin:0; padding:0;}
 	margin-bottom:70px;
 }
 
-table.blue_table{
+table{
 	border:solid red 1px;	
 	width:auto;
 }
-table.blue_table td {padding:5px 10px; border:solid #9ac9e6 1px; color:#fff;}
-table.blue_table td:first-child  {background:#0278c1; min-width:230px;}
-table.blue_table td:last-child {background:#67aeda; border:solid #c5e1f0 1px; min-width:130px;}
+table td {padding:5px 10px; border:solid #9ac9e6 1px; color:#fff;}
+table td:first-child  {background:#0278c1; min-width:230px;}
+table td:last-child {background:#67aeda; border:solid #c5e1f0 1px; min-width:130px;}
 
 
 .attachment_div {

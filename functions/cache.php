@@ -667,7 +667,7 @@ class cache extends connection{
 			case "left_menu": 
 			$get_slug_from_url = new get_slug_from_url();
 			$slug = $get_slug_from_url->slug();
-			$sql = 'SELECT `cid` FROM `studio404_pages` WHERE `slug`=:slug AND `status`!=:status AND `menu_type`!=:super AND `lang`=:lang AND `visibility`!=:visibility ORDER BY `position` ASC ';	
+			$sql = 'SELECT `idx`,`cid` FROM `studio404_pages` WHERE `slug`=:slug AND `status`!=:status AND `menu_type`!=:super AND `lang`=:lang AND `visibility`!=:visibility ORDER BY `position` ASC ';	
 			$prepare = $conn->prepare($sql); 
 			$prepare->execute(array(
 				":status"=>1, 
@@ -717,10 +717,21 @@ class cache extends connection{
 				":super"=>'super', 
 				":lang"=>LANG_ID, 
 				":visibility"=>1, 
-				":cid"=>$f['cid'] 
+				":cid"=>$f['idx'] 
 			)); 
 			$fetch = $prepare2->fetchAll(PDO::FETCH_ASSOC);
-			
+			if($prepare2->rowCount() <= 0){
+				$sql3 = 'SELECT * FROM `studio404_pages` WHERE `cid`=:cid AND `status`!=:status AND `menu_type`!=:super AND `lang`=:lang AND `visibility`!=:visibility ORDER BY `position` ASC';	
+				$prepare3 = $conn->prepare($sql3); 
+				$prepare3->execute(array(
+					":status"=>1, 
+					":super"=>'super', 
+					":lang"=>LANG_ID, 
+					":visibility"=>1, 
+					":cid"=>$f['cid'] 
+				)); 
+				$fetch = $prepare3->fetchAll(PDO::FETCH_ASSOC);
+			}			
 			break; 
 			case "multimedia": 
 			$sql = 'SELECT 
