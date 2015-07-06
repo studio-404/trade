@@ -44,6 +44,14 @@ class controller
 			}else{
 				$controller = new error_page(); 
 			}
+		}else if($file=='ajax'){//insertemail
+			// if under developer
+			$controller = "controller/ajax.php";
+			if(file_exists($controller)){
+				$controller = new ajax($c); 
+			}else{
+				$controller = new error_page(); 
+			}
 		}else if($file=='insertemail'){//
 			// if under developer
 			$controller = "controller/insertemail.php";

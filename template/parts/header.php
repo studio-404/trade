@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title><?php
+<title><?php 
 $template_title = new template_title();
 $header_data = $template_title->getTitle($data);
 echo $header_data["title"]; 
@@ -24,109 +24,10 @@ echo $header_data["title"];
 </head>
 <body id="menu_responsive">
 	<div style="margin:0; padding:0; width:100%; text-align:center; background-color:#ffa100; color:white; line-height:25px; font-size:14px">Under Development</div>
-<!-- START LOGIN POPUP -->
-<div id="login_popup" class="modal fade" role="dialog">
-  <div class="modal-dialog" style="width:340px;">
-    <!-- Modal content-->
-    <div class="modal-content">
-		<div class="modal-body">
-			<h3 class="modal-title"><?=$data["language_data"]["login"]?> <small data-toggle="modal" data-target="#register_popup" onclick="$('#login_popup').modal('hide')"><?=$data["language_data"]["register"]?></small></h3>
-			
-			<div class="form-group">
-				<label><?=$data["language_data"]["emailaddress"]?></label>
-				<input type="text" class="form-control"/>
-			</div>
-			<div class="form-group">
-				<label><?=$data["language_data"]["password"]?></label>
-				<input type="password" class="form-control"/>
-			</div>
-			<div class="btn btn-block btn-yellow" style="font-size:19px; margin-top:35px;"><?=strtoupper($data["language_data"]["register"])?></div>
-		</div> 
-    </div>
-  </div>
-</div>
-<!-- END LOGIN POPUP -->
-
-
-
-<!-- START REGISTER POPUP -->
-<div id="register_popup" class="modal fade" role="dialog">
-  <div class="modal-dialog" style="width:340px;">
-    <!-- Modal content-->
-    <div class="modal-content">
-		<div class="modal-body">
-			<h3 class="modal-title"><?=$data["language_data"]["register"]?> <small data-toggle="modal" data-target="#login_popup" onclick="$('#register_popup').modal('hide')"><?=$data["language_data"]["login"]?></small></h3>
-			<ul class="" role="tablist">
-				<li class="btn btn-block btn-blue active">
-					<a href="#export_catalogue" aria-controls="export_catalogue" role="tab" data-toggle="tab"><?=strtoupper($data["language_data"]["exportcatalog"])?></a>
-				</li>
-				<li class="btn btn-block btn-blue">
-					<a href="#bussines_enquires" aria-controls="bussines_enquires" role="tab" data-toggle="tab"><?=strtoupper($data["language_data"]["bussinesenquires"])?></a>
-				</li>
-			</ul>
-			 
-			<div class="tab-content">
-				<div role="tabpanel" class="tab-pane active" id="export_catalogue">
-				</br/>
-						<div class="form-group">
-							<label>Company Type</label>
-							<select class="form-control">
-								<option>Manufacturing</option>
-								<option>Service provider</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label>E-mail Address</label>
-							<input type="text" class="form-control"/>
-						</div>
-						<div class="form-group">
-							<label>Password</label>
-							<input type="password" class="form-control"/>
-						</div>
-						<div class="form-group">
-							<label>Repeat Password</label>
-							<input type="password" class="form-control"/>
-						</div>
-						
-						<input type="checkbox"  style="float:left; margin-right:5px; "/>
-						<div class="text_formats">By clicking Register, you agree that you have read and accepted the <a href="<?=WEBSITE.LANG?>/user-agreement">User Agreement.</a> </div>
-						
-						<div class="btn btn-block btn-yellow" style="font-size:19px; margin-top:35px;">REGISTER</div>
-				</div>
-				<div role="tabpanel" class="tab-pane" id="bussines_enquires">
-				</br/>
-						<div class="form-group">
-							<label>Register As</label>
-							<select class="form-control">
-								<option>Company</option>
-								<option>Individual</option>
-							</select>
-						</div>
-						<div class="form-group">
-							<label>E-mail Address</label>
-							<input type="text" class="form-control"/>
-						</div>
-						<div class="form-group">
-							<label>Password</label>
-							<input type="password" class="form-control"/>
-						</div>
-						<div class="form-group">
-							<label>Repeat Password</label>
-							<input type="password" class="form-control"/>
-						</div>
-						
-						<input type="checkbox"  style="float:left; margin-right:5px; "/>
-						<div class="text_formats">By clicking Register, you agree that you have read and accepted the <a href="#">User Agreement.</a> </div>
-						
-						<div class="btn btn-block btn-yellow" style="font-size:19px; margin-top:35px;">REGISTER</div>
-				</div>
-			</div>
- 
-		</div> 
-    </div>
-  </div>
-</div>
-<!-- END REGISTER POPUP -->
+<?php
+include("login.php");
+include("register.php");
+?>
 
  
 <header id="header" class="container-fluid" style="padding:0">
@@ -136,7 +37,7 @@ echo $header_data["title"];
 				<div id="members_area">					
 					<a href="#" data-toggle="modal" data-target="#register_popup"><?=$data["language_data"]["register"]?></a> | 
 					<a href="#" data-toggle="modal" data-target="#login_popup"><?=$data["language_data"]["login"]?></a>
-					<a href="#"><?=$data["language_data"]["profile"]?></a>	
+					<!-- <a href="#"><?=$data["language_data"]["profile"]?></a> -->	
 				</div>
 			</div>
 		</div>

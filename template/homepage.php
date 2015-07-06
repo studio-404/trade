@@ -4,7 +4,6 @@
 
  <div id="home_slider" class="carousel slide" data-ride="carousel">
 	<div class="carousel-inner" role="listbox">
-
         <?php
 		$x=1;
 		$ctext = new ctext();
