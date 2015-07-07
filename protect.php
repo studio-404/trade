@@ -13,7 +13,7 @@ imagesetthickness($im, 1);
 imageline($im, 0, rand(0,30), 120, rand(0,30), $linecolor);
 }
 
-imagestring($im, 25, 20, 12, $string, $red);
+imagestring($im, 35, 20, 12, $string, $red);
 
 
 
