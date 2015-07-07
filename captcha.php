@@ -21,7 +21,7 @@ foreach($files as $file)
 		$now = time() - 30;
 		if($cerationTime<$now)
 		{
-			unlink($dir.$file);
+			@unlink($dir.$file);
 		}
 	}
 }
