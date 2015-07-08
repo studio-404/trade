@@ -120,6 +120,46 @@ class ajax extends connection{
 				}
 			}
 		endif;
+
+		if(Input::method("POST","logintry")) :
+			if(!Input::method("POST","e") || !Input::method("POST","p") || !Input::method("POST","c")){
+				echo "Error empty";
+			}else if(Input::method("POST","c")!=$_SESSION['protect_']){
+				echo "Error code";
+			}else{
+				$e = Input::method("POST","e");
+				$p = Input::method("POST","p");
+				$sql = 'SELECT * FROM `studio404_users` WHERE `username`=:username AND `password`=:password AND `user_type`=:user_type AND `allow`=:two AND `status`!=:one'; 
+				$prepare = $conn->prepare($sql); 
+				$prepare->execute(array(
+					":username"=>$e, 
+					":password"=>md5($p), 
+					":user_type"=>'website', 
+					":two"=>2, 
+					":one"=>1 
+				));
+				if($prepare->rowCount() > 0){
+					$fetch = $prepare->fetch(PDO::FETCH_ASSOC);
+					$_SESSION["tradewithgeorgia_username"] = $e; 
+					$_SESSION["tradewithgeorgia_company_type"] = $fetch["company_type"]; 
+					// update 
+					$usql = 'UPDATE `studio404_users` SET `logtime`=:logtime, `log`=`log`+1 WHERE `id`=:id';
+					$prepare2 = $conn->prepare($usql); 
+					$prepare2->execute(array(
+						":logtime"=>time(), 
+						":id"=>$fetch["id"], 
+					));
+					echo "Done"; 
+				}else{
+					echo "Error numrows"; 
+				}
+			}
+		endif;
+
+		if(Input::method("POST","logout")) :
+			session_destroy();
+			echo "Done"; 
+		endif;
 			
 	}
 

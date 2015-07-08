@@ -1,5 +1,6 @@
 <?php 
 	@include("parts/header.php"); 
+	if(isset($_SESSION["tradewithgeorgia_username"])) {
 ?>
 <div class="container" id="container">
 	<div class="page_title_1">
@@ -118,4 +119,21 @@
 				</div>
 			</div>
 		</div>
-<?php @include("parts/footer.php"); ?>
+<?php 
+	}else{
+		?>
+	<div class="container" id="container" style="min-height:450px;">
+		<div class="page_title_1">
+			You dont have permition to access this page.
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<a href="<?=WEBSITE?>">Start page</a> | 
+				<a href="#" data-toggle="modal" data-target="#login_popup">Please log in</a>
+			</div>
+		</div>
+	</div>
+		<?php
+	}
+	@include("parts/footer.php"); 
+?>

@@ -171,8 +171,25 @@ $(document).on("click","#login_user",function(e){
 	}else if(checkEmpty(captcha,"#captcha")!=true){
 		$(".captcha_required").fadeIn("slow");
 	}else{
-		alert("yeah");
+		$("#finalstep3").html("<div>Please wait...</div>");
+		$(".modal-title small").hide();
+		$.post("http://"+document.domain+"/en/ajax",{ logintry:true, e:emailaddress3, p:password3, c:captcha }, function(d){
+			if(d=="Done"){ location.reload(); }
+			else{ $("#finalstep3").html("<div>Username, password or captcha code is incorrect, or you do not have permition to access your account yet</div>"); $(".reloadbutton").show(); }
+		});
 	}
+});
+
+$(document).on("click","#logoutbutton",function(e){
+	$(this).html("Please wait..."); 
+	$.post("http://"+document.domain+"/en/ajax",{ logout:true },function(d){
+		if(d=="Done"){
+			location.reload();
+		}else{ 
+			$(this).html("Logout"); 
+			alert("Error");
+		}
+	});
 });
 
 $(document).on("click","#reload",function(){

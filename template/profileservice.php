@@ -10,12 +10,12 @@
 		<div class="col-sm-3">
 			<div class="form-group">
 				<label>Company Name</label>
-				<input type="text" class="form-control" value="Business Enquires LTD">
+				<input type="text" class="form-control" value="MobileJobile">
 			</div>
 			<div class="form-group">
 				<label>Sector</label>
 				<select class="form-control">
-					<option>Food &amp; Drinks</option>
+					<option>IT &amp; Telecomunications</option>
 				</select>
 			</div>
 			<div class="form-group">
@@ -23,8 +23,10 @@
 				<input type="text" class="form-control">
 			</div>
 			<div class="form-group">
-				<label>production Capasity</label>
-				<input type="text" class="form-control">
+				<label>SME Classification</label>
+				<select class="form-control">
+					<option></option>
+				</select>
 			</div>
 			<div class="form-group">
 				<label>Address</label>
@@ -38,12 +40,12 @@
 		<div class="col-sm-3">
 			<div class="form-group">
 				<label>Email Address</label>
-				<input type="text" class="form-control" value="export@bagration.ge">
+				<input type="text" class="form-control" value="Design@dg.ge">
 			</div>	
 			<div class="form-group">
 				<label>Sub-Sector</label>
 				<select class="form-control">
-					<option>Alcoholic Drinks</option>
+					<option>Mobile Communication</option>
 				</select>
 			</div>
 			<div class="form-group">
@@ -51,7 +53,7 @@
 				<input type="text" class="form-control">
 			</div>
 			<div class="form-group">
-				<label>Certificates</label>
+				<label>Certificate</label>
 				<input type="text" class="form-control">
 			</div>
 			<div class="form-group">
@@ -59,7 +61,7 @@
 				<input type="text" class="form-control">
 			</div>
 			<div class="form-group">
-				<label>Office Phone</label>
+				<label>Phone Phone</label>
 				<input type="text" class="form-control">
 			</div>
 		</div>
@@ -69,14 +71,8 @@
 				<input type="password" class="form-control" value="password">
 			</div>
 			<div class="form-group">
-				<label>Products</label>
-				<input type="text" class="form-control" value="Wine, Beer, Energy Drink">
-			</div>
-			<div class="form-group">
-				<label>SME Classification</label>
-				<select class="form-control">
-					<option></option>
-				</select>
+				<label>Services</label>
+				<input type="text" class="form-control" value="Mobile Fixing, Communication Fixing">
 			</div>
 			<div class="form-group">
 				<label>Export Markets</label>
@@ -84,6 +80,7 @@
 					<option>Europe</option>
 				</select>
 			</div>
+			<br><br><br><br>
 			<div class="form-group">
 				<label>E-mail</label>
 				<input type="text" class="form-control">
@@ -114,106 +111,56 @@
 			<div class="col-sm-3">
 				<button class="btn btn-yellow">SAVE CHANGES</button>
 			</div>
-		</div>
+		</div>	
 	</div>
 	<hr>
 	
 	<div class="page_title_1">
-		Add New Products
+		Add New Service
 	</div>
 	
 		<div class="row">
-			<div class="col-sm-3">
+			<div class="col-sm-5">
 				<div class="form-group">
-					<label>Choose Product</label>
+					<label>Title</label>
 					<select class="form-control">
-						<option>Wine</option>
+						<option>Communication Fixing</option>
 					</select>
-				</div>
-				<div class="form-group">
-					<label>Shelf Life</label>
-					<input type="text" class="form-control">
 				</div>
 			</div>	
-			<div class="col-sm-3">
+			<div class="col-sm-12">
 				<div class="form-group">
-					<label>product Name</label>
-					<select class="form-control">
-						<option>Mukuzani - White Dry</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label>Packaging</label>
-					<input type="text" class="form-control">
+					<label>Describe Service</label>
+					<textarea class="form-control"></textarea>
+				</div>				
+			</div>	
+			<div class="col-sm-12">
+				<div class="text-right">
+					<button class="btn btn-yellow">POST ENQUARY</button>
 				</div>
 			</div>
-			<div class="col-sm-3">
-				<div class="form-group">
-					<label>HS Code</label>
-					<select class="form-control">
-						<option>0293948493</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label>AWards</label>
-					<input type="text" class="form-control">
-				</div>
-			</div>	
-			<div class="col-sm-3">
-				<div class="form-group">
-					<label>Product Photo</label> 
-					<div class="upload_img_tmp">
-						<img src="<?=TEMPLATE?>img/img_upload.png" class="img-responsive" width="100%" alt="" />
-					</div>
-					<div class="btn btn-upload btn-block"> 
-						UPLOAD LOGO <input type="file" class="input_type_file">
-					</div> 
-				</div>
-			</div>
-			<div class="admin_inputs">
-				<div class="col-sm-9">
-					<div class="form-group">
-						<label>Describe what are you offering or looking for</label>
-						<textarea class="form-control"></textarea>
-					</div>				
-				</div>	
-				<div class="col-sm-3">
-					<div class="text-right">
-						<button class="btn btn-yellow">POST ENQUARY</button>
-					</div>
-				</div>
-			</div>	
 		</div>
 		
 		<hr>
 		
 		<div class="page_title_1">
-			Products
+			Services
 		</div>
 		
 		<div class="col-sm-12 padding_0">
-			<div class="products">
-				<div class="col-sm-12 col-md-12 col-xs-12 col-gl-12 product_item">
-					<div class="col-sm-2 col-md-2 col-xs-2 col-lg-2 padding_0">
-						<div class="image"><img src="<?=TEMPLATE?>img/product_1.jpg" class="img-responsive" width="100%" alt="" /></div>
-					</div>	
-					<div class="col-sm-7 col-md-7 col-xs-7 col-gl-7 product_info padding_0">
-						<ul>
-							<li><span>Sparkling Wine Rose Semi Dry - </span>HS Code 04431001</li>
-							<li><span>Packaging </span>0.75 Crystal dark, 6 bottles pre box</li>
-							<li><span>Awards </span>Golden Globe, Bronze Medal UK Wines, Silver Medal European Wines</li>
-						</ul>
+			<div class="services">
+				<div class="col-sm-12 col-md-12 col-xs-12 col-gl-12 service_item">
+					<div class="col-sm-9 col-md-9 col-xs-12 col-gl-9 product_info padding_0">
+						<div class="title">Mobile Phone Transfers</div>
+						<div class="text">
+							Finest sparkling wine produced by methode traditionnelle from carefully selected grapes of Georgian variety "Chinuri", grown in the best wine-producing zone of Kartli region Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered 
+						</div>
 					</div>
-					<div class="col-sm-8 col-md-8 col-xs-8 col-gl-8 product_info padding_0">
-						<ul>
-							<li><span>About - </span>
-								Finest sparkling wine produced by methode traditionnelle from carefully selected grapes of Georgian variety "Chinuri", grown in the best wine-producing zone of Kartli region
-							</li>
-						</ul>
-					</div>
-					<div class="col-sm-2 " style="margin-top:30px;">
-						<button class="btn btn-yellow btn-sm btn-block">MAKE CHANGES</button>
-						<button class="btn btn-aproved btn-sm btn-block">APPROVED</button>
+					<div class="col-sm-3 padding_0" style="margin-top:30px;">
+						<div class="text-right">
+							<button class="btn btn-yellow btn-sm btn-service_item">MAKE CHANGES</button>
+							<button class="btn btn-aproved btn-sm btn-service_item">APPROVED</button>
+						</div>	
 					</div>
 				</div>
 			</div>
@@ -237,4 +184,5 @@
 		<?php
 	}
 	@include("parts/footer.php"); 
+
 ?>

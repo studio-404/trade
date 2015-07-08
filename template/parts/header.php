@@ -21,6 +21,15 @@ echo $header_data["title"];
 <script src="<?php echo TEMPLATE;?>js/bootstrap.js"></script>
 <script src="<?php echo TEMPLATE;?>js/responsive_menu.js"></script>
 <script src="<?php echo TEMPLATE;?>js/scripts.js"></script>
+<!--Start of Zopim Live Chat Script-->
+<script type="text/javascript">
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+$.src="//v2.zopim.com/?39RyjmvEGfikM3GPxh7EiUJlsKNbZgyI";z.t=+new Date;$.
+type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+</script>
+<!--End of Zopim Live Chat Script-->
 </head>
 <body id="menu_responsive">
 	<div style="margin:0; padding:0; width:100%; text-align:center; background-color:#ffa100; color:white; line-height:25px; font-size:14px">Under Development</div>
@@ -34,10 +43,15 @@ include("register.php");
 	<div class="container">
 		<div id="header_line">
 			<div class="col-sm-12 text-right padding_0">			
-				<div id="members_area">					
+				<div id="members_area">	
+					<?php if(!isset($_SESSION["tradewithgeorgia_username"])) { ?>			
 					<a href="#" data-toggle="modal" data-target="#register_popup"><?=$data["language_data"]["register"]?></a> | 
 					<a href="#" data-toggle="modal" data-target="#login_popup"><?=$data["language_data"]["login"]?></a>
-					<!-- <a href="#"><?=$data["language_data"]["profile"]?></a> -->	
+					<?php }else if(isset($_SESSION["tradewithgeorgia_company_type"])){ ?>
+					<a href="javascript:;"><?=$_SESSION["tradewithgeorgia_username"]?></a> | 
+					<a href="<?=company_type::profilelink()?>"><?=$data["language_data"]["profile"]?></a> | 
+					<a href="javascipt:;" id="logoutbutton"><?=$data["language_data"]["logout"]?></a> 
+					<?php } ?>
 				</div>
 			</div>
 		</div>
