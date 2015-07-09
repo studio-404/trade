@@ -42,21 +42,17 @@ $(document).on("click","#register_catalog",function(e){
 		setCookie("emailaddress1", emailaddress1, "1");
 		setCookie("password1", password1, "1");
 		setCookie("repeatpassword1", repeatpassword1, "1");
-
 		$.post("http://"+document.domain+"/en/ajax",{ sendemail1:true, type1:companytype1, email1:emailaddress1 },function(data){
 			if(data=="Error"){
 				$(".emailaddress1_exists").fadeIn("slow");
 			}else{
+				console.log(data);
 				$(".modal-title small").hide();
 				$("#first-step").hide();
 				$(".modal-body ul").hide();
-				$("#second-step").show();$(".modal-title small").hide();
-				$("#first-step").hide();
-				$(".modal-body ul").hide();
-				$("#second-step").show();
+				$("#second-step").show(); 				
 			}
 		});
-
 	}
 	
 });
@@ -123,7 +119,7 @@ $(document).on("click","#register__final_catalog",function(e){
 			if(data=="Error"){
 				$("#second-step").html("<div>Sorry, Your email already registered or Security code is not right or All fields have not been filled or Email is not valid !</div>");
 			}else if(data=="Done"){
-				$("#second-step").html("<div>Congrats, You have successfully registered, Please wait untill website administrator gives you permition to access your account; We will send you an email.</div>");
+				$("#second-step").html("<div>Congrats, You have successfully registered ! </div>");
 			}else{
 				$("#second-step").html("<div>Sorry, Your email already registered or Security code is not right or All fields have not been filled or Email is not valid !</div>");
 			}
@@ -145,7 +141,7 @@ $(document).on("click","#register__final_catalog2",function(e){
 			if(data=="Error"){
 				$("#second-step2").html("<div>Sorry, Your email already registered or Security code is not right or All fields have not been filled or Email is not valid !</div>");
 			}else if(data=="Done"){
-				$("#second-step2").html("<div>Congrats, You have successfully registered, Please wait untill website administrator gives you permition to access your account; We will send you an email.</div>");
+				$("#second-step2").html("<div>Congrats, You have successfully registered ! </div>");
 			}else{
 				$("#second-step2").html("<div>Sorry, Your email already registered or Security code is not right or All fields have not been filled or Email is not valid !</div>");
 			}

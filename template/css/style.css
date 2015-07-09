@@ -561,11 +561,21 @@ ul {margin:0; padding:0;}
 
 table{
 	border:solid red 1px;	
-	width:auto;
+	width:100%;
+	margin: 10px 0;
+	clear: both; 
+	float: left;
 }
 table td {padding:5px 10px; border:solid #9ac9e6 1px; color:#fff;}
-table td:first-child  {background:#0278c1; min-width:230px;}
-table td:last-child {background:#67aeda; border:solid #c5e1f0 1px; min-width:130px;}
+
+table td:nth-child(even) {
+    background:#0278c1; 
+}
+table td:nth-child(odd) {
+    background:#67aeda; border:solid #c5e1f0 1px;
+}
+/*table td:first-child  {}*/
+/*table td:last-child {}*/
 
 
 .attachment_div {

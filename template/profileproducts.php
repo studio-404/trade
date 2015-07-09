@@ -52,7 +52,9 @@
 			</div>
 			<div class="form-group">
 				<label>Certificates</label>
-				<input type="text" class="form-control">
+				<select class="form-control">
+					<option>ISO</option>
+				</select>
 			</div>
 			<div class="form-group">
 				<label>Contact Person</label>
@@ -70,7 +72,12 @@
 			</div>
 			<div class="form-group">
 				<label>Products</label>
-				<input type="text" class="form-control" value="Wine, Beer, Energy Drink">
+				<!-- <input type="text" class="form-control" value="Wine, , Energy Drink"> -->
+				<select multiple class="form-control" style="min-height:109px; max-height:109px">
+				  <option value="Wine" selected="selected">Wine</option>
+				  <option value="Beer" selected="selected">Beer</option>
+				  <option value="Energy Drink">Energy Drink</option>
+				</select>
 			</div>
 			<div class="form-group">
 				<label>SME Classification</label>
@@ -88,10 +95,6 @@
 				<label>E-mail</label>
 				<input type="text" class="form-control">
 			</div>
-			<div class="form-group">
-				<label>Web Address</label>
-				<input type="text" class="form-control">
-			</div>
 		</div>
 		<div class="col-sm-3">
 			<div class="form-group">
@@ -106,6 +109,10 @@
 		</div>
 		<div class="admin_inputs">
 			<div class="col-sm-9">
+				<div class="form-group">
+					<label>Web Address</label>
+					<input type="text" class="form-control">
+				</div>
 				<div class="form-group">
 					<label>About</label>
 					<textarea class="form-control"></textarea>

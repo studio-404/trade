@@ -32,7 +32,7 @@ class ajax extends connection{
 			$sendemail2 = Input::method("POST","sendemail3");
 			$type2 = Input::method("POST","type2");
 			$email2 = Input::method("POST","email2");
-			
+			$_SESSION["register_code_tradewithgeorgia"] = ustring::random(6);
 			$msg = 'Hello dear user, you have registered to our website: <b>'.WEBSITE.'</b>; Your registration code is: '.$_SESSION["register_code_tradewithgeorgia"];
 			$sql = 'SELECT `id` FROM `studio404_users` WHERE `username`=:email AND `status`!=:status';
 			$prepare = $conn->prepare($sql);
@@ -69,7 +69,7 @@ class ajax extends connection{
 				if($prepare->rowCount() > 0){
 					echo "Error";
 				}else{
-					$sql2 = 'INSERT INTO `studio404_users` SET `registered_date`=:registered_date, `registered_ip`=:registered_ip, `username`=:email, `password`=:password, `company_type`=:company_type, `user_type`=:user_type';
+					$sql2 = 'INSERT INTO `studio404_users` SET `registered_date`=:registered_date, `registered_ip`=:registered_ip, `username`=:email, `password`=:password, `company_type`=:company_type, `user_type`=:user_type, `allow`=:allow';
 					$prepare2 = $conn->prepare($sql2);
 					$prepare2->execute(array(
 						":registered_date"=>time(), 
@@ -77,7 +77,8 @@ class ajax extends connection{
 						":email"=>$e, 
 						":password"=>md5($p), 
 						":company_type"=>$t, 
-						":user_type"=>'website'
+						":user_type"=>'website', 
+						":allow"=>2
 					));
 					echo "Done";
 				}
@@ -106,7 +107,7 @@ class ajax extends connection{
 				if($prepare->rowCount() > 0){
 					echo "Error";
 				}else{
-					$sql2 = 'INSERT INTO `studio404_users` SET `registered_date`=:registered_date, `registered_ip`=:registered_ip, `username`=:email, `password`=:password, `company_type`=:company_type, `user_type`=:user_type';
+					$sql2 = 'INSERT INTO `studio404_users` SET `registered_date`=:registered_date, `registered_ip`=:registered_ip, `username`=:email, `password`=:password, `company_type`=:company_type, `user_type`=:user_type, `allow`=:allow';
 					$prepare2 = $conn->prepare($sql2);
 					$prepare2->execute(array(
 						":registered_date"=>time(), 
@@ -114,7 +115,8 @@ class ajax extends connection{
 						":email"=>$e, 
 						":password"=>md5($p), 
 						":company_type"=>$t, 
-						":user_type"=>'website'
+						":user_type"=>'website', 
+						":allow"=>2
 					));
 					echo "Done";
 				}

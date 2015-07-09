@@ -186,7 +186,9 @@
 		    ],
 		    toolbar1: "insertfile undo redo | styleselect | bold italic | link image",
 		    image_advtab: true, 
-		    extended_valid_elements : "iframe[src|width|height|name|align]"
+		    extended_valid_elements : "iframe[src|width|height|name|align]", 
+		    relative_urls : 0, 
+			remove_script_host : 0
 		});
 	});
 	</script>

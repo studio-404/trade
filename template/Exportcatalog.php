@@ -84,13 +84,13 @@
 		<div class="filters_div">
 			<div class="col-sm-2">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Company Name <span class="caret"></span> 
+					Product Name <span class="caret"></span> 
 				</a>					
-				<ul class="dropdown-menu">
+				<!-- <ul class="dropdown-menu">
 					<li><a href="#">Company Name</a></li>
 					<li><a href="#">Company Name</a></li>
 					<li><a href="#">Company Name</a></li>
-				</ul>
+				</ul> -->
 			</div>
 			<div class="col-sm-2">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -113,14 +113,14 @@
 				</a>
 			</div>
 			<div class="col-sm-4">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Certificates<span class="caret"></span> 
+				<a href="#" > <!-- class="dropdown-toggle" data-toggle="dropdown" -->
+					About<!-- <span class="caret"></span>  -->
 				</a>
-				<ul class="dropdown-menu">
+				<!-- <ul class="dropdown-menu">
 					<li><a href="#">Certificates</a></li>
 					<li><a href="#">Certificates</a></li>
 					<li><a href="#">Certificates</a></li>
-				</ul>
+				</ul> -->
 			</div>
 		</div>
 		

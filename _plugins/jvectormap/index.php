@@ -42,7 +42,7 @@
 <body>
   <div class="mymap">
     <div class="searchMap">
-      <div class="general-title">Trade map of Georgia export</div>
+      <div class="general-title">Trade map of Georgia export 2015</div>
       <div class="viewby">
       
         <div class="title">View by</div>

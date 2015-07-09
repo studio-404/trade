@@ -20,14 +20,13 @@
 					Buy And Sell<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="#">Buy And Sell</a></li>
-					<li><a href="#">Buy And Sell</a></li>
-					<li><a href="#">Buy And Sell</a></li>
+					<li><a href="#">Buy</a></li>
+					<li><a href="#">Sell</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-2 selected">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Individuals <span class="caret"></span>
+					Individual <span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">
 					<li><a href="#">Individuals</a></li>

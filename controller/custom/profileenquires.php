@@ -1,7 +1,11 @@
 <?php if(!defined("DIR")){ exit(); }
 class profileenquires extends connection{
-	function __construct($c){
-		$this->template($c);
+	function __construct($c){ 
+		if(isset($_SESSION["tradewithgeorgia_company_type"]) && $_SESSION["tradewithgeorgia_company_type"]!="company" && $_SESSION["tradewithgeorgia_company_type"]!="individual"){
+			$controller = new error_page(); 
+		}else{
+			$this->template($c);
+		}
 	}
 	
 	public function template($c){

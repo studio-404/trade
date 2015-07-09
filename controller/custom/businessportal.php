@@ -1,7 +1,7 @@
 <?php if(!defined("DIR")){ exit(); }
-class businessenquires extends connection{
+class businessportal extends connection{
 	function __construct($c){
-		$this->template($c,"businessenquires");
+		$this->template($c,"businessportal");
 	}
 	
 	public function template($c,$page){
@@ -49,7 +49,7 @@ class businessenquires extends connection{
 		
 
 
-		@include($c["website.directory"]."/businessenquires.php"); 
+		@include($c["website.directory"]."/businessportal.php"); 
 	}
 }
 ?>
