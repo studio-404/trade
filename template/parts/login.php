@@ -9,18 +9,18 @@
 				<div class="form-group">
 					<label for="emailaddress3"><?=$data["language_data"]["emailaddress"]?></label>
 					<input type="text" name="emailaddress" id="emailaddress3" class="form-control" value="" autocomplete="off" />
-					<div class="error_message emailaddress3_message">Please check E-mail address field !</div>
-					<div class="error_message emailaddress3_required">E-mail is required !</div>
+					<div class="error_message emailaddress3_message"><?=$data["language_data"]["pleasecheckemail"]?> !</div>
+					<div class="error_message emailaddress3_required"><?=$data["language_data"]["emailrequired"]?> !</div>
 				</div>
 				<div class="form-group">
 					<label for="password3"><?=$data["language_data"]["password"]?></label>
 					<input type="password" name="password" id="password3" class="form-control" value="" autocomplete="off" />
-					<div class="error_message password3_required">Password is required !</div>
+					<div class="error_message password3_required"><?=$data["language_data"]["passwordrequired"]?> !</div>
 				</div>
 				<div class="form-group">
 					<label for="captcha"><?=$data["language_data"]["captchavalue"]?></label>
 					<input type="text" name="captcha" id="captcha" class="form-control" value="" autocomplete="off" />
-					<div class="error_message captcha_required">Captcha is required !</div>
+					<div class="error_message captcha_required"><?=$data["language_data"]["captcharquired"]?> !</div>
 					<div style="clear:both"></div>
 					<?php $_SESSION['protect_'] = uid::captcha(7); ?>
 					<img src="<?=WEBSITE?>protect.php" alt="" style="float:left; margin-top:15px; border:solid 1px #3895ce; width:95px; height:35px;" />

@@ -116,9 +116,7 @@ $(document).on("click","#register__final_catalog",function(e){
 		var pass = getCookie("password1");
 		var pass2 = getCookie("repeatpassword1");
 		$.post("http://"+document.domain+"/en/ajax",{ finalregister:true, t:type, e:email, p:pass, p2:pass2, code:emailcode },function(data){
-			if(data=="Error"){
-				$("#second-step").html("<div>Sorry, Your email already registered or Security code is not right or All fields have not been filled or Email is not valid !</div>");
-			}else if(data=="Done"){
+			if(data=="Done"){
 				$("#second-step").html("<div>Congrats, You have successfully registered ! </div>");
 			}else{
 				$("#second-step").html("<div>Sorry, Your email already registered or Security code is not right or All fields have not been filled or Email is not valid !</div>");
@@ -138,9 +136,7 @@ $(document).on("click","#register__final_catalog2",function(e){
 		var pass2 = getCookie("repeatpassword2");
 		$("#second-step2").html("<div>Please wait...</div>");
 		$.post("http://"+document.domain+"/en/ajax",{ finalregister2:true, t:type, e:email, p:pass, p2:pass2, code:emailcode2 },function(data){
-			if(data=="Error"){
-				$("#second-step2").html("<div>Sorry, Your email already registered or Security code is not right or All fields have not been filled or Email is not valid !</div>");
-			}else if(data=="Done"){
+			if(data=="Done"){
 				$("#second-step2").html("<div>Congrats, You have successfully registered ! </div>");
 			}else{
 				$("#second-step2").html("<div>Sorry, Your email already registered or Security code is not right or All fields have not been filled or Email is not valid !</div>");

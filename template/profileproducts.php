@@ -80,7 +80,7 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label>SME Classification</label>
+				<label>Company size</label>
 				<select class="form-control">
 					<option></option>
 				</select>
