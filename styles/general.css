@@ -48,7 +48,7 @@ main .center .content .my-form .frURLInput{ width:350px !important; float: left;
 main .center .content #table { display: table; width: 100%; background: #fff; margin: 0; box-sizing: border-box; }
 main .center .content .header-row { background-color: #3085db; color: #fff; }
 main .center .content .row { display: table-row; }
-main .center .content .cell { display: table-cell; padding: 10px; border-bottom: 1px solid #e5e5e5; text-align: left; }
+main .center .content .cell { display: table-cell; padding: 10px; border-bottom: 1px solid #e5e5e5; text-align: left; max-width: 400px; }
 main .center .content .cell .slugs{ font-size: 12px; }
 main .center .content .primary { text-align: left; }
 main .center .content .button{ margin: 0 0 20px 0; line-height: 35px; background-color: #ef4836; color: #ffffff; font-family: 'roboto'; cursor: pointer; text-align: center; float: left; }

@@ -15,15 +15,28 @@ class profileproducts extends connection{
 		$text_general = $cache->index($c,"text_general");
 		$data["text_general"] = json_decode($text_general,true);
 
-		$text_files = $cache->index($c,"text_files");
-		$data["text_files"] = json_decode($text_files);
-
 		$text_documents = $cache->index($c,"text_documents");
 		$data["text_documents"] = json_decode($text_documents);
 
 		/* languages */
 		$languages = $cache->index($c,"languages");
 		$data["languages"] = json_decode($languages); 
+
+		/* sector */
+		$sector = $cache->index($c,"sector");
+		$data["sector"] = json_decode($sector); 
+
+		/* countries */
+		$countries = $cache->index($c,"countries");
+		$data["countries"] = json_decode($countries); 
+
+		/* certificates */
+		$certificates = $cache->index($c,"certificates");
+		$data["certificates"] = json_decode($certificates); 
+
+		/* Company size */
+		$companysize = $cache->index($c,"companysize");
+		$data["companysize"] = json_decode($companysize); 
 
 		/* language variables */
 		$language_data = $cache->index($c,"language_data");
@@ -38,18 +51,36 @@ class profileproducts extends connection{
 		$data["main_menu"] = $model_template_main_menu->nav($menu_array,"header");
 		$data["footer_menu"] = $model_template_main_menu->nav($menu_array,"footer");
 
-		/* website left menu */
-		$left_menu = $cache->index($c,"left_menu");
-		$left_menu = json_decode($left_menu);
-		$data["left_menu"] = $model_template_main_menu->left($left_menu);
-
-		/* breadcrups */
-		$breadcrups = $cache->index($c,"breadcrups");
-		$data["breadcrups"] = json_decode($breadcrups);
-
 		/* components */
 		$components = $cache->index($c,"components");
 		$data["components"] = json_decode($components); 
+
+		if(!isset($_SESSION["user_data"])){
+			$sql = 'SELECT * FROM `studio404_users` WHERE `username`=:username AND `allow`!=:one AND `status`!=:one';
+			$prepare = $conn->prepare($sql);
+			$prepare->execute(array(
+				":username"=>$_SESSION["tradewithgeorgia_username"], 
+				":one"=>1
+			));
+			$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
+			$_SESSION["user_data"]["companyname"] = $fetch["namelname"];
+			$_SESSION["user_data"]["sector"] = $fetch["sector_id"];
+			$_SESSION["user_data"]["subsector"] = $fetch["sub_sector_id"];
+			$_SESSION["user_data"]["establishedin"] = $fetch["established_in"];
+			$_SESSION["user_data"]["productioncapasity"] = $fetch["production_capacity"];
+			$_SESSION["user_data"]["address"] = $fetch["address"];
+			$_SESSION["user_data"]["mobiles"] = $fetch["mobile"];
+			$_SESSION["user_data"]["numemploy"] = $fetch["number_of_employes"];
+			$_SESSION["user_data"]["certificates"] = $fetch["certificates"];
+			$_SESSION["user_data"]["contactpersones"] = $fetch["contact_person"];
+			$_SESSION["user_data"]["officephone"] = $fetch["office_phone"];
+			$_SESSION["user_data"]["companysize"] = $fetch["company_size"];
+			$_SESSION["user_data"]["webaddress"] = $fetch["web_address"];
+			$_SESSION["user_data"]["contactemail"] = $fetch["email"];
+			$_SESSION["user_data"]["about"] = $fetch["about"];
+			$_SESSION["user_data"]["products"] = $fetch["products"];
+			$_SESSION["user_data"]["exportmarkets"] = $fetch["export_markets_id"];
+		}
 		
 
 

@@ -1119,6 +1119,22 @@ class cache extends connection{
 			$slug = $get_slug_from_url->slug();
 			$fetch =  $this->breakcrups($c,$slug);
 			break;
+			case "sector": 
+			$sectors_subsectors_products = new sectors_subsectors_products();
+			$fetch = $sectors_subsectors_products->sectors($c);
+			break;
+			case "countries":
+			$sectors_subsectors_products = new sectors_subsectors_products();
+			$fetch = $sectors_subsectors_products->countries($c);
+			break;
+			case "certificates":
+			$sectors_subsectors_products = new sectors_subsectors_products();
+			$fetch = $sectors_subsectors_products->certificates($c);
+			break;
+			case "companysize":
+			$sectors_subsectors_products = new sectors_subsectors_products();
+			$fetch = $sectors_subsectors_products->companysize($c);
+			break;
 		}
 		if(count($fetch)){
 			$fh = @fopen($cache_file, 'w') or die("Error opening output file");

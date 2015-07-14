@@ -36,6 +36,7 @@ type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
 <?php
 include("login.php");
 include("register.php");
+include("message.php");
 ?>
 
  

@@ -162,6 +162,136 @@ class ajax extends connection{
 			session_destroy();
 			echo "Done"; 
 		endif;
+
+		if(Input::method("POST","loadsubsector") && $_SESSION["tradewithgeorgia_username"]){
+			$sval = json_decode(Input::method("POST","sval")); 
+			$l = count($sval);
+			echo "ass ".$l;
+			$x = 1;
+			$in = '';
+			foreach($sval as $i){
+				$i = (int)$i;
+				if($x>=$l){
+					$in .= $i;
+				}else{
+					$in .= $i.",";
+				}
+				$x++;
+			}
+			//echo $in;
+			if(!Input::method("POST","products")){
+				echo '<option value="">Choose</option>';
+			}
+			try{
+				$sql = 'SELECT `idx`,`title` FROM `studio404_pages` WHERE `cid` IN ('.$in.') AND `visibility`!=:visibility AND `status`!=:status';
+				$prepare = $conn->prepare($sql); 
+				$prepare->execute(array(
+					":visibility"=>1, 
+					":status"=>1
+				));
+				
+				$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC);
+				foreach ($fetch as $val) {
+					echo '<option value="'.$val['idx'].'">'.$val['title'].'</option>';
+				}
+			}catch(Exception $e){
+
+			}
+		}
+
+		if(Input::method("POST","changeprofile")=="true" && $_SESSION["tradewithgeorgia_username"]){
+			$p_companyname = strip_tags(Input::method("POST","p_companyname")); 
+			$p_establishedin = strip_tags(Input::method("POST","p_establishedin"));
+			$p_productioncapasity = strip_tags(Input::method("POST","p_productioncapasity"));
+			$p_address = strip_tags(Input::method("POST","p_address"));
+			$p_mobiles = strip_tags(Input::method("POST","p_mobiles"));
+			$p_numemploy = strip_tags(Input::method("POST","p_numemploy"));
+			$p_certificates = strip_tags(Input::method("POST","p_certificates"));
+			$p_contactpersones = strip_tags(Input::method("POST","p_contactpersones"));
+			$p_officephone = strip_tags(Input::method("POST","p_officephone"));
+			$p_companysize = strip_tags(Input::method("POST","p_companysize"));
+			$p_webaddress = strip_tags(Input::method("POST","p_webaddress"));
+			$p_contactemail = strip_tags(Input::method("POST","p_contactemail"));
+			$p_about = strip_tags(nl2br(Input::method("POST","p_about")));
+			
+			$p_products = json_decode(Input::method("POST","p_products"));
+			$p_products = implode(",", $p_products); 
+
+			$p_exportmarkets = json_decode(Input::method("POST","p_exportmarkets"));
+			$p_exportmarkets = implode(",", $p_exportmarkets); 
+
+			$p_sector = json_decode(Input::method("POST","p_sector"));
+			$p_sector = implode(",", $p_sector); 
+
+			$p_subsector = json_decode(Input::method("POST","p_subsector"));
+			$p_subsector = implode(",", $p_subsector); 
+			
+			$sql = 'UPDATE `studio404_users` SET 
+			`namelname`=:namelname, 
+			`sector_id`=:sector_id, 
+			`sub_sector_id`=:sub_sector_id, 
+			`established_in`=:established_in, 
+			`production_capacity`=:production_capacity, 
+			`address`=:address, 
+			`mobile`=:mobile, 
+			`number_of_employes`=:number_of_employes, 
+			`certificates`=:certificates, 
+			`contact_person`=:contact_person, 
+			`office_phone`=:office_phone, 
+			`company_size`=:company_size, 
+			`web_address`=:web_address, 
+			`email`=:email, 
+			`about`=:about, 
+			`products`=:products, 
+			`export_markets_id`=:export_markets_id 
+			WHERE 
+			`username`=:username AND 
+			`allow`!=:one AND 
+			`status`!=:one 
+			';
+			$prepare = $conn->prepare($sql); 
+			$prepare->execute(array(
+				":namelname"=>$p_companyname, 
+				":sector_id"=>$p_sector, 
+				":sub_sector_id"=>$p_subsector, 
+				":established_in"=>$p_establishedin, 
+				":production_capacity"=>$p_productioncapasity, 
+				":address"=>$p_address, 
+				":mobile"=>$p_mobiles, 
+				":number_of_employes"=>$p_numemploy, 
+				":certificates"=>$p_certificates, 
+				":contact_person"=>$p_contactpersones, 
+				":office_phone"=>$p_officephone, 
+				":company_size"=>$p_companysize, 
+				":web_address"=>$p_webaddress, 
+				":email"=>$p_contactemail, 
+				":about"=>$p_about, 
+				":products"=>$p_products, 
+				":export_markets_id"=>$p_exportmarkets, 
+				":username"=>$_SESSION["tradewithgeorgia_username"], 
+				":one"=>1
+			));
+
+			$_SESSION["user_data"]["companyname"] = $p_companyname;
+			$_SESSION["user_data"]["sector"] = $p_sector;
+			$_SESSION["user_data"]["subsector"] = $p_subsector;
+			$_SESSION["user_data"]["establishedin"] = $p_establishedin;
+			$_SESSION["user_data"]["productioncapasity"] = $p_productioncapasity;
+			$_SESSION["user_data"]["address"] = $p_address;
+			$_SESSION["user_data"]["mobiles"] = $p_mobiles;
+			$_SESSION["user_data"]["numemploy"] = $p_numemploy;
+			$_SESSION["user_data"]["certificates"] = $p_certificates;
+			$_SESSION["user_data"]["contactpersones"] = $p_contactpersones;
+			$_SESSION["user_data"]["officephone"] = $p_officephone;
+			$_SESSION["user_data"]["companysize"] = $p_companysize;
+			$_SESSION["user_data"]["webaddress"] = $p_webaddress;
+			$_SESSION["user_data"]["contactemail"] = $p_contactemail;
+			$_SESSION["user_data"]["about"] = $p_about;
+			$_SESSION["user_data"]["products"] = $p_products;
+			$_SESSION["user_data"]["exportmarkets"] = $p_exportmarkets;
+
+			echo "Done";
+		}
 			
 	}
 

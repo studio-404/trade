@@ -188,6 +188,124 @@ $(document).on("click","#reload",function(){
 	location.reload();
 });
 
+$(document).on("change","#sector",function(){
+	$("#subsector").html('<option value="">Plesae wait...</option>'); 
+	$("#products").html('<option value="">Choose</option>'); 
+
+	var chosen = []; 
+	$('#sector :selected').each(function(i, selected){ 
+	  chosen[i] = $(selected).val(); 
+	});
+
+	$.post("http://"+document.domain+"/en/ajax", { loadsubsector:true, sval:JSON.stringify(chosen) }, function(d){
+		$("#subsector").html(d);
+	});
+});
+
+$(document).on("change","#subsector",function(){
+	var chosen = []; 
+	$('#subsector :selected').each(function(i, selected){ 
+	  chosen[i] = $(selected).val(); 
+	});
+
+	$("#products").html('<option value="">Plesae wait...</option>'); 
+	$.post("http://"+document.domain+"/en/ajax", { loadsubsector:true, products:true, sval:JSON.stringify(chosen) }, function(d){
+		$("#products").html(d);
+		$("#products2").html(d);
+	});
+});
+
+$(document).on("click","#save_changes",function(){
+	$(".error-msg").hide();
+
+	var companyname = $("#companyname").val(); 
+	var establishedin = $("#establishedin").val(); 
+	var productioncapasity = $("#productioncapasity").val(); 
+	var address = $("#address").val(); 
+	var mobile = $("#mobile").val(); 
+	var numemploy = $("#numemploy").val(); 
+	var certificates = $("#certificates").val(); 
+	var contactperson = $("#contactperson").val(); 
+	var officephone = $("#officephone").val(); 
+	var companysize = $("#companysize").val(); 
+	var webaddress = $("#webaddress").val(); 
+	var contactemail = $("#contactemail").val(); 
+	var about = $("#about").val(); 
+
+	var sector = []; 
+	$('#sector :selected').each(function(i, selected){ 
+	  sector[i] = $(selected).val(); 
+	});
+
+	var subsector = []; 
+	$('#subsector :selected').each(function(i, selected){ 
+	  subsector[i] = $(selected).val(); 
+	});
+
+	var products = []; 
+	$('#products :selected').each(function(i, selected){ 
+	  products[i] = $(selected).val(); 
+	});
+
+	var exportmarkets = []; 
+	$('#exportmarkets :selected').each(function(i, selected){ 
+	  exportmarkets[i] = $(selected).val(); 
+	});
+
+
+	if(companyname==""){
+		$("#requiredx_companyname").fadeIn("slow");
+		return false;
+	}else if(sector.length<=0){
+		$("#requiredx_sector").fadeIn("slow");
+		return false;
+	}else if(subsector.length<=0){
+		$("#requiredx_subsector").fadeIn("slow");
+		return false;
+	}else if(products.length<=0){
+		$("#requiredx_products").fadeIn("slow");
+		return false;
+	}else if(exportmarkets.length<=0){
+		$("#requiredx_exportmarkets").fadeIn("slow");
+		return false;
+	}else if(validateEmail(contactemail)!=true){
+		$("#requiredx_contactemail").fadeIn("slow");
+	}else{ 
+		$("#insertText").html("Please wait"); 
+		$('#message_popup').modal('toggle');
+		$.post("http://"+document.domain+"/en/ajax", 
+		{ 
+			changeprofile:true, 
+			p_companyname:companyname, 
+			p_sector:JSON.stringify(sector), 
+			p_subsector:JSON.stringify(subsector), 
+			p_establishedin:establishedin, 
+			p_productioncapasity:productioncapasity, 
+			p_address:address, 
+			p_mobiles:mobile, 
+			p_numemploy:numemploy, 
+			p_certificates:certificates, 
+			p_contactpersones:contactperson, 
+			p_officephone:officephone, 
+			p_companysize:companysize, 
+			p_webaddress:webaddress, 
+			p_contactemail:contactemail, 
+			p_about:nl2br(about), 
+			p_products:JSON.stringify(products), 
+			p_exportmarkets:JSON.stringify(exportmarkets) 
+		}, 
+		function(d){
+			if(d=="Done"){ $("#insertText").html("Data updated !"); } 
+		});
+	}
+});
+
+function nl2br(str) {
+  var breakTag = '<br />'; 
+  return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
+}
+
+
 function checkLength(ele,min,max){
 	var lengthx = $(ele).val().length;
 

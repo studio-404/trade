@@ -12,21 +12,28 @@
 	<div class="col-sm-9" id="content">
 		<div class="row">
 			 <div class="useful_div">
-				<a href="#">
-					<div class="col-sm-4 useful_item">
-						<div class="image"><img src="<?=TEMPLATE?>img/useful_1.jpg"></div>
-						<div class="title">Explore all the possibilities of investing in Georgian economy from here »</div>
-					</div>
-				</a>	
-				<a href="#">
-					<div class="col-sm-4 useful_item">
-						<div class="image"><img src="<?=TEMPLATE?>img/useful_2.jpg"></div>
-						<div class="title">This link will give you the opportunity to calculate all the transportation biils »</div>
-					</div>
-				</a>
-				
+				<?php 
+				$ctext = new ctext();
+				foreach($data["components"] as $val)
+				{
+					if($val->com_name != "usefull links"){ continue; }
+				?>
+					<a href="<?=$val->url?>" target="_blank" title="<?=htmlentities($val->title)?>">
+						<div class="col-sm-4 useful_item">
+							<div class="image"><img src="<?=WEBSITE?>image?f=<?=WEBSITE_.$val->image?>&w=215&h=80" /></div>
+							<div class="title"><?=$ctext->cut(strip_tags($val->title),120)?> »</div>
+						</div>
+					</a>
+				<?php
+				}
+				?>
 			 </div>
 		</div>
 	</div>
+
+
+	
+
+
 </div>
 <?php @include("parts/footer.php"); ?>

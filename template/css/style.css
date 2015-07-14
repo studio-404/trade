@@ -1227,6 +1227,7 @@ height:25px; width:25px; z-index:999999999999999999999999999;
 .error_message{ margin:0; padding: 0; width: 100%; clear: both; float: left; font-size: 10px; color: red; display: none; }
 #second-step{ display: none; }
 #second-step2{ display: none; }
+.error-msg{ margin: 0; padding: 0; width: 100%; font-size: 12px; color: red; text-align: left; position: absolute; display: none; }
 @media (max-width: 992px){
 	#header{ min-height: 120px !important; }
 }
