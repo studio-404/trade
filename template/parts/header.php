@@ -21,15 +21,6 @@ echo $header_data["title"];
 <script src="<?php echo TEMPLATE;?>js/bootstrap.js"></script>
 <script src="<?php echo TEMPLATE;?>js/responsive_menu.js"></script>
 <script src="<?php echo TEMPLATE;?>js/scripts.js"></script>
-<!--Start of Zopim Live Chat Script-->
-<script type="text/javascript">
-window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
-d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
-_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
-$.src="//v2.zopim.com/?39RyjmvEGfikM3GPxh7EiUJlsKNbZgyI";z.t=+new Date;$.
-type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
-</script>
-<!--End of Zopim Live Chat Script-->
 </head>
 <body id="menu_responsive">
 	<div style="margin:0; padding:0; width:100%; text-align:center; background-color:#ffa100; color:white; line-height:25px; font-size:14px">Under Development</div>

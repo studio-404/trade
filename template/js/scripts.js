@@ -272,7 +272,8 @@ $(document).on("click","#save_changes",function(){
 		$("#requiredx_contactemail").fadeIn("slow");
 	}else{ 
 		$("#insertText").html("Please wait"); 
-		$('#message_popup').modal('toggle');
+		$('#message_popup').modal('toggle'); 
+		var f = $("#inputUserLogo").val();
 		$.post("http://"+document.domain+"/en/ajax", 
 		{ 
 			changeprofile:true, 
@@ -292,13 +293,59 @@ $(document).on("click","#save_changes",function(){
 			p_contactemail:contactemail, 
 			p_about:nl2br(about), 
 			p_products:JSON.stringify(products), 
-			p_exportmarkets:JSON.stringify(exportmarkets) 
+			p_exportmarkets:JSON.stringify(exportmarkets), 
+			p_file: f
 		}, 
 		function(d){
-			if(d=="Done"){ $("#insertText").html("Data updated !"); } 
+			if(d=="Done"){ 
+				$("#insertText").html("Data updated !"); 
+			} 
 		});
 	}
 });
+
+
+$(document).on("change",".input_type_file",function(e){
+	e.stopPropagation();
+	e.preventDefault();
+	var files = e.target.files;
+
+
+	var ex = files[0].name.split(".");
+	var extLast = ex[ex.length - 1].toLowerCase();
+	console.log(extLast);
+	if(extLast!="jpeg" && extLast!="jpg" && extLast!="png" && extLast!="gif"){
+		$('#message_popup').modal('toggle'); 
+		$("#insertText").html("Please choose jpeg, jpg, gif or png file !"); 
+		return false;
+	}else if(files[0].size > 1000000){
+		$('#message_popup').modal('toggle'); 
+		$("#insertText").html("File size must be under 1 MB !"); 
+		return false;
+	}else if(files[0].name){
+		$("#uploadImageForm").submit();
+		$('#message_popup').modal('toggle'); 
+		$("#insertText").html("Please wait !"); 
+	}
+});
+
+function selectSectors(sarray, sarray2, sarray3){
+	for(i=0;i<=sarray.length;i++){
+		$('#sector [value="'+sarray[i]+'"]').attr('selected',true).change();
+	}
+	setTimeout(function(){
+		for(i=0;i<=sarray2.length;i++){
+			$('#subsector [value="'+sarray2[i]+'"]').attr('selected',true).change();
+		}
+	},1500);
+
+	setTimeout(function(){
+		for(i=0;i<=sarray3.length;i++){
+			$('#products [value="'+sarray3[i]+'"]').attr('selected',true).change();
+		}
+	},2500);
+}
+
 
 function nl2br(str) {
   var breakTag = '<br />'; 

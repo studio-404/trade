@@ -199,6 +199,10 @@ class ajax extends connection{
 			}
 		}
 
+		if(Input::method("POST","uploadfile")){
+			echo "Its been uploaded !"; 
+		}
+
 		if(Input::method("POST","changeprofile")=="true" && $_SESSION["tradewithgeorgia_username"]){
 			$p_companyname = strip_tags(Input::method("POST","p_companyname")); 
 			$p_establishedin = strip_tags(Input::method("POST","p_establishedin"));
@@ -225,7 +229,14 @@ class ajax extends connection{
 
 			$p_subsector = json_decode(Input::method("POST","p_subsector"));
 			$p_subsector = implode(",", $p_subsector); 
-			
+			$p_file = Input::method("POST","p_file"); 
+
+			// $str = file_get_contents("php://input");
+			// if($str){
+			// 	$filename = md5(time()).".jpg";
+			// 	$path = 'testu/'.$filename;
+			// 	file_put_contents($path, $str);
+			// }
 			$sql = 'UPDATE `studio404_users` SET 
 			`namelname`=:namelname, 
 			`sector_id`=:sector_id, 

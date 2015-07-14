@@ -62,7 +62,7 @@
 				<select id="certificates" name="certificates" class="form-control">
 					<option value="">Choose</option>
 					<?php foreach($data["certificates"] as $certificates) : ?>
-					<option value="<?=$certificates->idx?>"><?=$certificates->title?></option>
+					<option value="<?=$certificates->idx?>" <?=($_SESSION["user_data"]["certificates"]==$certificates->idx) ? 'selected="selected"' : ''?>><?=$certificates->title?></option>
 					<?php endforeach; ?>
 				</select>
 			</div>
@@ -92,15 +92,18 @@
 				<select id="companysize" name="companysize" class="form-control">
 					<option value="">Choose</option>
 					<?php foreach($data["companysize"] as $companysize) : ?>
-					<option value="<?=$companysize->idx?>"><?=$companysize->title?></option>
+					<option value="<?=$companysize->idx?>" <?=($_SESSION["user_data"]["companysize"]==$companysize->idx) ? 'selected="selected"' : ''?>><?=$companysize->title?></option>
 					<?php endforeach; ?>
 				</select>
 			</div>
 			<div class="form-group">
 				<label>Export Markets <font color="red">*</font></label>
 				<select name="exportmarkets" id="exportmarkets" class="form-control" style="min-height:109px; max-height:109px" multiple>
-					<?php foreach($data["countries"] as $countries) : ?>
-					<option value="<?=$countries->idx?>"><?=$countries->title?></option>
+					<?php 
+					$markets = explode(",",$_SESSION["user_data"]["exportmarkets"]);
+					foreach($data["countries"] as $countries) : 
+					?>
+					<option value="<?=$countries->idx?>" <?=(in_array($countries->idx,$markets)) ? 'selected="selected"' : ''?>><?=$countries->title?></option>
 					<?php endforeach; ?>
 				</select>
 				<font class="error-msg" id="requiredx_exportmarkets">Please choose minimum one export market !</font>
@@ -114,11 +117,17 @@
 			<div class="form-group">
 				<label>Company Logo</label> 
 				<div class="upload_img_tmp">
-					<img src="<?=TEMPLATE?>img/img_upload.png" class="img-responsive" width="100%" alt="" />
+					<?php
+					$logo = (!empty($_SESSION["user_data"]["picture"])) ? WEBSITE.'image?f='.WEBSITE.'files/usersimage/'.$_SESSION["user_data"]["picture"].'&w=300&h=170' : TEMPLATE.'img/img_upload.png';
+					?>
+					<img src="<?=$logo?>" class="img-responsive" id="userLogo" width="100%" alt="" />
 				</div>
+				<form action="" method="post" enctype="multipart/form-data" id="uploadImageForm">
 				<div class="btn btn-upload btn-block"> 
-					UPLOAD LOGO <input type="file" class="input_type_file">
-				</div> 
+					<span id="txtFupload">UPLOAD LOGO</span> <input type="file" name="inputUserLogo" class="input_type_file" accept="image/*" id="inputUserLogo" />
+				</div>
+				</form> 
+				<font class="error-msg" style="padding:5px 15px 0 0;" id="imageWarning">Please choose 300x170 px photo or system resizes it itself !</font>
 			</div>
 		</div>
 		<div class="admin_inputs">
@@ -240,6 +249,14 @@
 		</div>
 		
 	</div>
+<?php 
+$make = phparray_to_jsarray::sectorSelects();
+?>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+selectSectors(<?=$make[0]?>,<?=$make[1]?>,<?=$make[2]?>);
+});				
+</script>
 <?php 
 	}else{
 		?>
