@@ -3,7 +3,7 @@
   <div class="modal-dialog" style="width:340px;">
     <!-- Modal content-->
     <div class="modal-content">
-		<div class="modal-body">
+		<div class="modal-body" id="modal_containerx">
 			<h3 class="modal-title">Change passwod</h3>
 			<div id="finalstep3">
 				<div class="form-group">
@@ -16,6 +16,7 @@
 					<label for="newpass">New password</label>
 					<input type="password" name="newpass" id="newpass" class="form-control" value="" autocomplete="off" />
 					<div class="error_message newpass_message">Please check new password field !</div>
+					<div class="error_message newpass_minmax">New password must be greater then 6 and less then 20 character !</div>
 					<div class="error_message newpass_required">New password is required !</div>
 				</div>
 				<div class="form-group">

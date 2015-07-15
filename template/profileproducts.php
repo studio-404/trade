@@ -5,7 +5,7 @@
 ?>
 <div class="container" id="container">
 	<div class="page_title_1">
-		Company Profile (Business Enquires)
+		Company Profile (<?=ucfirst($_SESSION["tradewithgeorgia_company_type"])?>)
 	</div>
 	<div class="row">
 		<div class="col-sm-3">
@@ -17,7 +17,7 @@
 				<label>Sector <font color="red">*</font></label>
 				<select name="sector" id="sector" name="sector" class="form-control" multiple style="min-height:109px; max-height:109px">
 					<?php foreach($data["sector"] as $sector) : ?>
-					<option value="<?=$sector->idx?>"><?=$sector->title?></option>
+					<option value="<?=$sector->idx?>" title="<?=htmlentities($sector->title)?>"><?=$sector->title?></option>
 					<?php endforeach; ?>
 				</select>
 				<font class="error-msg" id="requiredx_sector">Please choose minimum one sector !</font>
@@ -177,11 +177,18 @@
 				</div>
 			</div>
 			<div class="col-sm-3">
-				<div class="form-group">
+				<div class="form-group" style="position:relative">
 					<label>HS Code</label>
-					<select class="form-control">
-						<option>0293948493</option>
-					</select>
+					<input type="hidden" name="hscode_id" id="hscode_id" value="" />
+					<input type="text" name="hscode" id="hscode" class="form-control" value="" placeholder="Type minimum 3 letter.." />
+					<div class="results">
+						<ul>
+							<!-- <li><a href="#">54584652 - Growing rise</a></li>
+							<li><a href="#">54584652 - Growing rise</a></li>
+							<li><a href="#">54584652 - Growing rise</a></li>
+							<li><a href="#">54584652 - Growing rise</a></li> -->
+						</ul> 
+					</div>
 				</div>
 				<div class="form-group">
 					<label>AWards</label>

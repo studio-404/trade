@@ -329,6 +329,64 @@ $(document).on("change",".input_type_file",function(e){
 	}
 });
 
+$(document).on("click","#change_pass",function(){
+	var oldpass = $("#oldpass").val();
+	var newpass = $("#newpass").val();
+	var repass = $("#repass").val();
+
+	$(".error_message").hide();
+	if(oldpass==""){
+		$(".oldpass_required").fadeIn("slow"); 
+	}else if(newpass==""){
+		$(".newpass_required").fadeIn("slow"); 
+	}else if(newpass!=repass){
+		$(".repass_required").fadeIn("slow"); 
+	}else if(checkLength('#newpass',6,20)!=true){
+		$(".newpass_minmax").fadeIn("slow"); 
+	}else{
+		$("#modal_containerx").html("<h3 class=\"modal-title\">Change passwod</h3> <p>Please wait...</p>");
+		$.post("http://"+document.domain+"/en/ajax", {
+			changepassword:true, 
+			o:oldpass, 
+			n:newpass, 
+			r:repass			
+		}, function(d){
+			if(d=="Done"){
+				$("#modal_containerx").html("<h3 class=\"modal-title\">Change passwod</h3> <p>Password changed !</p><a href=\"javascript:;\" id=\"reload\">Reload</a>");
+			}else{
+				$("#modal_containerx").html("<h3 class=\"modal-title\">Change passwod</h3> <p>Error, Please check fileds</p><a href=\"javascript:;\" id=\"reload\">Reload</a>");
+			}
+		});
+	}
+});
+
+$(document).on("keyup","#hscode",function(e){
+	var l = $(this).val();
+	if(l.length>=3){
+		$(".results ul").html("<li><a href=\"javascript:;\">Please wait...</a></li>"); 
+		$(".results").slideDown("slow");
+		$.post("http://"+document.domain+"/en/ajax", { hscode:true, s:l }, function(r){
+			if(r!=""){
+				$(".results ul").html(r); 
+			}else{
+				$(".results ul").html('<li><a href="javascript:;">No result</a></li>'); 
+			}
+		});
+	}else{
+		$("#hscode_id").val(''); 
+		$(".results").slideUp("slow");
+	}
+});
+
+$(document).on("click",".resultx",function(e){
+	var idx = $(this).data("idx"); 
+	var val = $(this).html(); 
+	val = val.replace(/[<]br[^>]*[>]/gi,"");
+	$("#hscode").val(val); 
+	$("#hscode_id").val(idx); 
+	$(".results").slideUp("slow");
+});
+
 function selectSectors(sarray, sarray2, sarray3){
 	for(i=0;i<=sarray.length;i++){
 		$('#sector [value="'+sarray[i]+'"]').attr('selected',true).change();

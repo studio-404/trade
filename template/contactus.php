@@ -16,7 +16,7 @@
 		</div>
 		<div class="row contact_person">
 			<div class="col-sm-4 col-md-3 col-xs-4">
-				<div class="image"><img src="<?=TEMPLATE?>img/person_1.jpg" class="img-responsive"></div>
+				<!-- <div class="image"><img src="<?=TEMPLATE?>img/person_1.jpg" class="img-responsive"></div> -->
 				<div class="name">Liana Mezvrishvili</div>
 				<div class="work_position">Marketing Manager</div>
 				<div class="email">lmezvrishvil@enterprise.gov.ge</div>

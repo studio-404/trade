@@ -109,6 +109,9 @@ insert log
 */
 // $file_manipulate = new file_manipulate(); 
 // $file_manipulate->insertLog("[".$ip."][".date("d-m-Y G:m:s")."] - ".WEBSITE_.$actual_link);
+/* token */
+$_SESSION["token_generator"] = ustring::random(10);
+
 /*
 ** some more define
 */

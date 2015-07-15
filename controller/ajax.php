@@ -192,16 +192,16 @@ class ajax extends connection{
 				
 				$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC);
 				foreach ($fetch as $val) {
-					echo '<option value="'.$val['idx'].'">'.$val['title'].'</option>';
+					echo '<option value="'.$val['idx'].'" title="'.htmlentities($val['title']).'">'.$val['title'].'</option>';
 				}
 			}catch(Exception $e){
 
 			}
 		}
 
-		if(Input::method("POST","uploadfile")){
-			echo "Its been uploaded !"; 
-		}
+		// if(Input::method("POST","uploadfile")){
+		// 	echo "Its been uploaded !"; 
+		// }
 
 		if(Input::method("POST","changeprofile")=="true" && $_SESSION["tradewithgeorgia_username"]){
 			$p_companyname = strip_tags(Input::method("POST","p_companyname")); 
@@ -302,6 +302,51 @@ class ajax extends connection{
 			$_SESSION["user_data"]["exportmarkets"] = $p_exportmarkets;
 
 			echo "Done";
+		}
+
+		if(Input::method("POST","changepassword")){
+			if( !empty(Input::method("POST","o")) && !empty(Input::method("POST","n")) && !empty(Input::method("POST","r")) && (!empty(Input::method("POST","n"))==!empty(Input::method("POST","r"))) ){
+				$oldpass = Input::method("POST","o");
+				$sql = 'SELECT `id` FROM `studio404_users` WHERE `username`=:username AND `password`=:password AND `allow`!=:one AND `status`!=:one';
+				$prepare = $conn->prepare($sql); 
+				$prepare->execute(array(
+					":username"=>$_SESSION["tradewithgeorgia_username"], 
+					":password"=>md5($oldpass), 
+					":one"=>1
+				));
+				if($prepare->rowCount()){ 
+					$n = md5(Input::method("POST","n"));
+					$update = 'UPDATE `studio404_users` SET `password`=:password WHERE `username`=:username AND `allow`!=:one AND `status`!=:one'; 
+					$prepare2 = $conn->prepare($update); 
+					$prepare2->execute(array(
+						":username"=>$_SESSION["tradewithgeorgia_username"], 
+						":password"=>$n,
+						":one"=>1
+					));
+					echo "Done";
+				}else{
+					echo "Error";
+				}
+			}else{
+				echo "Error";
+			}
+		}
+
+		if(Input::method("POST","hscode") && Input::method("POST","hscode")=="true" && Input::method("POST","s") && strlen(Input::method("POST","s"))>=3){
+			$sql = 'SELECT `idx`,`title` FROM `studio404_pages` WHERE `cid`=:cid AND `title` LIKE "%'.Input::method("POST","s").'%" AND `status`!=:one ORDER BY `title` ASC LIMIT 10';
+			$prepare = $conn->prepare($sql); 
+			$prepare->execute(array(
+				":cid"=>769, 
+				":one"=>1
+			));
+			$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC); 
+			if($prepare->rowCount()){
+				foreach($fetch as $val){
+					echo '<li><a href="javascript:;" class="resultx" data-idx="'.$val["idx"].'">'.$val["title"].'</a></li>';
+				}
+			}else{
+				echo '';
+			}
 		}
 			
 	}

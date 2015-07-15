@@ -57,18 +57,19 @@
 <div class="container">
 	<div class="breadcrumbs">
 		<div class="your_are_here">Your are here: </div>
-			<li><a href="#">Export Catalog</a></li><li>  &gt;  
-			</li><li><a href="#">Companies</a></li><li>  &gt;  
-			</li><li><a href="#">Spirits and bavareges</a></li><li>  &gt;  
-			</li><li><a href="#">Bagrationi 1880</a></li><li> 
+			<li><a href="<?=WEBSITE.LANG?>/export-catalog?token=<?=$_SESSION["token_generator"]?>">Export Catalog</a></li><li>  &gt;  
+			</li><li><a href="javascript:;"><?=$data["fetch"]["namelname"]?></a></li><li>  
 	</li></div>
 	
-	<div class="back_to"><a href="#">Back to catalog</a></div>
+	<div class="back_to"><a href="<?=WEBSITE.LANG?>/export-catalog?token=<?=$_SESSION["token_generator"]?>">Back to catalog</a></div>
 	
 	<div class="page_title_5">
-		BAGRATIONI 1882
+		<?=$data["fetch"]["namelname"]?>
 		<div class="image">
-			<img src="<?=TEMPLATE?>img/bagrationi.png" alt="" />
+			<?php
+				$logo = (!empty($data["fetch"]["picture"])) ? WEBSITE.'image?f='.WEBSITE.'files/usersimage/'.$data["fetch"]["picture"].'&w=80&h=40' : TEMPLATE.'img/noimage.png';
+			?>
+			<img src="<?=$logo?>" alt="" />
 		</div>
 	</div>
 	
@@ -80,43 +81,54 @@
 	<div class="col-sm-3" id="sidebar">
 		<ul class="text_formats_ul">
 			<li class="text_formats"><span>Sector</span></li>
-			<li class="text_formats">Food &amp; Drink</li>
+			<li class="text_formats">
+				<?=$retrieve_users_info->retrieveDb($data["fetch"]["sector_id"])?>
+			</li>
 		</ul>
 		<ul class="text_formats_ul">
 			<li class="text_formats"><span>Sub sector</span></li>
-			<li class="text_formats">Alcoholic drinks</li>
+			<li class="text_formats">
+				<?=$retrieve_users_info->retrieveDb($data["fetch"]["sub_sector_id"])?>
+			</li>
 		</ul>
 		<ul class="text_formats_ul">
 			<li class="text_formats"><span>Products</span></li>
-			<li class="text_formats">Wine, Beer, Shampagne</li>
+			<li class="text_formats">
+				<?=$retrieve_users_info->retrieveDb($data["fetch"]["products"])?>
+			</li>
 		</ul>
 		<ul class="text_formats_ul">
 			<li class="text_formats"><span>Export Markets</span></li>
-			<li class="text_formats">Ukrain, Russia, USA,  Germany, Latvia, Estonia Azerbaijan, UK, Netherlands, China, Japan</li>
+			<li class="text_formats">
+				<?=$retrieve_users_info->retrieveDb($data["fetch"]["export_markets_id"])?>
+			</li>
 		</ul>
 		<ul class="text_formats_ul">
 			<li class="text_formats"><span>Certificates</span></li>
-			<li class="text_formats">ISO 220000</li>
+			<li class="text_formats">
+				<?=$retrieve_users_info->retrieveDb($data["fetch"]["certificates"])?>
+			</li>
 		</ul>
 		<ul class="text_formats_ul">
 			<li class="text_formats"><span>Production Capasity</span></li>
-			<li class="text_formats">2 Milion Bottles</li>
+			<li class="text_formats"><?=htmlentities(strip_tags($data["fetch"]["production_capacity"]))?></li>
 		</ul>
 		<ul class="text_formats_ul">
 			<li class="text_formats"><span>Established In</span></li>
-			<li class="text_formats">1995</li>
+			<li class="text_formats"><?=htmlentities(strip_tags($data["fetch"]["established_in"]))?></li>
 		</ul>
 		<ul class="text_formats_ul">
 			<li class="text_formats"><span>Number Of Employes</span></li>
-			<li class="text_formats">250</li>
+			<li class="text_formats"><?=htmlentities(strip_tags($data["fetch"]["number_of_employes"]))?></li>
 		</ul>
 		<ul class="text_formats_ul contact_text">
 			<li class="text_formats"><span>Contact Details</span></li>
-			<li class="text_formats">Reg. no.11544988</li>
-			<li class="text_formats">Address: Chavcahavdze av.7, Tbilisi Georgia.</li>
-			<li class="text_formats">Phone: +995 32 2 232323</li>
-			<li class="text_formats">E-mail: export@bgrationi.ge</li>
-			<li class="text_formats">Web: www.bagrationi.ge</li>
+			<!-- <li class="text_formats">Reg. no.11544988</li> -->
+			<li class="text_formats">Address: <?=htmlentities(strip_tags($data["fetch"]["address"]))?></li>
+			<li class="text_formats">Mobile number: <?=htmlentities(strip_tags($data["fetch"]["mobile"]))?></li>
+			<li class="text_formats">Office phone: <?=htmlentities(strip_tags($data["fetch"]["office_phone"]))?></li>
+			<li class="text_formats">E-mail: <?=strip_tags($data["fetch"]["email"])?></li>
+			<li class="text_formats">Web: <?=strip_tags($data["fetch"]["web_address"])?></li>
 		</ul>
 		<div class="btn btn-yellow btn-block contact_btn" data-toggle="modal" data-target="#page_enquires_popup">CONTACT</div>
 	</div>
@@ -124,12 +136,7 @@
 		<ul class="text_formats_ul">
 			<li class="text_formats"><span>About</span></li>
 			<li class="text_formats">
-				<p>
-				Bagrationi 1882, a historic sparklink wine producer from the country of georgia in the Black sea region of estern
-				Europe, Has announces its entrance into the U.S Wihe Market, for the first time in the new world, wine enthusiasts
-				can now experience these unique sparkling wines from the very place where winemaking was born. with the intro-duction 
-				of bagrationi 1882, wine consumers in america can now enjoy the favorite sparkling wine from the forlds's oldest wine growing region
-				</p>
+				<?=nl2br(strip_tags($data["fetch"]["about"]))?>
 			</li>
 		</ul>	
 		<div class="yellow_title_19">Products</div>
@@ -137,10 +144,10 @@
 		<div class="product_more_item">
 			<div class="products white_bg">
 				<div class="col-sm-12 col-md-12 col-xs-12 col-gl-12 product_item">
-					<div class="col-sm-3 col-md-3 col-xs-3 col-lg-3 padding_0">
+					<div class="col-sm-12 col-md-3 col-xs-12 col-lg-3 padding_0">
 						<div class="image"><img src="<?=TEMPLATE?>img/bagration_2.jpg" class="img-responsive" alt="" /></div>
 					</div>	
-					<div class="col-sm-7 col-md-7 col-xs-7 col-gl-7 product_info padding_0">
+					<div class="col-sm-12 col-md-7 col-xs-12 col-gl-7 product_info padding_0">
 						<ul>
 							<li><span>Bagratini - sparckling wine</span> - HS 023393920 </li>
 							<li><span>Packiging: </span>075, crystal dark bottles (6 in box)</li>

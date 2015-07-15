@@ -11,11 +11,11 @@ class company extends connection{
 		$text_general = $cache->index($c,"text_general");
 		$data["text_general"] = json_decode($text_general,true);
 
-		$text_files = $cache->index($c,"text_files");
-		$data["text_files"] = json_decode($text_files);
+		// $text_files = $cache->index($c,"text_files");
+		// $data["text_files"] = json_decode($text_files);
 
-		$text_documents = $cache->index($c,"text_documents");
-		$data["text_documents"] = json_decode($text_documents);
+		// $text_documents = $cache->index($c,"text_documents");
+		// $data["text_documents"] = json_decode($text_documents);
 
 		/* languages */
 		$languages = $cache->index($c,"languages");
@@ -35,9 +35,9 @@ class company extends connection{
 		$data["footer_menu"] = $model_template_main_menu->nav($menu_array,"footer");
 
 		/* website left menu */
-		$left_menu = $cache->index($c,"left_menu");
-		$left_menu = json_decode($left_menu);
-		$data["left_menu"] = $model_template_main_menu->left($left_menu);
+		// $left_menu = $cache->index($c,"left_menu");
+		// $left_menu = json_decode($left_menu);
+		// $data["left_menu"] = $model_template_main_menu->left($left_menu);
 
 		/* breadcrups */
 		$breadcrups = $cache->index($c,"breadcrups");
@@ -46,9 +46,33 @@ class company extends connection{
 		/* components */
 		$components = $cache->index($c,"components");
 		$data["components"] = json_decode($components); 
+
+		/*company*/
+		$data["get_view"] = (Input::method("GET","view")) ? (int)Input::method("GET","view") : 1;
+		$data["get_token"] = (Input::method("GET","token")) ? Input::method("GET","token") : '';
+
 		
-
-
+		$sql = 'SELECT 
+		`studio404_users`.*
+		FROM 
+		`studio404_users` 
+		WHERE 
+		`studio404_users`.`user_type`=:user_type AND 
+		`studio404_users`.`id`=:idx AND 
+		`studio404_users`.`allow`!=:one AND 
+		`studio404_users`.`status`!=:one 
+		';
+		$prepare = $conn->prepare($sql); 
+		$prepare->execute(array(
+			":user_type"=>'website', 
+			":idx"=>$data["get_view"], 
+			":one"=>1
+		));
+		$data["fetch"] = $prepare->fetch(PDO::FETCH_ASSOC);		
+		$retrieve_users_info = new retrieve_users_info();
+		// echo "<pre>";
+		// print_r($data["fetch"]); 
+		// echo "</pre>";
 		@include($c["website.directory"]."/company.php");
 	}
 }
