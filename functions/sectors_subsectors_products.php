@@ -7,7 +7,7 @@ class sectors_subsectors_products extends connection{
 
 	public function sectors($c){
 		$conn = $this->conn($c);
-		$sql = 'SELECT `idx`,`title` FROM `studio404_pages` WHERE `cid`=:cid AND `visibility`!=:visibility AND `status`!=:status ORDER BY `position` ASC';
+		$sql = 'SELECT `idx`,`title` FROM `studio404_pages` WHERE `cid`=:cid AND `visibility`!=:visibility AND `status`!=:status ORDER BY `title` ASC';
 		$prepare = $conn->prepare($sql); 
 		$prepare->execute(array(
 			":cid"=>30, 
@@ -18,9 +18,55 @@ class sectors_subsectors_products extends connection{
 		return $fetch;
 	}
 
+	public function subsector($c){
+		$conn = $this->conn($c);
+		$sql = 'SELECT `idx` FROM `studio404_pages` WHERE `cid`=:cid AND `visibility`!=:visibility AND `status`!=:status ORDER BY `title` ASC';
+		$prepare = $conn->prepare($sql); 
+		$prepare->execute(array(
+			":cid"=>30, 
+			":visibility"=>1, 
+			":status"=>1
+		));
+		$fe = $prepare->fetchAll(PDO::FETCH_ASSOC);
+		$i = '';
+		foreach($fe as $val){
+			$i .= $val["idx"].","; 
+		}
+		$in = rtrim($i,",");
+		$sql2 = 'SELECT `idx`,`title` FROM `studio404_pages` WHERE `cid` IN ('.$in.') AND `visibility`!=:visibility AND `status`!=:status ORDER BY `title` ASC';
+		$prepare2 = $conn->prepare($sql2); 
+		$prepare2->execute(array(
+			":visibility"=>1, 
+			":status"=>1
+		));
+		$fetch = $prepare2->fetchAll(PDO::FETCH_ASSOC);
+
+		return $fetch;
+	}
+
+	public function products($c){
+		$conn = $this->conn($c);
+
+		$fe = $this->subsector($c);
+		$i = '';
+		foreach($fe as $val){
+			$i .= $val["idx"].",";
+		}
+		$in = rtrim($i,",");
+
+		$sql2 = 'SELECT `idx`,`title` FROM `studio404_pages` WHERE `cid` IN ('.$in.') AND `visibility`!=:visibility AND `status`!=:status ORDER BY `title` ASC';
+		$prepare2 = $conn->prepare($sql2); 
+		$prepare2->execute(array(
+			":visibility"=>1, 
+			":status"=>1
+		));
+		$fetch = $prepare2->fetchAll(PDO::FETCH_ASSOC);
+		return $fetch;
+	}
+
 	public function countries($c){
 		$conn = $this->conn($c);
-		$sql = 'SELECT `idx`,`title` FROM `studio404_pages` WHERE `cid`=:cid AND `visibility`!=:visibility AND `status`!=:status ORDER BY `position` ASC';
+		$sql = 'SELECT `idx`,`title` FROM `studio404_pages` WHERE `cid`=:cid AND `visibility`!=:visibility AND `status`!=:status ORDER BY `title` ASC';
 		$prepare = $conn->prepare($sql); 
 		$prepare->execute(array(
 			":cid"=>561, 
@@ -46,7 +92,7 @@ class sectors_subsectors_products extends connection{
 
 	public function companysize($c){
 		$conn = $this->conn($c);
-		$sql = 'SELECT `idx`,`title` FROM `studio404_pages` WHERE `cid`=:cid AND `visibility`!=:visibility AND `status`!=:status ORDER BY `position` ASC';
+		$sql = 'SELECT `idx`,`title` FROM `studio404_pages` WHERE `cid`=:cid AND `visibility`!=:visibility AND `status`!=:status ORDER BY `title` ASC';
 		$prepare = $conn->prepare($sql); 
 		$prepare->execute(array(
 			":cid"=>765, 

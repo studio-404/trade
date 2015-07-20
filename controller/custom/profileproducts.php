@@ -9,7 +9,11 @@ class profileproducts extends connection{
 	}
 	
 	public function template($c){
-		$conn = $this->conn($c); // connection
+		$conn = $this->conn($c); // connection 
+
+		// upload function 
+		$model_template_upload_user_logo = new model_template_upload_user_logo();
+		$upload = $model_template_upload_user_logo->upload($c);
 
 		$cache = new cache();
 		$text_general = $cache->index($c,"text_general");
@@ -53,9 +57,9 @@ class profileproducts extends connection{
 
 		/* components */
 		$components = $cache->index($c,"components");
-		$data["components"] = json_decode($components); 
+		$data["components"] = json_decode($components);  
 
-		if(!isset($_SESSION["user_data"]) && isset($_SESSION["tradewithgeorgia_username"])){
+		if(!isset($_SESSION["user_data"]["companyname"]) && isset($_SESSION["tradewithgeorgia_username"])){
 			$sql = 'SELECT * FROM `studio404_users` WHERE `username`=:username AND `allow`!=:one AND `status`!=:one';
 			$prepare = $conn->prepare($sql);
 			$prepare->execute(array(
@@ -83,9 +87,68 @@ class profileproducts extends connection{
 			$_SESSION["user_data"]["exportmarkets"] = $fetch["export_markets_id"];
 		}
 
-		// upload function 
-		$model_template_upload_user_logo = new model_template_upload_user_logo();
-		$upload = $model_template_upload_user_logo->upload($c);
+		if(Input::method("POST","p_id") && isset($_FILES["p_image"]["name"])){
+			$ex = explode(".",$_FILES["p_image"]["name"]); 
+			$ex = strtolower(end($ex));
+			$uex = explode("@",$_SESSION["tradewithgeorgia_username"]); 
+			if($ex == "jpg" || $ex == "jpeg" && $_FILES["p_image"]["size"]<=1000000){
+				$f = $uex[0].md5(time()).".jpg";
+				$fn =  DIR . 'files/usersproducts/'.$f;
+
+				/*remove old pic*/
+				$sql_select = 'SELECT `idx`,`picture` FROM `studio404_module_item` WHERE `id`=:id AND `insert_admin`=:insert_admin';
+				$prepare_select = $conn->prepare($sql_select);
+				$prepare_select->execute(array(
+					":id"=>(int)Input::method("POST","p_id"), 
+					":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"]
+				));
+				$fet = $prepare_select->fetch(PDO::FETCH_ASSOC); 
+				if($fet["picture"]){
+					$old_pic = DIR . 'files/usersproducts/'.$fet["picture"]; 
+			 		@unlink($old_pic);
+				}
+
+				/* insert new */
+				if(move_uploaded_file($_FILES["p_image"]["tmp_name"], $fn)){
+					$sqlup = 'UPDATE `studio404_module_item` SET `picture`=:picture WHERE `idx`=:idx AND `insert_admin`=:insert_admin';
+					$prup = $conn->prepare($sqlup);
+					$prup->execute(array(
+						":picture"=>$f, 
+						":idx"=>$fet["idx"], 
+						":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"]
+					));
+				}
+
+			}
+		}
+
+		// select products
+		$products_sql = 'SELECT 
+		`studio404_module_item`.`idx`,
+		`studio404_module_item`.`title`,
+		`studio404_module_item`.`picture`,
+		`studio404_module_item`.`packaging`,
+		`studio404_module_item`.`awards`,
+		`studio404_module_item`.`long_description`,
+		`studio404_module_item`.`visibility`, 
+		`studio404_pages`.`title` AS hs_title
+		FROM 
+		`studio404_module_item`, `studio404_pages`
+		WHERE 
+		`studio404_module_item`.`insert_admin`=:insert_admin AND 
+		`studio404_module_item`.`module_idx`=:module_idx AND 
+		`studio404_module_item`.`status`!=:one AND 
+		`studio404_module_item`.`hscode`=`studio404_pages`.`idx` AND 
+		`studio404_pages`.`status`!=:one  
+		ORDER BY `studio404_module_item`.`date` DESC LIMIT 10';
+		$prepare_product = $conn->prepare($products_sql);
+		$prepare_product->execute(array(
+			":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"], 
+			":module_idx"=>3, 
+			":one"=>1
+		));
+		$data["myproducts"] = $prepare_product->fetchAll(PDO::FETCH_ASSOC); 
+
 
 		@include($c["website.directory"]."/profileproducts.php"); 
 	}

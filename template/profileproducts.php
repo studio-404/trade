@@ -2,6 +2,7 @@
 	@include("parts/header.php"); 
 	if(isset($_SESSION["tradewithgeorgia_username"])) { 
 		@include('parts/changepassword.php'); 
+		@include('parts/makechange.php'); 
 ?>
 <div class="container" id="container">
 	<div class="page_title_1">
@@ -13,15 +14,29 @@
 				<label>Username <font color="red">*</font></label>
 				<input type="text" class="form-control" value="<?=$_SESSION["tradewithgeorgia_username"]?>" readonly="readonly" />
 			</div>	
-			<div class="form-group">
+			<div class="form-group ">
 				<label>Sector <font color="red">*</font></label>
-				<select name="sector" id="sector" name="sector" class="form-control" multiple style="min-height:109px; max-height:109px">
-					<?php foreach($data["sector"] as $sector) : ?>
-					<option value="<?=$sector->idx?>" title="<?=htmlentities($sector->title)?>"><?=$sector->title?></option>
-					<?php endforeach; ?>
-				</select>
-				<font class="error-msg" id="requiredx_sector">Please choose minimum one sector !</font>
+				<div class="multiselectBox">
+					<div class="selectBoxWithCheckbox" data-toggle="drop_sector">
+						Choose
+					</div>
+					<div class="selectBoxWithCheckbox_dropdown" id="drop_sector">
+						<?php 
+						$x = 1;
+						foreach($data["sector"] as $sector) : ?>
+						<div class="selectItem" data-checkbox="selectItem<?=$x?>">
+							<input type="checkbox" name="selectItem[]" class="sector_ids selectItem<?=$x?>" value="<?=$sector->idx?>" />
+							<span><?=htmlentities($sector->title)?></span>
+						</div>
+						<?php 
+						$x++;
+						endforeach; 
+						?>
+					</div>
+				</div>
+				<font class="error-msg" id="requiredx_sector">Please select minimum one sector !</font>
 			</div>
+
 			<div class="form-group">
 				<label>production Capasity</label>
 				<input type="text" id="productioncapasity" name="productioncapasity" class="form-control" value="<?=($_SESSION["user_data"]["productioncapasity"]) ? htmlentities($_SESSION["user_data"]["productioncapasity"]) : ''?>" />
@@ -46,13 +61,20 @@
 				<input type="text" id="companyname" name="companyname" class="form-control" value="<?=($_SESSION["user_data"]["companyname"]) ? htmlentities($_SESSION["user_data"]["companyname"]) : ''?>" />
 				<font class="error-msg" id="requiredx_companyname">Please fill company name field !</font>
 			</div>
-			<div class="form-group">
+
+			<div class="form-group ">
 				<label>Sub-Sector <font color="red">*</font></label>
-				<select id="subsector" name="subsector" class="form-control" multiple style="min-height:109px; max-height:109px">
-					<option value="">Choose</option>
-				</select>
-				<font class="error-msg" id="requiredx_subsector">Please choose minimum one sub-sector !</font>
+				<div class="multiselectBox2">
+					<div class="selectBoxWithCheckbox2" data-toggle="drop_sector2">
+						Choose
+					</div>
+					<div class="selectBoxWithCheckbox_dropdown2" id="drop_sector2">
+						
+					</div>
+				</div>
+				<font class="error-msg" id="requiredx_subsector">Please select minimum one Sub-Sector !</font>
 			</div>
+
 			<div class="form-group">
 				<label>Number of employees</label>
 				<input type="text" id="numemploy" name="numemploy" class="form-control" value="<?=($_SESSION["user_data"]["numemploy"]) ? htmlentities($_SESSION["user_data"]["numemploy"]) : ''?>" />
@@ -80,13 +102,25 @@
 				<label>Established in</label>
 				<input type="text" id="establishedin" name="establishedin" class="form-control" value="<?=($_SESSION["user_data"]["establishedin"]) ? htmlentities($_SESSION["user_data"]["establishedin"]) : ''?>" />
 			</div>
+				
 			<div class="form-group">
+				<label>Products <font color="red">*</font></label>
+				<div class="multiselectBox3">
+					<div class="selectBoxWithCheckbox3" data-toggle="drop_sector3">
+						Choose
+					</div>
+					<div class="selectBoxWithCheckbox_dropdown3" id="drop_sector3">
+					</div>
+				</div>
+				<font class="error-msg" id="requiredx_products">Please select minimum one product !</font>
+			</div>
+			<!-- <div class="form-group">
 				<label>Products <font color="red">*</font></label>
 				<select multiple id="products" name="products" class="form-control" style="min-height:109px; max-height:109px">
 				  <option value="">Choose</option>
 				</select>
 				<font class="error-msg" id="requiredx_products">Please choose minimum one product !</font>
-			</div>
+			</div> -->
 			<div class="form-group">
 				<label>Company size</label>
 				<select id="companysize" name="companysize" class="form-control">
@@ -96,17 +130,30 @@
 					<?php endforeach; ?>
 				</select>
 			</div>
+
 			<div class="form-group">
-				<label>Export Markets <font color="red">*</font></label>
-				<select name="exportmarkets" id="exportmarkets" class="form-control" style="min-height:109px; max-height:109px" multiple>
-					<?php 
-					$markets = explode(",",$_SESSION["user_data"]["exportmarkets"]);
-					foreach($data["countries"] as $countries) : 
-					?>
-					<option value="<?=$countries->idx?>" <?=(in_array($countries->idx,$markets)) ? 'selected="selected"' : ''?>><?=$countries->title?></option>
-					<?php endforeach; ?>
-				</select>
-				<font class="error-msg" id="requiredx_exportmarkets">Please choose minimum one export market !</font>
+				<label>Export markets <font color="red">*</font></label>
+				<?php $markets = explode(",",$_SESSION["user_data"]["exportmarkets"]); ?>
+				<div class="multiselectBox4">
+					<div class="selectBoxWithCheckbox4" data-toggle="drop_sector4">
+						<?=(count($markets) > 0) ? "Selected ".count($markets)." items" : "Choose"?>
+					</div>
+					<div class="selectBoxWithCheckbox_dropdown4" id="drop_sector4">
+						<?php 
+						$x=0;
+						foreach($data["countries"] as $countries) : 
+						?>
+						<div class="selectItem4" data-checkbox="selectItemxxx<?=$x?>">
+							<input type="checkbox" name="selectItem4[]" class="sector_ids4" id="selectItemxxx<?=$x?>" value="<?=$countries->idx?>" <?=(in_array($countries->idx,$markets)) ? 'checked="checked"' : ''?> />
+							<span><?=htmlentities($countries->title)?></span>
+						</div>
+						<?php 
+						$x++;
+						endforeach; ?>
+
+					</div>
+				</div>
+				<font class="error-msg" id="requiredx_exportmarkets">Please check minimum one export market</font>
 			</div>
 			<div class="form-group">
 				<label>Web Address</label>
@@ -156,66 +203,68 @@
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="form-group">
-					<label>Choose Product</label>
+					<label>Choose Product <font color="red">*</font></label>
 					<select id="products2" name="products2" class="form-control">
-						<option>Choose</option>
+						<option value="">Choose</option>
 					</select>
+					<font class="error-msg" id="requiredx_add_products">Please choose product !</font>
 				</div>
 				<div class="form-group">
 					<label>Shelf Life</label>
-					<input type="text" class="form-control">
+					<input type="text" id="shelf_life" name="shelf_life" class="form-control" value="" />
 				</div>
 			</div>	
 			<div class="col-sm-3">
 				<div class="form-group">
-					<label>Product Name</label>
-					<input type="text" class="form-control">
+					<label>Product Name <font color="red">*</font></label>
+					<input type="text" id="product_name" name="product_name" class="form-control" value="" />
+					<font class="error-msg" id="requiredx_add_productsname">Product name is required !</font>
 				</div>
 				<div class="form-group">
 					<label>Packaging</label>
-					<input type="text" class="form-control">
+					<input type="text" name="packinging" id="packinging" class="form-control" value="" />
 				</div>
 			</div>
 			<div class="col-sm-3">
 				<div class="form-group" style="position:relative">
-					<label>HS Code</label>
-					<input type="hidden" name="hscode_id" id="hscode_id" value="" />
-					<input type="text" name="hscode" id="hscode" class="form-control" value="" placeholder="Type minimum 3 letter.." />
-					<div class="results">
-						<ul>
-							<!-- <li><a href="#">54584652 - Growing rise</a></li>
-							<li><a href="#">54584652 - Growing rise</a></li>
-							<li><a href="#">54584652 - Growing rise</a></li>
-							<li><a href="#">54584652 - Growing rise</a></li> -->
-						</ul> 
-					</div>
+					<label>HS Code <font color="red">*</font></label>
+					<input type="hidden" name="hscode_id" class="hscode_id" value="" />
+					<input type="text" name="hscode" class="form-control hscode" value="" placeholder="Type minimum 3 letter.." />
+					<div class="results"><ul></ul></div>
+					<font class="error-msg" id="requiredx_add_hscode">HS code is required !</font>
 				</div>
 				<div class="form-group">
 					<label>AWards</label>
-					<input type="text" class="form-control">
+					<input type="text" class="form-control" name="awards" id="awards" value="" />
 				</div>
 			</div>	
 			<div class="col-sm-3">
+				<form action="" method="post" name="addproduct" id="addproduct" enctype="multipart/form-data">
+				<input type="hidden" name="t" value="<?=$_SESSION["token_generator"]?>" />
+				<input type="hidden" name="pi" id="pi" class="pi" value="" />
 				<div class="form-group">
-					<label>Product Photo</label> 
+					<label>Product Photo <font color="red">*</font></label> 
 					<div class="upload_img_tmp">
-						<img src="<?=TEMPLATE?>img/img_upload.png" class="img-responsive" width="100%" alt="" />
+						<img src="<?=TEMPLATE?>img/img_upload.png" id="product_picture" class="img-responsive" width="100%" alt="" />
 					</div>
 					<div class="btn btn-upload btn-block"> 
-						UPLOAD LOGO <input type="file" class="input_type_file">
+						UPLOAD LOGO <input type="file" id="productfile" name="productfile" class="input_type_file" value="" />
 					</div> 
+					<font class="error-msg" id="requiredx_add_photo">Product photo is required !</font>
 				</div>
+				</form>
 			</div>
 			<div class="admin_inputs">
 				<div class="col-sm-9">
 					<div class="form-group">
-						<label>Describe what are you offering or looking for</label>
-						<textarea class="form-control"></textarea>
+						<label>Describe what are you offering or looking for <font color="red">*</font></label>
+						<textarea class="form-control" id="product_description" name="product_description"></textarea>
+						<font class="error-msg" id="requiredx_add_describe">Description field is required !</font>
 					</div>				
 				</div>	
 				<div class="col-sm-3">
 					<div class="text-right">
-						<button class="btn btn-yellow">POST ENQUARY</button>
+						<button class="btn btn-yellow" id="post_product" class="post_product">POST PRODUCT</button>
 					</div>
 				</div>
 			</div>	
@@ -226,34 +275,54 @@
 		<div class="page_title_1">
 			Products
 		</div>
-		
-		<div class="col-sm-12 padding_0">
+
+		<?php foreach($data["myproducts"] as $val) : ?>
+		<div class="col-sm-12 padding_0 product_box">
 			<div class="products">
 				<div class="col-sm-12 col-md-12 col-xs-12 col-gl-12 product_item">
-					<div class="col-sm-2 col-md-2 col-xs-2 col-lg-2 padding_0">
-						<div class="image"><img src="<?=TEMPLATE?>img/product_1.jpg" class="img-responsive" width="100%" alt="" /></div>
+					<div class="col-sm-12 col-md-2 col-xs-12 col-lg-2 padding_0" style="padding-bottom:10px;">
+					<?php
+					$logo = (!empty($val["picture"])) ? WEBSITE.'image?f='.WEBSITE.'files/usersproducts/'.$val["picture"].'&w=180&h=180' : TEMPLATE.'img/p.png';
+					?>
+						<div class="image"><img src="<?=$logo?>" class="img-responsive" width="100%" alt="" /></div>
 					</div>	
-					<div class="col-sm-7 col-md-7 col-xs-7 col-gl-7 product_info padding_0">
+					<div class="col-sm-12 col-md-7 col-xs-12 col-gl-7 product_info padding_0">
 						<ul>
-							<li><span>Sparkling Wine Rose Semi Dry - </span>HS Code 04431001</li>
-							<li><span>Packaging </span>0.75 Crystal dark, 6 bottles pre box</li>
-							<li><span>Awards </span>Golden Globe, Bronze Medal UK Wines, Silver Medal European Wines</li>
+							<li><span><?=htmlentities($val["title"])?> - </span>HS code: <?=$val["hs_title"]?></li>
+							<li><span>Packaging </span><?=htmlentities($val["packaging"])?> </li>
+							<li><span>Awards </span><?=htmlentities($val["awards"])?></li>
 						</ul>
 					</div>
-					<div class="col-sm-8 col-md-8 col-xs-8 col-gl-8 product_info padding_0">
+					<div class="col-sm-12 col-md-8 col-xs-12 col-gl-8 product_info padding_0">
 						<ul>
 							<li><span>About - </span>
-								Finest sparkling wine produced by methode traditionnelle from carefully selected grapes of Georgian variety "Chinuri", grown in the best wine-producing zone of Kartli region
+								<?=htmlentities($val["long_description"])?>
 							</li>
 						</ul>
 					</div>
 					<div class="col-sm-2 " style="margin-top:30px;">
-						<button class="btn btn-yellow btn-sm btn-block">MAKE CHANGES</button>
-						<button class="btn btn-aproved btn-sm btn-block">APPROVED</button>
+						<?php 
+						if($val["visibility"]==1){
+							?>
+							<button class="btn btn-yellow btn-sm btn-block makeitchange" data-prid="<?=$val["idx"]?>">MAKE CHANGES</button>
+							<button class="btn btn-yellow btn-sm btn-block delete-product" data-prid="<?=$val["idx"]?>" style="background:red">DELETE</button>
+							<button class="btn btn-aproved btn-sm btn-block">PENDING</button>
+							<?php
+						}else{
+							?>
+							<button class="btn btn-yellow btn-sm btn-block makeitchange" data-prid="<?=$val["idx"]?>">MAKE CHANGES</button>
+							<button class="btn btn-yellow btn-sm btn-block delete-product" data-prid="<?=$val["idx"]?>" style="background:red">DELETE</button>
+							<button class="btn btn-aproved btn-sm btn-block">APPROVED</button>
+							<?php
+						}
+						?>
+						
 					</div>
 				</div>
 			</div>
 		</div>
+	<?php endforeach; ?>
+		
 		
 	</div>
 <?php 

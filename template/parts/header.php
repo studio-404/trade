@@ -40,7 +40,17 @@ include("message.php");
 					<a href="#" data-toggle="modal" data-target="#register_popup"><?=$data["language_data"]["register"]?></a> | 
 					<a href="#" data-toggle="modal" data-target="#login_popup"><?=$data["language_data"]["login"]?></a>
 					<?php }else if(isset($_SESSION["tradewithgeorgia_company_type"])){ ?>
-					<a href="javascript:;"><?=$_SESSION["tradewithgeorgia_username"]?></a> | 
+					<a href="javascript:;">
+					<?php 
+						if($_SESSION["user_data"]["companyname"]){
+							echo $_SESSION["user_data"]["companyname"];
+						}else if($_SESSION["tradewithgeorgia_user_namelname"]){
+							echo $_SESSION["tradewithgeorgia_user_namelname"];
+						}else{
+						 	echo $_SESSION["tradewithgeorgia_username"];
+						}
+						?>
+					</a> | 
 					<a href="<?=company_type::profilelink()?>"><?=$data["language_data"]["profile"]?></a> | 
 					<a href="javascipt:;" id="logoutbutton"><?=$data["language_data"]["logout"]?></a> 
 					<?php } ?>

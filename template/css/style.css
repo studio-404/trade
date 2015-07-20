@@ -1235,6 +1235,41 @@ height:25px; width:25px; z-index:999999999999999999999999999;
 .results ul{ margin: 0; padding: 0; width: 100%; list-style-type: none; }
 .results ul li{ margin: 0; padding: 5px 10px; }
 .results ul li a{ margin: 0; padding: 0px; color: #555555; }
+.product_box{ margin-bottom: 10px; }
+
+.multiselectBox{ margin: 0; padding: 0; height: 34px; line-height: 34px; position: relative; cursor:pointer; outline: solid 1px #f2f2f2; background-image: url('../img/line.png'); background-repeat: repeat-x; }
+.multiselectBox .selectBoxWithCheckbox{ margin: 0; padding: 0 12px; height: 34px; line-height: 34px; color:#3895ce; font-size: 15px; position: relative; }
+.multiselectBox .selectBoxWithCheckbox:after{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: left center; position: absolute; left:0px; }
+.multiselectBox .selectBoxWithCheckbox:before{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: right center; position: absolute; right: 0px; }
+.multiselectBox .selectBoxWithCheckbox_dropdown{ margin: 0; padding: 0; line-height: 17px; max-height: 225px; position: absolute; top:32px; left:0; z-index: 1000; width: 100%; background-color: white; border: solid 1px #3895ce; border-top: none; overflow-y:auto; display: none; }
+.multiselectBox::after{ content: ''; width: 6px; height:6px; background-image: url('../img/drop.png'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
+.multiselectBox .selectBoxWithCheckbox_dropdown .selectItem{ margin: 0 10px; padding: 5px 0; line-height: 17px; border-bottom: 1px solid #f2f2f2; cursor: pointer; }
+
+
+.multiselectBox2{ margin: 0; padding: 0; height: 34px; line-height: 34px; position: relative; cursor:pointer; outline: solid 1px #f2f2f2; background-image: url('../img/line.png'); background-repeat: repeat-x; }
+.multiselectBox2 .selectBoxWithCheckbox2{ margin: 0; padding: 0 12px; height: 34px; line-height: 34px; color:#3895ce; font-size: 15px; position: relative; }
+.multiselectBox2 .selectBoxWithCheckbox2:after{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: left center; position: absolute; left:0px; }
+.multiselectBox2 .selectBoxWithCheckbox2:before{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: right center; position: absolute; right: 0px; }
+.multiselectBox2 .selectBoxWithCheckbox_dropdown2{ margin: 0; padding: 0; line-height: 17px; max-height: 225px; position: absolute; top:32px; left:0; z-index: 1000; width: 100%; background-color: white; border: solid 1px #3895ce; border-top: none; overflow-y:auto; display: none; }
+.multiselectBox2::after{ content: ''; width: 6px; height:6px; background-image: url('../img/drop.png'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
+.multiselectBox2 .selectBoxWithCheckbox_dropdown2 .selectItem2{ margin: 0 10px; padding: 5px 0; line-height: 17px; border-bottom: 1px solid #f2f2f2; cursor: pointer; }
+
+.multiselectBox3{ margin: 0; padding: 0; height: 34px; line-height: 34px; position: relative; cursor:pointer; outline: solid 1px #f2f2f2; background-image: url('../img/line.png'); background-repeat: repeat-x; }
+.multiselectBox3 .selectBoxWithCheckbox3{ margin: 0; padding: 0 12px; height: 34px; line-height: 34px; color:#3895ce; font-size: 15px; position: relative; }
+.multiselectBox3 .selectBoxWithCheckbox3:after{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: left center; position: absolute; left:0px; }
+.multiselectBox3 .selectBoxWithCheckbox3:before{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: right center; position: absolute; right: 0px; }
+.multiselectBox3 .selectBoxWithCheckbox_dropdown3{ margin: 0; padding: 0; line-height: 17px; max-height: 225px; position: absolute; top:32px; left:0; z-index: 1000; width: 100%; background-color: white; border: solid 1px #3895ce; border-top: none; overflow-y:auto; display: none; }
+.multiselectBox3::after{ content: ''; width: 6px; height:6px; background-image: url('../img/drop.png'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
+.multiselectBox3 .selectBoxWithCheckbox_dropdown3 .selectItem3{ margin: 0 10px; padding: 5px 0; line-height: 17px; border-bottom: 1px solid #f2f2f2; cursor: pointer; }
+
+.multiselectBox4{ margin: 0; padding: 0; height: 34px; line-height: 34px; position: relative; cursor:pointer; outline: solid 1px #f2f2f2; background-image: url('../img/line.png'); background-repeat: repeat-x; }
+.multiselectBox4 .selectBoxWithCheckbox4{ margin: 0; padding: 0 12px; height: 34px; line-height: 34px; color:#3895ce; font-size: 15px; position: relative; }
+.multiselectBox4 .selectBoxWithCheckbox4:after{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: left center; position: absolute; left:0px; }
+.multiselectBox4 .selectBoxWithCheckbox4:before{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: right center; position: absolute; right: 0px; }
+.multiselectBox4 .selectBoxWithCheckbox_dropdown4{ margin: 0; padding: 0; line-height: 17px; max-height: 225px; position: absolute; top:32px; left:0; z-index: 1000; width: 100%; background-color: white; border: solid 1px #3895ce; border-top: none; overflow-y:auto; display: none; }
+.multiselectBox4::after{ content: ''; width: 6px; height:6px; background-image: url('../img/drop.png'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
+.multiselectBox4 .selectBoxWithCheckbox_dropdown4 .selectItem4{ margin: 0 10px; padding: 5px 0; line-height: 17px; border-bottom: 1px solid #f2f2f2; cursor: pointer; }
+
 @media (max-width: 992px){
 	#header{ min-height: 120px !important; }
 	.export_menu ul li {

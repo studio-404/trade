@@ -105,6 +105,16 @@ class model_admin_editcatalogsitem extends connection{
 			":idx"=>$_GET['rcidx'], 
 			":status"=>1
 		));
+
+		$slx = 'SELECT `position`,`module_idx` FROM `studio404_module_item` WHERE `idx`='.(int)$_GET['rcidx'].' '; 
+		$queryslx = $conn->query($slx); 
+		$rowm = $queryslx->fetch(PDO::FETCH_ASSOC);
+		$pos = (int)$rowm['position'];
+		$module_idx = (int)$rowm['module_idx'];
+
+		$update_pos = 'UPDATE `studio404_module_item` SET `position`=`position`-1 WHERE `status`!=1 AND `position`>'.$pos.' AND `module_idx`='.$module_idx.' ';
+		$query = $conn->query($update_pos); 
+
 		$this->outMessage = 1;
 	}
 

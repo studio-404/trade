@@ -1123,6 +1123,14 @@ class cache extends connection{
 			$sectors_subsectors_products = new sectors_subsectors_products();
 			$fetch = $sectors_subsectors_products->sectors($c);
 			break;
+			case "subsector": 
+			$sectors_subsectors_products = new sectors_subsectors_products();
+			$fetch = $sectors_subsectors_products->subsector($c);
+			break;
+			case "products": 
+			$sectors_subsectors_products = new sectors_subsectors_products();
+			$fetch = $sectors_subsectors_products->products($c);
+			break;
 			case "countries":
 			$sectors_subsectors_products = new sectors_subsectors_products();
 			$fetch = $sectors_subsectors_products->countries($c);

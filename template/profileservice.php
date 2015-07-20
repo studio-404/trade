@@ -1,117 +1,198 @@
 <?php 
 	@include("parts/header.php"); 
-	if(isset($_SESSION["tradewithgeorgia_username"])) {
+	if(isset($_SESSION["tradewithgeorgia_username"])) { 
+		@include('parts/changepassword.php'); 
+		@include('parts/makeservicechange.php'); 
 ?>
 <div class="container" id="container">
 	<div class="page_title_1">
-		Company Profile (Business Enquires)
+		Company Profile (Service provider)
 	</div>
 	<div class="row">
 		<div class="col-sm-3">
 			<div class="form-group">
-				<label>Company Name</label>
-				<input type="text" class="form-control" value="MobileJobile">
+				<label>Username <font color="red">*</font></label>
+				<input type="text" class="form-control" value="<?=$_SESSION["tradewithgeorgia_username"]?>" readonly="readonly" />
+			</div>	
+			<div class="form-group ">
+				<label>Sector <font color="red">*</font></label>
+				<div class="multiselectBox">
+					<div class="selectBoxWithCheckbox" data-toggle="drop_sector">
+						Choose
+					</div>
+					<div class="selectBoxWithCheckbox_dropdown" id="drop_sector">
+						<?php 
+						$x = 1;
+						foreach($data["sector"] as $sector) : ?>
+						<div class="selectItem" data-checkbox="selectItem<?=$x?>">
+							<input type="checkbox" name="selectItem[]" class="sector_ids selectItem<?=$x?>" value="<?=$sector->idx?>" />
+							<span><?=htmlentities($sector->title)?></span>
+						</div>
+						<?php 
+						$x++;
+						endforeach; 
+						?>
+					</div>
+				</div>
+				<font class="error-msg" id="requiredx_sector">Please select minimum one sector !</font>
 			</div>
+
 			<div class="form-group">
-				<label>Sector</label>
-				<select class="form-control">
-					<option>IT &amp; Telecomunications</option>
-				</select>
-			</div>
-			<div class="form-group">
-				<label>Established in</label>
-				<input type="text" class="form-control">
-			</div>
-			<div class="form-group">
-				<label>SME Classification</label>
-				<select class="form-control">
-					<option></option>
-				</select>
+				<label>production Capasity</label>
+				<input type="text" id="productioncapasity" name="productioncapasity" class="form-control" value="<?=($_SESSION["user_data"]["productioncapasity"]) ? htmlentities($_SESSION["user_data"]["productioncapasity"]) : ''?>" />
 			</div>
 			<div class="form-group">
 				<label>Address</label>
-				<input type="text" class="form-control">
+				<input type="text" id="address" name="address" class="form-control" value="<?=($_SESSION["user_data"]["address"]) ? htmlentities($_SESSION["user_data"]["address"]) : ''?>" />
 			</div>
 			<div class="form-group">
 				<label>Mobile Number</label>
-				<input type="text" class="form-control">
+				<input type="text" id="mobile" name="mobile" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" />
 			</div>
+			<div class="form-group">
+					<label>Contact email <font color="red">*</font></label>
+					<input type="text" id="contactemail" name="contactemail" class="form-control" value="<?=($_SESSION["user_data"]["contactemail"]) ? htmlentities($_SESSION["user_data"]["contactemail"]) : ''?>" />
+					<font class="error-msg" id="requiredx_contactemail">Please check contact email field !</font>
+				</div>
 		</div>
 		<div class="col-sm-3">
 			<div class="form-group">
-				<label>Email Address</label>
-				<input type="text" class="form-control" value="Design@dg.ge">
-			</div>	
-			<div class="form-group">
-				<label>Sub-Sector</label>
-				<select class="form-control">
-					<option>Mobile Communication</option>
-				</select>
+				<label>Company Name <font color="red">*</font></label>
+				<input type="text" id="companyname" name="companyname" class="form-control" value="<?=($_SESSION["user_data"]["companyname"]) ? htmlentities($_SESSION["user_data"]["companyname"]) : ''?>" />
+				<font class="error-msg" id="requiredx_companyname">Please fill company name field !</font>
 			</div>
+
+			<div class="form-group ">
+				<label>Sub-Sector <font color="red">*</font></label>
+				<div class="multiselectBox2">
+					<div class="selectBoxWithCheckbox2" data-toggle="drop_sector2">
+						Choose
+					</div>
+					<div class="selectBoxWithCheckbox_dropdown2" id="drop_sector2">
+						
+					</div>
+				</div>
+				<font class="error-msg" id="requiredx_subsector">Please select minimum one Sub-Sector !</font>
+			</div>
+
 			<div class="form-group">
 				<label>Number of employees</label>
-				<input type="text" class="form-control">
+				<input type="text" id="numemploy" name="numemploy" class="form-control" value="<?=($_SESSION["user_data"]["numemploy"]) ? htmlentities($_SESSION["user_data"]["numemploy"]) : ''?>" />
 			</div>
 			<div class="form-group">
-				<label>Certificate</label>
-				<input type="text" class="form-control">
+				<label>Certificates</label>
+				<select id="certificates" name="certificates" class="form-control">
+					<option value="">Choose</option>
+					<?php foreach($data["certificates"] as $certificates) : ?>
+					<option value="<?=$certificates->idx?>" <?=($_SESSION["user_data"]["certificates"]==$certificates->idx) ? 'selected="selected"' : ''?>><?=$certificates->title?></option>
+					<?php endforeach; ?>
+				</select>
 			</div>
 			<div class="form-group">
 				<label>Contact Person</label>
-				<input type="text" class="form-control">
+				<input type="text" id="contactperson" name="contactperson" class="form-control" value="<?=($_SESSION["user_data"]["contactpersones"]) ? htmlentities($_SESSION["user_data"]["contactpersones"]) : ''?>" />
 			</div>
 			<div class="form-group">
-				<label>Phone Phone</label>
-				<input type="text" class="form-control">
+				<label>Office Phone</label>
+				<input type="text" id="officephone" name="officephone" class="form-control" value="<?=($_SESSION["user_data"]["officephone"]) ? htmlentities($_SESSION["user_data"]["officephone"]) : ''?>" />
 			</div>
 		</div>
 		<div class="col-sm-3">
 			<div class="form-group">
-				<label>Password</label>
-				<input type="password" class="form-control" value="password">
+				<label>Established in</label>
+				<input type="text" id="establishedin" name="establishedin" class="form-control" value="<?=($_SESSION["user_data"]["establishedin"]) ? htmlentities($_SESSION["user_data"]["establishedin"]) : ''?>" />
 			</div>
+				
 			<div class="form-group">
-				<label>Services</label>
-				<input type="text" class="form-control" value="Mobile Fixing, Communication Fixing">
+				<label>Services <font color="red">*</font></label>
+				<div class="multiselectBox3">
+					<div class="selectBoxWithCheckbox3" data-toggle="drop_sector3">
+						Choose
+					</div>
+					<div class="selectBoxWithCheckbox_dropdown3" id="drop_sector3">
+					</div>
+				</div>
+				<font class="error-msg" id="requiredx_products">Please select minimum one service !</font>
 			</div>
+			<!-- <div class="form-group">
+				<label>Services <font color="red">*</font></label>
+				<select multiple id="products" name="products" class="form-control" style="min-height:109px; max-height:109px">
+				  <option value="">Choose</option>
+				</select>
+				<font class="error-msg" id="requiredx_products">Please choose minimum one product !</font>
+			</div> -->
 			<div class="form-group">
-				<label>Export Markets</label>
-				<select class="form-control">
-					<option>Europe</option>
+				<label>Company size</label>
+				<select id="companysize" name="companysize" class="form-control">
+					<option value="">Choose</option>
+					<?php foreach($data["companysize"] as $companysize) : ?>
+					<option value="<?=$companysize->idx?>" <?=($_SESSION["user_data"]["companysize"]==$companysize->idx) ? 'selected="selected"' : ''?>><?=$companysize->title?></option>
+					<?php endforeach; ?>
 				</select>
 			</div>
-			<br><br><br><br>
+
 			<div class="form-group">
-				<label>E-mail</label>
-				<input type="text" class="form-control">
+				<label>Export markets <font color="red">*</font></label>
+				<?php $markets = explode(",",$_SESSION["user_data"]["exportmarkets"]); ?>
+				<div class="multiselectBox4">
+					<div class="selectBoxWithCheckbox4" data-toggle="drop_sector4">
+						<?=(count($markets) > 0) ? "Selected ".count($markets)." items" : "Choose"?>
+					</div>
+					<div class="selectBoxWithCheckbox_dropdown4" id="drop_sector4">
+						<?php 
+						$x=0;
+						foreach($data["countries"] as $countries) : 
+						?>
+						<div class="selectItem4" data-checkbox="selectItemxxx<?=$x?>">
+							<input type="checkbox" name="selectItem4[]" class="sector_ids4" id="selectItemxxx<?=$x?>" value="<?=$countries->idx?>" <?=(in_array($countries->idx,$markets)) ? 'checked="checked"' : ''?> />
+							<span><?=htmlentities($countries->title)?></span>
+						</div>
+						<?php 
+						$x++;
+						endforeach; ?>
+
+					</div>
+				</div>
+				<font class="error-msg" id="requiredx_exportmarkets">Please check minimum one export market</font>
 			</div>
 			<div class="form-group">
 				<label>Web Address</label>
-				<input type="text" class="form-control">
+				<input type="text" id="webaddress" name="webaddress" class="form-control" value="<?=($_SESSION["user_data"]["webaddress"]) ? htmlentities($_SESSION["user_data"]["webaddress"]) : ''?>" />
 			</div>
 		</div>
 		<div class="col-sm-3">
 			<div class="form-group">
 				<label>Company Logo</label> 
 				<div class="upload_img_tmp">
-					<img src="<?=TEMPLATE?>img/img_upload.png" class="img-responsive" width="100%" alt="" />
+					<?php
+					$logo = (!empty($_SESSION["user_data"]["picture"])) ? WEBSITE.'image?f='.WEBSITE.'files/usersimage/'.$_SESSION["user_data"]["picture"].'&w=300&h=170' : TEMPLATE.'img/img_upload.png';
+					?>
+					<img src="<?=$logo?>" class="img-responsive" id="userLogo" width="100%" alt="" />
 				</div>
+				<form action="" method="post" enctype="multipart/form-data" id="uploadImageForm">
 				<div class="btn btn-upload btn-block"> 
-					UPLOAD LOGO <input type="file" class="input_type_file">
-				</div> 
+					<span id="txtFupload">UPLOAD LOGO</span> <input type="file" name="inputUserLogo" class="input_type_file" accept="image/*" id="inputUserLogo" />
+				</div>
+				</form> 
+				<font class="error-msg" style="padding:5px 15px 0 0;" id="imageWarning">Please choose 300x170 px photo or system resizes it itself !</font>
 			</div>
 		</div>
 		<div class="admin_inputs">
 			<div class="col-sm-9">
 				<div class="form-group">
 					<label>About</label>
-					<textarea class="form-control"></textarea>
+					<textarea id="about" name="about" class="form-control"><?=($_SESSION["user_data"]["about"]) ? htmlentities($_SESSION["user_data"]["about"]) : ''?></textarea>
+				</div>
+			</div>
+			<div class="col-sm-9">
+				<div class="form-group">
+					<label><a href="#" data-toggle="modal" data-target="#changepass_popup">Change password</a></label>
 				</div>
 			</div>
 			<div class="col-sm-3">
-				<button class="btn btn-yellow">SAVE CHANGES</button>
+				<button class="btn btn-yellow" id="save_changes">SAVE CHANGES</button>
 			</div>
-		</div>	
+		</div>
 	</div>
 	<hr>
 	
@@ -122,21 +203,23 @@
 		<div class="row">
 			<div class="col-sm-5">
 				<div class="form-group">
-					<label>Title</label>
-					<select class="form-control">
-						<option>Communication Fixing</option>
+					<label for="service_title">Title <font color="red">*</font></label>
+					<select class="form-control" id="service_title" class="service_title" name="service_title">
+						<option value="">Choose</option>
 					</select>
+					<font class="error-msg" id="servicetitle_required">Please select service title !</font>
 				</div>
 			</div>	
 			<div class="col-sm-12">
 				<div class="form-group">
-					<label>Describe Service</label>
-					<textarea class="form-control"></textarea>
+					<label for="service_description">Describe Service <font color="red">*</font></label>
+					<textarea class="form-control" id="service_description" name="service_description"></textarea>
+					<font class="error-msg" id="servicedesc_required">Please describe your service !</font>
 				</div>				
 			</div>	
 			<div class="col-sm-12">
 				<div class="text-right">
-					<button class="btn btn-yellow">POST ENQUARY</button>
+					<button class="btn btn-yellow" id="post_service">POST SERVICE</button>
 				</div>
 			</div>
 		</div>
@@ -146,27 +229,46 @@
 		<div class="page_title_1">
 			Services
 		</div>
-		
+		<?php
+		// echo "<pre>"; 
+		// print_r($data["myservices"]); 
+		// echo "</pre>";
+		?>
 		<div class="col-sm-12 padding_0">
-			<div class="services">
+			
+			<?php
+			foreach($data["myservices"] as $val):
+			?>
+			<div class="services" style="float:left; margin-bottom:10px; width:100%">
 				<div class="col-sm-12 col-md-12 col-xs-12 col-gl-12 service_item">
-					<div class="col-sm-9 col-md-9 col-xs-12 col-gl-9 product_info padding_0">
-						<div class="title">Mobile Phone Transfers</div>
+					<div class="col-sm-10 col-md-10 col-xs-12 col-gl-10 product_info padding_0">
+						<div class="title"><?=$val["title"]?></div>
 						<div class="text">
-							Finest sparkling wine produced by methode traditionnelle from carefully selected grapes of Georgian variety "Chinuri", grown in the best wine-producing zone of Kartli region Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered 
+							<?=$val["long_description"]?>
 						</div>
 					</div>
-					<div class="col-sm-3 padding_0" style="margin-top:30px;">
-						<div class="text-right">
-							<button class="btn btn-yellow btn-sm btn-service_item">MAKE CHANGES</button>
-							<button class="btn btn-aproved btn-sm btn-service_item">APPROVED</button>
-						</div>	
+					<div class="col-sm-2">
+							<button class="btn btn-yellow btn-sm btn-service_item" style="width:100%;" id="change_service" data-sid="<?=$val["id"]?>">MAKE CHANGES</button>
+							<button class="btn btn-yellow btn-sm btn-service_item" style="background:red; width:100%;" id="delete_service" data-srvid="<?=$val["idx"]?>">DELETE</button>
+							<button class="btn btn-aproved btn-sm btn-service_item" style="width:100%;"><?=($val["visibility"]==2) ? 'APPROVED' : 'PENDING'?></button>
 					</div>
 				</div>
 			</div>
+			<div style="clear:both"></div>
+			<?php endforeach; ?>
+
 		</div>
 		
 	</div>
+<?php 
+$make = phparray_to_jsarray::sectorSelects();
+?>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+selectSectors(<?=$make[0]?>,<?=$make[1]?>,<?=$make[2]?>);
+});				
+</script>
+
 <?php 
 	}else{
 		?>

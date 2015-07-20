@@ -32,34 +32,48 @@
 		<div class="filters_div">
 			<div class="col-sm-2">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Sort by name <span class="caret"></span> 
+					Product name <span class="caret"></span> 
 				</a>					
 				<ul class="dropdown-menu">
-					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=asc&amp;sector=<?=$data["get_sector"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">ASC</a></li>
-					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=desc&amp;sector=<?=$data["get_sector"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">DESC</a></li>
+					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=asc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by ascending</a></li>
+					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=desc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by descending</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-2">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Choose sector <span class="caret"></span> 
+					Sub sector <span class="caret"></span> 
 				</a>
 				<ul class="dropdown-menu">
-					<?php foreach($data["sector"] as $sector) : ?>
+					<?php foreach($data["subsector"] as $subsector) : ?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;sector=<?=$sector->idx?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$sector->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;<?=$data["get_sort"]?>=asc&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$subsector->title?></a> 
 					</li>
 					<?php endforeach; ?>					
 				</ul>
 			</div>
 			<div class="col-sm-2">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Products
+					Products <span class="caret"></span> 
 				</a>
+				<ul class="dropdown-menu">
+					<?php foreach($data["products"] as $products) : ?>
+					<li>
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$products->idx?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$products->title?></a> 
+					</li>
+					<?php endforeach; ?>					
+				</ul>
 			</div>
 			<div class="col-sm-4">
-				<a href="#">
-					Export Markets
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					Export markets <span class="caret"></span> 
 				</a>
+				<ul class="dropdown-menu">
+					<?php foreach($data["countries"] as $countries) : ?>
+					<li>
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$countries->idx?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$countries->title?></a> 
+					</li>
+					<?php endforeach; ?>					
+				</ul>
 			</div>
 			<div class="col-sm-2">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -67,7 +81,7 @@
 				</a>
 				<ul class="dropdown-menu">
 					<?php foreach($data["certificates"] as $certificates) : ?>
-					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_asc"]?>&amp;sector=<?=$data["get_sector"]?>&amp;certificate=<?=$certificates->idx?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$certificates->title?></a></li>
+					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_asc"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$certificates->idx?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$certificates->title?></a></li>
 					<?php endforeach; ?>
 				</ul>
 			</div>
@@ -85,10 +99,26 @@
 				$logo = (!empty($val["su_picture"])) ? WEBSITE.'image?f='.WEBSITE.'files/usersimage/'.$val["su_picture"].'&w=150&h=75' : TEMPLATE.'img/noimage.png';
 				?>
 				<div class="col-sm-2 no-float itemssss"><img src="<?=$logo?>" class="img-responsive"></div>
-				<div class="col-sm-2 no-float itemssss"><?=$retrieve_users_info->retrieveDb($val["su_sector_id"])?></div>
-				<div class="col-sm-2 no-float itemssss"><?=$retrieve_users_info->retrieveDb($val["su_products"])?></div>
-				<div class="col-sm-4 no-float itemssss"><?=$retrieve_users_info->retrieveDb($val["su_export_markets_id"])?></div>
-				<div class="col-sm-2 no-float itemssss"><?=$retrieve_users_info->retrieveDb($val["su_certificates"])?></div>
+				<div class="col-sm-2 no-float itemssss">
+					<ul class="text_formats">
+					<li><?=$retrieve_users_info->retrieveDb($val["su_sub_sector_id"])?></li>
+					</ul>
+				</div>
+				<div class="col-sm-2 no-float itemssss">
+					<ul class="text_formats">
+						<li><?=$retrieve_users_info->retrieveDb($val["su_products"])?></li>
+					</ul>
+				</div>
+				<div class="col-sm-4 no-float itemssss">
+					<ul class="text_formats">
+						<li><?=$retrieve_users_info->retrieveDb($val["su_export_markets_id"])?></li>
+					</ul>
+				</div>
+				<div class="col-sm-2 no-float itemssss">
+					<ul class="text_formats">
+						<li><?=$retrieve_users_info->retrieveDb($val["su_certificates"])?></li>
+					</ul>
+				</div>
 			</div>	
 		</div>
 	</a>
@@ -100,62 +130,93 @@
 		<div class="filters_div">
 			<div class="col-sm-2">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Product Name <span class="caret"></span> 
-				</a>
-			</div>
-			<div class="col-sm-2">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Sub Sector <span class="caret"></span> 
-				</a>
+					Product name <span class="caret"></span> 
+				</a>					
 				<ul class="dropdown-menu">
-					<li><a href="#">Sub Sector</a></li>
-					<li><a href="#">Sub Sector</a></li>
-					<li><a href="#">Sub Sector</a></li>
+					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=asc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by ascending</a></li>
+					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=desc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by descending</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-2">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Products
+					Sub sector <span class="caret"></span> 
 				</a>
+				<ul class="dropdown-menu">
+					<?php foreach($data["subsector"] as $subsector) : ?>
+					<li>
+						<a href="?view=<?=$data["get_view"]?>&amp;<?=$data["get_sort"]?>=asc&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$subsector->title?></a> 
+					</li>
+					<?php endforeach; ?>					
+				</ul>
 			</div>
 			<div class="col-sm-2">
-				<a href="#">
-					Export Markets
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					Products <span class="caret"></span> 
+				</a>
+				<ul class="dropdown-menu">
+					<?php foreach($data["products"] as $products) : ?>
+					<li>
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$products->idx?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$products->title?></a> 
+					</li>
+					<?php endforeach; ?>					
+				</ul>
+			</div>
+			<div class="col-sm-2">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					Company
 				</a>
 			</div>
 			<div class="col-sm-4">
-				<a href="#" > <!-- class="dropdown-toggle" data-toggle="dropdown" -->
-					About<!-- <span class="caret"></span>  -->
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					About
 				</a>
-				<!-- <ul class="dropdown-menu">
-					<li><a href="#">Certificates</a></li>
-					<li><a href="#">Certificates</a></li>
-					<li><a href="#">Certificates</a></li>
-				</ul> -->
 			</div>
 		</div>
-		
-		<a href="Page_company.html">	
+		<?php
+		// echo "<pre>";
+		// print_r($data["fetch"]); 
+		// echo "</pre>";
+		$retrieve_users_info = new retrieve_users_info();
+		$ctext = new ctext();
+		foreach($data["fetch"] as $val) :
+		?>
+		<a href="<?=WEBSITE.LANG?>/export-catalog/company?view=<?=$val['users_id']?>&product=<?=$val['id']?>&token=<?=$_SESSION["token_generator"]?>">	
 			<div class="filter_content">
-				<div class="names">MUKUZANI - RED WINE</div>
+				<div class="names"><?=htmlentities($val["title"])?></div>
 				<div class="content_divs">
-					<div class="col-sm-2 no-float itemssss"><img src="<?=TEMPLATE?>img/mukuzani.jpg" class="img-responsive"></div>
-					<div class="col-sm-2 no-float itemssss">Alcoholic Drinks</div>
-					<div class="col-sm-2 no-float itemssss">Wine</div>
-					<div class="col-sm-2 no-float itemssss">Eniseli Wines</div>
+					<?php
+						$logo = (!empty($val["picture"])) ? WEBSITE.'image?f='.WEBSITE.'files/usersproducts/'.$val["picture"].'&w=175&h=175' : TEMPLATE.'img/noimage.png';
+					?>
+					<div class="col-sm-2 no-float itemssss"><img src="<?=$logo?>" class="img-responsive" width="100%" alt="" /></div>
+					<div class="col-sm-2 no-float itemssss">
+						<ul class="text_formats">
+							<li><?=$retrieve_users_info->retrieve_subsector_from_product(strip_tags($val["products"]))?></li>
+						</ul>
+					</div>
+					<div class="col-sm-2 no-float itemssss">
+						<ul class="text_formats">
+							<li><?=$retrieve_users_info->retrieveDb(strip_tags($val["products"]))?></li>
+						</ul>
+					</div>
+					<div class="col-sm-2 no-float itemssss">
+						<ul class="text_formats">
+							<li><?=htmlentities(strip_tags($val["users_name"]))?></li>
+						</ul>
+					</div>
 					<div class="col-sm-4 no-float itemssss">
 						<ul class="text_formats">
-							<li><span>Packiging:</span> 075, Crystal Dark Bottles (6 in box)</li>
-							<li><span>Shelf Life:</span> 12 years</li>
-							<li><span>Awards:</span> Golden Medal of  European Wina accossiation</li>
+							<li><span>Packiging:</span> <?=htmlentities($val["packaging"])?></li>
+							<li><span>Shelf Life:</span> <?=htmlentities($val["shelf_life"])?></li>
+							<li><span>Awards:</span> <?=htmlentities($val["awards"])?></li>
 						</ul>
 						<ul class="text_formats" style="margin-top:20px;">
-							<li><span>About:</span> Finest sparkling wine produced by methode traditionnelle from carefully selected grapes of Georgian variety "Chinuri", grown in the best wine-producing zone of ....</li>
+							<li><span>About:</span> <?=$ctext->cut(strip_tags($val["long_description"]),120)?></li>
 						</ul>
 					</div>
 				</div>	
 			</div>
-		</a>	
+		</a>
+		<?php endforeach; ?>	
 	</div>
 <?php endif; ?>
 
@@ -167,9 +228,8 @@
 					Company Name <span class="caret"></span> 
 				</a>					
 				<ul class="dropdown-menu">
-					<li><a href="#">Company Name</a></li>
-					<li><a href="#">Company Name</a></li>
-					<li><a href="#">Company Name</a></li>
+					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=asc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by ascending</a></li>
+					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=desc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by descending</a></li>
 				</ul>
 			</div>
 			<div class="col-sm-2">
@@ -177,15 +237,24 @@
 					Sub Sector <span class="caret"></span> 
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="#">Sub Sector</a></li>
-					<li><a href="#">Sub Sector</a></li>
-					<li><a href="#">Sub Sector</a></li>
+					<?php foreach($data["subsector"] as $subsector) : ?>
+					<li>
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$subsector->title?></a> 
+					</li>
+					<?php endforeach; ?>
 				</ul>
 			</div>
 			<div class="col-sm-2">
-				<a href="#">
-					Services
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					Services <span class="caret"></span> 
 				</a>
+				<ul class="dropdown-menu">
+					<?php foreach($data["products"] as $products) : ?>
+					<li>
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$products->idx?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$products->title?></a> 
+					</li>
+					<?php endforeach; ?>
+				</ul>
 			</div>
 			<div class="col-sm-6">
 				<a href="#">
@@ -193,19 +262,47 @@
 				</a>
 			</div> 
 		</div>
-		
-	<a href="Page_Service_company.html">	
+
+	<?php
+	// echo "<pre>";
+	// print_r($data["fetch"]); 
+	// echo "</pre>";
+	
+	$retrieve_users_info = new retrieve_users_info();
+	$ctext = new ctext();
+	foreach($data["fetch"] as $val) :
+	?>		
+	<a href="<?=WEBSITE.LANG?>/export-catalog/service?view=<?=$val['users_id']?>&product=<?=$val['id']?>&token=<?=$_SESSION["token_generator"]?>">	
 		<div class="filter_content">
-			<div class="names">MUKUZANI - RED WINE</div>
+			<div class="names"><?=$val["users_name"]?></div>
 			<div class="content_divs">
-				<div class="col-sm-2 no-float itemssss"><img src="<?=TEMPLATE?>img/microsoft.jpg" class="img-responsive"></div>
-				<div class="col-sm-2 no-float itemssss">IT &amp; Communications</div>
-				<div class="col-sm-2 no-float itemssss">Operating system fixings Online bussines conultations, Skype conferences</div>
-				<div class="col-sm-6 no-float itemssss">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampdenney College in Virginia, looked up one of the more ....</div>
+				<?php
+					$logo = (!empty($val["users_picture"])) ? WEBSITE.'image?f='.WEBSITE.'files/usersimage/'.$val["users_picture"].'&w=150&h=75' : TEMPLATE.'img/noimage.png';
+				?>
+				<div class="col-sm-2 no-float itemssss">
+					<img src="<?=$logo?>" class="img-responsive" alt="" />
+				</div>
+				<div class="col-sm-2 no-float itemssss">
+					<ul class="text_formats">
+						<li><?=$retrieve_users_info->retrieveDb($val["sub_sector_id"])?></li>
+					</ul>
+				</div>
+				<div class="col-sm-2 no-float itemssss">
+					<ul class="text_formats">
+						<li><?=$retrieve_users_info->retrieveDb($val["products"])?></li>
+					</ul>
+				</div>
+				<div class="col-sm-6 no-float itemssss">
+					<ul class="text_formats">
+						<li><?=$ctext->cut($val["long_description"],100)?></li>
+					</ul>
+				</div>
 			</div>	
 		</div>
 	</a>	
-
+	<?php
+	endforeach;
+	?>
 	</div>
 <?php endif; ?>
 	
