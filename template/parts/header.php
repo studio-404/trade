@@ -31,7 +31,7 @@ include("message.php");
 ?>
 
  
-<header id="header" class="container-fluid" style="padding:0">
+<header id="header" class="container-fluid" style="padding:0;">
 	<div class="container">
 		<div id="header_line">
 			<div class="col-sm-12 text-right padding_0">			
@@ -74,9 +74,9 @@ include("message.php");
 				<img src="<?=TEMPLATE?>img/enterprise_georgia.png"/>
 			</div>
 		</div>
-	</div>	
-</header>
+	</div>
 
+</header>
 
 <!-- START MAIN MENU -->
 	<div class="navbar navbar-trade navbar-fixed-top" role="navigation" id="slide-nav">

@@ -98,10 +98,13 @@ class exportcatalog extends connection{
 			'.$exportmarkets.' 
 			'.$certificates.' 
 			'.$search.' 
+			(`studio404_users`.`company_type`=:manufacturer OR `studio404_users`.`company_type`=:serviceprovider) AND 
 			`studio404_users`.`status`!=:one '.$orderBy.' '.$limit.'
 			';
 			$prepare = $conn->prepare($sql); 
 			$prepare->execute(array(
+				":manufacturer"=>'manufacturer', 
+				":serviceprovider"=>'serviceprovider', 
 				":user_type"=>'website', 
 				":one"=>1
 			));

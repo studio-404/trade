@@ -306,6 +306,80 @@ $(document).on("click","#save_changes",function(){
 });
 
 
+
+$(document).on("click","#save_company_changes",function(){
+	$(".error-msg").hide();
+	//alert("shevide"); 
+	var companyname = $("#companyname").val(); 
+	var establishedin = $("#establishedin").val(); 
+	var address = $("#address").val(); 
+	var mobile = $("#mobile").val(); 
+	var numemploy = $("#numemploy").val(); 
+	var contactperson = $("#contactperson").val(); 
+	var officephone = $("#officephone").val(); 
+	var companysize = $("#companysize").val(); 
+	var webaddress = $("#webaddress").val(); 
+	var contactemail = $("#contactemail").val(); 
+	var about = $("#about").val(); 
+
+
+	var sector = []; 
+	$('.sector_ids:checked').each(function(i, selected){ 
+	  sector[i] = $(selected).val(); 
+	});
+
+	// var subsector = []; 
+	// $('.sector_ids2:checked').each(function(i, selected){ 
+	//   subsector[i] = $(selected).val(); 
+	// });
+
+	// var products = []; 
+	// $('.sector_ids3:checked').each(function(i, selected){ 
+	//   products[i] = $(selected).val(); 
+	// });
+
+	// var exportmarkets = []; 
+	// $('.sector_ids4:checked').each(function(i, selected){ 
+	//   exportmarkets[i] = $(selected).val(); 
+	// });
+
+
+	if(companyname==""){
+		$("#requiredx_companyname").fadeIn("slow");
+		return false;
+	}else if(sector.length<=0){
+		$("#requiredx_sector").fadeIn("slow");
+		return false;
+	}else if(validateEmail(contactemail)!=true){
+		$("#requiredx_contactemail").fadeIn("slow");
+	}else{ 
+		$("#insertText").html("Please wait"); 
+		$('#message_popup').modal('toggle'); 
+		var f = $("#inputUserLogo").val();
+		$.post("http://"+document.domain+"/en/ajax", 
+		{ 
+			changecompanyprofile:true, 
+			p_companyname:companyname, 
+			p_sector:JSON.stringify(sector), 
+			p_establishedin:establishedin, 
+			p_address:address, 
+			p_mobiles:mobile, 
+			p_numemploy:numemploy, 
+			p_contactpersones:contactperson, 
+			p_officephone:officephone, 
+			p_companysize:companysize, 
+			p_webaddress:webaddress, 
+			p_contactemail:contactemail, 
+			p_about:nl2br(about), 
+			p_file: f
+		}, 
+		function(d){
+			if(d=="Done"){ 
+				$("#insertText").html("Data updated !"); 
+			} 
+		});
+	}
+});
 $(document).on("change","#inputUserLogo",function(e){
 	e.stopPropagation();
 	e.preventDefault();
@@ -623,12 +697,14 @@ $(document).on("click",".selectItem",function(e){
     	r++;
 	});
 	$(".selectBoxWithCheckbox").html("Selected "+ (r) +" items");
-	$(".selectBoxWithCheckbox2").html("Choose");
-	$(".selectBoxWithCheckbox3").html("Choose"); 
-	document.getElementById("drop_sector2").innerHTML = "Please wait...";
-	$.post("http://"+document.domain+"/en/ajax", { loadsubsector:true, sval:JSON.stringify(names) }, function(d){
-		document.getElementById("drop_sector2").innerHTML = d;
-	});
+	if(document.getElementById("drop_sector2")){
+		$(".selectBoxWithCheckbox2").html("Choose");
+		$(".selectBoxWithCheckbox3").html("Choose"); 
+		document.getElementById("drop_sector2").innerHTML = "Please wait...";
+		$.post("http://"+document.domain+"/en/ajax", { loadsubsector:true, sval:JSON.stringify(names) }, function(d){
+			document.getElementById("drop_sector2").innerHTML = d;
+		});
+	}
 });
 
 $(document).on("click",".selectItem2",function(e){
@@ -686,7 +762,43 @@ $(document).on("click","#post_service",function(e){
 			}
 		});
 	}
-	
+});
+
+$(document).on("click",".postEnquires",function(){
+	var type = $("#etype").val();
+	var sector = $("#esector").val();
+	var title = $("#etitle").val();
+	var description = nl2br($("#edescription").val());
+	$(".error-msg").hide();
+	if(type==''){
+		$("#enquire_type_required").fadeIn("slow"); 
+		return false;
+	}else if(esector==''){
+		$("#enquire_sector_required").fadeIn("slow"); 
+		return false;
+	}else if(etitle==''){
+		$("#enquire_title_required").fadeIn("slow"); 
+		return false;
+	}else if(edescription==''){
+		$("#enquire_description_required").fadeIn("slow"); 
+		return false;
+	}else{
+		$("#insertText").html("Please wait"); 
+		$('#message_popup').modal('toggle');
+		$.post("http://"+document.domain+"/en/ajax", {
+			addenquire:true, 
+			t:type, 
+			s:sector, 
+			ti:title, 
+			d:description 
+		}, function(r){
+			if(r=="Done"){
+				location.reload();
+			}else{
+				$("#insertText").html("Error"); 
+			}
+		});
+	}
 
 });
 
@@ -720,6 +832,19 @@ $(document).on("click",".selectItem4",function(e){
 	}
 });
 
+
+function selectOnlySectors(sarray){
+	$("#drop_sector .selectItem .sector_ids").each(function(e){
+		var v = $(this).val(); 
+		for(i=0;i<=sarray.length;i++){
+			if(v==sarray[i]){
+				$(this).click();
+			}
+		}
+	});
+	$(".selectBoxWithCheckbox").html("Selected "+ (sarray.length) +" items");
+
+}
 
 function selectSectors(sarray, sarray2, sarray3){
 	$("#drop_sector .selectItem .sector_ids").each(function(e){

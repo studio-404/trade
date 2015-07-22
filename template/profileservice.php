@@ -6,7 +6,7 @@
 ?>
 <div class="container" id="container">
 	<div class="page_title_1">
-		Company Profile (Service provider)
+		Profile (<?=ucfirst($_SESSION["tradewithgeorgia_company_type"])?>)
 	</div>
 	<div class="row">
 		<div class="col-sm-3">
