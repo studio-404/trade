@@ -559,6 +559,34 @@ class ajax extends connection{
 			echo "Done"; 
 		}
 
+		if(Input::method("POST","delenquire")=="true" && Input::method("POST","eid") && is_numeric(Input::method("POST","eid")) && !empty($_SESSION["tradewithgeorgia_user_id"])){
+			
+			$check = 'SELECT `position` FROM `studio404_module_item` WHERE `idx`=:idx AND `module_idx`=5 AND `insert_admin`=:insert_admin'; 
+		 	$pre_check = $conn->prepare($check);
+		 	$pre_check->execute(array(
+		 		":idx"=>(int)Input::method("POST","eid"), 
+		 		":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"]
+		 	));
+		 	$ch_fetch = $pre_check->fetch(PDO::FETCH_ASSOC); 
+		 	// if(!empty($ch_fetch["picture"])){
+		 	// 	$old_pic = DIR . 'files/usersproducts/'.$ch_fetch["picture"]; 
+		 	// 	@unlink($old_pic);
+		 	// }
+
+		 	$update_pos = 'UPDATE `studio404_module_item` SET `position`=`position`-1 WHERE `status`!=1 AND `position`>'.$ch_fetch['position'].' AND `module_idx`=5 ';
+		 	$query = $conn->query($update_pos); 
+
+			$sql = 'UPDATE `studio404_module_item` SET `status`=:one WHERE `insert_admin`=:insert_admin AND `module_idx`=:module_idx AND `idx`=:idx';
+			$prepare = $conn->prepare($sql);
+			$prepare->execute(array(
+				":idx"=>(int)Input::method("POST","eid"), 
+		 		":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"], 
+		 		":module_idx"=>5, 
+		 		":one"=>1
+			));
+			echo "Done"; 
+		}
+
 		if(Input::method("POST","addproduct") && Input::method("POST","addproduct")=="true" && Input::method("POST","p") && Input::method("POST","pn") && Input::method("POST","c") && Input::method("POST","d"))
 		{
 			$products = (int)Input::method("POST","p");
@@ -607,6 +635,7 @@ class ajax extends connection{
 				$sql = 'INSERT INTO `studio404_module_item` SET 
 				`idx`=:idx, 
 				`uid`=:uid, 
+				`insert_ip`=:insert_ip, 
 				`date`=:datex, 
 				`module_idx`=:module_idx, 
 				`title`=:title, 
@@ -627,6 +656,7 @@ class ajax extends connection{
 				$prepare->execute(array(
 					":idx"=>$maxidm, 
 					":uid"=>$u, 
+					":insert_ip"=>get_ip::ip(), 
 					":datex"=>time(), 
 					":module_idx"=>3, 
 					":title"=>strip_tags(Input::method("POST","pn")), 
@@ -745,6 +775,38 @@ class ajax extends connection{
 			echo "Done"; 
 		}
 
+		//
+		if(Input::method("POST","changeenquire")=="true" && is_numeric(Input::method("POST","i")) && Input::method("POST","t") && Input::method("POST","s") && Input::method("POST","ti") && Input::method("POST","d")){
+			$i = Input::method("POST","i"); 
+			$t = Input::method("POST","t"); 
+			$s = Input::method("POST","s"); 
+			$ti = Input::method("POST","ti"); 
+			$d = Input::method("POST","d"); 
+			
+
+			$sql = 'UPDATE `studio404_module_item` SET 
+			`type`=:type, 
+			`sector_id`=:sector_id, 
+			`title`=:title, 
+			`long_description`=:long_description, 
+			`visibility`=:one  
+			WHERE 
+			`id`=:id AND  
+			`insert_admin`=:insert_admin   
+			';
+			$prepare = $conn->prepare($sql); 
+			$prepare->execute(array(
+				":type"=>$t, 
+				":sector_id"=>$s, 
+				":title"=>$ti, 
+				":long_description"=>$d, 
+				":id"=>$i, 
+				":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"], 
+				":one"=>1
+			));
+			echo "Done"; 
+		}
+
 
 		if(Input::method("POST","makeitchange")=="true"){
 			$pi = Input::method("POST","pi"); 
@@ -810,6 +872,7 @@ class ajax extends connection{
 			$sql = 'INSERT INTO `studio404_module_item` SET 
 			`idx`=:idx, 
 			`uid`=:uid, 
+			`insert_ip`=:insert_ip, 
 			`date`=:datex, 
 			`module_idx`=:module_idx, 
 			`title`=:title,
@@ -826,6 +889,7 @@ class ajax extends connection{
 			$prepare->execute(array(
 				":idx"=>$maxidm, 
 				":uid"=>$u, 
+				":insert_ip"=>get_ip::ip(), 
 				":datex"=>time(), 
 				":module_idx"=>4, 
 				":title"=>$p, 
@@ -869,6 +933,7 @@ class ajax extends connection{
 			$sql = 'INSERT INTO `studio404_module_item` SET 
 			`idx`=:idx, 
 			`uid`=:uid, 
+			`insert_ip`=:insert_ip, 
 			`date`=:datex, 
 			`module_idx`=:module_idx, 
 			`type`=:type, 
@@ -885,6 +950,7 @@ class ajax extends connection{
 			$prepare->execute(array(
 				":idx"=>$maxidm, 
 				":uid"=>$u, 
+				":insert_ip"=>get_ip::ip(), 
 				":datex"=>time(), 
 				":module_idx"=>5, 
 				":type"=>$t, 

@@ -182,14 +182,14 @@
 							<?=$val["title"]?>
 						</div>
 						<div class="text">
-							<?=nl2br($val["long_description"])?>
+							<?=strip_tags(nl2br($val["long_description"]))?>
 						</div>
 					</div>	
 					<div class="col-sm-2">
 						<div class="text-right">
 							<button class="btn btn-yellow" style="width:100%; padding: 7px 0; float:left;" id="change_enquires" data-eid="<?=$val["id"]?>">MAKE CHANGES</button>
-							<button class="btn btn-aproved" style="width:100%; padding: 7px 0; margin-top:8px; float:left; background:red">DELETE</button>							
-							<button class="btn btn-aproved" style="width:100%; padding: 7px 0; margin-top:8px; float:left;"><?=($val->visibility==2) ? 'APPROVED' : 'PENDING'?></button>
+							<button class="btn btn-aproved" style="width:100%; padding: 7px 0; margin-top:8px; float:left; background:red" id="delete_enquires" data-enquid="<?=$val["idx"]?>">DELETE</button>							
+							<button class="btn btn-aproved" style="width:100%; padding: 7px 0; margin-top:8px; float:left;"><?=($val['visibility']==2) ? 'APPROVED' : 'PENDING'?></button>
 						</div>
 					</div>
 					<div style="clear:both"></div>

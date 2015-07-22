@@ -543,6 +543,12 @@ $(document).on("click","#delete_service",function(e){
 	$('#message_popup').modal('toggle');  
 });
 
+$(document).on("click","#delete_enquires",function(e){
+	var i = $(this).data("enquid");  
+	$("#insertText").html("<p>Would you like to delete enquire ? </p><div class=\"btn  btn-yellow\" style=\"width:100%\" data-e=\""+i+"\" id=\"deleteme_enquire_true\">DELETE</div><div class=\"btn btn-aproved btn-sm btn-block\" style=\"width:100%; margin-top:10px\" onclick=\"$('#message_popup').modal('toggle');\">CANCEL</div>");
+	$('#message_popup').modal('toggle');  
+});
+
 $(document).on("click","#deleteme",function(e){
 	var i = $(this).data("p"); 
 	$("#insertText").html("<p>Please wait...</p>");
@@ -561,6 +567,18 @@ $(document).on("click","#deleteme_service_true",function(e){
 	$.post("http://"+document.domain+"/en/ajax", {
 		delservice:true, 
 		sid:i
+	}, function(r){
+		if(r=="Done"){ location.reload(); }
+		else{ $("#insertText").html("<p>Error, Please try it again later !</p>"); }
+	})
+});
+
+$(document).on("click","#deleteme_enquire_true",function(e){//test
+	var i = $(this).data("e"); 
+	$("#insertText").html("<p>Please wait...</p>");
+	$.post("http://"+document.domain+"/en/ajax", {
+		delenquire:true, 
+		eid:i
 	}, function(r){
 		if(r=="Done"){ location.reload(); }
 		else{ $("#insertText").html("<p>Error, Please try it again later !</p>"); }
@@ -840,7 +858,7 @@ $(document).on("click","#change_enquires",function(e){
 		eid:i
 	}, function(r){
 		var obj = jQuery.parseJSON(r);
-		//console.log(r); 
+
 		$("#e_eid").val(obj[0].id);
 		$("#e_type").val(obj[0].type);
 		
@@ -863,9 +881,10 @@ $(document).on("click","#change_enquire_inside",function(e){
 	var e_sector = $("#e_sector").val();
 	var e_title = $("#e_title").val();
 	var e_description = nl2br($("#e_description").val());
-
+	
 	$.post("http://"+document.domain+"/en/ajax", {
 		changeenquire: true, 
+		i:e_eid, 
 		t:e_type, 
 		s:e_sector, 
 		ti:e_title, 

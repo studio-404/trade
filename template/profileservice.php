@@ -170,9 +170,9 @@
 					<img src="<?=$logo?>" class="img-responsive" id="userLogo" width="100%" alt="" />
 				</div>
 				<form action="" method="post" enctype="multipart/form-data" id="uploadImageForm">
-				<div class="btn btn-upload btn-block"> 
-					<span id="txtFupload">UPLOAD LOGO</span> <input type="file" name="inputUserLogo" class="input_type_file" accept="image/*" id="inputUserLogo" />
-				</div>
+					<div class="btn btn-upload btn-block"> 
+						<span id="txtFupload">UPLOAD LOGO</span> <input type="file" name="inputUserLogo" class="input_type_file" accept="image/*" id="inputUserLogo" />
+					</div>
 				</form> 
 				<font class="error-msg" style="padding:5px 15px 0 0;" id="imageWarning">Please choose 300x170 px photo or system resizes it itself !</font>
 			</div>

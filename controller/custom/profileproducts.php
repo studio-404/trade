@@ -15,6 +15,9 @@ class profileproducts extends connection{
 		$model_template_upload_user_logo = new model_template_upload_user_logo();
 		$upload = $model_template_upload_user_logo->upload($c);
 
+		// $sectors_subsectors_products = new sectors_subsectors_products(); 
+		// $data["sectors"] = $sectors_subsectors_products->sectors($c); 
+
 		$cache = new cache();
 		$text_general = $cache->index($c,"text_general");
 		$data["text_general"] = json_decode($text_general,true);
