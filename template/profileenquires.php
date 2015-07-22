@@ -2,6 +2,7 @@
 	@include("parts/header.php"); 
 	if(isset($_SESSION["tradewithgeorgia_username"])) {
 		@include('parts/changepassword.php'); 
+		@include('parts/makeenquireschange.php'); 
 ?>
 <div class="container" id="container">
 	<div class="page_title_1">
@@ -167,21 +168,33 @@
 		<div class="page_title_1">
 			Previous Enquiries/Proposals
 		</div>
-		
-		<div class="col-sm-12 padding_0">
-			<div class="enquire">
-				<div class="date">03.03.2015</div>
-				<div class="col-sm-9" style="float:none;">
-					<div class="title">
-						Titanium sheets, Titanium bars, Titanium tubes
+		<?php
+		// echo "<pre>";
+		// print_r($data["myenquire"]);  
+		// echo "</pre>"; 
+		?>
+			<div class="col-sm-12 padding_0">
+				<?php foreach($data["myenquire"] as $val) : ?>
+				<div class="enquire">
+					<div class="date"><?=date("d.m.Y",$val["date"])?></div>
+					<div class="col-sm-10">
+						<div class="title">
+							<?=$val["title"]?>
+						</div>
+						<div class="text">
+							<?=nl2br($val["long_description"])?>
+						</div>
+					</div>	
+					<div class="col-sm-2">
+						<div class="text-right">
+							<button class="btn btn-yellow" style="width:100%; padding: 7px 0; float:left;" id="change_enquires" data-eid="<?=$val["id"]?>">MAKE CHANGES</button>
+							<button class="btn btn-aproved" style="width:100%; padding: 7px 0; margin-top:8px; float:left; background:red">DELETE</button>							
+							<button class="btn btn-aproved" style="width:100%; padding: 7px 0; margin-top:8px; float:left;"><?=($val->visibility==2) ? 'APPROVED' : 'PENDING'?></button>
+						</div>
 					</div>
-					<div class="text">
-						We can produce varieties of nonferrous mill products and its alloy in shape of bars, billets, sheets, plates, forged rings, discs, anode, etc. For technical specifications, please see website.
-					</div>
-				</div>	
-				<div class="text-right">
-					<button class="btn btn-aproved">APPROVED</button></div>
+					<div style="clear:both"></div>
 				</div>
+			<?php endforeach; ?>
 			</div>
 		</div>
 

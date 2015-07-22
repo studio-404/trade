@@ -699,6 +699,20 @@ class ajax extends connection{
 			echo json_encode($fetch);
 		}
 
+		if(Input::method("POST","loadenquires")=="true" && Input::method("POST","eid") && is_numeric(Input::method("POST","eid")) && $_SESSION["tradewithgeorgia_user_id"]){
+			// load project info for update form
+			$products_sql = 'SELECT `id`,`idx`,`title`,`type`,`sector_id`,`long_description`
+			FROM `studio404_module_item` WHERE `id`=:id AND `insert_admin`=:insert_admin AND `status`!=:one ORDER BY `date` DESC LIMIT 10';
+			$prepare_product = $conn->prepare($products_sql);
+			$prepare_product->execute(array(
+				":id"=>Input::method("POST","eid"), 
+				":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"], 
+				":one"=>1
+			));
+			$fetch = $prepare_product->fetchAll(PDO::FETCH_ASSOC); 
+			echo json_encode($fetch);
+		}
+
 		if(Input::method("POST","changeservice")=="true" && is_numeric(Input::method("POST","i")) && Input::method("POST","s") && Input::method("POST","d")){
 			$i = Input::method("POST","i"); 
 			$s = Input::method("POST","s"); 

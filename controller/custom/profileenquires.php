@@ -87,14 +87,16 @@ class profileenquires extends connection{
 
 		// select products
 		$products_sql = 'SELECT 
+		`studio404_module_item`.`id`,
 		`studio404_module_item`.`idx`,
+		`studio404_module_item`.`date`,
 		`studio404_module_item`.`title`,
 		`studio404_module_item`.`sector_id`,
 		`studio404_module_item`.`type`, 
 		`studio404_module_item`.`long_description`,
 		`studio404_module_item`.`visibility`
 		FROM 
-		`studio404_module_item`, `studio404_pages`
+		`studio404_module_item`
 		WHERE 
 		`studio404_module_item`.`insert_admin`=:insert_admin AND 
 		`studio404_module_item`.`module_idx`=:module_idx AND 
