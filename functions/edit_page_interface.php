@@ -68,6 +68,7 @@ class edit_page_interface extends connection{
 				`studio404_module_item`.`event_desc` AS smi_event_desc,  
 				`studio404_module_item`.`event_when` AS smi_event_when,  
 				`studio404_module_item`.`event_fee` AS smi_event_fee, 
+				`studio404_module_item`.`event_website` AS smi_event_website, 
 				`studio404_module_item`.`videourl` AS smi_videourl,  
 				`studio404_module_item`.`short_description` AS smi_short_description,  
 				`studio404_module_item`.`long_description` AS smi_long_description,  
@@ -684,6 +685,9 @@ class edit_page_interface extends connection{
 
 			$out .= '<label for="event_fee">Event fee: </label>';
 			$out .= '<input type="text" name="event_fee" id="event_fee" value="'.htmlentities($fetch["smi_event_fee"]).'" autocomplete="off">';
+
+			$out .= '<label for="event_fee">Event website: </label>';
+			$out .= '<input type="text" name="event_website" id="event_website" value="'.htmlentities($fetch["smi_event_website"]).'" autocomplete="off">';
 		}
 
 

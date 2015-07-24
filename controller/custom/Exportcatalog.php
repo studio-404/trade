@@ -87,7 +87,8 @@ class exportcatalog extends connection{
 			`studio404_users`.`picture` AS su_picture,
 			`studio404_users`.`products` AS su_products, 
 			`studio404_users`.`export_markets_id` AS su_export_markets_id, 
-			`studio404_users`.`certificates` AS su_certificates
+			`studio404_users`.`certificates` AS su_certificates, 
+			`studio404_users`.`company_type` AS su_companytype
 			FROM 
 			`studio404_users`
 			WHERE 
@@ -142,7 +143,8 @@ class exportcatalog extends connection{
 			`studio404_module_item`.`awards`, 
 			`studio404_module_item`.`long_description`, 
 			`studio404_users`.`id` AS users_id,
-			`studio404_users`.`namelname` AS users_name
+			`studio404_users`.`namelname` AS users_name, 
+			`studio404_users`.`company_type` AS su_companytype
 			FROM 
 			`studio404_module_item`, `studio404_users`
 			WHERE 
@@ -180,7 +182,7 @@ class exportcatalog extends connection{
 			$orderBy = ' ORDER BY `studio404_module_item`.`date` '.urlencode($data["get_sort"]);
 			$subsectors = ($data["get_subsector"] && is_numeric($data["get_subsector"])) ? ' FIND_IN_SET('.$data["get_subsector"].',`studio404_module_item`.`sub_sector_id`) AND ' : '';
 			$services = ($data["get_services"] && is_numeric($data["get_services"])) ? ' FIND_IN_SET('.$data["get_services"].',`studio404_module_item`.`products`) AND ' : '';
-			$search = (!empty($data["get_search"])) ? '`studio404_module_item`.`title` LIKE "%'.$data["get_search"].'%" AND ' : '';
+			$search = (!empty($data["get_search"])) ? '`studio404_module_item`.`long_description` LIKE "%'.$data["get_search"].'%" AND ' : '';
 			 
 			$sql = 'SELECT 
 			`studio404_module_item`.`id`, 
@@ -196,7 +198,8 @@ class exportcatalog extends connection{
 			`studio404_module_item`.`long_description`, 
 			`studio404_users`.`id` AS users_id,
 			`studio404_users`.`namelname` AS users_name, 
-			`studio404_users`.`picture` AS users_picture
+			`studio404_users`.`picture` AS users_picture, 
+			`studio404_users`.`company_type` AS su_companytype
 			FROM 
 			`studio404_module_item`, `studio404_users`
 			WHERE 

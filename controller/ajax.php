@@ -965,7 +965,117 @@ class ajax extends connection{
 				":status"=>0 
 			));
 			echo "Done";
+		}
 
+		if(Input::method("POST","saveusersemail") && Input::method("POST","e")){
+			
+			if($this->isValidEmail(Input::method("POST","e"))){
+				if(Input::method("POST","latestupdates")=="true"){//products and enquires
+					$sql = 'SELECT `id` FROM `studio404_newsletter_emails` WHERE `type`="email" AND `group_id`=1 AND `email`=:email AND `status`!=:one ';
+					$prepare = $conn->prepare($sql); 
+					$prepare->execute(array(
+						":email"=>Input::method("POST","e"), 
+						":one"=>1
+					));
+					if($prepare->rowCount() > 0){
+						echo "Exists";
+					}else{
+						$unsubscribe = sha1(md5(Input::method("POST","e")."Studio404"));
+						$sql_insert = 'INSERT INTO `studio404_newsletter_emails` SET `type`="email", `unsubscribe`=:unsubscribe, `u_ip`=:u_ip, `name`="User", `group_id`=1, `email`=:email ';
+						$prepare2 = $conn->prepare($sql_insert); 
+						$prepare2->execute(array(
+							":unsubscribe"=>$unsubscribe,
+							":u_ip"=>get_ip::ip(), 
+							":email"=>Input::method("POST","e")
+						));
+						echo "Done"; 
+					}
+				}	
+			}else{
+				echo "Error";
+			}
+
+		}
+
+		if(Input::method("POST","loadevents")=="true"){
+			$current = time(); 
+			$sql = 'SELECT 
+			`studio404_module_item`.`idx` AS smi_idx,  
+			`studio404_module_item`.`title` AS smi_title 
+			FROM 
+			`studio404_module_attachment`, `studio404_module`, `studio404_module_item`
+			WHERE 
+			`studio404_module_attachment`.`connect_idx`=:sma_connect_id AND 
+			`studio404_module_attachment`.`page_type`=:sma_page_type AND 
+			`studio404_module_attachment`.`lang`=:lang AND 
+			`studio404_module_attachment`.`status`!=:status AND 
+			`studio404_module_attachment`.`idx`=`studio404_module`.`idx` AND 
+			`studio404_module`.`lang`=:lang AND 
+			`studio404_module`.`status`!=:status AND 
+			`studio404_module`.`idx`=`studio404_module_item`.`module_idx` AND 
+			`studio404_module_item`.`date`>:current AND 
+			`studio404_module_item`.`lang`=:lang AND 
+			`studio404_module_item`.`status`!=:status 
+			ORDER BY 
+			`studio404_module_item`.`date` DESC
+			';
+			$prepare = $conn->prepare($sql); 
+			$prepare->execute(array(
+				":sma_connect_id"=>16, 
+				":sma_page_type"=>'eventpage', 
+				":lang"=>LANG_ID, 
+				":status"=>1, 
+				":current"=>$current
+			));
+			$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC); 
+			echo json_encode($fetch);
+		}
+
+		if(Input::method("POST","regEvent")=="true" && Input::method("POST","ei") && Input::method("POST","n") && Input::method("POST","e") && Input::method("POST","m")){
+			$event = 'SELECT `title` FROM `studio404_module_item` WHERE `idx`=:idx';
+			$prepare_e = $conn->prepare($event); 
+			$prepare_e->execute(array(
+				":idx"=>(int)Input::method("POST","ei")
+			));
+			$fetch_e = $prepare_e->fetch(PDO::FETCH_ASSOC); 
+
+			$sql = 'SELECT `host`,`user`,`pass`,`from`,`fromname` FROM `studio404_newsletter` WHERE `id`=1';
+			$prepare = $conn->prepare($sql); 
+			$prepare->execute(); 
+			$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
+			
+			$host = $fetch["host"]; 
+			$user = $fetch["user"]; 
+			$pass = $fetch["pass"]; 
+			$where_to_send = $fetch["from"]; 
+			$subject = "::Event registration:: - Trade with georgia"; 
+
+			$from = Input::method("POST","e"); 
+			$fromname = Input::method("POST","n"); 
+			$mobile = Input::method("POST","m"); 
+
+			$uid = new uid();
+			$event_ticket_id = $uid->generate(6);
+
+			$message = '';
+			$message .= '<b>Send time: </b>'.date("d/m/Y H:m:s")."<br />";
+			$message .= '<b>Tickit: </b> #'.$event_ticket_id."<br />";
+			$message .= '<b>Company or Person Name: </b>'.$fromname."<br />";
+			$message .= '<b>Event: </b>'.$fetch_e["title"]."<br />";
+			$message .= '<b>Email address: </b>'.$from."<br />";
+			$message .= '<b>Mobile / Phone number: </b>'.$mobile."<br />";
+			$message .= '<b>Sender IP: </b>'.get_ip::ip()."<br />";
+
+			$message2 = '';
+			$message2 .= '<b>Send time: </b>'.date("d/m/Y H:m:s")."<br />";
+			$message2 .= '<b>Tickit: </b> #'.$event_ticket_id."<br />";
+			$message2 .= 'You have successfully registered for the event: <b>'.$fetch_e["title"]."</b> <br />";
+
+
+			$send_email = new send_email(); 
+			$send_email->send($host,$user,$pass,$from,$fromname,$where_to_send,$subject,$message); 
+			$send_email->send($host,$user,$pass,$fetch["from"],$fetch["fromname"],Input::method("POST","e"),$subject,$message2); 
+			echo "Done"; 
 		}
 
 	}

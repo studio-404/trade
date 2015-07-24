@@ -91,7 +91,7 @@
 	$retrieve_users_info = new retrieve_users_info();
 	foreach($data["fetch"] as $val){
 	?>
-	<a href="<?=WEBSITE.LANG?>/export-catalog/company?view=<?=$val["su_id"]?>&token=<?=$_SESSION["token_generator"]?>">	
+	<a href="<?=WEBSITE.LANG?>/user?t=<?=$val["su_companytype"]?>&amp;i=<?=$val["su_id"]?>&amp;token=<?=$_SESSION["token_generator"]?>">	
 		<div class="filter_content">
 			<div class="names"><?=$val["su_namelname"]?></div>
 			<div class="content_divs">
@@ -180,7 +180,7 @@
 		$ctext = new ctext();
 		foreach($data["fetch"] as $val) :
 		?>
-		<a href="<?=WEBSITE.LANG?>/export-catalog/company?view=<?=$val['users_id']?>&product=<?=$val['id']?>&token=<?=$_SESSION["token_generator"]?>">	
+		<a href="<?=WEBSITE.LANG?>/user?t=<?=$val["su_companytype"]?>&amp;i=<?=$val["users_id"]?>&amp;p=<?=$val['id']?>&amp;token=<?=$_SESSION["token_generator"]?>">	
 			<div class="filter_content">
 				<div class="names"><?=htmlentities($val["title"])?></div>
 				<div class="content_divs">
@@ -272,7 +272,7 @@
 	$ctext = new ctext();
 	foreach($data["fetch"] as $val) :
 	?>		
-	<a href="<?=WEBSITE.LANG?>/export-catalog/service?view=<?=$val['users_id']?>&product=<?=$val['id']?>&token=<?=$_SESSION["token_generator"]?>">	
+	<a href="<?=WEBSITE.LANG?>/user?t=<?=$val["su_companytype"]?>&amp;i=<?=$val["users_id"]?>&amp;p=<?=$val['id']?>&amp;token=<?=$_SESSION["token_generator"]?>">	
 		<div class="filter_content">
 			<div class="names"><?=$val["users_name"]?></div>
 			<div class="content_divs">

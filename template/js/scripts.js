@@ -896,6 +896,151 @@ $(document).on("click","#change_enquire_inside",function(e){
 	});
 });
 
+$(document).on("click",".subscribeproductsenquires",function(){
+	var spe_val = $("#spe_val").val(); 
+	if(spe_val==''){
+		$("#spe_val").attr({"placeholder":"Please type your email address"});
+	}else{
+		if(validateEmail(spe_val)){
+			$("#insertText").html("Please wait"); 
+			$('#message_popup').modal('toggle');
+			$.post("http://"+document.domain+"/en/ajax",{
+				saveusersemail:true, 
+				latestupdates:true, 
+				e:spe_val
+			}, function(r){
+				if(r=="Exists"){
+					$("#insertText").html("You are registered already!");
+				}else if(r=="Done"){
+					$("#insertText").html("You registered successfully!");
+				}else{
+					$("#insertText").html("Error");
+				}
+				$("#spe_val").attr({"placeholder":"Your Email Address"}).val('');
+			});
+
+		}else{
+			$("#spe_val").val('');
+			$("#spe_val").attr({"placeholder":"Please type valid email address"});
+		}
+	}
+});
+
+
+$(document).on("click",".usersigned",function(){	
+	$("#insertText").html("Please logout and then register.."); 
+	$('#message_popup').modal('toggle');			
+});
+
+$(document).on("click",".eventRegister",function(){
+	$("#insertText").html("Please wait..."); 
+	$('#message_popup').modal('toggle');
+	var eid = $(this).data("eventid"); 
+	$.post("http://"+document.domain+"/en/ajax", {
+		loadevents:true
+	}, function(r){
+		var obj = jQuery.parseJSON(r); 
+		var opt = '';
+		if(obj.length > 0){
+			for(var i=0; i<obj.length; i++){
+				opt += '<option value="'+obj[i]["smi_idx"]+'">'+obj[i]["smi_title"]+'</option>'; 
+			}
+			$("#chooseEvent").html(opt); 
+			if(eid){
+				$("#chooseEvent").val(eid); 
+			}
+			$('#message_popup').modal('toggle');
+			$('#register_for_event').modal('toggle');	
+		}else{
+			$("#insertText").html("Sorry there is no event at the moment!"); 
+		}
+	});
+	
+});
+
+$(document).on("click",".regEvent",function(e){
+	var chooseEvent = $("#chooseEvent").val();
+	var comname = $("#comname").val();
+	var er_email = $("#er_email").val();
+	var er_mobile_phone = $("#er_mobile_phone").val();
+	$(".error_message").hide(); 
+	if(chooseEvent==""){
+		$(".er_chooseevent_require").fadeIn("slow"); 
+		return false;
+	}else if(comname==""){
+		$(".er_name_require").fadeIn("slow"); 
+		return false;
+	}else if(er_email==""){
+		$(".er_email_require").fadeIn("slow"); 
+		return false;
+	}else if(er_mobile_phone==""){
+		$(".er_mobile_require").fadeIn("slow"); 
+		return false;
+	}else{
+
+		if(validateEmail(er_email)){
+			$('#register_for_event').modal('toggle');
+			$("#insertText").html("Please wait..."); 
+			$('#message_popup').modal('toggle');
+			$.post("http://"+document.domain+"/en/ajax", {
+				regEvent:true, 
+				ei:chooseEvent,
+				n:comname,  
+				e:er_email, 
+				m:er_mobile_phone
+			}, function(r){
+				if(r=="Done"){
+					$("#insertText").html("Registration completed!"); 
+				}else{
+					$("#insertText").html("Error!"); 
+				}
+			});
+		}else{
+			$(".er_checkemail_require").fadeIn("slow"); 
+			return false;
+		}
+
+	}
+
+});
+
+$(document).on("click",".registernewuser",function(){
+	var spe_val = $("#rnu_val").val(); 
+	if(spe_val==''){
+		$("#rnu_val").attr({"placeholder":"Please type your email address"});
+	}else{
+		if(validateEmail(spe_val)){
+			$("#emailaddress1").val(spe_val); 
+			$("#emailaddress2").val(spe_val); 
+			$('#register_popup').modal('toggle');
+			$("#rnu_val").val('');
+			$("#rnu_val").attr({"placeholder":"Your Email Address"});
+		}else{
+			$("#rnu_val").val('');
+			$("#rnu_val").attr({"placeholder":"Please type valid email address"});
+		}
+	}
+});
+
+$(document).on("click",".checkboxsearch",function(e){
+	$('.checkboxsearch').prop('checked', false);
+	$(this).prop('checked', true); 
+});
+
+$(document).on("click",".searchButtonHomepage",function(e){
+	var hpsv = $("#hpsv").val();
+	var go = '';
+	if($("#check_company").prop('checked')){
+		go = "http://"+document.domain+"/en/export-catalog?view=companies&search="+hpsv;
+	}else if($("#check_product").prop('checked')){
+		go = "http://"+document.domain+"/en/export-catalog?view=products&search="+hpsv;
+	}else if($("#check_service").prop('checked')){
+		go = "http://"+document.domain+"/en/export-catalog?view=services&search="+hpsv;
+	}
+	if(go!=''){
+		location.href = go;
+	}
+});
 
 function selectOnlySectors(sarray){
 	$("#drop_sector .selectItem .sector_ids").each(function(e){

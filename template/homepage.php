@@ -1,12 +1,13 @@
 <?php 
 @include("parts/header.php");
+@include("parts/eventregister.php");
+$ctext = new ctext();
 ?>
 
  <div id="home_slider" class="carousel slide" data-ride="carousel">
 	<div class="carousel-inner" role="listbox">
         <?php
 		$x=1;
-		$ctext = new ctext();
 		foreach($data["components"] as $val){
 			if($val->com_name != "Slider"){ continue; }
 		?>
@@ -47,15 +48,15 @@
 	<div class="home_search">
 		<div class="col-sm-5 text">
 			<span>Looking For Something in Particular?</span>
-				<li><input type="checkbox"/> Companies</li>
-				<li><input type="checkbox"/> Products</li>
-				<li><input type="checkbox"/> Services</li>
+			<li><label><input type="checkbox" id="check_company" class="checkboxsearch" name="check_company" value="companies" checked="checked" /> Companies</label></li>
+			<li><label><input type="checkbox" id="check_product" class="checkboxsearch" name="check_product" value="products" /> Products</label></li>
+			<li><label><input type="checkbox" id="check_service" class="checkboxsearch" name="check_service" value="services" /> Services</label></li>
 		</div>
 		<div class="col-sm-5 home_search_input padding_0">
-			<input type="text" class="form-control" placeholder="Search By Name Or Phrase"/>
+			<input type="text" class="form-control hpsv" id="hpsv" placeholder="Search By Name Or Phrase"/>
 		</div>
 		<div class="col-sm-2 padding_0" style="padding-left:5px;">
-			<button class="btn btn-block btn-sm btn-yellow">SEARCH</button>
+			<button class="btn btn-block btn-sm btn-yellow searchButtonHomepage">SEARCH</button>
 		</div>
 	</div>
 </div>
@@ -89,7 +90,6 @@
 		<div class="row news_div">
 
 			<?php 
-			$ctext = new ctext(); 
 			$newArray1 = array_slice($data["news"], 0, 6, true);
 			foreach($newArray1 as $val){
 			?>
@@ -106,106 +106,87 @@
 		
 		<div class="home_div_3">
 			<div class="row">
-				<div class="col-sm-4">
-					<a href="#">
-						<div class="item trade_map">					
-							<div class="title">Trade Map</div>
+			<?php
+			$x=1;
+			foreach($data["components"] as $val){
+				if($val->com_name != "Home page small banners"){ continue; }
+			?>
+		     <div class="col-sm-4">
+					<a href="<?=$val->url?>" target="_blank">
+						<div class="item" style="background-image:url('<?=WEBSITE?>image?f=<?=WEBSITE_.$val->image?>&w=366&h=85')">					
+							<div class="title"><?=$ctext->cut(strip_tags($val->title),55)?></div>
 							<div class="text">
-								learn foreign trade statistics by years and countiresSearch countries with most Georgian products on export.
+								<?=$ctext->cut(strip_tags($val->desc),53)?><br/>
+								<?php
+								$repl = str_replace(array('http://','www.'), "", $val->url);
+								$repl = rtrim($repl,'/');
+								echo 'www.'.$repl;
+								?>
 							</div>							
 						</div>
 					</a>	
-				</div>
-				<div class="col-sm-4">
-					<a href="#">
-						<div class="item enterprise_georgia">					
-							<div class="title">Enterprise Georgia</div>
-							<div class="text">
-								External Website<br/>
-								www.enterprise.ge
-							</div>								
-						</div>
-					</a>
-				</div>
-				<div class="col-sm-4">
-					<a href="#">
-						<div class="item produced_in_georgia">					
-							<div class="title">Produced In Georgia</div>
-							<div class="text">
-								External Website<br/>
-								www.qartuli.ge
-							</div>							
-						</div>
-					</a>
-				</div>
-			</div>	
+			</div>
+
+			<?php
+				$x++;
+			}
+			?>
+			</div>
 		</div>
 		
 		<div class="page_title_4">Top Exports Product</div>
 		
 		<div id="home_products" class="carousel slide" data-interval="5000" data-ride="carousel">
 			<div class="carousel-inner">
-				<div class="active item">
-					<div class="row">
-						<div class="col-sm-4">
-							<a href="#">
-								<div class="product_item">
-									<div class="image"><img src="<?=TEMPLATE?>img/home_product_1.jpg" class="img-responsive"/></div>
-									<div class="text">Mineral water industry holds the largest portion of the Georgian export </div>
+
+
+				<?php
+				$x=1;
+				$f_top = 1;
+				$f_bottom = 1;
+				foreach($data["components"] as $val){
+					if($val->com_name != "Top Exports Product"){ continue; }
+				?>
+
+				<?php if($f_top==1) : ?>
+				<div class="<?=($x==1) ? 'active ' : ''?>item"><div class="row">
+				<?php endif; ?>
+
+					<div class="col-sm-4">
+						<a href="<?=$val->url?>">
+							<div class="product_item">
+								<div class="image"><img src="<?=WEBSITE?>image?f=<?=WEBSITE_.$val->image?>&w=365&h=275'" class="img-responsive" alt="" /></div>
+								<div class="text">
+									<?=$ctext->cut(strip_tags($val->title),45)?><br />
+									<?=$ctext->cut(strip_tags($val->desc),55)?>
 								</div>
-							</a>	
-						</div>
-						<div class="col-sm-4">
-							<a href="#">
-								<div class="product_item">
-									<div class="image"><img src="<?=TEMPLATE?>img/home_product_1.jpg" class="img-responsive"/></div>
-									<div class="text">Mineral water industry holds the largest portion of the Georgian export </div>
-								</div>
-							</a>	
-						</div>
-						<div class="col-sm-4">
-							<a href="#">
-								<div class="product_item">
-									<div class="image"><img src="<?=TEMPLATE?>img/home_product_1.jpg" class="img-responsive"/></div>
-									<div class="text">Mineral water industry holds the largest portion of the Georgian export </div>
-								</div>
-							</a>	
-						</div>
+							</div>
+						</a>	
 					</div>
-				</div>
-				<div class="item">
-					<div class="row">
-						<div class="col-sm-4">
-							<a href="#">
-								<div class="product_item">
-									<div class="image"><img src="<?=TEMPLATE?>img/home_product_1.jpg" class="img-responsive"/></div>
-									<div class="text">Mineral water industry holds the largest portion of the Georgian export </div>
-								</div>
-							</a>	
-						</div>
-						<div class="col-sm-4">
-							<a href="#">
-								<div class="product_item">
-									<div class="image"><img src="<?=TEMPLATE?>img/home_product_1.jpg" class="img-responsive"/></div>
-									<div class="text">Mineral water industry holds the largest portion of the Georgian export </div>
-								</div>
-							</a>	
-						</div>
-						<div class="col-sm-4">
-							<a href="#">
-								<div class="product_item">
-									<div class="image"><img src="<?=TEMPLATE?>img/home_product_1.jpg" class="img-responsive"/></div>
-									<div class="text">Mineral water industry holds the largest portion of the Georgian export </div>
-								</div>
-							</a>	
-						</div>
-					</div>
-				</div>
+
+				<?php if($f_bottom==3) : ?>
+				</div></div>
+				<?php 
+				endif; 
+					if($f_top==3){ $f_top=0; $f_bottom=0; }
+					$x++;
+					$f_top++;
+					$f_bottom++;
+				}
+				if(($x%3 && $x>4)!=0){ echo '</div></div>'; $allitems = ceil($x / 3) - 1; }
+				?>
+
+				
 			</div>
-			<ol class="carousel-indicators">
-				<li data-target="#home_products" data-slide-to="0" class="active"></li>
-				<li data-target="#home_products" data-slide-to="1"></li> 
-			</ol>
+			<?php if($allitems) : ?>
+				<ol class="carousel-indicators">
+					<?php for($i=0;$i<=$allitems;$i++) : ?>
+						<li data-target="#home_products" data-slide-to="<?=$i?>" class="<?=($i==0) ? 'active' : ''?>"></li>
+					<?php endfor; ?>
+				</ol>
+			<?php endif; ?>
+
+
 		</div> 
 
 
@@ -218,8 +199,8 @@
 						<div class="text">get new products and bussines enquires straight in your email inbox. </div>
 						<div class="form-group">
 							<div class="input-group"> 
-								<input type="text" class="input_home" placeholder="Your Email Address"/>
-								<div class="input-group-addon btn-home">Subscribe</div>
+								<input type="text" class="input_home" name="spe_val" id="spe_val" placeholder="Your Email Address" value="" />
+								<div class="input-group-addon btn-home subscribeproductsenquires">Subscribe</div>
 							</div>
 						</div>
 					</div>
@@ -230,8 +211,8 @@
 						<div class="text">And Join our Community to gain access to our services for companies interested in finding business partners.</div>
 						<div class="form-group">
 							<div class="input-group"> 
-								<input type="text" class="input_home" placeholder="Your Email Address"/>
-								<div class="input-group-addon btn-home">Register</div>
+								<input type="text" class="input_home" id="rnu_val" name="rnu_val" placeholder="Your Email Address" value="" />
+								<div class="input-group-addon btn-home <?=(isset($_SESSION["tradewithgeorgia_username"])) ? 'usersigned' : 'registernewuser'?>">Register</div>
 							</div>
 						</div>
 					</div>
@@ -242,7 +223,7 @@
 						<div class="text">Find out more about our or international events <br/> and register </div>
 						<div class="form-group">
 							<div class="input-group">  
-								<div class="btn-home btn-home-2">Subscribe</div>
+								<div class="btn-home btn-home-2 eventRegister">Subscribe</div>
 							</div>
 						</div>
 					</div>

@@ -19,6 +19,7 @@ class model_admin_addnews extends connection{
 				$event_desc = (isset($_POST['event_desc'])) ? $_POST["event_desc"] : '';
 				$event_when = (isset($_POST['event_when'])) ? $_POST["event_when"] : '';
 				$event_fee = (isset($_POST['event_fee'])) ? $_POST["event_fee"] : '';
+				$event_website = (isset($_POST['event_website'])) ? $_POST["event_website"] : '';
 
 				//select max idx
 				$sqlm = 'SELECT MAX(`idx`)+1 AS maxid FROM `studio404_module_item`';
@@ -77,6 +78,7 @@ class model_admin_addnews extends connection{
 					`event_desc`=:smi_event_desc, 
 					`event_when`=:smi_event_when, 
 					`event_fee`=:smi_event_fee, 
+					`event_website`=:smi_event_website, 
 					`videourl`=:videourl, 
 					`short_description`=:short_description, 
 					`long_description`=:long_description, 
@@ -96,6 +98,7 @@ class model_admin_addnews extends connection{
 						":smi_event_desc"=>$event_desc, 
 						":smi_event_when"=>$event_when, 
 						":smi_event_fee"=>$event_fee,
+						":smi_event_website"=>$event_website,
 						":videourl"=>$_POST['videourl'], 
 						":short_description"=>$_POST['short_description'], 
 						":long_description"=>$_POST['long_description'], 

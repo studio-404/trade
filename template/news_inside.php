@@ -20,11 +20,11 @@
 		</div>
 		
 		<div class="text_formats margin_top_20">
-			<img src="<?=WEBSITE?>image?f=<?=WEBSITE.$data["news_general"][0]["pic"]?>&w=270&h=130" class="img-responsive" alt="" />
-			<p>
-				The Business Excellence (BE) Briefing is suitable for companies &amp; organizations that are new to business excellence, and are interested in finding out how the Revised BE Framework can help strengthen management systems to deliver superior results. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen 
-				book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-			</p>
+			<?php if(!empty($data["news_general"][0]["pic"])) : ?>
+				<img src="<?=WEBSITE?>image?f=<?=WEBSITE.$data["news_general"][0]["pic"]?>&w=270&h=130" class="img-responsive" alt="" />
+			<?php endif;?>
+
+			<?=$data["news_general"][0]["long_description"]?>
 		</div>
 		
 		<hr class="line_effect hr_margin">
@@ -59,7 +59,7 @@
 			?>
 		</div>
 		
-		<a href="#" class="gray_link">View More News »</a>
+		<!-- <a href="#" class="gray_link"><?=$data["language_data"]["viewmorenews"]?> »</a> -->
 		
 	</div>
 </div>

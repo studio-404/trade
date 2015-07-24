@@ -51,7 +51,10 @@ class model_admin_changeVisibility extends connection{
 			`studio404_module_attachment`,`studio404_module`,`studio404_module_item` 
 			WHERE 
 			`studio404_module_attachment`.`connect_idx`=:connect_id AND 
-			`studio404_module_attachment`.`page_type`=:page_type AND 
+			(
+				`studio404_module_attachment`.`page_type`=:newspage OR 
+				`studio404_module_attachment`.`page_type`=:eventpage 
+			) AND 
 			`studio404_module_attachment`.`lang`=:lang AND 
 			`studio404_module_attachment`.`status`!=:status AND 
 			`studio404_module_attachment`.`idx`=`studio404_module`.`idx` AND 
@@ -65,7 +68,8 @@ class model_admin_changeVisibility extends connection{
 			$select_prepare = $conn->prepare($select_sql);
 			$select_prepare->execute(array(
 				":connect_id"=>$_GET['id'], 
-				":page_type"=>$pagetype, 
+				":newspage"=>'newspage', 
+				":eventpage"=>'eventpage', 
 				":lang"=>LANG_ID,
 				":status"=>1, 
 				":newsidx"=>$idx

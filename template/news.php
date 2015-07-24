@@ -56,7 +56,7 @@
 			?>
 		</div>
 		
-		<a href="#" class="gray_link"><?=$data["language_data"]["viewmorenews"]?> »</a>
+		<!-- <a href="#" class="gray_link"><?=$data["language_data"]["viewmorenews"]?> »</a> -->
 		
 	</div>
 </div>
