@@ -35,6 +35,15 @@ class user extends connection{
 		/* components */
 		$components = $cache->index($c,"components");
 		$data["components"] = json_decode($components); 
+
+		/* countries */
+		$countries = $cache->index($c,"countries");
+		$data["countries"] = json_decode($countries); 
+
+		/* users statements */
+		$model_template_userstatements = new model_template_userstatements();
+		$data["userstatements"] = $model_template_userstatements->stats($c,Input::method("GET","t"),Input::method("GET","i"));
+		
 		$doerror = false;
 		/*company*/
 		if(Input::method("GET","t")=="manufacturer" || Input::method("GET","t")=="serviceprovider" || Input::method("GET","t")=="company" || Input::method("GET","t")=="individual"){

@@ -171,7 +171,7 @@ class exportcatalog extends connection{
 			$data["get_view"] = (Input::method("GET","view")) ? Input::method("GET","view") : 'services';
 			$data["get_sort"] = (Input::method("GET","sort") && Input::method("GET","sort")=="asc") ? "ASC" : 'DESC';
 			$data["get_subsector"] = (Input::method("GET","subsector")) ? urlencode(Input::method("GET","subsector")) : '';
-			$data["get_services"] = (Input::method("GET","services")) ? Input::method("GET","services") : '';
+			$data["get_services"] = (Input::method("GET","products")) ? Input::method("GET","products") : '';
 			$data["get_search"] = (Input::method("GET","search")) ? Input::method("GET","search") : '';
 			$data["get_pn"] = (Input::method("GET","pn")) ? Input::method("GET","pn") : 1;
 			$data["get_token"] = (Input::method("GET","token")) ? Input::method("GET","token") : '';

@@ -1,17 +1,27 @@
 <?php 
 	@include("parts/header.php"); 
 	@include("parts/contactuser.php"); 
+	@include("parts/readmore.php"); 
 ?>
 
 
 <div class="container">
 	<div class="breadcrumbs">
 		<div class="your_are_here">Your are here: </div>
-			<li><a href="<?=WEBSITE.LANG?>/export-catalog?token=<?=$_SESSION["token_generator"]?>">Export Catalog</a></li><li>  &gt;  
-			</li><li><a href="javascript:;"><?=$data["fetch"]["namelname"]?></a></li><li>  
-	</li></div>
+			<li>
+				<a href="<?=WEBSITE.LANG?>/<?=(isset($_GET["t"]) && ($_GET["t"]=="individual" || $_GET["t"]=="company")) ? 'business-portal' : 'export-catalog'?>?token=<?=$_SESSION["token_generator"]?>">
+					<?=(isset($_GET["t"]) && ($_GET["t"]=="individual" || $_GET["t"]=="company")) ? 'Bussiness portal' : 'Export Catalog'?>
+				</a>
+			</li>
+			<li>  &gt;  </li>
+			<li>
+				<a href="javascript:;">
+					<?=$data["fetch"]["namelname"]?>
+				</a>
+			</li>
+		</div>
 	
-	<div class="back_to"><a href="<?=WEBSITE.LANG?>/export-catalog?token=<?=$_SESSION["token_generator"]?>">Back to catalog</a></div>
+	<div class="back_to"><a href="<?=WEBSITE.LANG?>/<?=(isset($_GET["t"]) && ($_GET["t"]=="individual" || $_GET["t"]=="company")) ? 'business-portal' : 'export-catalog'?>?token=<?=$_SESSION["token_generator"]?>"><?=(isset($_GET["t"]) && ($_GET["t"]=="individual" || $_GET["t"]=="company")) ? 'Back to bussiness portal' : 'Back to catalog'?></a></div>
 	
 	<div class="page_title_5">
 		<?=$data["fetch"]["namelname"]?>
@@ -99,28 +109,39 @@
 					<?=nl2br(strip_tags($data["fetch"]["about"]))?>
 				</li>
 			</ul>	
+			<?php if(is_array($data["userstatements"])) { ?>
 			<div class="yellow_title_19">Products</div>
 			<div class="product_more_item">
 				<div class="products white_bg">
-					<div class="col-sm-12 col-md-12 col-xs-12 col-gl-12 product_item">
-						<div class="col-sm-12 col-md-3 col-xs-12 col-lg-3 padding_0">
-							<div class="image"><img src="<?=TEMPLATE?>img/bagration_2.jpg" class="img-responsive" alt="" /></div>
-						</div>	
-						<div class="col-sm-12 col-md-7 col-xs-12 col-gl-7 product_info padding_0">
-							<ul>
-								<li><span>Bagratini - sparckling wine</span> - HS 023393920 </li>
-								<li><span>Packiging: </span>075, crystal dark bottles (6 in box)</li>
-								<li><span>Shelf life: </span>12 years </li>
-								<li><span>Awards: </span>Golden medal of European wina accossiation</li>
-								<li>Silver medal of UK</li>
-								<li>Bronze  medal of European wina accossiation</li>
-								<li style="margin-top:15px;"><a href="#">View describtion</a></li>
-							</ul>
+					
+					<?php 
+					foreach($data["userstatements"] as $val) : 
+					?>
+						<div class="col-sm-12 col-md-12 col-xs-12 col-gl-12 product_item" style="margin-bottom:10px;">
+							<div class="col-sm-12 col-md-3 col-xs-12 col-lg-3 padding_0">
+								<?php
+								$picture = ($val["picture"]) ? WEBSITE.'image?f='.WEBSITE.'files/usersproducts/'.$val["picture"].'&w=175&h=175' : '';
+								?>
+								<div class="image"><img src="<?=$picture?>" class="img-responsive" alt="" /></div>
+							</div>	
+							<div class="col-sm-12 col-md-7 col-xs-12 col-gl-7 product_info padding_0">
+								<ul>
+									<li><span><?=$val["title"]?></span> - HS <?=$val["hscode"]?> </li>
+									<li><span>Packiging: </span><?=$val["packaging"]?></li>
+									<li><span>Shelf life: </span><?=$val["shelf_life"]?> </li>
+									<li><span>Awards: </span><?=$val["awards"]?></li>
+									<li style="margin-top:15px;"><a href="javascript:;" class="readmore" data-pid="<?=$val["id"]?>">View describtion</a></li>
+								</ul>
+							</div>
 						</div>
-					</div>
+					<?php 
+					endforeach; 
+					?>
+
+
 				</div>
 			</div>
-		<?php endif; ?>
+		<?php } endif; ?>
 
 
 		<?php if($data["get_type"]=="serviceprovider") : ?>
@@ -129,51 +150,78 @@
 				<li class="text_formats">
 					<?=nl2br(strip_tags($data["fetch"]["about"]))?>
 				</li>
-			</ul>	
+			</ul>
+			<?php if($data["userstatements"]) { ?>	
 			<div class="yellow_title_19">Services</div>
-			<div class="service_box">
+			<?php 
+			foreach($data["userstatements"] as $val) : 
+			?>
+			<div class="service_box readmore" data-pid="<?=$val["id"]?>" style="cursor:pointer">
 				<ul class="text_formats_ul">
-					<li class="text_formats"><span>Mobile phone transefrs</span></li>
+					<li class="text_formats"><span><?=$val["title"]?></span></li>
 					<li class="text_formats">
-						<p>
-							Finest sparkling wine produced by methode traditionnelle from carefully selected grapes of Georgian variety "Chinuri", grown in the best wine-producing zone of Kartli region Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered 
-						</p>
+						<p><?=strip_tags($val["long_description"])?></p>
 					</li>
 				</ul>
 			</div>
-		<?php endif; ?>
+		<?php 
+			endforeach; 
+			} 
+		endif; 
+		?>
 
-		<?php if($data["get_type"]=="company") : ?>
-			<div class="enquire enquire_small no_border">
-				<div class="date">03.03.2015</div>
+		<?php if($data["get_type"]=="company" || $data["get_type"]=="individual") : ?>
+
+			<?php 
+			if(is_array($data["userstatements"])){
+				$first = array_slice($data["userstatements"],0,1);
+				$others = array_slice($data["userstatements"],1);
+			}
+			?>
+
+			<div class="enquire enquire_small no_border readmore" data-pid="<?=$first[0]["id"]?>" style="cursor:pointer">
+				<div class="date"><?=date("d.m.Y",$first[0]["date"])?></div>
 				<div class="col-sm-12" style="float:none;">
 					<div class="title">
-						Looking for New Business Partners in Europe
+						<?=$first[0]["title"]?>
 					</div>
 					<div class="text">
-						We are a trade service company based in Hong Kong and focused on premium food and beverages. Currently, we are looking for agents, distributors or contacts who can help us to enter the European market, we have been producing our services since 1998 and we are keen to make real good partners all over the world. For mor einformation please  contact us and we will get back to you. 
-						<small>Proposal</small>
+						<?=$first[0]["long_description"]?>
+						<small><?=$first[0]["type"]?></small>
 					</div>
 				</div>	 
 			</div>
 				
 			<div class="yellow_title_19">Previous adds</div>
-			
-			<div class="enquire enquire_small">
-				<div class="date">03.03.2015</div>
+			<?php
+			foreach ($others as $val) :
+			?>
+			<div class="enquire enquire_small readmore" data-pid="<?=$val["id"]?>" style="cursor:pointer">
+				<div class="date"><?=date("d.m.Y",$val["date"])?></div>
 				<div class="col-sm-12" style="float:none;">
 					<div class="title">
-						Titanium sheets, Titanium bars, Titanium tubes
+						<?=$val["title"]?>
 					</div>
 					<div class="text">
-						We can produce varieties of nonferrous mill products and its alloy in shape of bars, billets, sheets, plates, forged rings, discs, anode, etc. For technical specifications, please see website.
+						<?=$val["long_description"]?>
+						<small><?=$val["type"]?></small>
 					</div>
 				</div>	 
 			</div> 
+			<?php endforeach; ?>
+
 		<?php endif; ?>
 
 
 
 	</div>
 </div>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function(){
+	var par = urlParamiters();
+	if(par["i"] && par["p"]){
+		getReadmoreInfo(par["i"],par["p"]);
+	}
+});
+</script>
 <?php @include("parts/footer.php"); ?>

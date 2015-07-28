@@ -129,6 +129,7 @@ define('ADMIN_SLUG',$c['admin.slug']);
 /*
 ** Controller function
 */
+ob_start();
 $controller = new controller($c);
 $controller->loadpage($obj,$c);
 // }catch(Exception $e){

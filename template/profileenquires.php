@@ -3,11 +3,13 @@
 	if(isset($_SESSION["tradewithgeorgia_username"])) {
 		@include('parts/changepassword.php'); 
 		@include('parts/makeenquireschange.php'); 
+		$sector_array = array_filter(explode(",",$_SESSION["user_data"]["sector"]));
 ?>
 <div class="container" id="container">
 	<div class="page_title_1">
 		Profile (<?=ucfirst($_SESSION["tradewithgeorgia_company_type"])?>)
 	</div>
+	<?php if($_SESSION["tradewithgeorgia_company_type"]=="company") : ?>
 	<div class="row">
 		<div class="col-sm-4">
 			<div class="form-group">
@@ -18,14 +20,14 @@
 				<label>Sector <font color="red">*</font></label>
 				<div class="multiselectBox">
 					<div class="selectBoxWithCheckbox" data-toggle="drop_sector">
-						Choose
+						<?=(count($sector_array)>0) ? 'Selected '.count($sector_array).' items' : 'Choose'?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown" id="drop_sector">
 						<?php 
 						$x = 1;
 						foreach($data["sector"] as $sector) : ?>
 						<div class="selectItem" data-checkbox="selectItem<?=$x?>">
-							<input type="checkbox" name="selectItem[]" class="sector_ids selectItem<?=$x?>" value="<?=$sector->idx?>" />
+							<input type="checkbox" name="selectItem[]" class="sector_ids selectItem<?=$x?>" value="<?=$sector->idx?>" <?=(in_array($sector->idx, $sector_array)) ? 'checked="checked"' : ''?> />
 							<span><?=htmlentities($sector->title)?></span>
 						</div>
 						<?php 
@@ -113,6 +115,83 @@
 			</div>
 		</div>
 	</div>
+<?php endif; ?>
+
+
+<?php if($_SESSION["tradewithgeorgia_company_type"]=="individual") : ?>
+	<div class="row">
+		<div class="col-sm-4">
+			<div class="form-group">
+				<label>Username <font color="red">*</font></label>
+				<input type="text" class="form-control" value="<?=$_SESSION["tradewithgeorgia_username"]?>" readonly="readonly" />
+			</div>	
+
+			<div class="form-group ">
+				<label>Sector <font color="red">*</font></label>
+				<div class="multiselectBox">
+					<div class="selectBoxWithCheckbox" data-toggle="drop_sector">
+						<?=(count($sector_array)>0) ? 'Selected '.count($sector_array).' items' : 'Choose'?>
+					</div>
+					<div class="selectBoxWithCheckbox_dropdown" id="drop_sector">
+						<?php 
+						$x = 1;
+						foreach($data["sector"] as $sector) : ?>
+						<div class="selectItem" data-checkbox="selectItem<?=$x?>">
+							<input type="checkbox" name="selectItem[]" class="sector_ids selectItem<?=$x?>" value="<?=$sector->idx?>" <?=(in_array($sector->idx, $sector_array)) ? 'checked="checked"' : ''?> />
+							<span><?=htmlentities($sector->title)?></span>
+						</div>
+						<?php 
+						$x++;
+						endforeach; 
+						?>
+					</div>
+				</div>
+				<font class="error-msg" id="requiredx_sector">Please select minimum one sector !</font>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<div class="form-group">
+				<label>Name <font color="red">*</font></label>
+				<input type="text" id="companyname" name="companyname" class="form-control" value="<?=($_SESSION["user_data"]["companyname"]) ? htmlentities($_SESSION["user_data"]["companyname"]) : ''?>" />
+				<font class="error-msg" id="requiredx_companyname">Please fill name field !</font>
+			</div>
+
+			<div class="form-group">
+				<label>Mobile Number</label>
+				<input type="text" id="mobile" name="mobile" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" />
+			</div>
+		</div>
+		<div class="col-sm-4">
+			
+			<div class="form-group">
+				<label>Web Address</label>
+				<input type="text" id="webaddress" name="webaddress" class="form-control" value="<?=($_SESSION["user_data"]["webaddress"]) ? htmlentities($_SESSION["user_data"]["webaddress"]) : ''?>" />
+			</div>
+			<div class="form-group">
+					<label>Contact email <font color="red">*</font></label>
+					<input type="text" id="contactemail" name="contactemail" class="form-control" value="<?=($_SESSION["user_data"]["contactemail"]) ? htmlentities($_SESSION["user_data"]["contactemail"]) : ''?>" />
+					<font class="error-msg" id="requiredx_contactemail">Please check contact email field !</font>
+				</div>
+		</div>
+	
+		<div class="admin_inputs">
+			<div class="col-sm-12">
+				<div class="form-group">
+					<label>Address</label>
+					<input type="text" id="address" name="address" class="form-control" value="<?=($_SESSION["user_data"]["address"]) ? htmlentities($_SESSION["user_data"]["address"]) : ''?>" />
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<div class="form-group">
+					<label><a href="#" data-toggle="modal" data-target="#changepass_popup">Change password</a></label>
+				</div>
+			</div>
+			<div class="col-sm-12">
+				<button class="btn btn-yellow" id="save_individual_changes">SAVE CHANGES</button>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>
 	
 
 	<hr>
@@ -136,7 +215,10 @@
 			<div class="form-group">
 				<label>Sector <font color="red">*</font></label>
 				<select class="form-control" id="esector" name="esector">
-					<?php foreach($data["sector"] as $val) : ?>
+					<?php
+						foreach($data["sector"] as $val) : 
+						if(!in_array($val->idx, $sector_array)){ continue; }
+					?>
 						<option value="<?=$val->idx?>" title="<?=htmlentities($val->title)?>"><?=$val->title?></option>
 					<?php endforeach; ?>
 				</select>
@@ -203,7 +285,7 @@ $make = phparray_to_jsarray::sectorSelects();
 ?>
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function(){
-selectOnlySectors(<?=$make[0]?>);
+ //selectOnlySectors(<?=$make[0]?>);
 });				
 </script>
 <?php 

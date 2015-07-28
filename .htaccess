@@ -17,6 +17,10 @@ DirectoryIndex open.php
   Deny from all
 </Files>
 
+<IfModule php5_module>
+    php_flag session.cookie_httponly on
+</IfModule>
+
 # force non-www domain
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]

@@ -30,58 +30,62 @@
 	<?php if(Input::method("GET","view")=="companies" || !Input::method("GET","view")) : ?>
 	<div class="export_companies">
 		<div class="filters_div">
-			<div class="col-sm-2">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Product name <span class="caret"></span> 
+			<div class="col-sm-2 filter_cols">
+				<a href="javascript:;">
+					Company name 
 				</a>					
-				<ul class="dropdown-menu">
+				<!-- <ul class="dropdown-menu">
 					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=asc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by ascending</a></li>
 					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=desc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by descending</a></li>
-				</ul>
+				</ul> -->
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2 filter_cols<?=(isset($_GET['subsector']) && !empty($_GET['subsector'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Sub sector <span class="caret"></span> 
+					Sub sector <span class="caret"></span> <?=(isset($_GET['subsector']) && !empty($_GET['subsector'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="subsector"></div>' : ''?>
 				</a>
 				<ul class="dropdown-menu">
 					<?php foreach($data["subsector"] as $subsector) : ?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;<?=$data["get_sort"]?>=asc&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$subsector->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['subsector']) && $_GET['subsector']==$subsector->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$subsector->title?></a> 
 					</li>
 					<?php endforeach; ?>					
 				</ul>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2 filter_cols<?=(isset($_GET['products']) && !empty($_GET['products'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Products <span class="caret"></span> 
+					Products <span class="caret"></span> <?=(isset($_GET['products']) && !empty($_GET['products'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="products"></div>' : ''?>
 				</a>
 				<ul class="dropdown-menu">
 					<?php foreach($data["products"] as $products) : ?>
+					<?php 
+						if(!empty($_GET["subsector"]) && $products->cid!=$_GET["subsector"]){ continue; } 
+						if(empty($_GET["subsector"])){ $subsector_id = $products->cid; }else{ $subsector_id = $data["get_subsector"]; }
+					?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$products->idx?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$products->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector_id?>&amp;products=<?=$products->idx?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['products']) && $_GET['products']==$products->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$products->title?></a> 
 					</li>
 					<?php endforeach; ?>					
 				</ul>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-4 filter_cols<?=(isset($_GET['exportmarkets']) && !empty($_GET['exportmarkets'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Export markets <span class="caret"></span> 
+					Export markets <span class="caret"></span> <?=(isset($_GET['exportmarkets']) && !empty($_GET['exportmarkets'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="exportmarkets"></div>' : ''?>
 				</a>
 				<ul class="dropdown-menu">
 					<?php foreach($data["countries"] as $countries) : ?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$countries->idx?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$countries->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$countries->idx?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['exportmarkets']) && $_GET['exportmarkets']==$countries->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$countries->title?></a> 
 					</li>
 					<?php endforeach; ?>					
 				</ul>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2 filter_cols<?=(isset($_GET['certificate']) && !empty($_GET['certificate'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Choose certificate<span class="caret"></span> 
+					Certificate <span class="caret"></span> <?=(isset($_GET['certificate']) && !empty($_GET['certificate'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="certificate"></div>' : ''?>
 				</a>
 				<ul class="dropdown-menu">
 					<?php foreach($data["certificates"] as $certificates) : ?>
-					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_asc"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$certificates->idx?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$certificates->title?></a></li>
+					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_asc"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$certificates->idx?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['certificate']) && $_GET['certificate']==$certificates->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$certificates->title?></a></li>
 					<?php endforeach; ?>
 				</ul>
 			</div>
@@ -128,45 +132,49 @@
 <?php if(Input::method("GET","view")=="products") : ?>
 	<div class="export_companies">
 		<div class="filters_div">
-			<div class="col-sm-2">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Product name <span class="caret"></span> 
+			<div class="col-sm-2 filter_cols">
+				<a href="javascript:;">
+					Product name <!-- <span class="caret"></span>  -->
 				</a>					
-				<ul class="dropdown-menu">
+				<!-- <ul class="dropdown-menu">
 					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=asc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by ascending</a></li>
 					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=desc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by descending</a></li>
-				</ul>
+				</ul> -->
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2 filter_cols<?=(isset($_GET['subsector']) && !empty($_GET['subsector'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Sub sector <span class="caret"></span> 
+					Sub sector <span class="caret"></span> <?=(isset($_GET['subsector']) && !empty($_GET['subsector'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="subsector"></div>' : ''?>
 				</a>
 				<ul class="dropdown-menu">
 					<?php foreach($data["subsector"] as $subsector) : ?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;<?=$data["get_sort"]?>=asc&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$subsector->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['subsector']) && $_GET['subsector']==$subsector->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$subsector->title?></a> 
 					</li>
 					<?php endforeach; ?>					
 				</ul>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2 filter_cols<?=(isset($_GET['products']) && !empty($_GET['products'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Products <span class="caret"></span> 
+					Products <span class="caret"></span> <?=(isset($_GET['products']) && !empty($_GET['products'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="products"></div>' : ''?>
 				</a>
 				<ul class="dropdown-menu">
 					<?php foreach($data["products"] as $products) : ?>
+					<?php 
+						if(!empty($_GET["subsector"]) && $products->cid!=$_GET["subsector"]){ continue; } 
+						if(empty($_GET["subsector"])){ $subsector_id = $products->cid; }else{ $subsector_id = $data["get_subsector"]; }
+					?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$products->idx?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$products->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector_id?>&amp;products=<?=$products->idx?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['products']) && $_GET['products']==$products->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$products->title?></a> 
 					</li>
 					<?php endforeach; ?>					
 				</ul>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2 filter_cols">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					Company
 				</a>
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-4 filter_cols">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					About
 				</a>
@@ -223,40 +231,44 @@
 <?php if(Input::method("GET","view")=="services") : ?>
 	<div class="export_companies">
 		<div class="filters_div">
-			<div class="col-sm-2">
-				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Company Name <span class="caret"></span> 
+			<div class="col-sm-2 filter_cols">
+				<a href="javascript:;">
+					Company Name <!-- <span class="caret"></span>  -->
 				</a>					
-				<ul class="dropdown-menu">
+				<!-- <ul class="dropdown-menu">
 					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=asc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by ascending</a></li>
 					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=desc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by descending</a></li>
-				</ul>
+				</ul> -->
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2 filter_cols<?=(isset($_GET['subsector']) && !empty($_GET['subsector'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Sub Sector <span class="caret"></span> 
+					Sub Sector <span class="caret"></span> <?=(isset($_GET['subsector']) && !empty($_GET['subsector'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="subsector"></div>' : ''?>
 				</a>
 				<ul class="dropdown-menu">
 					<?php foreach($data["subsector"] as $subsector) : ?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$subsector->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['subsector']) && $_GET['subsector']==$subsector->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$subsector->title?></a> 
 					</li>
 					<?php endforeach; ?>
 				</ul>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2 filter_cols<?=(isset($_GET['products']) && !empty($_GET['products'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Services <span class="caret"></span> 
+					Services <span class="caret"></span> <?=(isset($_GET['products']) && !empty($_GET['products'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="products"></div>' : ''?>
 				</a>
 				<ul class="dropdown-menu">
 					<?php foreach($data["products"] as $products) : ?>
+					<?php 
+						if(!empty($_GET["subsector"]) && $products->cid!=$_GET["subsector"]){ continue; }  
+						if(empty($_GET["subsector"])){ $subsector_id = $products->cid; }else{ $subsector_id = $data["get_subsector"]; }
+					?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$products->idx?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$products->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector_id?>&amp;products=<?=$products->idx?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['products']) && $_GET['products']==$products->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$products->title?></a> 
 					</li>
 					<?php endforeach; ?>
 				</ul>
 			</div>
-			<div class="col-sm-6">
+			<div class="col-sm-6 filter_cols">
 				<a href="#">
 					About
 				</a>

@@ -21,7 +21,7 @@
 					<a href="<?=$val->url?>" target="_blank" title="<?=htmlentities($val->title)?>">
 						<div class="col-sm-4 useful_item">
 							<div class="image"><img src="<?=WEBSITE?>image?f=<?=WEBSITE_.$val->image?>&w=215&h=80" /></div>
-							<div class="title"><?=$ctext->cut(strip_tags($val->title),120)?> »</div>
+							<div class="title" style="max-height:60px"><?=$ctext->cut(strip_tags($val->title),110)?> »</div>
 						</div>
 					</a>
 				<?php

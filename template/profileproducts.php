@@ -3,6 +3,9 @@
 	if(isset($_SESSION["tradewithgeorgia_username"])) { 
 		@include('parts/changepassword.php'); 
 		@include('parts/makechange.php'); 
+		$sector_array = array_filter(explode(",",$_SESSION["user_data"]["sector"]));
+		$sector_array2 = array_filter(explode(",",$_SESSION["user_data"]["subsector"]));
+		$sector_array3 = array_filter(explode(",",$_SESSION["user_data"]["products"]));
 ?>
 <div class="container" id="container">
 	<div class="page_title_1">
@@ -18,14 +21,14 @@
 				<label>Sector <font color="red">*</font></label>
 				<div class="multiselectBox">
 					<div class="selectBoxWithCheckbox" data-toggle="drop_sector">
-						Choose
+						<?=(count($sector_array)>0) ? 'Selected '.count($sector_array).' items' : 'Choose'?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown" id="drop_sector">
 						<?php 
 						$x = 1;
 						foreach($data["sector"] as $sector) : ?>
 						<div class="selectItem" data-checkbox="selectItem<?=$x?>">
-							<input type="checkbox" name="selectItem[]" class="sector_ids selectItem<?=$x?>" value="<?=$sector->idx?>" />
+							<input type="checkbox" name="selectItem[]" class="sector_ids selectItem<?=$x?>" value="<?=$sector->idx?>" <?=(in_array($sector->idx, $sector_array)) ? 'checked="checked"' : ''?> />
 							<span><?=htmlentities($sector->title)?></span>
 						</div>
 						<?php 
@@ -66,10 +69,25 @@
 				<label>Sub-Sector <font color="red">*</font></label>
 				<div class="multiselectBox2">
 					<div class="selectBoxWithCheckbox2" data-toggle="drop_sector2">
-						Choose
+						<?=(count($sector_array2)>0) ? 'Selected '.count($sector_array2).' items' : 'Choose'?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown2" id="drop_sector2">
-						
+						<?php 
+						$sectors_subsectors_products = new sectors_subsectors_products();
+						$fetch = $sectors_subsectors_products->subsector($c,$sector_array);
+						$x = 1;
+						foreach($fetch as $val){
+							?>
+
+							<div class="selectItem2" data-checkbox="selectItemx<?=$x?>">
+								<input type="checkbox" name="selectItem2[]" class="sector_ids2" id="selectItemx<?=$x?>" value="<?=$val["idx"]?>" <?=(in_array($val["idx"], $sector_array2)) ? 'checked="checked"' : ''?> />
+								<span><?=htmlentities($val['title'])?></span>
+							</div>
+
+							<?php
+							$x++;
+						}
+						?>
 					</div>
 				</div>
 				<font class="error-msg" id="requiredx_subsector">Please select minimum one Sub-Sector !</font>
@@ -107,9 +125,27 @@
 				<label>Products <font color="red">*</font></label>
 				<div class="multiselectBox3">
 					<div class="selectBoxWithCheckbox3" data-toggle="drop_sector3">
-						Choose
+						<?=(count($sector_array3)>0) ? 'Selected '.count($sector_array3).' items' : 'Choose'?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown3" id="drop_sector3">
+
+						<?php 
+						$sectors_subsectors_products = new sectors_subsectors_products();
+						$fetch2 = $sectors_subsectors_products->products($c,$sector_array2);
+						$x = 1;
+						foreach($fetch2 as $val){
+							?>
+
+							<div class="selectItem3" data-checkbox="selectItemxx<?=$x?>">
+								<input type="checkbox" name="selectItem3[]" class="sector_ids3" id="selectItemxx<?=$x?>" value="<?=$val["idx"]?>" <?=(in_array($val["idx"], $sector_array3)) ? 'checked="checked"' : ''?> />
+								<span><?=htmlentities($val['title'])?></span>
+							</div>
+
+							<?php
+							$x++;
+						}
+						?>
+
 					</div>
 				</div>
 				<font class="error-msg" id="requiredx_products">Please select minimum one product !</font>
@@ -206,6 +242,12 @@
 					<label>Choose Product <font color="red">*</font></label>
 					<select id="products2" name="products2" class="form-control">
 						<option value="">Choose</option>
+						<?php 
+						foreach($fetch2 as $val){	
+							if(!in_array($val["idx"], $sector_array3)){ continue; }
+						?>
+							<option value="<?=htmlentities($val['idx'])?>"><?=htmlentities($val['title'])?></option>
+						<?php }	?>
 					</select>
 					<font class="error-msg" id="requiredx_add_products">Please choose product !</font>
 				</div>
@@ -228,7 +270,7 @@
 			<div class="col-sm-3">
 				<div class="form-group" style="position:relative">
 					<label>HS Code <font color="red">*</font></label>
-					<input type="hidden" name="hscode_id" class="hscode_id" value="" />
+					<input type="hidden" name="hscode_id" class="hscode_id" id="hscode_id" value="" />
 					<input type="text" name="hscode" class="form-control hscode" value="" placeholder="Type minimum 3 letter.." />
 					<div class="results"><ul></ul></div>
 					<font class="error-msg" id="requiredx_add_hscode">HS code is required !</font>
@@ -330,7 +372,7 @@ $make = phparray_to_jsarray::sectorSelects();
 ?>
 <script type="text/javascript" charset="utf-8">
 $(document).ready(function(){
-selectSectors(<?=$make[0]?>,<?=$make[1]?>,<?=$make[2]?>);
+//selectSectors(<?=$make[0]?>,<?=$make[1]?>,<?=$make[2]?>);
 });				
 </script>
 <?php 

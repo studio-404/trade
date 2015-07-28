@@ -53,7 +53,8 @@ class model_admin_changeVisibility extends connection{
 			`studio404_module_attachment`.`connect_idx`=:connect_id AND 
 			(
 				`studio404_module_attachment`.`page_type`=:newspage OR 
-				`studio404_module_attachment`.`page_type`=:eventpage 
+				`studio404_module_attachment`.`page_type`=:eventpage OR 
+				`studio404_module_attachment`.`page_type`=:catalogpage  
 			) AND 
 			`studio404_module_attachment`.`lang`=:lang AND 
 			`studio404_module_attachment`.`status`!=:status AND 
@@ -70,6 +71,7 @@ class model_admin_changeVisibility extends connection{
 				":connect_id"=>$_GET['id'], 
 				":newspage"=>'newspage', 
 				":eventpage"=>'eventpage', 
+				":catalogpage"=>'catalogpage', 
 				":lang"=>LANG_ID,
 				":status"=>1, 
 				":newsidx"=>$idx

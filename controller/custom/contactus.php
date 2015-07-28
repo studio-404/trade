@@ -45,7 +45,9 @@
 						// $breadcrups = json_decode($breadcrups);
 						//$data["left_menu"] = $model_template_main_menu->left($left_menu);
 
-
+						/* languages */
+						$hidden_team_list = $cache->index($c,"hidden_team_list");
+						$data["hidden_team_list"] = json_decode($hidden_team_list,true); 
 
 						/* components */
 						$components = $cache->index($c,"components");

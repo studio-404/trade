@@ -299,7 +299,8 @@ $(document).on("click","#save_changes",function(){
 		}, 
 		function(d){
 			if(d=="Done"){ 
-				$("#insertText").html("Data updated !"); 
+				//$("#insertText").html("Data updated !"); 
+				location.reload();
 			} 
 		});
 	}
@@ -375,11 +376,62 @@ $(document).on("click","#save_company_changes",function(){
 		}, 
 		function(d){
 			if(d=="Done"){ 
-				$("#insertText").html("Data updated !"); 
+				//$("#insertText").html("Data updated !"); 
+				location.reload();
 			} 
 		});
 	}
 });
+
+
+
+$(document).on("click","#save_individual_changes",function(){
+	$(".error-msg").hide();
+	//alert("shevide"); 
+	var companyname = $("#companyname").val(); 
+	var address = $("#address").val(); 
+	var mobile = $("#mobile").val(); 
+	var webaddress = $("#webaddress").val(); 
+	var contactemail = $("#contactemail").val(); 
+
+	var sector = []; 
+	$('.sector_ids:checked').each(function(i, selected){ 
+	  sector[i] = $(selected).val(); 
+	});
+
+	if(companyname==""){
+		$("#requiredx_companyname").fadeIn("slow");
+		return false;
+	}else if(validateEmail(contactemail)!=true){
+		$("#requiredx_contactemail").fadeIn("slow");
+	}else if(sector.length<=0){
+		$("#requiredx_sector").fadeIn("slow");
+		return false;
+	}else{ 
+		$("#insertText").html("Please wait"); 
+		$('#message_popup').modal('toggle'); 
+		var f = $("#inputUserLogo").val();
+		$.post("http://"+document.domain+"/en/ajax", 
+		{ 
+			changeindividualprofile:true, 
+			p_companyname:companyname, 
+			p_sector:JSON.stringify(sector), 
+			p_address:address, 
+			p_mobiles:mobile, 
+			p_webaddress:webaddress, 
+			p_contactemail:contactemail 
+		}, 
+		function(d){
+			if(d=="Done"){ 
+				//$("#insertText").html("Data updated !"); 
+				location.reload();
+			} 
+		});
+	}
+});
+
+
+
 $(document).on("change","#inputUserLogo",function(e){
 	e.stopPropagation();
 	e.preventDefault();
@@ -498,6 +550,8 @@ $(document).on("click","#post_product",function(){
 			if(r!="Error"){
 				$("#pi").val(r); 
 				$("#addproduct").submit(); 
+			}else{
+				$("#insertText").html("Error"); 
 			} 
 		});
 	}
@@ -926,6 +980,14 @@ $(document).on("click",".subscribeproductsenquires",function(){
 	}
 });
 
+$(document).on("click",".readmore",function(e){
+	var par = urlParamiters(); 
+	var p = $(this).data("pid");
+	if(parseInt(par["i"])){
+		getReadmoreInfo(par["i"],p);
+	}
+});
+
 
 $(document).on("click",".usersigned",function(){	
 	$("#insertText").html("Please logout and then register.."); 
@@ -1042,6 +1104,152 @@ $(document).on("click",".searchButtonHomepage",function(e){
 	}
 });
 
+$(document).on("click",".msgtouser",function(e){
+	var par = urlParamiters();
+	var uid = parseInt(par["i"]);
+	var ccname = $("#ccname").val();
+	var cccountry = $("#cccountry").val();
+	var ccemail = $("#ccemail").val();
+	var cccontact_number = $("#cccontact_number").val();
+	var ccmessage = nl2br($("#ccmessage").val());
+	$(".error-msg").hide(); 
+	if(uid=="" || uid<=0){
+		$("#page_enquires_popup").modal("toggle");
+		$("#insertText").html("Error !"); 
+		$('#message_popup').modal('toggle');
+		return false; 
+	}else if(ccname==""){
+		$("#ccname_required").fadeIn("slow"); 
+		return false; 
+	}else if(cccountry==""){
+		$("#cccountry_required").fadeIn("slow"); 
+		return false; 
+	}else if(ccemail==""){
+		$("#ccemail_required").fadeIn("slow"); 
+		return false; 
+	}else if(cccontact_number==""){
+		$("#cccontact_number_required").fadeIn("slow"); 
+		return false; 
+	}else if(ccmessage==""){
+		$("#ccmessage_required").fadeIn("slow"); 
+		return false; 
+	}else{
+
+		if(validateEmail(ccemail)){
+			$("#page_enquires_popup").modal("toggle");
+			$("#insertText").html("Please wait..."); 
+			$('#message_popup').modal('toggle');
+			$.post("http://"+document.domain+"/en/ajax", {
+				sendmsgtouser:true, 
+				i:uid, 
+				n:ccname, 
+				c:cccountry, 
+				e:ccemail, 
+				cn:cccontact_number, 
+				m:ccmessage
+			}, function(r){
+				if(r=="Done"){
+					$("#ccname").val('');
+					$("#cccountry").val('');
+					$("#ccemail").val('');
+					$("#cccontact_number").val('');
+					$("#ccmessage").val('');
+					$("#insertText").html("Message sent successfully!"); 
+				}else{
+					$("#insertText").html("Error"); 
+				}
+			});
+		}else{
+			$("#ccemail_check_required").fadeIn("slow"); 
+			return false; 
+		}
+
+	}
+
+});
+
+$(document).on("click",".callChatButton",function(){
+	callChat(); 
+});
+
+$(document).on("click",".clearFilter", function(e){
+	e.preventDefault();
+	e.stopPropagation(); 
+
+	$("#insertText").html("Please wait..."); 
+	$('#message_popup').modal('toggle');
+
+	var dat = $(this).data("clearme"); 
+	var par = urlParamiters(); 
+	var view = (par["view"]) ? par["view"] : '';
+	var sort = (par["sort"]) ? par["sort"] : '';
+	var subsector = (par["subsector"]) ? par["subsector"] : '';
+	var products = (par["products"]) ? par["products"] : '';
+	var exportmarkets = (par["exportmarkets"]) ? par["exportmarkets"] : '';
+	var certificate = (par["certificate"]) ? par["certificate"] : '';
+	var type = (par["type"]) ? par["type"] : '';
+	var sector = (par["sector"]) ? par["sector"] : '';
+	var search = (par["search"]) ? par["search"] : '';
+	var pn = (par["pn"]) ? par["pn"] : '';
+	var token = (par["token"]) ? par["token"] : '';
+	var build = "http://"+document.domain+"/en/export-catalog";
+
+	if(par["view"]=="companies" && dat=="subsector"){
+		build += "?view=companies&sort"+sort+"&subsector=&products=&exportmarkets="+exportmarkets+"&certificate="+certificate+"&search="+search+"&pn="+pn+"&token="+token;
+	}else if(par["view"]=="companies" && dat=="products"){
+		build += "?view=companies&sort"+sort+"&subsector="+subsector+"&products=&exportmarkets="+exportmarkets+"&certificate="+certificate+"&search="+search+"&pn="+pn+"&token="+token;
+	}else if(par["view"]=="companies" && dat=="exportmarkets"){
+		build += "?view=companies&sort"+sort+"&subsector="+subsector+"&products="+products+"&exportmarkets=&certificate="+certificate+"&search="+search+"&pn="+pn+"&token="+token;
+	}else if(par["view"]=="companies" && dat=="certificate"){
+		build = "?view=companies&sort"+sort+"&subsector="+subsector+"&products="+products+"&exportmarkets="+exportmarkets+"&certificate=&search="+search+"&pn="+pn+"&token="+token;
+	}else if(par["view"]=="products" && dat=="subsector"){
+		build += "?view=products&sort"+sort+"&subsector=&products=&exportmarkets="+exportmarkets+"&certificate="+certificate+"&search="+search+"&pn="+pn+"&token="+token;
+	}else if(par["view"]=="products" && dat=="products"){
+		build += "?view=products&sort"+sort+"&subsector="+subsector+"&products=&exportmarkets="+exportmarkets+"&certificate="+certificate+"&search="+search+"&pn="+pn+"&token="+token;
+	}else if(par["view"]=="services" && dat=="subsector"){
+		build += "?view=services&sort"+sort+"&subsector=&products=&exportmarkets="+exportmarkets+"&certificate="+certificate+"&search="+search+"&pn="+pn+"&token="+token;
+	}else if(par["view"]=="services" && dat=="products"){
+		build += "?view=services&sort"+sort+"&subsector="+subsector+"&products=&exportmarkets="+exportmarkets+"&certificate="+certificate+"&search="+search+"&pn="+pn+"&token="+token;
+	}else if(dat=="xview"){
+		build = "http://"+document.domain+"/en/business-portal?view=&type="+type+"&sector="+sector+"&token="+token;
+	}else if(dat=="xtype"){
+		build = "http://"+document.domain+"/en/business-portal?view="+view+"&type=&sector="+sector+"&token="+token;
+	}else if(dat=="xsector"){
+		build = "http://"+document.domain+"/en/business-portal?view="+view+"&type="+type+"&sector=&token="+token;
+	}
+
+	location.href = build; 
+});
+
+function callChat(){
+	$("#insertText").html("Please wait..."); 
+	$('#message_popup').modal('toggle');
+	window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+	d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+	_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute("charset","utf-8");
+	$.src="//v2.zopim.com/?39RyjmvEGfikM3GPxh7EiUJlsKNbZgyI";z.t=+new Date;$.
+	type="text/javascript";e.parentNode.insertBefore($,e)})(document,"script");
+	
+	$zopim(function() {
+		$zopim.livechat.window.show();
+		});
+	$('#message_popup').modal('toggle');
+}
+
+function getReadmoreInfo(uid,pid){
+	$("#insertText").html("Please wait..."); 
+	$('#message_popup').modal('toggle');
+	$.post("http://"+document.domain+"/en/ajax", {
+		loadreadmore:true, 
+		u:uid, 
+		p:pid 
+	}, function(r){
+		$('#message_popup').modal('toggle');
+		$("#insertHtmlP").html(r); 
+		$('#readmore_popup').modal('toggle');
+	});
+}
+
 function selectOnlySectors(sarray){
 	$("#drop_sector .selectItem .sector_ids").each(function(e){
 		var v = $(this).val(); 
@@ -1139,4 +1347,27 @@ function getCookie(cname) {
 
 function htmlEntities(str) {
     return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function urlParamiters()
+{
+	var query_string = new Array();
+	var query = window.location.search.substring(1);
+	var vars = query.split("&");
+	for (var i=0;i<vars.length;i++) {
+		var pair = vars[i].split("=");
+		if (typeof query_string[pair[0]] === "undefined") {
+		  query_string[pair[0]] = pair[1];
+		} else if (typeof query_string[pair[0]] === "string") {
+		  var arr = [ query_string[pair[0]], pair[1] ];
+		  query_string[pair[0]] = arr;
+		} else {
+			if(query_string.length){
+		  		query_string[pair[0]].push(pair[1]);
+			}else{
+				query_string[pair[0]] = '';
+			}
+		}
+	} 
+	return query_string;		
 }

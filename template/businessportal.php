@@ -1,10 +1,7 @@
 <?php 
 	@include("parts/header.php"); 
-?>
-
-
-<?php
-//$last_line = system('ls', $retval);
+	//$last_line = system('ls', $retval);
+	$ctext = new ctext();
 ?>
 
 <div class="container" id="container">
@@ -28,31 +25,31 @@
 	
 	<div class="export_companies">
 		<div class="filters_div">
-			<div class="col-sm-8">
+			<div class="col-sm-8 filter_cols<?=(isset($_GET['view']) && !empty($_GET['view'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Buy And Sell<span class="caret"></span>
+					Buy And Sell<span class="caret"></span> <?=(isset($_GET['view']) && !empty($_GET['view'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="xview"></div>' : ''?>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="?view=buy&amp;type=<?=$data["get_type"]?>&amp;sector=<?=$data["get_sector"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Buy</a></li>
-					<li><a href="?view=sell&amp;type=<?=$data["get_type"]?>&amp;sector=<?=$data["get_sector"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Sell</a></li>
+					<li><a href="?view=buy&amp;type=<?=$data["get_type"]?>&amp;sector=<?=$data["get_sector"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=($_GET["view"]=="buy") ? 'style="color:#f97900 !important;"' : ''?>>Buy</a></li>
+					<li><a href="?view=sell&amp;type=<?=$data["get_type"]?>&amp;sector=<?=$data["get_sector"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=($_GET["view"]=="sell") ? 'style="color:#f97900 !important;"' : ''?>>Sell</a></li>
 				</ul>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2 filter_cols<?=(isset($_GET['type']) && !empty($_GET['type'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Type <span class="caret"></span>
+					Type <span class="caret"></span> <?=(isset($_GET['type']) && !empty($_GET['type'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="xtype"></div>' : ''?>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a href="?view=<?=$data["get_view"]?>&amp;type=company&amp;sector=<?=$data["get_sector"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Companies</a></li>
-					<li><a href="?view=<?=$data["get_view"]?>&amp;type=individual&amp;sector=<?=$data["get_sector"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Individuals</a></li>
+					<li><a href="?view=<?=$data["get_view"]?>&amp;type=company&amp;sector=<?=$data["get_sector"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=($_GET["type"]=="company") ? 'style="color:#f97900 !important;"' : ''?>>Companies</a></li>
+					<li><a href="?view=<?=$data["get_view"]?>&amp;type=individual&amp;sector=<?=$data["get_sector"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=($_GET["type"]=="individual") ? 'style="color:#f97900 !important;"' : ''?>>Individuals</a></li>
 				</ul>
 			</div>
-			<div class="col-sm-2">
+			<div class="col-sm-2 filter_cols<?=(isset($_GET['sector']) && !empty($_GET['sector'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Sector <span class="caret"></span>
+					Sector <span class="caret"></span> <?=(isset($_GET['sector']) && !empty($_GET['sector'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="xsector"></div>' : ''?>
 				</a>
 				<ul class="dropdown-menu">
 					<?php foreach($data["sector"] as $val) : ?>
-						<li><a href="?view=<?=$data["get_view"]?>&amp;type=<?=$data["get_type"]?>&amp;sector=<?=$val->idx?>&amp;token=<?=$_SESSION["token_generator"]?>"><?=$val->title?></a></li>
+						<li><a href="?view=<?=$data["get_view"]?>&amp;type=<?=$data["get_type"]?>&amp;sector=<?=$val->idx?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['sector']) && $_GET['sector']==$val->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$val->title?></a></li>
 					<?php endforeach; ?>
 				</ul>				
 			</div>
@@ -71,7 +68,7 @@
 									<?=strip_tags($val['title'])?>
 								</div>
 								<div class="text">
-									<?=nl2br(strip_tags($val['long_description']))?>
+									<?=nl2br($ctext->cut(strip_tags($val['long_description']),260))?>
 									<small><?=$val['type']?></small>
 								</div>
 							</div>	 
@@ -79,7 +76,7 @@
 					</div>
 				</a>
 				<div class="col-sm-2 no-float itemssss">
-					<a href="Page_enquires.html"></a><a href="#"><?=$val['users_name']?></a>
+					<a href="<?=WEBSITE.LANG?>/user?t=<?=$val["su_companytype"]?>&amp;i=<?=$val["users_id"]?>&amp;token=<?=$_SESSION["token_generator"]?>" style="color:#0278c1; text-decoration:underline"><?=$val['users_name']?></a>
 				</div>
 				<div class="col-sm-2 no-float itemssss"><?=$val['sector_name']?></div>
 			</div><div style="clear:both"></div>

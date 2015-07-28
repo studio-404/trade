@@ -1,5 +1,15 @@
-* {outline:none !important;}
-
+* {outline:none !important; word-wrap:break-word;}
+/*::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+ 
+::-webkit-scrollbar-thumb {
+    background-color: #ffa100;
+}*/
 html,body {
 	font-family: 'Roboto', sans-serif;
 	font-size:13px;
@@ -164,11 +174,14 @@ ul {margin:0; padding:0;}
 }
 .export_companies a {color:#000; text-decoration:none;}
 .export_companies .filters_div div{border-right:solid #fea100 1px;}
-.export_companies .filters_div .active {background:#ffcf7c !important;}
+.export_companies .filters_div .active{background:#ffcf7c !important; position: relative; }
+.export_companies .filters_div .active .clearFilter{ margin: 0; padding: 0; width: 12px; height: 13px; position: absolute; right: 5px; top:6px; background-image: url('../img/clearfilter.png'); background-repeat: no-repeat; display: block; cursor: pointer; z-index: 1000; }
+.export_companies .filters_div .selected{position: relative;}
+.export_companies .filters_div .selected .clearFilter{  margin: 0; padding: 0; width: 12px; height: 13px; position: absolute; right: 5px; top:6px; background-image: url('../img/clearfilter.png'); background-repeat: no-repeat; display: block; cursor: pointer; z-index: 1000; }
 .export_companies .filters_div .selected a{color:#f97900; text-decoration:underline;}
 .export_companies .filters_div .selected a .caret {color:#000}
 .export_companies .filters_div div:last-child {border:none;}
-.export_companies .filters_div div  a {color:#000; text-decoration:none; display:block;  padding:3px 6px;}
+.export_companies .filters_div div  a {color:#0a2074; text-decoration:none; display:block;  padding:3px 0;}
 .export_companies .filter_content  .itemssss:first-child {text-align:center;}
 .export_companies .filter_content .names{
 	background:#88bfe2;
@@ -1228,9 +1241,9 @@ height:25px; width:25px; z-index:999999999999999999999999999;
 #second-step{ display: none; }
 #second-step2{ display: none; }
 .error-msg{ margin: 0; padding: 0; width: 100%; font-size: 12px; color: red; text-align: left; position: absolute; display: none; }
-.dropdown-menu{ margin:0; padding: 0; min-width: 100%; max-height: 200px; overflow-y:auto; text-align: left; list-style-type: none; background-color: #67aeda; color: white;  }
-.dropdown-menu li a{ color: white !important; display: block; background-color: none; border-bottom: solid 1px #f2f2f2; }
-.dropdown-menu li a:hover{ background-color: #0278c0 !important; background-image: none !important; text-decoration: underline; }
+.dropdown-menu{ margin:0; padding: 0; min-width: 100%; max-height: 200px; overflow-y:auto; text-align: left; list-style-type: none; background-color: #fee2b5; color: white; border: solid 1px #fc9f2b; z-index: 1001; }
+.dropdown-menu li a{ padding:5px 6px !important; color: #0a2074 !important; display: block; background-color: none; }
+.dropdown-menu li a:hover{ background-color: #fee2b5 !important; background-image: none !important; text-decoration: underline; }
 .results{ margin: 0; padding: 0; width: 100%; position: absolute; background-color: white; border: solid 1px #ccc; display: none; z-index: 1000; }
 .results ul{ margin: 0; padding: 0; width: 100%; list-style-type: none; }
 .results ul li{ margin: 0; padding: 5px 10px; }
@@ -1271,6 +1284,9 @@ height:25px; width:25px; z-index:999999999999999999999999999;
 .multiselectBox4::after{ content: ''; width: 6px; height:6px; background-image: url('../img/drop.png'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
 .multiselectBox4 .selectBoxWithCheckbox_dropdown4 .selectItem4{ margin: 0 10px; padding: 5px 0; line-height: 17px; border-bottom: 1px solid #f2f2f2; cursor: pointer; }
 .subscribeproductsenquires, .registernewuser, .usersigned, .eventRegister{ cursor: pointer; }
+.p100 p{ margin: 0px; padding: 0; width: 100%; line-height: 26px; } 
+.filter_cols:hover{ background: #ffcf7c !important; }
+.filter_content:hover .names{ background-color: #0278c0 !important;  }
 @media (max-width: 992px){
 	#header{ min-height: 120px !important; }
 	.export_menu ul li {

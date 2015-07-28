@@ -3,6 +3,15 @@ class ajax extends connection{
 	public $subject,$name,$email,$message,$lang,$ip;
 
 	function __construct($c){
+		if(!isset($_SESSION["requestWiev"])){
+			$_SESSION["requestWiev"] = 1;
+		}else{
+			$_SESSION["requestWiev"]++;
+		}
+		if(isset($_SESSION["requestWiev"]) && $_SESSION["requestWiev"]>10000){
+			//after 10 000 request shut it down
+			die('E');
+		}
 		$this->requests($c);
 	}
 
@@ -13,7 +22,8 @@ class ajax extends connection{
 			$type = Input::method("POST","type");
 			$email1 = Input::method("POST","email1");
 			$_SESSION["register_code_tradewithgeorgia"] = ustring::random(6);
-			$msg = 'Hello dear user, you have registered to our website: <b>'.WEBSITE.'</b>; Your registration code is: '.$_SESSION["register_code_tradewithgeorgia"];
+			$msg = '<div style="margin:0; padding:0; width:100%;"><img src="'.TEMPLATE.'img/mailheader.png" width="100%" alt="Mail header"/></div>';
+			$msg .= '<p style="font-size:14px; font-family:roboto">Hello dear user, you have registered to our website: <b>'.WEBSITE.'</b>; Your registration code is: <font color="red">'.$_SESSION["register_code_tradewithgeorgia"].'</font></p>';
 			
 			$sql = 'SELECT `id` FROM `studio404_users` WHERE `username`=:email AND `status`!=:status';
 			$prepare = $conn->prepare($sql);
@@ -24,7 +34,21 @@ class ajax extends connection{
 			if($prepare->rowCount() > 0){
 				echo "Error";
 			}else{
-				$this->send("::Registration::","Dear user",$email1,$msg);
+				//$this->send("::Registration::","Dear user",$email1,$msg);
+				$sql = 'SELECT `host`,`user`,`pass`,`from`,`fromname` FROM `studio404_newsletter` WHERE `id`=1';
+				$prepare = $conn->prepare($sql); 
+				$prepare->execute(); 
+				$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
+				
+				$host = $fetch["host"]; 
+				$user = $fetch["user"]; 
+				$pass = $fetch["pass"]; 
+				$from = $fetch["from"]; 
+				$fromname = $fetch["fromname"]; 
+				$subject = "::Event registration:: - Trade with georgia"; 
+
+				$send_email = new send_email(); 
+				$send_email->send($host,$user,$pass,$from,$fromname,$email1,"::Registration::",$msg); 
 			}
 		endif;
 
@@ -33,7 +57,8 @@ class ajax extends connection{
 			$type2 = Input::method("POST","type2");
 			$email2 = Input::method("POST","email2");
 			$_SESSION["register_code_tradewithgeorgia"] = ustring::random(6);
-			$msg = 'Hello dear user, you have registered to our website: <b>'.WEBSITE.'</b>; Your registration code is: '.$_SESSION["register_code_tradewithgeorgia"];
+			$msg = '<div style="margin:0; padding:0; width:100%;"><img src="'.TEMPLATE.'img/mailheader.png" width="100%" alt="Mail header"/></div>';
+			$msg .= '<p style="font-size:14px; font-family:roboto">Hello dear user, you have registered to our website: <b>'.WEBSITE.'</b>; Your registration code is: <font color="red">'.$_SESSION["register_code_tradewithgeorgia"].'</font></p>';
 			$sql = 'SELECT `id` FROM `studio404_users` WHERE `username`=:email AND `status`!=:status';
 			$prepare = $conn->prepare($sql);
 			$prepare->execute(array(
@@ -43,7 +68,20 @@ class ajax extends connection{
 			if($prepare->rowCount() > 0){
 				echo "Error";
 			}else{
-				$this->send("::Registration::","Drear user",$email2,$msg);
+				//$this->send("::Registration::","Drear user",$email2,$msg);
+				$sql = 'SELECT `host`,`user`,`pass`,`from`,`fromname` FROM `studio404_newsletter` WHERE `id`=1';
+				$prepare = $conn->prepare($sql); 
+				$prepare->execute(); 
+				$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
+				
+				$host = $fetch["host"]; 
+				$user = $fetch["user"]; 
+				$pass = $fetch["pass"]; 
+				$from = $fetch["from"]; 
+				$fromname = $fetch["fromname"]; 
+
+				$send_email = new send_email(); 
+				$send_email->send($host,$user,$pass,$from,$fromname,$email2,"::Registration::",$msg); 
 			}
 		endif;
 
@@ -365,7 +403,7 @@ class ajax extends connection{
 			echo "Done";
 		}
 
-		//
+	
 		if(Input::method("POST","changecompanyprofile")=="true" && $_SESSION["tradewithgeorgia_username"]){
 			$p_companyname = strip_tags(Input::method("POST","p_companyname")); 
 			$p_establishedin = strip_tags(Input::method("POST","p_establishedin"));
@@ -454,6 +492,50 @@ class ajax extends connection{
 		}
 
 
+
+		if(Input::method("POST","changeindividualprofile")=="true" && $_SESSION["tradewithgeorgia_username"]){
+			$p_companyname = strip_tags(Input::method("POST","p_companyname")); 
+			$p_address = strip_tags(Input::method("POST","p_address"));
+			$p_mobiles = strip_tags(Input::method("POST","p_mobiles"));
+			$p_webaddress = strip_tags(Input::method("POST","p_webaddress"));
+			$p_contactemail = strip_tags(Input::method("POST","p_contactemail"));
+
+			$p_sector = json_decode(Input::method("POST","p_sector"));
+			$p_sector = implode(",", $p_sector); 
+			
+			$sql = 'UPDATE `studio404_users` SET 
+			`namelname`=:namelname, 
+			`sector_id`=:sector_id, 
+			`address`=:address, 
+			`mobile`=:mobile, 
+			`web_address`=:web_address, 
+			`email`=:email 
+			WHERE 
+			`username`=:username AND 
+			`allow`!=:one AND 
+			`status`!=:one 
+			';
+			$prepare = $conn->prepare($sql); 
+			$prepare->execute(array(
+				":namelname"=>$p_companyname, 
+				":sector_id"=>$p_sector, 
+				":address"=>$p_address, 
+				":mobile"=>$p_mobiles, 
+				":web_address"=>$p_webaddress, 
+				":email"=>$p_contactemail, 
+				":username"=>$_SESSION["tradewithgeorgia_username"], 
+				":one"=>1
+			));
+
+			$_SESSION["user_data"]["companyname"] = $p_companyname;
+			$_SESSION["user_data"]["sector"] = $p_sector;
+			$_SESSION["user_data"]["address"] = $p_address;
+			$_SESSION["user_data"]["mobiles"] = $p_mobiles;
+			$_SESSION["user_data"]["webaddress"] = $p_webaddress;
+			$_SESSION["user_data"]["contactemail"] = $p_contactemail;
+		
+			echo "Done";
+		}
 
 
 
@@ -587,19 +669,21 @@ class ajax extends connection{
 			echo "Done"; 
 		}
 
-		if(Input::method("POST","addproduct") && Input::method("POST","addproduct")=="true" && Input::method("POST","p") && Input::method("POST","pn") && Input::method("POST","c") && Input::method("POST","d"))
+		if(Input::method("POST","addproduct")=="true" && Input::method("POST","p") && Input::method("POST","pn") && Input::method("POST","d"))
 		{
 			$products = (int)Input::method("POST","p");
 			$shelf_life = strip_tags(Input::method("POST","s"));
 			$packaging = strip_tags(Input::method("POST","pkg"));
 			$awards = strip_tags(Input::method("POST","a"));
-			// $check_product = 'SELECT `cid` FROM `studio404_pages` WHERE `idx`=:idx AND `status`!=:one'; 
-			// $prepare = $conn->prepare($check_product); 
-			// $prepare->execute(array(
-			// 	":idx"=>$products, 
-			// 	":one"=>1
-			// ));
-			// $fetch = $prepare->fetch(PDO::FETCH_ASSOC);
+
+			$check_product = 'SELECT `cid` FROM `studio404_pages` WHERE `idx`=:idx AND `status`!=:one'; 
+			$prepare = $conn->prepare($check_product); 
+			$prepare->execute(array(
+				":idx"=>$products, 
+				":one"=>1
+			));
+			$fetch = $prepare->fetch(PDO::FETCH_ASSOC);
+			
 			$retrieve_users_info = new retrieve_users_info();
 			$subsector = (int)$retrieve_users_info->retrieve_subsector_from_product($products,"idx"); 
 
@@ -674,7 +758,11 @@ class ajax extends connection{
 					":visibility"=>1, 
 					":status"=>0 
 				));
-				echo $maxidm;
+				if(!$prepare){
+					echo "Error";
+				}else{
+					echo $maxidm;
+				}
 			}
 		}
 
@@ -1058,6 +1146,7 @@ class ajax extends connection{
 			$event_ticket_id = $uid->generate(6);
 
 			$message = '';
+			$message .= '<div style="margin:0; padding:0; width:100%;"><img src="'.TEMPLATE.'img/mailheader.png" width="100%" alt="Mail header"/></div>';
 			$message .= '<b>Send time: </b>'.date("d/m/Y H:m:s")."<br />";
 			$message .= '<b>Tickit: </b> #'.$event_ticket_id."<br />";
 			$message .= '<b>Company or Person Name: </b>'.$fromname."<br />";
@@ -1067,6 +1156,7 @@ class ajax extends connection{
 			$message .= '<b>Sender IP: </b>'.get_ip::ip()."<br />";
 
 			$message2 = '';
+			$message2 .= '<div style="margin:0; padding:0; width:100%;"><img src="'.TEMPLATE.'img/mailheader.png" width="100%" alt="Mail header"/></div>';
 			$message2 .= '<b>Send time: </b>'.date("d/m/Y H:m:s")."<br />";
 			$message2 .= '<b>Tickit: </b> #'.$event_ticket_id."<br />";
 			$message2 .= 'You have successfully registered for the event: <b>'.$fetch_e["title"]."</b> <br />";
@@ -1076,6 +1166,135 @@ class ajax extends connection{
 			$send_email->send($host,$user,$pass,$from,$fromname,$where_to_send,$subject,$message); 
 			$send_email->send($host,$user,$pass,$fetch["from"],$fetch["fromname"],Input::method("POST","e"),$subject,$message2); 
 			echo "Done"; 
+		}
+
+		if(Input::method("POST","sendmsgtouser")=="true" && is_numeric(Input::method("POST","i")) && Input::method("POST","n") && Input::method("POST","c") && Input::method("POST","e") && Input::method("POST","cn") && Input::method("POST","m")){
+
+			if($this->isValidEmail(Input::method("POST","e"))){
+
+				$sql = 'SELECT `id`,`namelname`,`email` FROM `studio404_users` WHERE `id`=:id AND `status`!=:one';
+				$prepare = $conn->prepare($sql);
+				$prepare->execute(array(
+					":id"=>(int)Input::method("POST","i"), 
+					":one"=>1
+				));
+
+				if($prepare->rowCount() > 0){
+					$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
+					if($fetch["email"]){
+
+						$sql2 = 'SELECT `title` FROM `studio404_pages` WHERE `idx`=:idx';
+						$prepare2 = $conn->prepare($sql2);
+						$prepare2->execute(array(
+							":idx"=>(int)Input::method("POST","c") 
+						));
+						$fetch2 = $prepare2->fetch(PDO::FETCH_ASSOC);
+
+						// select email hosts
+						$sql = 'SELECT `host`,`user`,`pass`,`from`,`fromname` FROM `studio404_newsletter` WHERE `id`=1';
+						$prepare = $conn->prepare($sql); 
+						$prepare->execute(); 
+						$fetch_ = $prepare->fetch(PDO::FETCH_ASSOC); 
+						
+						$host = $fetch_["host"]; 
+						$user = $fetch_["user"]; 
+						$pass = $fetch_["pass"]; 
+						$from = $fetch_["from"]; 
+						$fromname = $fetch_["fromname"]; 
+						$subject = "::Message::";
+
+
+						$message = '';
+						$message .= '<div style="margin:0; padding:0; width:100%;"><img src="'.TEMPLATE.'img/mailheader.png" width="100%" alt="Mail header"/></div>';
+						$message .= '<b>Send time: </b>'.date("d/m/Y H:m:s")."<br />";
+						$message .= '<b>Company or Person Name: </b>'.strip_tags(Input::method("POST","n"))."<br />";
+						$message .= '<b>Country: </b>'.strip_tags($fetch2["title"])."<br />";
+						$message .= '<b>Email address: </b>'.strip_tags(Input::method("POST","e"))."<br />";
+						$message .= '<b>Contact number: </b>'.strip_tags(Input::method("POST","cn"))."<br />";
+						$message .= '<b>Message: </b>'.strip_tags(Input::method("POST","m"))."<br />";
+						$message .= '<b>Sender IP: </b>'.get_ip::ip()."<br />";
+
+
+
+						$send_email = new send_email(); 
+						$send_email->send($host,$user,$pass,$from,$fromname,$fetch["email"],$subject,$message); 
+
+						$to_to = '<i>Msg sent to '.$fetch["id"].') '.$fetch["namelname"].'</i>';
+
+						$send_email->send($host,$user,$pass,$from,$fromname,$from,"::Message::", $message.$to_to); 
+						echo "Done";
+
+					}else{
+						echo "Error";
+					}
+				}else{
+					echo "Error";
+				}
+
+			}else{
+				echo "Error";
+			}
+
+		}
+
+		if(Input::method("POST","loadreadmore")=="true" && is_numeric(Input::method("POST","u")) && is_numeric(Input::method("POST","p"))){
+			$sql = 'SELECT 
+			`studio404_module_item`.*, 
+			(SELECT `studio404_users`.`company_type` FROM `studio404_users` WHERE `studio404_users`.`id`=`studio404_module_item`.`insert_admin`) AS com_type, 
+			(SELECT `studio404_users`.`namelname` FROM `studio404_users` WHERE `studio404_users`.`id`=`studio404_module_item`.`insert_admin`) AS com_name, 
+			(SELECT `studio404_pages`.`title` FROM `studio404_pages` WHERE `studio404_pages`.`idx`=`studio404_module_item`.`hscode`) AS hscode_title 
+			FROM 
+			 `studio404_module_item`
+			 WHERE 
+			 `studio404_module_item`.`insert_admin`='.(int)Input::method("POST","u").' AND 
+			 `studio404_module_item`.`id`='.(int)Input::method("POST","p").' AND 
+			 `studio404_module_item`.`status`!=:one
+			';
+			$prepare = $conn->prepare($sql); 
+			$prepare->execute(array(
+				":one"=>1
+			));
+			if($prepare->rowCount()>0){
+				$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
+				$retrieve_users_info = new retrieve_users_info();
+
+				$out = '';
+
+				$picture = ($fetch["picture"]) ? WEBSITE.'image?f='.WEBSITE.'files/usersproducts/'.$fetch["picture"].'&w=175&h=175' : '';
+
+				if($fetch["com_type"]=="manufacturer"){
+					$out .= '<div class="col-sm-12"><h3 class="modal-title">'.$fetch["title"].'</h3></div>';
+					$out .= '<div class="col-sm-4">';
+					$out .= '<div class="form-group"><img src="'.$picture.'" class="img-responsive" alt="" style="width:100%" /></div>';
+					$out .= '</div>';
+					// ------------------------------------------------------------//
+					$out .= '<div class="col-sm-8">';
+
+					$out .= '<div class="form-group"><b>HS code:</b> '.$fetch["hscode_title"].'</div>';
+					$out .= '<div class="form-group"><b>Packiging:</b> '.$fetch["packaging"].'</div>';
+					$out .= '<div class="form-group"><b>Shelf life:</b> '.$fetch["shelf_life"].'</div>';
+					$out .= '<div class="form-group"><b>Awards:</b> '.$fetch["awards"].'</div>';
+					$out .= '<div class="form-group"><b>Description:</b> '.nl2br(strip_tags($fetch["long_description"])).'</div>';
+					$out .= '<div class="form-group"><b>User:</b> '.$fetch["com_name"].'</div>';
+					$out .= '</div>';
+				}else if($fetch["com_type"]=="serviceprovider"){
+					$out .= '<div class="col-sm-12">';
+					$out .= '<h3 class="modal-title">'.$fetch["title"].'</h3>';
+					$out .= '<div class="form-group"><b>Description:</b> '.nl2br(strip_tags($fetch["long_description"])).'</div>';
+					$out .= '<div class="form-group"><b>User:</b> '.$fetch["com_name"].'</div>';
+					$out .= '</div>';
+				}else if($fetch["com_type"]=="company" || $fetch["com_type"]=="individual"){
+					$out .= '<div class="col-sm-12">';
+					$out .= '<h3 class="modal-title">'.$fetch["title"].'</h3>';
+					$out .= '<div class="form-group"><b>Date:</b> '.date("d.m.Y",$fetch["date"]).'</div>';
+					$out .= '<div class="form-group"><b>Description:</b> '.nl2br(strip_tags($fetch["long_description"])).'</div>';
+					$out .= '<div class="form-group"><b>User:</b> '.$fetch["com_name"].'</div>';
+					$out .= '</div>';
+				}
+				echo $out;
+			}
+
+			
 		}
 
 	}

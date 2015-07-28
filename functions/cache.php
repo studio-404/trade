@@ -1192,6 +1192,42 @@ class cache extends connection{
 			$sectors_subsectors_products = new sectors_subsectors_products();
 			$fetch = $sectors_subsectors_products->companysize($c);
 			break;
+			case "hidden_team_list": 
+			$sql = 'SELECT 
+			`studio404_module_item`.`idx` AS smi_idx, 
+			`studio404_module_item`.`title` AS namelname 
+			FROM 
+			`studio404_pages`, `studio404_module_attachment`, `studio404_module`, `studio404_module_item`  
+			WHERE 
+			`studio404_pages`.`slug`=:slug AND 
+			`studio404_pages`.`lang`=:lang AND 
+			`studio404_pages`.`visibility`!=:visibility AND 
+			`studio404_pages`.`status`!=:status AND 
+			`studio404_pages`.`idx`=`studio404_module_attachment`.`connect_idx` AND 
+			`studio404_module_attachment`.`page_type`=:pagetype AND 
+			`studio404_module_attachment`.`lang`=:lang AND 
+			`studio404_module_attachment`.`status`!=:status AND 
+			`studio404_module_attachment`.`idx`=`studio404_module`.`idx` AND 
+			`studio404_module`.`lang`=:lang AND 
+			`studio404_module`.`status`!=:status AND 
+			`studio404_module`.`idx`=`studio404_module_item`.`module_idx` AND 
+			`studio404_module_item`.`lang`=:lang AND 
+			`studio404_module_item`.`visibility`!=:visibility AND 
+			`studio404_module_item`.`status`!=:status 
+			ORDER BY `studio404_module_item`.`position` ASC 
+			';	
+			$prepare = $conn->prepare($sql); 
+			$prepare->execute(array(
+				":media_type"=>'photo', 
+				":media_type_doc"=>'document', 
+				":pagetype"=>'catalogpage', 
+				":slug"=>'team', 
+				":status"=>1, 
+				":visibility"=>1, 
+				":lang"=>LANG_ID 
+			)); 			
+			$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC); 
+			break;
 		}
 		if(count($fetch)){
 			$fh = @fopen($cache_file, 'w') or die("Error opening output file");

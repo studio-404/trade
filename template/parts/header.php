@@ -23,7 +23,7 @@ echo $header_data["title"];
 <script src="<?php echo TEMPLATE;?>js/scripts.js"></script>
 </head>
 <body id="menu_responsive">
-	<div style="margin:0; padding:0; width:100%; text-align:center; background-color:#ffa100; color:white; line-height:25px; font-size:14px">Under Development</div>
+	<!-- <div style="margin:0; padding:0; width:100%; text-align:center; background-color:#ffa100; color:white; line-height:25px; font-size:14px">Under Development</div> -->
 <?php
 include("login.php");
 include("register.php");
@@ -64,7 +64,7 @@ include("message.php");
 				</a>
 			</div>
 			<div class="col-sm-5 head_contact text-right">
-				<div id="live_chat_div"><a href="#"><?=$data["language_data"]["livechart"]?></a></div>
+				<div id="live_chat_div"><a href="javascript:;" class="callChatButton"><?=$data["language_data"]["livechart"]?></a></div>
 				<div id="header_contact">
 					<li><?=$data["language_data"]["hotlinelabel"]?></li>
 					<li><span><?=$data["language_data"]["hotlinevalue"]?></span></li>
