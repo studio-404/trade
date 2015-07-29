@@ -72,7 +72,7 @@ class exportcatalog extends connection{
 
 
 			$limit = ' LIMIT '.(($data["get_pn"]-1)*10).', 10';
-			$orderBy = ' ORDER BY `studio404_users`.`namelname` '.urlencode($data["get_sort"]);
+			$orderBy = ' ORDER BY `studio404_users`.`id` DESC';
 			$subsectors = ($data["get_subsector"] && is_numeric($data["get_subsector"])) ? ' FIND_IN_SET('.$data["get_subsector"].',`studio404_users`.`sub_sector_id`) AND ' : '';
 			$products = ($data["get_products"] && is_numeric($data["get_products"])) ? ' FIND_IN_SET('.$data["get_products"].',`studio404_users`.`products`) AND ' : '';
 			$exportmarkets = ($data["get_exportmarkets"] && is_numeric($data["get_exportmarkets"])) ? ' FIND_IN_SET('.$data["get_exportmarkets"].',`studio404_users`.`export_markets_id`) AND ' : '';

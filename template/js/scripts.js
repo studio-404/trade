@@ -1220,6 +1220,240 @@ $(document).on("click",".clearFilter", function(e){
 
 	location.href = build; 
 });
+var newfrom = 1;
+$(document).on("click",".loadmore",function(){
+	var type = $(this).data("type"); 
+	var typex = $(this).data("typex"); 
+	var subsector = $(this).data("subsector"); 
+	var products = $(this).data("products"); 
+	var exportmarkets = $(this).data("exportmarkets"); 
+	var certificate = $(this).data("certificate");
+	var view = $(this).data("view");
+	var from = $(this).attr("data-from");
+	var load = $(this).data("load");
+	var search = $("#svalue").val();
+
+	if(type=="companylist"){
+		$(this).hide();
+		$(".loader").fadeIn("slow"); 
+		$.post("http://"+document.domain+"/en/ajax",{
+			loadmore:true, 
+			t:type,
+			ss:subsector, 
+			p:products, 
+			e:exportmarkets, 
+			c:certificate, 
+			f:from, 
+			l:load, 
+			ser:search
+		},function(r){
+			nf = parseInt(load) * newfrom;
+			$(".loader").hide();
+			$(".loadmore").attr({"data-from":nf}); 
+			if(r!="Empty"){
+				var obj = jQuery.parseJSON(r);
+				var insert = '';
+				for(i=0; i<obj.length; i++){
+					insert += '<a href="http://'+document.domain+'/en/user?t='+obj[i].su_companytype+'&amp;i='+obj[i].su_id+'&amp;token=nope">';
+					insert += '<div class="filter_content">';
+					insert += '<div class="names">'+obj[i].su_namelname+'</div>';
+					insert += '<div class="content_divs">';
+					insert += '<div class="col-sm-2 no-float itemssss"><img src="http://'+document.domain+'/image?f=http://'+document.domain+'/files/usersimage/'+obj[i].su_picture+'&w=150&h=75" class="img-responsive" alt="logo" /></div>';
+					insert += '<div class="col-sm-2 no-float itemssss">';
+					insert += '<ul class="text_formats">';
+					insert += '<li>'+obj[i].su_sub_sector_id+'</li>';
+					insert += '</ul>';
+					insert += '</div>';
+					insert += '<div class="col-sm-2 no-float itemssss">';
+					insert += '<ul class="text_formats">';
+					insert += '<li>'+obj[i].su_products+'</li>';
+					insert += '</ul>';
+					insert += '</div>';
+					insert += '<div class="col-sm-4 no-float itemssss">';
+					insert += '<ul class="text_formats">';
+					insert += '<li>'+obj[i].su_export_markets_id+'</li>';
+					insert += '</ul>';
+					insert += '</div>';
+					insert += '<div class="col-sm-2 no-float itemssss">';
+					insert += '<ul class="text_formats">';
+					insert += '<li>'+obj[i].su_certificates+'</li>';
+					insert += '</ul>';
+					insert += '</div>';
+					insert += '</div>';
+					insert += '</div>';
+					insert += '</a>';
+				}
+				$(".appends").append(insert);
+				$(".loadmore").show(); 
+			}else{
+				$(".appends").append("<p>Sorry, there is no more data!</p>");
+			}
+		});
+	}else if(type=="productslist"){
+		$(this).hide();
+		$(".loader").fadeIn("slow"); 
+		$.post("http://"+document.domain+"/en/ajax",{
+			loadmore:true, 
+			t:type,
+			ss:subsector, 
+			p:products, 
+			f:from, 
+			l:load
+		},function(r){
+			nf = parseInt(load) * newfrom;
+			$(".loader").hide();
+			$(".loadmore").attr({"data-from":nf}); 
+			if(r!="Empty"){
+				var obj = jQuery.parseJSON(r);
+				var insert = '';
+				for(i=0; i<obj.length; i++){
+					insert += '<a href="http://'+document.domain+'/en/user?t='+obj[i].su_companytype+'&amp;i='+obj[i].users_id+'&amp;p='+obj[i].id+'&amp;token=nope">';
+					insert += '<div class="filter_content">';
+					insert += '<div class="names">'+obj[i].title+'</div>';
+					insert += '<div class="content_divs">';
+					insert += '<div class="col-sm-2 no-float itemssss"><img src="http://'+document.domain+'/image?f=http://'+document.domain+'/files/usersproducts/'+obj[i].picture+'&w=175&h=175" class="img-responsive" width="100%" alt="" /></div>';
+					insert += '<div class="col-sm-2 no-float itemssss">';
+					insert += '<ul class="text_formats">';
+					insert += '<li>'+obj[i].sub_sector_id+'</li>';
+					insert += '</ul>';
+					insert += '</div>';
+					insert += '<div class="col-sm-2 no-float itemssss">';
+					insert += '<ul class="text_formats">';
+					insert += '<li>'+obj[i].products+'</li>';
+					insert += '</ul>';
+					insert += '</div>';
+					insert += '<div class="col-sm-2 no-float itemssss">';
+					insert += '<ul class="text_formats">';
+					insert += '<li>'+obj[i].users_name+'</li>';
+					insert += '</ul>';
+					insert += '</div>';
+					insert += '<div class="col-sm-4 no-float itemssss">';
+					insert += '<ul class="text_formats">';
+					insert += '<li><span>Packiging:</span> '+obj[i].packaging+'</li>';
+					insert += '<li><span>Shelf Life:</span> '+obj[i].shelf_life+'</li>';
+					insert += '<li><span>Awards:</span> '+obj[i].awards+'</li>';
+					insert += '</ul>';
+					insert += '<ul class="text_formats" style="margin-top:20px;">';
+					insert += '<li><span>About:</span> '+obj[i].long_description+'</li>';
+					insert += '</ul>';
+					insert += '</div>';
+					insert += '</div>';
+					insert += '</div>';
+					insert += '</a>';
+				}
+				$(".appends").append(insert);
+				$(".loadmore").show(); 
+			}else{
+				$(".appends").append("<p>Sorry, there is no more data!</p>");
+			}
+		});
+	}else if(type=="servicelist"){
+		$(this).hide();
+		$(".loader").fadeIn("slow"); 
+		$.post("http://"+document.domain+"/en/ajax",{
+			loadmore:true, 
+			t:type,
+			ss:subsector, 
+			p:products, 
+			f:from, 
+			l:load
+		},function(r){
+			nf = parseInt(load) * newfrom;
+			$(".loader").hide();
+			$(".loadmore").attr({"data-from":nf}); 
+			$(".loadmore").show(); 
+		});
+	}else if(type=="enquirelist"){
+		$(this).hide();
+		$(".loader").fadeIn("slow"); 
+		$.post("http://"+document.domain+"/en/ajax",{
+			loadmore:true, 
+			t:type,
+			v:view, 
+			tx:typex, 
+			f:from, 
+			l:load
+		},function(r){
+			nf = parseInt(load) * newfrom;
+			$(".loader").hide();
+			$(".loadmore").attr({"data-from":nf}); 
+			$(".loadmore").show(); 
+		});
+	}else if(type=="profileservicelist"){
+		$(this).hide();
+		$(".loader").fadeIn("slow"); 
+		$.post("http://"+document.domain+"/en/ajax",{
+			loadmore:true, 
+			t:type,
+			f:from, 
+			l:load
+		},function(r){
+			nf = parseInt(load) * newfrom;
+			$(".loader").hide();
+			$(".loadmore").attr({"data-from":nf}); 
+			$(".loadmore").show(); 
+		});
+	}else if(type=="profileproductlist"){
+		$(this).hide();
+		$(".loader").fadeIn("slow"); 
+		$.post("http://"+document.domain+"/en/ajax",{
+			loadmore:true, 
+			t:type,
+			f:from, 
+			l:load
+		},function(r){
+			nf = parseInt(load) * newfrom;
+			$(".loader").hide();
+			$(".loadmore").attr({"data-from":nf}); 
+			$(".loadmore").show(); 
+		});
+	}else if(type=="profileenquirelist"){
+		$(this).hide();
+		$(".loader").fadeIn("slow"); 
+		$.post("http://"+document.domain+"/en/ajax",{
+			loadmore:true, 
+			t:type,
+			f:from, 
+			l:load
+		},function(r){
+			nf = parseInt(load) * newfrom;
+			$(".loader").hide();
+			$(".loadmore").attr({"data-from":nf}); 
+			$(".loadmore").show(); 
+		});
+	}else if(type=="eventslist"){
+		$(this).hide();
+		$(".loader").fadeIn("slow"); 
+		$.post("http://"+document.domain+"/en/ajax",{
+			loadmore:true, 
+			t:type,
+			f:from, 
+			l:load
+		},function(r){
+			nf = parseInt(load) * newfrom;
+			$(".loader").hide();
+			$(".loadmore").attr({"data-from":nf}); 
+			$(".loadmore").show(); 
+		});
+	}else if(type=="newslist"){
+		$(this).hide();
+		$(".loader").fadeIn("slow"); 
+		$.post("http://"+document.domain+"/en/ajax",{
+			loadmore:true, 
+			t:type,
+			f:from, 
+			l:load
+		},function(r){
+			nf = parseInt(load) * newfrom;
+			$(".loader").hide();
+			$(".loadmore").attr({"data-from":nf}); 
+			$(".loadmore").show(); 
+		});
+	}
+
+
+	newfrom++;
+});
 
 function callChat(){
 	$("#insertText").html("Please wait..."); 

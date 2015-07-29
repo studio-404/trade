@@ -277,6 +277,11 @@
 					<div style="clear:both"></div>
 				</div>
 			<?php endforeach; ?>
+			<div style="clear:both"></div>
+				<div class="appends"></div>
+				<div style="clear:both"></div>
+				<div class="loader">Please wait...</div>
+				<a href="javascript:;" class="gray_link loadmore" data-type="profileenquirelist"  data-from="10" data-load="10">Load more »</a>
 			</div>
 		</div>
 

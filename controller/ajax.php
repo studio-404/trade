@@ -1292,9 +1292,156 @@ class ajax extends connection{
 					$out .= '</div>';
 				}
 				echo $out;
-			}
+			}	
+		}
 
-			
+		if(Input::method("POST","loadmore")=="true"){
+			$type = Input::method("POST","t"); 
+			$subsector = Input::method("POST","ss"); 
+			$products = Input::method("POST","p");
+			$exportmarkets = Input::method("POST","e");
+			$certificate = Input::method("POST","c");
+			$from = Input::method("POST","f");
+			$load = Input::method("POST","l");
+			$search = Input::method("POST","ser");
+
+			switch($type){
+				case "companylist":
+				$limit = ' LIMIT '.$from.', '.$load;
+				$orderBy = ' ORDER BY `studio404_users`.`id` DESC';
+
+				$subsectors = ($subsector && is_numeric($subsector)) ? ' FIND_IN_SET('.$subsector.',`studio404_users`.`sub_sector_id`) AND ' : '';
+				$products = ($products && is_numeric($products)) ? ' FIND_IN_SET('.$products.',`studio404_users`.`products`) AND ' : '';
+				$exportmarkets = ($exportmarkets && is_numeric($exportmarkets)) ? ' FIND_IN_SET('.$exportmarkets.',`studio404_users`.`export_markets_id`) AND ' : '';
+				$certificates = ($certificate && is_numeric($certificate)) ? ' FIND_IN_SET('.$certificate.',`studio404_users`.`certificates`) AND ' : '';
+				$search = (!empty($search)) ? '`studio404_users`.`namelname` LIKE "%'.$search.'%" AND ' : '';
+				 
+				$sql = 'SELECT 
+				`studio404_users`.`id` AS su_id,
+				`studio404_users`.`username` AS su_username,
+				`studio404_users`.`sub_sector_id` AS su_sub_sector_id,
+				`studio404_users`.`namelname` AS su_namelname,
+				`studio404_users`.`picture` AS su_picture,
+				`studio404_users`.`products` AS su_products, 
+				`studio404_users`.`export_markets_id` AS su_export_markets_id, 
+				`studio404_users`.`certificates` AS su_certificates, 
+				`studio404_users`.`company_type` AS su_companytype
+				FROM 
+				`studio404_users`
+				WHERE 
+				`studio404_users`.`user_type`=:user_type AND 
+				`studio404_users`.`allow`!=:one AND 
+				'.$subsectors.' 
+				'.$products.' 
+				'.$exportmarkets.' 
+				'.$certificates.' 
+				'.$search.' 
+				(`studio404_users`.`company_type`=:manufacturer OR `studio404_users`.`company_type`=:serviceprovider) AND 
+				`studio404_users`.`status`!=:one '.$orderBy.' '.$limit.'
+				';
+				$prepare = $conn->prepare($sql); 
+				$prepare->execute(array(
+					":manufacturer"=>'manufacturer', 
+					":serviceprovider"=>'serviceprovider', 
+					":user_type"=>'website', 
+					":one"=>1
+				));
+				if($prepare->rowCount()>0){
+					$retrieve_users_info = new retrieve_users_info();
+					$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC);
+					$result = array();
+					$x = 0;
+					foreach($fetch as $val){
+						$result[$x]["su_id"] = $val["su_id"];  
+						$result[$x]["su_username"] = $val["su_username"];  
+						$result[$x]["su_namelname"] = $val["su_namelname"];  
+						$result[$x]["su_picture"] = $val["su_picture"];  
+						$result[$x]["su_companytype"] = $val["su_companytype"];
+
+						$result[$x]["su_sub_sector_id"] = $retrieve_users_info->retrieveDb($val["su_sub_sector_id"]);  
+						$result[$x]["su_products"] = $retrieve_users_info->retrieveDb($val["su_products"]);  
+						$result[$x]["su_export_markets_id"] = $retrieve_users_info->retrieveDb($val["su_export_markets_id"]);  
+						$result[$x]["su_certificates"] = $retrieve_users_info->retrieveDb($val["su_certificates"]); 
+						$x++; 
+					}
+
+					echo json_encode($result);
+				}else{
+					echo "Empty"; 
+				}
+				break;
+				case "productslist":
+				$limit = ' LIMIT '.$from.', '.$load;
+				$orderBy = ' ORDER BY `studio404_module_item`.`id` DESC';
+				$subsectors = ($subsector && is_numeric($subsector)) ? ' FIND_IN_SET('.$subsector.',`studio404_module_item`.`sub_sector_id`) AND ' : '';
+				$products = ($products && is_numeric($products)) ? ' FIND_IN_SET('.$products.',`studio404_module_item`.`products`) AND ' : '';
+				$search = (!empty($search)) ? '`studio404_module_item`.`title` LIKE "%'.$search.'%" AND ' : '';
+				 
+				$sql = 'SELECT 
+				`studio404_module_item`.`id`, 
+				`studio404_module_item`.`idx`, 
+				`studio404_module_item`.`title`, 
+				`studio404_module_item`.`picture`, 
+				`studio404_module_item`.`sub_sector_id`, 
+				`studio404_module_item`.`hscode`, 
+				`studio404_module_item`.`products`, 
+				`studio404_module_item`.`shelf_life`, 
+				`studio404_module_item`.`packaging`, 
+				`studio404_module_item`.`awards`, 
+				`studio404_module_item`.`long_description`, 
+				`studio404_users`.`id` AS users_id,
+				`studio404_users`.`namelname` AS users_name, 
+				`studio404_users`.`company_type` AS su_companytype
+				FROM 
+				`studio404_module_item`, `studio404_users`
+				WHERE 
+				`studio404_module_item`.`module_idx`=3 AND 
+				'.$subsectors.' 
+				'.$products.' 
+				'.$search.' 
+				`studio404_module_item`.`visibility`=:two AND 
+				`studio404_module_item`.`status`!=:one AND 
+				`studio404_module_item`.`insert_admin`=`studio404_users`.`id` AND 
+				`studio404_users`.`status`!=:one  
+				'.$orderBy.' '.$limit.'
+				';
+				$prepare = $conn->prepare($sql); 
+				$prepare->execute(array(
+					":two"=>2, 
+					":one"=>1
+				));
+				if($prepare->rowCount()>0){
+					$retrieve_users_info = new retrieve_users_info();
+					$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC);
+					$result = array();
+					$x = 0;
+					$ctext = new ctext();
+					
+					foreach($fetch as $val){
+						$result[$x]["id"] = $val["id"];  
+						$result[$x]["idx"] = $val["idx"];  
+						$result[$x]["title"] = $val["title"];  
+						$result[$x]["picture"] = $val["picture"];  
+						$result[$x]["hscode"] = $val["hscode"];
+						$result[$x]["shelf_life"] = $val["shelf_life"];
+						$result[$x]["packaging"] = $val["packaging"];
+						$result[$x]["awards"] = $val["awards"];
+						$result[$x]["long_description"] = $ctext->cut(strip_tags($val["long_description"]),120);
+						$result[$x]["users_id"] = $val["users_id"];
+						$result[$x]["users_name"] = $val["users_name"];
+						$result[$x]["su_companytype"] = $val["su_companytype"];
+
+						$result[$x]["sub_sector_id"] = $retrieve_users_info->retrieveDb($val["sub_sector_id"]);  
+						$result[$x]["products"] = $retrieve_users_info->retrieveDb($val["products"]);  
+						$x++; 
+					}
+
+					echo json_encode($result);
+				}else{
+					echo "Empty"; 
+				}
+				break;
+			}
 		}
 
 	}

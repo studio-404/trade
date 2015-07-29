@@ -78,12 +78,16 @@ $first = array_slice($data["event_list"], 0, 1);
 			foreach($other as $val) : ?>
 			<div class="col-sm-4 col-md-3 col-xs-4 event_item">
 				<a href="<?=WEBSITE.LANG?>/<?=$val["slug"]?>">
-					<div class="date"><?=$val["event_when"]?></div>
+					<div class="date"><?=date("d M",$val["date"])?></div>
 					<div class="image"><img src="<?=WEBSITE?>image?f=<?=WEBSITE.$val["pic"]?>&amp;w=270&amp;h=130" class="img-responsive" alt="" /></div>
 					<div class="text"><?=$ctext->cut($val["title"],30)?></div>
 				</a>	
 			</div>
-		<?php endforeach; ?>
+			<?php endforeach; ?>
+			<div class="appends"></div>
+			<div style="clear:both"></div>
+			<div class="loader">Please wait...</div>
+			<a href="javascript:;" class="gray_link loadmore" data-type="eventslist"  data-from="10" data-load="10">Load more »</a>
 			
 		</div>
 		

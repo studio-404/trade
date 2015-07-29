@@ -81,6 +81,11 @@
 				<div class="col-sm-2 no-float itemssss"><?=$val['sector_name']?></div>
 			</div><div style="clear:both"></div>
 		<?php endforeach; ?>
+			<div style="clear:both"></div>
+			<div class="appends"></div>
+			<div style="clear:both"></div>
+			<div class="loader">Please wait...</div>
+			<a href="javascript:;" class="gray_link loadmore" data-type="enquirelist" data-view="<?=Input::method("GET","view")?>" data-typex="<?=Input::method("GET","type")?>"  data-from="10" data-load="10">Load more »</a>
 		</div>
 	
 

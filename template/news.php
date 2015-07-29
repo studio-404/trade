@@ -54,6 +54,10 @@
 			<?php
 			}
 			?>
+			<div class="appends"></div>
+			<div style="clear:both"></div>
+			<div class="loader">Please wait...</div>
+			<a href="javascript:;" class="gray_link loadmore" data-type="newslist"  data-from="10" data-load="10">Load more »</a>
 		</div>
 		
 		<!-- <a href="#" class="gray_link"><?=$data["language_data"]["viewmorenews"]?> »</a> -->

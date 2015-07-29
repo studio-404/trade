@@ -127,6 +127,11 @@
 		</div>
 	</a>
 	<?php } ?>
+	<div style="clear:both"></div>
+	<div class="appends"></div>
+	<div style="clear:both"></div>
+	<div class="loader">Please wait...</div>
+	<a href="javascript:;" class="gray_link loadmore" data-type="companylist" data-subsector="<?=Input::method("GET","subsector")?>" data-products="<?=Input::method("GET","products")?>" data-exportmarkets="<?=Input::method("GET","exportmarkets")?>" data-certificate="<?=Input::method("GET","certificate")?>" data-from="10" data-load="10">Load more »</a>
 <?php endif; ?>
 
 <?php if(Input::method("GET","view")=="products") : ?>
@@ -134,12 +139,8 @@
 		<div class="filters_div">
 			<div class="col-sm-2 filter_cols">
 				<a href="javascript:;">
-					Product name <!-- <span class="caret"></span>  -->
+					Product name 
 				</a>					
-				<!-- <ul class="dropdown-menu">
-					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=asc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by ascending</a></li>
-					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=desc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by descending</a></li>
-				</ul> -->
 			</div>
 			<div class="col-sm-2 filter_cols<?=(isset($_GET['subsector']) && !empty($_GET['subsector'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -181,9 +182,6 @@
 			</div>
 		</div>
 		<?php
-		// echo "<pre>";
-		// print_r($data["fetch"]); 
-		// echo "</pre>";
 		$retrieve_users_info = new retrieve_users_info();
 		$ctext = new ctext();
 		foreach($data["fetch"] as $val) :
@@ -225,6 +223,12 @@
 			</div>
 		</a>
 		<?php endforeach; ?>	
+		<div style="clear:both"></div>
+		<div class="appends"></div>
+		<div style="clear:both"></div>
+		<div class="loader">Please wait...</div>
+		<a href="javascript:;" class="gray_link loadmore" data-type="productslist" data-subsector="<?=Input::method("GET","subsector")?>" data-products="<?=Input::method("GET","products")?>"  data-from="10" data-load="10">Load more »</a>
+
 	</div>
 <?php endif; ?>
 
@@ -315,7 +319,12 @@
 	<?php
 	endforeach;
 	?>
-	</div>
+	<div style="clear:both"></div>
+	<div class="appends"></div>
+	<div style="clear:both"></div>
+	<div class="loader">Please wait...</div>
+	<a href="javascript:;" class="gray_link loadmore" data-type="servicelist" data-subsector="<?=Input::method("GET","subsector")?>" data-products="<?=Input::method("GET","products")?>"  data-from="10" data-load="10">Load more »</a>
+</div>
 <?php endif; ?>
 	
 </div>
