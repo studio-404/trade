@@ -1441,6 +1441,78 @@ class ajax extends connection{
 					echo "Empty"; 
 				}
 				break;
+				case "servicelist":
+				$limit = ' LIMIT '.$from.', '.$load;
+				$orderBy = ' ORDER BY `studio404_module_item`.`id` DESC';
+				$subsectors = ($subsector && is_numeric($subsector)) ? ' FIND_IN_SET('.$subsector.',`studio404_module_item`.`sub_sector_id`) AND ' : '';
+				$services = ($products && is_numeric($products)) ? ' FIND_IN_SET('.$products.',`studio404_module_item`.`products`) AND ' : '';
+				$search = (!empty($search)) ? '`studio404_module_item`.`long_description` LIKE "%'.$search.'%" AND ' : '';
+				 
+				$sql = 'SELECT 
+				`studio404_module_item`.`id`, 
+				`studio404_module_item`.`idx`, 
+				`studio404_module_item`.`title`, 
+				`studio404_module_item`.`picture`, 
+				`studio404_module_item`.`sub_sector_id`, 
+				`studio404_module_item`.`hscode`, 
+				`studio404_module_item`.`products`, 
+				`studio404_module_item`.`shelf_life`, 
+				`studio404_module_item`.`packaging`, 
+				`studio404_module_item`.`awards`, 
+				`studio404_module_item`.`long_description`, 
+				`studio404_users`.`id` AS users_id,
+				`studio404_users`.`namelname` AS users_name, 
+				`studio404_users`.`picture` AS users_picture, 
+				`studio404_users`.`company_type` AS su_companytype
+				FROM 
+				`studio404_module_item`, `studio404_users`
+				WHERE 
+				`studio404_module_item`.`module_idx`=4 AND 
+				'.$subsectors.' 
+				'.$services.' 
+				'.$search.' 
+				`studio404_module_item`.`visibility`=:two AND 
+				`studio404_module_item`.`status`!=:one AND 
+				`studio404_module_item`.`insert_admin`=`studio404_users`.`id` AND 
+				`studio404_users`.`status`!=:one  
+				'.$orderBy.' '.$limit.'
+				';
+				$prepare = $conn->prepare($sql); 
+				$prepare->execute(array(
+					":two"=>2, 
+					":one"=>1
+				));
+				if($prepare->rowCount()>0){
+					$retrieve_users_info = new retrieve_users_info();
+					$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC);
+					$result = array();
+					$x = 0;
+					$ctext = new ctext();
+					
+					foreach($fetch as $val){
+						$result[$x]["id"] = $val["id"];  
+						$result[$x]["idx"] = $val["idx"];  
+						$result[$x]["title"] = $val["title"];  
+						$result[$x]["picture"] = $val["users_picture"];  
+						$result[$x]["hscode"] = $val["hscode"];
+						$result[$x]["shelf_life"] = $val["shelf_life"];
+						$result[$x]["packaging"] = $val["packaging"];
+						$result[$x]["awards"] = $val["awards"];
+						$result[$x]["long_description"] = $ctext->cut(strip_tags($val["long_description"]),120);
+						$result[$x]["users_id"] = $val["users_id"];
+						$result[$x]["users_name"] = $val["users_name"];
+						$result[$x]["su_companytype"] = $val["su_companytype"];
+
+						$result[$x]["sub_sector_id"] = $retrieve_users_info->retrieveDb($val["sub_sector_id"]);  
+						$result[$x]["products"] = $retrieve_users_info->retrieveDb($val["products"]);  
+						$x++; 
+					}
+
+					echo json_encode($result);
+				}else{
+					echo "Empty"; 
+				}
+				break;
 			}
 		}
 
