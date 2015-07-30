@@ -122,7 +122,7 @@ class profileservice extends connection{
 		// }
 
 		
-		$service_sql = 'SELECT `id`,`idx`,`title`,`long_description`, `visibility` FROM `studio404_module_item` WHERE `module_idx`=:module_idx AND `insert_admin`=:insert_admin AND `status`!=:one ORDER BY `date` DESC LIMIT 10';
+		$service_sql = 'SELECT `id`,`idx`,`title`,`long_description`, `visibility` FROM `studio404_module_item` WHERE `module_idx`=:module_idx AND `insert_admin`=:insert_admin AND `status`!=:one ORDER BY `date` DESC LIMIT 5';
 		$service_product = $conn->prepare($service_sql);
 		$service_product->execute(array(
 			":module_idx"=>4, 

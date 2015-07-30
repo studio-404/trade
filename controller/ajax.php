@@ -1297,10 +1297,13 @@ class ajax extends connection{
 
 		if(Input::method("POST","loadmore")=="true"){
 			$type = Input::method("POST","t"); 
+			$typex = Input::method("POST","tx"); 
+			$sector = Input::method("POST","sec"); 
 			$subsector = Input::method("POST","ss"); 
 			$products = Input::method("POST","p");
 			$exportmarkets = Input::method("POST","e");
 			$certificate = Input::method("POST","c");
+			$enquire_type = Input::method("POST","v");
 			$from = Input::method("POST","f");
 			$load = Input::method("POST","l");
 			$search = Input::method("POST","ser");
@@ -1508,6 +1511,309 @@ class ajax extends connection{
 						$x++; 
 					}
 
+					echo json_encode($result);
+				}else{
+					echo "Empty"; 
+				}
+				break;
+				case "enquirelist":
+				$limit = ' LIMIT '.$from.', '.$load;
+				$orderBy = ' ORDER BY `studio404_module_item`.`id` DESC';
+				$sector = ($sector && is_numeric($sector)) ? ' FIND_IN_SET('.$sector.',`studio404_module_item`.`sector_id`) AND ' : '';
+				$ctype = ($typex) ? '`studio404_users`.`company_type`="'.$typex.'" AND ' : '';
+				$type = ($enquire_type) ? '`studio404_module_item`.`type`="'.$enquire_type.'" AND ' : '';
+				$search = (!empty($search)) ? '`studio404_module_item`.`title` LIKE "%'.$search.'%" AND ' : '';
+				 
+				$sql = 'SELECT 
+				`studio404_module_item`.`id`, 
+				`studio404_module_item`.`idx`, 
+				`studio404_module_item`.`date`, 
+				`studio404_module_item`.`title`, 
+				`studio404_module_item`.`type`, 
+				`studio404_module_item`.`long_description`, 
+				`studio404_users`.`id` AS users_id,
+				`studio404_users`.`namelname` AS users_name, 
+				`studio404_users`.`company_type` AS su_companytype, 
+				(SELECT `title` FROM `studio404_pages` WHERE `studio404_pages`.`idx`=`studio404_module_item`.`sector_id` AND `lang`=:lang) AS sector_name 
+				FROM 
+				`studio404_module_item`, `studio404_users`
+				WHERE 
+				`studio404_module_item`.`module_idx`=5 AND 
+				'.$sector.' 
+				'.$type.'
+				'.$search.' 
+				`studio404_module_item`.`visibility`=:two AND 
+				`studio404_module_item`.`status`!=:one AND 
+				`studio404_module_item`.`insert_admin`=`studio404_users`.`id` AND 
+				'.$ctype.'
+				`studio404_users`.`status`!=:one  
+				'.$orderBy.' '.$limit.'
+				';
+				// echo $sql;
+				$prepare = $conn->prepare($sql); 
+				$prepare->execute(array(
+					":lang"=>LANG_ID, 
+					":two"=>2, 
+					":one"=>1
+				));
+				if($prepare->rowCount()>0){
+					$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC);
+					$result = array();
+					$x = 0;
+					$ctext = new ctext();
+					
+					foreach($fetch as $val){
+						$result[$x]["id"] = $val["id"];  
+						$result[$x]["idx"] = $val["idx"];  
+						$result[$x]["date"] = date("d.m.Y", $val['date']); 
+						$result[$x]["title"] = $val["title"];  
+						$result[$x]["type"] = $val["type"];
+						$result[$x]["long_description"] = nl2br($ctext->cut(strip_tags($val['long_description']),260));
+						$result[$x]["users_id"] = $val["users_id"];
+						$result[$x]["users_name"] = $val["users_name"];
+						$result[$x]["su_companytype"] = $val["su_companytype"];
+						$result[$x]["sector_name"] = $val["sector_name"];  
+						$x++; 
+					}
+
+					echo json_encode($result);
+				}else{
+					echo "Empty"; 
+				}
+				break;
+				case "eventslist": 
+				$limit = ' LIMIT '.$from.', '.$load;
+				$sql = 'SELECT 
+				`studio404_module_item`.`slug`, 
+				`studio404_module_item`.`date`, 
+				`studio404_module_item`.`title`, 
+				( 
+					SELECT `studio404_gallery_file`.`file` FROM 
+					`studio404_gallery_attachment`,`studio404_gallery`,`studio404_gallery_file` 
+					WHERE 
+					`studio404_gallery_attachment`.`connect_idx`=`studio404_module_item`.`idx` AND 
+					`studio404_gallery_attachment`.`pagetype`=:pagetype AND 
+					`studio404_gallery_attachment`.`lang`=:lang AND 
+					`studio404_gallery_attachment`.`status`!=:status AND 
+					`studio404_gallery_attachment`.`idx`=`studio404_gallery`.`idx` AND 
+					`studio404_gallery`.`lang`=:lang AND 
+					`studio404_gallery`.`status`!=:status AND 
+					`studio404_gallery`.`idx`=`studio404_gallery_file`.`gallery_idx` AND 
+					`studio404_gallery_file`.`media_type`=:media_type AND 
+					`studio404_gallery_file`.`lang`=:lang AND 
+					`studio404_gallery_file`.`status`!=:status 
+					ORDER BY `studio404_gallery_file`.`position` ASC LIMIT 1 
+				) AS pic 
+				FROM 
+				`studio404_pages`,`studio404_module_attachment`, `studio404_module`, `studio404_module_item` 
+				WHERE 
+				`studio404_pages`.`page_type`=:pagetype AND 
+				`studio404_pages`.`lang`=:lang AND 
+				`studio404_pages`.`status`!=:status AND 
+				`studio404_pages`.`idx`=`studio404_module_attachment`.`connect_idx` AND 
+				`studio404_module_attachment`.`page_type`=:pagetype AND 
+				`studio404_module_attachment`.`lang`=:lang AND 
+				`studio404_module_attachment`.`status`!=:status AND 
+				`studio404_module_attachment`.`idx`=`studio404_module`.`idx` AND 
+				`studio404_module`.`lang`=:lang AND 
+				`studio404_module`.`status`!=:status AND 
+				`studio404_module`.`idx`=`studio404_module_item`.`module_idx` AND 
+				`studio404_module_item`.`lang`=:lang AND 
+				`studio404_module_item`.`visibility`!=:visibility AND 
+				`studio404_module_item`.`status`!=:status 
+				ORDER BY `studio404_module_item`.`date` DESC '.$limit.' 
+				';	
+				$prepare = $conn->prepare($sql); 
+				$prepare->execute(array(
+					":pagetype"=>'eventpage', 
+					":media_type"=>'photo', 
+					":lang"=>LANG_ID, 
+					":status"=>1, 
+					":visibility"=>1, 
+				)); 
+				if($prepare->rowCount()>0){
+					$ctext = new ctext();
+					$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC);
+					$result = array();
+					$x = 0;
+					foreach($fetch as $val){
+						$result[$x]["date"] = date("d M",$val["date"]);  
+						$result[$x]["slug"] = $val["slug"];  
+						$result[$x]["pic"] = $val["pic"];  
+						$result[$x]["title"] = $ctext->cut($val["title"],30);  						
+						$x++; 
+					}
+
+					echo json_encode($result);
+				}else{
+					echo "Empty"; 
+				}
+				break;
+				case "newslist": 
+				$limit = ' LIMIT '.$from.', '.$load;
+				$sql = 'SELECT 
+				`studio404_module_item`.`date`, 
+				`studio404_module_item`.`slug`, 
+				`studio404_module_item`.`title` 
+				FROM 
+				`studio404_pages`,`studio404_module_attachment`, `studio404_module`, `studio404_module_item` 
+				WHERE 
+				`studio404_pages`.`page_type`=:pagetype AND 
+				`studio404_pages`.`lang`=:lang AND 
+				`studio404_pages`.`status`!=:status AND 
+				`studio404_pages`.`idx`=`studio404_module_attachment`.`connect_idx` AND 
+				`studio404_module_attachment`.`page_type`=:pagetype AND 
+				`studio404_module_attachment`.`lang`=:lang AND 
+				`studio404_module_attachment`.`status`!=:status AND 
+				`studio404_module_attachment`.`idx`=`studio404_module`.`idx` AND 
+				`studio404_module`.`lang`=:lang AND 
+				`studio404_module`.`status`!=:status AND 
+				`studio404_module`.`idx`=`studio404_module_item`.`module_idx` AND 
+				`studio404_module_item`.`lang`=:lang AND 
+				`studio404_module_item`.`visibility`!=:visibility AND 
+				`studio404_module_item`.`status`!=:status 
+				ORDER BY `studio404_module_item`.`date` DESC '.$limit.' 
+				';	
+				$prepare = $conn->prepare($sql); 
+				$prepare->execute(array(
+					":pagetype"=>'newspage', 
+					":media_type"=>'photo', 
+					":lang"=>LANG_ID, 
+					":status"=>1, 
+					":visibility"=>1, 
+				)); 
+				if($prepare->rowCount()>0){
+					$ctext = new ctext();
+					$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC);
+					$result = array();
+					$x = 0;
+					foreach($fetch as $val){
+						$result[$x]["date"] = "<span>".date("d",$val["date"])."</span> ".date("M",$val["date"]);  
+						$result[$x]["slug"] = $val["slug"];  
+						$result[$x]["title"] = $ctext->cut($val["title"],30);  						
+						$x++; 
+					}
+
+					echo json_encode($result);
+				}else{
+					echo "Empty"; 
+				}
+				break;
+				case "profileproductlist": 
+				$limit = ' LIMIT '.$from.', '.$load;
+				$sql = 'SELECT 
+				`studio404_module_item`.`idx`,
+				`studio404_module_item`.`title`,
+				`studio404_module_item`.`picture`,
+				`studio404_module_item`.`packaging`,
+				`studio404_module_item`.`awards`,
+				`studio404_module_item`.`long_description`,
+				`studio404_module_item`.`visibility`, 
+				`studio404_pages`.`title` AS hs_title
+				FROM 
+				`studio404_module_item`, `studio404_pages`
+				WHERE 
+				`studio404_module_item`.`insert_admin`=:insert_admin AND 
+				`studio404_module_item`.`module_idx`=:module_idx AND 
+				`studio404_module_item`.`status`!=:one AND 
+				`studio404_module_item`.`hscode`=`studio404_pages`.`idx` AND 
+				`studio404_pages`.`status`!=:one  
+				ORDER BY `studio404_module_item`.`date` DESC '.$limit;
+				$prepare = $conn->prepare($sql);
+				$prepare->execute(array(
+					":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"], 
+					":module_idx"=>3, 
+					":one"=>1
+				));
+				if($prepare->rowCount()>0){
+					$ctext = new ctext();
+					$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC);
+					$result = array();
+					$x = 0;
+					foreach($fetch as $val){
+						$result[$x]["idx"] = $val["idx"];  
+						$result[$x]["title"] = $val["title"];  						
+						$result[$x]["picture"] = $val["picture"];  						
+						$result[$x]["packaging"] = $val["packaging"];  						
+						$result[$x]["awards"] = $val["awards"];  						
+						$result[$x]["long_description"] = $val["long_description"];  						
+						$result[$x]["visibility"] = $val["visibility"];  						
+						$result[$x]["hs_title"] = $val["hs_title"];  						
+						$x++; 
+					}
+
+					echo json_encode($result);
+				}else{
+					echo "Empty"; 
+				}
+				break;
+				case "profileservicelist": 
+				$limit = ' LIMIT '.$from.', '.$load;
+				$sql = 'SELECT `id`,`idx`,`title`,`long_description`, `visibility` FROM `studio404_module_item` WHERE `module_idx`=:module_idx AND `insert_admin`=:insert_admin AND `status`!=:one ORDER BY `date` DESC '.$limit;
+				$prepare = $conn->prepare($sql);
+				$prepare->execute(array(
+					":module_idx"=>4, 
+					":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"], 
+					":one"=>1
+				));
+				if($prepare->rowCount()>0){
+					$ctext = new ctext();
+					$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC);
+					$result = array();
+					$x = 0;
+					foreach($fetch as $val){
+						$result[$x]["id"] = $val["id"];  
+						$result[$x]["idx"] = $val["idx"];  
+						$result[$x]["title"] = $val["title"];   						
+						$result[$x]["long_description"] = $val["long_description"];  						
+						$result[$x]["visibility"] = $val["visibility"];  							
+						$x++; 
+					}
+					echo json_encode($result);
+				}else{
+					echo "Empty"; 
+				}
+				break;
+				case "profileenquirelist": 
+				$limit = ' LIMIT '.$from.', '.$load;
+				$sql = 'SELECT 
+				`studio404_module_item`.`id`,
+				`studio404_module_item`.`idx`,
+				`studio404_module_item`.`date`,
+				`studio404_module_item`.`title`,
+				`studio404_module_item`.`sector_id`,
+				`studio404_module_item`.`type`, 
+				`studio404_module_item`.`long_description`,
+				`studio404_module_item`.`visibility`
+				FROM 
+				`studio404_module_item`
+				WHERE 
+				`studio404_module_item`.`insert_admin`=:insert_admin AND 
+				`studio404_module_item`.`module_idx`=:module_idx AND 
+				`studio404_module_item`.`status`!=:one 
+				ORDER BY `studio404_module_item`.`date` DESC '.$limit;
+				$prepare = $conn->prepare($sql);
+				$prepare->execute(array(
+					":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"], 
+					":module_idx"=>5, 
+					":one"=>1
+				));
+				if($prepare->rowCount()>0){
+					$ctext = new ctext();
+					$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC);
+					$result = array();
+					$x = 0;
+					foreach($fetch as $val){
+						$result[$x]["id"] = $val["id"];  
+						$result[$x]["idx"] = $val["idx"];  
+						$result[$x]["date"] = date("d.m.Y",$val["date"]);  
+						$result[$x]["title"] = $val["title"];   						
+						$result[$x]["sector_id"] = $val["sector_id"];   						
+						$result[$x]["type"] = $val["type"];   						
+						$result[$x]["long_description"] = strip_tags(nl2br($val["long_description"]));  						
+						$result[$x]["visibility"] = $val["visibility"];  							
+						$x++; 
+					}
 					echo json_encode($result);
 				}else{
 					echo "Empty"; 

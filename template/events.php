@@ -69,7 +69,7 @@ $first = array_slice($data["event_list"], 0, 1);
 		
 		<div class="page_title_4">Events Schedule</div>
 		<?php 
-		$other = array_slice($data["event_list"], 1); 
+		$other = array_slice($data["event_list"], 1, 9); 
 		?>
 		<div class="row" id="events_items">
 
@@ -84,10 +84,11 @@ $first = array_slice($data["event_list"], 0, 1);
 				</a>	
 			</div>
 			<?php endforeach; ?>
+			<div style="clear:both"></div>
 			<div class="appends"></div>
 			<div style="clear:both"></div>
 			<div class="loader">Please wait...</div>
-			<a href="javascript:;" class="gray_link loadmore" data-type="eventslist"  data-from="10" data-load="10">Load more »</a>
+			<a href="javascript:;" class="gray_link loadmore" data-type="eventslist"  data-from="9" data-load="10">Load more »</a>
 			
 		</div>
 		

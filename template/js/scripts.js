@@ -1224,6 +1224,7 @@ var newfrom = 1;
 $(document).on("click",".loadmore",function(){
 	var type = $(this).data("type"); 
 	var typex = $(this).data("typex"); 
+	var sector = $(this).data("sector"); 
 	var subsector = $(this).data("subsector"); 
 	var products = $(this).data("products"); 
 	var exportmarkets = $(this).data("exportmarkets"); 
@@ -1403,13 +1404,43 @@ $(document).on("click",".loadmore",function(){
 			t:type,
 			v:view, 
 			tx:typex, 
+			sec:sector, 
 			f:from, 
 			l:load
 		},function(r){
 			nf = parseInt(load) * newfrom;
 			$(".loader").hide();
 			$(".loadmore").attr({"data-from":nf}); 
-			$(".loadmore").show(); 
+			if(r!="Empty"){
+				var obj = jQuery.parseJSON(r);
+				var insert = '';
+				for(i=0; i<obj.length; i++){
+					insert += '<div class="content_divs" style="margin-bottom:38px;">';					
+					insert += '<a href="http://'+document.domain+'/en/user?t='+obj[i].su_companytype+'&amp;i='+obj[i].users_id+'&amp;p='+obj[i].id+'&amp;token=nope">'; 
+					insert += '<div class="col-sm-8 no-float itemssss" style="text-align:left;">'; 
+					insert += '<div class="enquire enquire_small no_border">'; 
+					insert += '<div class="date">'+obj[i].date+'</div>'; 
+					insert += '<div class="col-sm-12">'; 
+					insert += '<div class="title">'+obj[i].title+'</div>'; 
+					insert += '<div class="text">'; 
+					insert += obj[i].long_description; 
+					insert += '<small>'+obj[i].type+'</small>'; 
+					insert += '</div>'; 
+					insert += '</div>'; 
+					insert += '</div>'; 
+					insert += '</div>'; 
+					insert += '</a>'; 
+					insert += '<div class="col-sm-2 no-float itemssss">'; 
+					insert += '<a href="http://'+document.domain+'/en/user?t='+obj[i].su_companytype+'&amp;i='+obj[i].users_id+'&amp;token=nope" style="color:#0278c1; text-decoration:underline">'+obj[i].users_name+'</a>'; 
+					insert += '</div>'; 
+					insert += '<div class="col-sm-2 no-float itemssss">'+obj[i].sector_name+'</div>'; 
+					insert += '</div><div style="clear:both"></div>'; 
+				}
+				$(".appends").append(insert);
+				$(".loadmore").show(); 
+			}else{
+				$(".appends").append("<p>Sorry, there is no more data!</p>");
+			}
 		});
 	}else if(type=="profileservicelist"){
 		$(this).hide();
@@ -1423,7 +1454,35 @@ $(document).on("click",".loadmore",function(){
 			nf = parseInt(load) * newfrom;
 			$(".loader").hide();
 			$(".loadmore").attr({"data-from":nf}); 
-			$(".loadmore").show(); 
+			if(r!="Empty"){
+				var obj = jQuery.parseJSON(r);
+				var insert = '';
+				for(i=0; i<obj.length; i++){
+					insert += '<div class="services" style="float:left; margin-bottom:10px; width:100%">';
+					insert += '<div class="col-sm-12 col-md-12 col-xs-12 col-gl-12 service_item">';
+					insert += '<div class="col-sm-10 col-md-10 col-xs-12 col-gl-10 product_info padding_0">';
+					insert += '<div class="title">'+obj[i].title+'</div>';
+					insert += '<div class="text">';
+					insert += obj[i].long_description;
+					insert += '</div>';
+					insert += '</div>';
+					insert += '<div class="col-sm-2">';
+					insert += '<button class="btn btn-yellow btn-sm btn-service_item" style="width:100%;" id="change_service" data-sid="'+obj[i].id+'">MAKE CHANGES</button>';
+					insert += '<button class="btn btn-yellow btn-sm btn-service_item" style="background:red; width:100%;" id="delete_service" data-srvid="'+obj[i].idx+'">DELETE</button>';
+					if(obj[i].visibility==2){
+						insert += '<button class="btn btn-aproved btn-sm btn-service_item" style="width:100%;">APPROVED</button>';	
+					}else{
+						insert += '<button class="btn btn-aproved btn-sm btn-service_item" style="width:100%;">PENDING</button>';	
+					}
+					insert += '</div>';
+					insert += '</div>';
+					insert += '</div>';
+				}
+				$(".appends").append(insert);
+				$(".loadmore").show(); 
+			}else{
+				$(".appends").append("<p>Sorry, there is no more data!</p>");
+			}
 		});
 	}else if(type=="profileproductlist"){
 		$(this).hide();
@@ -1437,7 +1496,48 @@ $(document).on("click",".loadmore",function(){
 			nf = parseInt(load) * newfrom;
 			$(".loader").hide();
 			$(".loadmore").attr({"data-from":nf}); 
-			$(".loadmore").show(); 
+			if(r!="Empty"){
+				var obj = jQuery.parseJSON(r);
+				var insert = '';
+				for(i=0; i<obj.length; i++){
+					insert += '<div class="col-sm-12 padding_0 product_box">';
+					insert += '<div class="products">';
+					insert += '<div class="col-sm-12 col-md-12 col-xs-12 col-gl-12 product_item">';
+					insert += '<div class="col-sm-12 col-md-2 col-xs-12 col-lg-2 padding_0" style="padding-bottom:10px;">';
+					insert += '<div class="image"><img src="http://'+document.domain+'/image?f=http://'+document.domain+'/files/usersproducts/'+obj[i].picture+'&w=180&h=180" class="img-responsive" width="100%" alt="" /></div>';
+					insert += '</div>';
+					insert += '<div class="col-sm-12 col-md-7 col-xs-12 col-gl-7 product_info padding_0">';
+					insert += '<ul>';
+					insert += '<li><span>'+obj[i].title+' - </span>HS code: '+obj[i].hs_title+'</li>';
+					insert += '<li><span>Packaging </span> '+obj[i].packaging+'</li>';
+					insert += '<li><span>Awards </span> '+obj[i].awards+'</li>';
+					insert += '</ul>';
+					insert += '</div>';
+					insert += '<div class="col-sm-12 col-md-8 col-xs-12 col-gl-8 product_info padding_0">';
+					insert += '<ul>';
+					insert += '<li><span>About - </span>';
+					insert += obj[i].long_description;
+					insert += '</li>';
+					insert += '</ul>';
+					insert += '</div>';
+					insert += '<div class="col-sm-2 " style="margin-top:30px;">';
+					insert += '<button class="btn btn-yellow btn-sm btn-block makeitchange" data-prid="'+obj[i].idx+'">MAKE CHANGES</button>';
+					insert += '<button class="btn btn-yellow btn-sm btn-block delete-product" data-prid="'+obj[i].idx+'" style="background:red">DELETE</button>';
+					if(obj[i].visibility==1){						
+						insert += '<button class="btn btn-aproved btn-sm btn-block">PENDING</button>';
+					}else{
+						insert += '<button class="btn btn-aproved btn-sm btn-block">APPROVED</button>';
+					}
+					insert += '</div>';
+					insert += '</div>';
+					insert += '</div>';
+					insert += '</div>';
+				}
+				$(".appends").append(insert);
+				$(".loadmore").show(); 
+			}else{
+				$(".appends").append("<p>Sorry, there is no more data!</p>");
+			}
 		});
 	}else if(type=="profileenquirelist"){
 		$(this).hide();
@@ -1451,7 +1551,39 @@ $(document).on("click",".loadmore",function(){
 			nf = parseInt(load) * newfrom;
 			$(".loader").hide();
 			$(".loadmore").attr({"data-from":nf}); 
-			$(".loadmore").show(); 
+			if(r!="Empty"){
+				var obj = jQuery.parseJSON(r);
+				var insert = '';
+				for(i=0; i<obj.length; i++){
+					insert += '<div class="enquire">';
+					insert += '<div class="date">'+obj[i].date+'</div>';
+					insert += '<div class="col-sm-10">';
+					insert += '<div class="title">';
+					insert += obj[i].title;
+					insert += '</div>';
+					insert += '<div class="text">';
+					insert += obj[i].long_description;
+					insert += '</div>';
+					insert += '</div>';
+					insert += '<div class="col-sm-2">';
+					insert += '<div class="text-right">';
+					insert += '<button class="btn btn-yellow" style="width:100%; padding: 7px 0; float:left;" id="change_enquires" data-eid="'+obj[i].id+'">MAKE CHANGES</button>';
+					insert += '<button class="btn btn-aproved" style="width:100%; padding: 7px 0; margin-top:8px; float:left; background:red" id="delete_enquires" data-enquid="'+obj[i].idx+'">DELETE</button>';
+					if(obj[i].visibility==2){
+						insert += '<button class="btn btn-aproved" style="width:100%; padding: 7px 0; margin-top:8px; float:left;">APPROVED</button>';
+					}else{
+						insert += '<button class="btn btn-aproved" style="width:100%; padding: 7px 0; margin-top:8px; float:left;">PENDING</button>';
+					}
+					insert += '</div>';
+					insert += '</div>';
+					insert += '<div style="clear:both"></div>';
+					insert += '</div>';
+				}
+				$(".appends").append(insert);
+				$(".loadmore").show(); 
+			}else{
+				$(".appends").append("<p>Sorry, there is no more data!</p>");
+			}
 		});
 	}else if(type=="eventslist"){
 		$(this).hide();
@@ -1465,7 +1597,23 @@ $(document).on("click",".loadmore",function(){
 			nf = parseInt(load) * newfrom;
 			$(".loader").hide();
 			$(".loadmore").attr({"data-from":nf}); 
-			$(".loadmore").show(); 
+			if(r!="Empty"){
+				var obj = jQuery.parseJSON(r);
+				var insert = '';
+				for(i=0; i<obj.length; i++){
+					insert += '<div class="col-sm-4 col-md-3 col-xs-4 event_item">';
+					insert += '<a href="http://'+document.domain+'/en/'+obj[i].slug+'">';
+					insert += '<div class="date">'+obj[i].date+'</div>';
+					insert += '<div class="image"><img src="http://'+document.domain+'/image?f=http://'+document.domain+'/'+obj[i].pic+'&amp;w=270&amp;h=130" class="img-responsive" alt="" /></div>';
+					insert += '<div class="text">'+obj[i].title+'</div>';
+					insert += '</a>';
+					insert += '</div>';
+				}
+				$(".appends").append(insert);
+				$(".loadmore").show(); 
+			}else{
+				$(".appends").append("<p>Sorry, there is no more data!</p>");
+			}
 		});
 	}else if(type=="newslist"){
 		$(this).hide();
@@ -1479,7 +1627,22 @@ $(document).on("click",".loadmore",function(){
 			nf = parseInt(load) * newfrom;
 			$(".loader").hide();
 			$(".loadmore").attr({"data-from":nf}); 
-			$(".loadmore").show(); 
+			if(r!="Empty"){
+				var obj = jQuery.parseJSON(r);
+				var insert = '';
+				for(i=0; i<obj.length; i++){
+					insert += '<div class="col-sm-4 col-md-3 col-xs-4 news_item">';
+					insert += '<a href="http://'+document.domain+'/en/'+obj[i].slug+'">';
+					insert += '<div class="date">'+obj[i].date+'</div>';
+					insert += '<div class="text">'+obj[i].title+'</div>';
+					insert += '</a>';
+					insert += '</div>';
+				}
+				$(".appends").append(insert);
+				$(".loadmore").show(); 
+			}else{
+				$(".appends").append("<p>Sorry, there is no more data!</p>");
+			}
 		});
 	}
 

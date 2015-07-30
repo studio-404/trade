@@ -101,7 +101,7 @@ class profileenquires extends connection{
 		`studio404_module_item`.`insert_admin`=:insert_admin AND 
 		`studio404_module_item`.`module_idx`=:module_idx AND 
 		`studio404_module_item`.`status`!=:one 
-		ORDER BY `studio404_module_item`.`date` DESC LIMIT 10';
+		ORDER BY `studio404_module_item`.`date` DESC LIMIT 5';
 		$prepare_product = $conn->prepare($products_sql);
 		$prepare_product->execute(array(
 			":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"], 

@@ -143,7 +143,7 @@ class profileproducts extends connection{
 		`studio404_module_item`.`status`!=:one AND 
 		`studio404_module_item`.`hscode`=`studio404_pages`.`idx` AND 
 		`studio404_pages`.`status`!=:one  
-		ORDER BY `studio404_module_item`.`date` DESC LIMIT 10';
+		ORDER BY `studio404_module_item`.`date` DESC LIMIT 5';
 		$prepare_product = $conn->prepare($products_sql);
 		$prepare_product->execute(array(
 			":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"], 
