@@ -89,7 +89,7 @@
 			
 			<div class="form-group">
 				<label>Web Address</label>
-				<input type="text" id="webaddress" name="webaddress" class="form-control" value="<?=($_SESSION["user_data"]["webaddress"]) ? htmlentities($_SESSION["user_data"]["webaddress"]) : ''?>" />
+				<input type="text" id="webaddress" name="webaddress" class="form-control" value="<?=($_SESSION["user_data"]["webaddress"]) ? htmlentities($_SESSION["user_data"]["webaddress"]) : ''?>" placeholder="http://www.yourwebsite.com" />
 			</div>
 			<div class="form-group">
 					<label>Contact email <font color="red">*</font></label>
@@ -165,7 +165,7 @@
 			
 			<div class="form-group">
 				<label>Web Address</label>
-				<input type="text" id="webaddress" name="webaddress" class="form-control" value="<?=($_SESSION["user_data"]["webaddress"]) ? htmlentities($_SESSION["user_data"]["webaddress"]) : ''?>" />
+				<input type="text" id="webaddress" name="webaddress" class="form-control" value="<?=($_SESSION["user_data"]["webaddress"]) ? htmlentities($_SESSION["user_data"]["webaddress"]) : ''?>" placeholder="http://www.yourwebsite.com" />
 			</div>
 			<div class="form-group">
 					<label>Contact email <font color="red">*</font></label>

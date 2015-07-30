@@ -2,7 +2,9 @@
 class profileproducts extends connection{
 	function __construct($c){
 		if(isset($_SESSION["tradewithgeorgia_company_type"]) && $_SESSION["tradewithgeorgia_company_type"]!="manufacturer"){
-			$controller = new error_page(); 
+			$redirect = new redirect();
+			$redirect->go(WEBSITE);
+			die(); 
 		}else{
 			$this->template($c);
 		}

@@ -1644,9 +1644,116 @@ $(document).on("click",".loadmore",function(){
 				$(".appends").append("<p>Sorry, there is no more data!</p>");
 			}
 		});
+	}else if(type=="userspageserviceprovider"){
+		$(this).hide();
+		$(".loader").fadeIn("slow"); 
+		var par = urlParamiters(); 
+		$.post("http://"+document.domain+"/en/ajax",{
+			loadmore:true, 
+			t:type,
+			uid:par["i"], 
+			f:from, 
+			l:load
+		},function(r){
+			nf = parseInt(load) * newfrom;
+			$(".loader").hide();
+			$(".loadmore").attr({"data-from":nf}); 
+			if(r!="Empty"){
+				var obj = jQuery.parseJSON(r);
+				var insert = '';
+				for(i=0; i<obj.length; i++){
+					insert += '<div class="service_box readmore" data-pid="'+obj[i].id+'" style="cursor:pointer">';
+					insert += '<ul class="text_formats_ul">';
+					insert += '<li class="text_formats"><span>'+obj[i].title+'</span></li>';
+					insert += '<li class="text_formats">';
+					insert += '<p>'+obj[i].long_description+'</p>';
+					insert += '</li>';
+					insert += '</ul>';
+					insert += '</div>';
+				}
+				$(".appends").append(insert);
+				$(".loadmore").show(); 
+			}else{
+				$(".appends").append("<p>Sorry, there is no more data!</p>");
+			}
+		});
+	}else if(type=="userspagemanufacturer"){
+		$(this).hide();
+		$(".loader").fadeIn("slow"); 
+		var par = urlParamiters(); 
+		$.post("http://"+document.domain+"/en/ajax",{
+			loadmore:true, 
+			t:type,
+			uid:par["i"], 
+			f:from, 
+			l:load
+		},function(r){
+			nf = parseInt(load) * newfrom;
+			$(".loader").hide();
+			$(".loadmore").attr({"data-from":nf}); 
+			if(r!="Empty"){
+				var obj = jQuery.parseJSON(r);
+				var insert = '';
+				for(i=0; i<obj.length; i++){
+					insert += '<div class="col-sm-12 col-md-12 col-xs-12 col-gl-12 product_item" style="margin-bottom:10px;">';
+					insert += '<div class="col-sm-12 col-md-3 col-xs-12 col-lg-3 padding_0">';
+					insert += '<div class="image"><img src="http://'+document.domain+'/image?f=http://'+document.domain+'/files/usersproducts/'+obj[i].picture+'&w=175&h=175" class="img-responsive" alt="" /></div>';
+					insert += '</div>';
+					insert += '<div class="col-sm-12 col-md-7 col-xs-12 col-gl-7 product_info padding_0">';
+					insert += '<ul>';
+					insert += '<li><span>'+obj[i].title+'</span> - HS '+obj[i].hscode+'</li>';
+					insert += '<li><span>Packiging: </span>'+obj[i].packaging+'</li>';
+					insert += '<li><span>Shelf life: </span>'+obj[i].shelf_life+'</li>';
+					insert += '<li><span>Awards: </span>'+obj[i].awards+'</li>';
+					insert += '<li style="margin-top:15px;"><a href="javascript:;" class="readmore" data-pid="'+obj[i].id+'">View describtion</a></li>';
+					insert += '</ul>';
+					insert += '</div>';
+					insert += '</div>';
+				}
+				$(".appends").append(insert);
+				$(".loadmore").show(); 
+			}else{
+				$(".appends").append("<p>Sorry, there is no more data!</p>");
+			}
+		});
+	}else if(type=="userspageenquires"){
+		$(this).hide();
+		$(".loader").fadeIn("slow"); 
+		var par = urlParamiters(); 
+		$.post("http://"+document.domain+"/en/ajax",{
+			loadmore:true, 
+			t:type,
+			uid:par["i"], 
+			f:from, 
+			l:load
+		},function(r){
+			nf = parseInt(load) * newfrom;
+			$(".loader").hide();
+			$(".loadmore").attr({"data-from":nf}); 
+			if(r!="Empty"){
+				var obj = jQuery.parseJSON(r);
+				var insert = '';
+				for(i=0; i<obj.length; i++){
+					insert += '<div class="enquire enquire_small readmore" data-pid="'+obj[i].id+'" style="cursor:pointer">';
+					insert += '<div class="date">'+obj[i].date+'</div>';
+					insert += '<div class="col-sm-12" style="float:none;">';
+					insert += '<div class="title">';
+					insert += obj[i].title;
+					insert += '</div>';
+					insert += '<div class="text">';
+					insert += obj[i].long_description;
+					insert += '<small>'+obj[i].type+'</small>';
+					insert += '</div>';
+					insert += '</div>';
+					insert += '</div>';
+				}
+				$(".appends").append(insert);
+				$(".loadmore").show(); 
+			}else{
+				$(".appends").append("<p>Sorry, there is no more data!</p>");
+			}
+		});
 	}
-
-
 	newfrom++;
 });
 

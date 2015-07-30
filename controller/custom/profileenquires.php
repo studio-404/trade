@@ -2,7 +2,9 @@
 class profileenquires extends connection{
 	function __construct($c){ 
 		if(isset($_SESSION["tradewithgeorgia_company_type"]) && $_SESSION["tradewithgeorgia_company_type"]!="company" && $_SESSION["tradewithgeorgia_company_type"]!="individual"){
-			$controller = new error_page(); 
+			$redirect = new redirect();
+			$redirect->go(WEBSITE);
+			die(); 
 		}else{
 			$this->template($c);
 		}

@@ -1307,6 +1307,7 @@ class ajax extends connection{
 			$from = Input::method("POST","f");
 			$load = Input::method("POST","l");
 			$search = Input::method("POST","ser");
+			$uid = Input::method("POST","uid");
 
 			switch($type){
 				case "companylist":
@@ -1812,6 +1813,77 @@ class ajax extends connection{
 						$result[$x]["type"] = $val["type"];   						
 						$result[$x]["long_description"] = strip_tags(nl2br($val["long_description"]));  						
 						$result[$x]["visibility"] = $val["visibility"];  							
+						$x++; 
+					}
+					echo json_encode($result);
+				}else{
+					echo "Empty"; 
+				}
+				break;
+				case "userspageserviceprovider":
+				$limit = ' LIMIT '.$from.', '.$load;
+				$model_template_userstatements = new model_template_userstatements(); 
+				$fetch = $model_template_userstatements->stats($c,'serviceprovider',$uid,$limit);
+				if($fetch){
+					$ctext = new ctext();
+					$result = array();
+					$x = 0;
+					foreach($fetch as $val){
+						$result[$x]["id"] = $val["id"];  
+						$result[$x]["idx"] = $val["idx"];   
+						$result[$x]["title"] = $val["title"];   						
+						$result[$x]["long_description"] = strip_tags(nl2br($val["long_description"]));  							
+						$x++; 
+					}
+					echo json_encode($result);
+				}else{
+					echo "Empty"; 
+				}
+				break;
+				case "userspagemanufacturer":
+				$limit = ' LIMIT '.$from.', '.$load;
+				$model_template_userstatements = new model_template_userstatements(); 
+				$fetch = $model_template_userstatements->stats($c,'manufacturer',$uid,$limit);
+				if($fetch){
+					$ctext = new ctext();
+					$result = array();
+					$x = 0;
+					$retrieve_users_info = new retrieve_users_info();
+					foreach($fetch as $val){
+						$result[$x]["id"] = $val["id"];  
+						$result[$x]["idx"] = $val["idx"];   
+						$result[$x]["title"] = $val["title"];   						
+						$result[$x]["picture"] = $val["picture"];   						
+						$result[$x]["hscode"] = $val["hscode"];   						
+						$result[$x]["shelf_life"] = $val["shelf_life"];   						
+						$result[$x]["packaging"] = $val["packaging"];   						
+						$result[$x]["awards"] = $val["awards"];   						
+						$result[$x]["sub_sector_id"] = $retrieve_users_info->retrieveDb($val["sub_sector_id"]);   						
+						$result[$x]["products"] = $retrieve_users_info->retrieveDb($val["products"]);   						
+						$result[$x]["long_description"] = strip_tags(nl2br($val["long_description"]));  							
+						$x++; 
+					}
+					echo json_encode($result);
+				}else{
+					echo "Empty"; 
+				}
+				break;
+				case "userspageenquires":
+				$limit = ' LIMIT '.$from.', '.$load;
+				$model_template_userstatements = new model_template_userstatements(); 
+				$fetch = $model_template_userstatements->stats($c,'company',$uid,$limit);
+				if($fetch){
+					$ctext = new ctext();
+					$result = array();
+					$x = 0;
+					$retrieve_users_info = new retrieve_users_info();
+					foreach($fetch as $val){
+						$result[$x]["id"] = $val["id"];  
+						$result[$x]["idx"] = $val["idx"];   
+						$result[$x]["date"] = date("d.m.Y",$val["date"]);   
+						$result[$x]["title"] = $val["title"];   						
+						$result[$x]["type"] = $val["type"];   						
+						$result[$x]["long_description"] = strip_tags(nl2br($val["long_description"]));  							
 						$x++; 
 					}
 					echo json_encode($result);

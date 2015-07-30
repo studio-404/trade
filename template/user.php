@@ -94,7 +94,12 @@
 			<li class="text_formats">Mobile number: <?=htmlentities(strip_tags($data["fetch"]["mobile"]))?></li>
 			<li class="text_formats">Office phone: <?=htmlentities(strip_tags($data["fetch"]["office_phone"]))?></li>
 			<li class="text_formats">E-mail: <?=strip_tags($data["fetch"]["email"])?></li>
-			<li class="text_formats">Web: <?=strip_tags($data["fetch"]["web_address"])?></li>
+			<?php
+			if($data["fetch"]["web_address"]):
+			$without = str_replace(array("http://","www."),array('',''),$data["fetch"]["web_address"]);
+			?>
+			<li class="text_formats">Web: <a href="http://<?=$without?>" target="_blank">www.<?=$without?></a></li>
+		    <?php endif; ?>
 		</ul>
 
 
@@ -137,6 +142,11 @@
 					<?php 
 					endforeach; 
 					?>
+					<div style="clear:both"></div>
+					<div class="appends"></div>
+					<div style="clear:both"></div>
+					<div class="loader">Please wait...</div>
+					<a href="javascript:;" class="gray_link loadmore" data-type="userspagemanufacturer"  data-from="5" data-load="10">Load more »</a>
 
 
 				</div>
@@ -166,6 +176,13 @@
 			</div>
 		<?php 
 			endforeach; 
+			?>
+			<div style="clear:both"></div>
+			<div class="appends"></div>
+			<div style="clear:both"></div>
+			<div class="loader">Please wait...</div>
+			<a href="javascript:;" class="gray_link loadmore" data-type="userspageserviceprovider"  data-from="5" data-load="10">Load more »</a>
+			<?php
 			} 
 		endif; 
 		?>
@@ -175,7 +192,7 @@
 			<?php 
 			if(is_array($data["userstatements"])){
 				$first = array_slice($data["userstatements"],0,1);
-				$others = array_slice($data["userstatements"],1);
+				$others = array_slice($data["userstatements"],1,4);
 			}
 			?>
 
@@ -209,7 +226,11 @@
 				</div>	 
 			</div> 
 			<?php endforeach; ?>
-
+			<div style="clear:both"></div>
+			<div class="appends"></div>
+			<div style="clear:both"></div>
+			<div class="loader">Please wait...</div>
+			<a href="javascript:;" class="gray_link loadmore" data-type="userspageenquires"  data-from="5" data-load="10">Load more »</a>
 		<?php endif; ?>
 
 

@@ -106,7 +106,12 @@ class user extends connection{
 			}
 
 			$data["get_type"] = Input::method("GET","t");
-		}else{ $doerror = true; }
+		}else{ 
+			$doerror = true; 
+			$redirect = new redirect();
+			$redirect->go(WEBSITE);
+			die(); 
+		}
 		$data["get_view"] = (int)Input::method("GET","i");
 		$data["get_product"] = (int)Input::method("GET","p");
 		$data["get_token"] = (Input::method("GET","token")) ? Input::method("GET","token") : '';
@@ -130,10 +135,17 @@ class user extends connection{
 			":idx"=>$data["get_view"], 
 			":one"=>1
 		));
-		$data["fetch"] = $prepare->fetch(PDO::FETCH_ASSOC);		
-		$retrieve_users_info = new retrieve_users_info();
-		
-		@include($c["website.directory"]."/user.php");
+
+		if($prepare->rowCount() > 0){
+			$data["fetch"] = $prepare->fetch(PDO::FETCH_ASSOC);		
+			$retrieve_users_info = new retrieve_users_info();
+			@include($c["website.directory"]."/user.php");
+		}else{
+			$doerror = true; 
+			$redirect = new redirect();
+			$redirect->go(WEBSITE);
+			die(); 
+		}
 	}
 }
 ?>

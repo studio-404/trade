@@ -6,9 +6,12 @@ class model_template_main_menu{
 		$slug = $get_slug_from_url->slug(); 
 
 		if($type=="header"){
+			$obj  = new url_controll(); 
+			$second_segment = $obj->url("segment",2);
+			//echo $second_segment; 
 			$o = '<ul class="nav navbar-nav">';
 				for($x=0;$x<count($menu_array->date);$x++){
-					$active = ($menu_array->slug[$x]==$slug) ? 'active' : '';
+					$active = ($menu_array->slug[$x]==$second_segment) ? 'active' : '';
 					if($menu_array->sub[$x]){ 
 						$o .= '<li class="dropdown '.$active.'">';
 						$o .= '<a href="'.MAIN_DIR.$menu_array->slug[$x].'?token='.$_SESSION["token_generator"].'">'.strtoupper($menu_array->title[$x]).'</a>';
@@ -40,9 +43,13 @@ class model_template_main_menu{
 		$get_slug_from_url = new get_slug_from_url();
 		$slug = $get_slug_from_url->slug();		
 		$o = '';
+
+		$obj  = new url_controll(); 
+		$third_segment = $obj->url("segment",2)."/".$obj->url("segment",3);
+
 		if(is_array($menu_array)){
 			foreach($menu_array as $val){
-				$active = ($val->slug==$slug) ? 'active' : '';
+				$active = ($val->slug==$third_segment) ? 'active' : '';
 				$o .= '<li class="'.$active.'"><a href="'.MAIN_DIR.$val->slug.'?token='.$_SESSION["token_generator"].'">'.$val->title.'</a></li>';
 			} 
 		}

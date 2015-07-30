@@ -1,11 +1,11 @@
 <?php if(!defined("DIR")){ exit(); }
 class model_template_userstatements extends connection{
 
-	public function stats($c,$t,$i){
+	public function stats($c,$t,$i,$limit = ' LIMIT 5'){
 		$conn = $this->conn($c); 
 		$fetch = '';
 		if(isset($t) && isset($i) && is_numeric($i)){
-			if(Input::method("GET","t")=="manufacturer"){
+			if($t=="manufacturer"){
 				$sql = 'SELECT 
 				`studio404_module_item`.`id`, 
 				`studio404_module_item`.`idx`, 
@@ -25,8 +25,7 @@ class model_template_userstatements extends connection{
 				`studio404_module_item`.`visibility`=:two AND 
 				`studio404_module_item`.`status`!=:one AND 
 				`studio404_module_item`.`insert_admin`=:insert_admin 
-				ORDER BY `studio404_module_item`.`date` DESC LIMIT 10
-				';
+				ORDER BY `studio404_module_item`.`date` DESC '.$limit;
 				$prepare = $conn->prepare($sql); 
 				$prepare->execute(array(
 					":insert_admin"=>(int)$i, 
@@ -40,7 +39,7 @@ class model_template_userstatements extends connection{
 				}
 			}
 
-			if(Input::method("GET","t")=="serviceprovider"){
+			if($t=="serviceprovider"){
 				$sql = 'SELECT 
 				`studio404_module_item`.`id`, 
 				`studio404_module_item`.`idx`, 
@@ -53,8 +52,7 @@ class model_template_userstatements extends connection{
 				`studio404_module_item`.`visibility`=:two AND 
 				`studio404_module_item`.`status`!=:one AND 
 				`studio404_module_item`.`insert_admin`=:insert_admin 
-				ORDER BY `studio404_module_item`.`date` DESC LIMIT 10
-				';
+				ORDER BY `studio404_module_item`.`date` DESC '.$limit;
 				$prepare = $conn->prepare($sql); 
 				$prepare->execute(array(
 					":insert_admin"=>(int)$i, 
@@ -68,7 +66,7 @@ class model_template_userstatements extends connection{
 				}
 			}
 
-			if(Input::method("GET","t")=="company" || Input::method("GET","t")=="individual"){
+			if($t=="company" || $t=="individual"){
 				$sql = 'SELECT 
 				`studio404_module_item`.`id`, 
 				`studio404_module_item`.`idx`, 
@@ -83,8 +81,7 @@ class model_template_userstatements extends connection{
 				`studio404_module_item`.`visibility`=:two AND 
 				`studio404_module_item`.`status`!=:one AND 
 				`studio404_module_item`.`insert_admin`=:insert_admin 
-				ORDER BY `studio404_module_item`.`date` DESC LIMIT 10
-				';
+				ORDER BY `studio404_module_item`.`date` DESC '.$limit;
 				$prepare = $conn->prepare($sql); 
 				$prepare->execute(array(
 					":insert_admin"=>(int)$i, 
