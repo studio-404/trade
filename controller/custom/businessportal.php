@@ -50,7 +50,7 @@ class businessportal extends connection{
 		$ctype = ($data["get_type"]) ? '`studio404_users`.`company_type`="'.$data["get_type"].'" AND ' : '';
 		$type = ($data["get_view"]) ? '`studio404_module_item`.`type`="'.$data["get_view"].'" AND ' : '';
 		$search = (!empty($data["get_search"])) ? '`studio404_module_item`.`title` LIKE "%'.$data["get_search"].'%" AND ' : '';
-		 
+		try{
 		$sql = 'SELECT 
 		`studio404_module_item`.`id`, 
 		`studio404_module_item`.`idx`, 
@@ -84,6 +84,12 @@ class businessportal extends connection{
 			":one"=>1
 		));
 		$data["fetch"] = $prepare->fetchAll(PDO::FETCH_ASSOC);
+		}catch(Exception $e){
+			$redirect = new redirect();
+			$redirect->go(WEBSITE);
+			die(); 
+		}
+		
 		
 
 		@include($c["website.directory"]."/businessportal.php"); 

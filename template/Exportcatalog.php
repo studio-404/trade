@@ -4,9 +4,9 @@
 <div class="container" id="container">
 	<div class="export_menu">
 		<ul>
-			<li<?=(Input::method("GET","view")=="companies" || !Input::method("GET","view")) ? ' class="active"' : ''?>><a href="?view=companies&amp;token=<?=$_SESSION["token_generator"]?>">COMPANIES</a></li>
-			<li<?=(Input::method("GET","view")=="products") ? ' class="active"' : ''?>><a href="?view=products&amp;token=<?=$_SESSION["token_generator"]?>">PRODUCTS</a></li>
-			<li<?=(Input::method("GET","view")=="services") ? ' class="active"' : ''?>><a href="?view=services&amp;token=<?=$_SESSION["token_generator"]?>">SERVICES</a></li>
+			<li<?=(Input::method("GET","view")=="companies" || !Input::method("GET","view")) ? ' class="active"' : ''?>><a href="?view=companies">COMPANIES</a></li>
+			<li<?=(Input::method("GET","view")=="products") ? ' class="active"' : ''?>><a href="?view=products">PRODUCTS</a></li>
+			<li<?=(Input::method("GET","view")=="services") ? ' class="active"' : ''?>><a href="?view=services">SERVICES</a></li>
 		</ul>
 	</div>
 	
@@ -20,7 +20,7 @@
 		<script type="text/javascript"> 
 		$(document).on("click","#serachMe",function(){
 			var s = $("#svalue").val();
-			var u = "http://"+document.domain+"/<?=LANG?>/export-catalog?view=<?=$data['get_view']?>&sort=<?=$data['get_sort']?>&sector=<?=$data['get_sector']?>&certificate=<?=$data['get_certificate']?>&search="+s+"&pn=<?=$data['get_pn']?>&token=<?=$_SESSION['token_generator']?>";
+			var u = "http://"+document.domain+"/<?=LANG?>/export-catalog?view=<?=$data['get_view']?>&sort=<?=$data['get_sort']?>&sector=<?=$data['get_sector']?>&certificate=<?=$data['get_certificate']?>&search="+s+"&pn=<?=$data['get_pn']?>";
 			location.href = u;
 		});
 		</script>
@@ -33,11 +33,7 @@
 			<div class="col-sm-2 filter_cols">
 				<a href="javascript:;">
 					Company name 
-				</a>					
-				<!-- <ul class="dropdown-menu">
-					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=asc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by ascending</a></li>
-					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=desc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by descending</a></li>
-				</ul> -->
+				</a>		
 			</div>
 			<div class="col-sm-2 filter_cols<?=(isset($_GET['subsector']) && !empty($_GET['subsector'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -46,7 +42,7 @@
 				<ul class="dropdown-menu">
 					<?php foreach($data["subsector"] as $subsector) : ?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['subsector']) && $_GET['subsector']==$subsector->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$subsector->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>" <?=(isset($_GET['subsector']) && $_GET['subsector']==$subsector->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$subsector->title?></a> 
 					</li>
 					<?php endforeach; ?>					
 				</ul>
@@ -62,7 +58,7 @@
 						if(empty($_GET["subsector"])){ $subsector_id = $products->cid; }else{ $subsector_id = $data["get_subsector"]; }
 					?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector_id?>&amp;products=<?=$products->idx?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['products']) && $_GET['products']==$products->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$products->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector_id?>&amp;products=<?=$products->idx?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>" <?=(isset($_GET['products']) && $_GET['products']==$products->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$products->title?></a> 
 					</li>
 					<?php endforeach; ?>					
 				</ul>
@@ -74,7 +70,7 @@
 				<ul class="dropdown-menu">
 					<?php foreach($data["countries"] as $countries) : ?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$countries->idx?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['exportmarkets']) && $_GET['exportmarkets']==$countries->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$countries->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$countries->idx?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>" <?=(isset($_GET['exportmarkets']) && $_GET['exportmarkets']==$countries->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$countries->title?></a> 
 					</li>
 					<?php endforeach; ?>					
 				</ul>
@@ -85,7 +81,7 @@
 				</a>
 				<ul class="dropdown-menu">
 					<?php foreach($data["certificates"] as $certificates) : ?>
-					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_asc"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$certificates->idx?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['certificate']) && $_GET['certificate']==$certificates->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$certificates->title?></a></li>
+					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_asc"]?>&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$certificates->idx?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>" <?=(isset($_GET['certificate']) && $_GET['certificate']==$certificates->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$certificates->title?></a></li>
 					<?php endforeach; ?>
 				</ul>
 			</div>
@@ -95,7 +91,7 @@
 	$retrieve_users_info = new retrieve_users_info();
 	foreach($data["fetch"] as $val){
 	?>
-	<a href="<?=WEBSITE.LANG?>/user?t=<?=$val["su_companytype"]?>&amp;i=<?=$val["su_id"]?>&amp;token=<?=$_SESSION["token_generator"]?>">	
+	<a href="<?=WEBSITE.LANG?>/user?t=<?=$val["su_companytype"]?>&amp;i=<?=$val["su_id"]?>">	
 		<div class="filter_content">
 			<div class="names"><?=$val["su_namelname"]?></div>
 			<div class="content_divs">
@@ -149,7 +145,7 @@
 				<ul class="dropdown-menu">
 					<?php foreach($data["subsector"] as $subsector) : ?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['subsector']) && $_GET['subsector']==$subsector->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$subsector->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>" <?=(isset($_GET['subsector']) && $_GET['subsector']==$subsector->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$subsector->title?></a> 
 					</li>
 					<?php endforeach; ?>					
 				</ul>
@@ -165,7 +161,7 @@
 						if(empty($_GET["subsector"])){ $subsector_id = $products->cid; }else{ $subsector_id = $data["get_subsector"]; }
 					?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector_id?>&amp;products=<?=$products->idx?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['products']) && $_GET['products']==$products->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$products->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector_id?>&amp;products=<?=$products->idx?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>" <?=(isset($_GET['products']) && $_GET['products']==$products->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$products->title?></a> 
 					</li>
 					<?php endforeach; ?>					
 				</ul>
@@ -186,7 +182,7 @@
 		$ctext = new ctext();
 		foreach($data["fetch"] as $val) :
 		?>
-		<a href="<?=WEBSITE.LANG?>/user?t=<?=$val["su_companytype"]?>&amp;i=<?=$val["users_id"]?>&amp;p=<?=$val['id']?>&amp;token=<?=$_SESSION["token_generator"]?>">	
+		<a href="<?=WEBSITE.LANG?>/user?t=<?=$val["su_companytype"]?>&amp;i=<?=$val["users_id"]?>&amp;p=<?=$val['id']?>">	
 			<div class="filter_content">
 				<div class="names"><?=htmlentities($val["title"])?></div>
 				<div class="content_divs">
@@ -237,12 +233,8 @@
 		<div class="filters_div">
 			<div class="col-sm-2 filter_cols">
 				<a href="javascript:;">
-					Company Name <!-- <span class="caret"></span>  -->
-				</a>					
-				<!-- <ul class="dropdown-menu">
-					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=asc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by ascending</a></li>
-					<li><a href="?view=<?=$data["get_view"]?>&amp;sort=desc&amp;subsector=<?=$data["get_subsector"]?>&amp;products=<?=$data["get_products"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>">Order by descending</a></li>
-				</ul> -->
+					Company Name 
+				</a>		
 			</div>
 			<div class="col-sm-2 filter_cols<?=(isset($_GET['subsector']) && !empty($_GET['subsector'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -251,7 +243,7 @@
 				<ul class="dropdown-menu">
 					<?php foreach($data["subsector"] as $subsector) : ?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['subsector']) && $_GET['subsector']==$subsector->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$subsector->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>" <?=(isset($_GET['subsector']) && $_GET['subsector']==$subsector->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$subsector->title?></a> 
 					</li>
 					<?php endforeach; ?>
 				</ul>
@@ -267,7 +259,7 @@
 						if(empty($_GET["subsector"])){ $subsector_id = $products->cid; }else{ $subsector_id = $data["get_subsector"]; }
 					?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector_id?>&amp;products=<?=$products->idx?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>&amp;token=<?=$_SESSION["token_generator"]?>" <?=(isset($_GET['products']) && $_GET['products']==$products->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$products->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector_id?>&amp;products=<?=$products->idx?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>" <?=(isset($_GET['products']) && $_GET['products']==$products->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$products->title?></a> 
 					</li>
 					<?php endforeach; ?>
 				</ul>
@@ -288,7 +280,7 @@
 	$ctext = new ctext();
 	foreach($data["fetch"] as $val) :
 	?>		
-	<a href="<?=WEBSITE.LANG?>/user?t=<?=$val["su_companytype"]?>&amp;i=<?=$val["users_id"]?>&amp;p=<?=$val['id']?>&amp;token=<?=$_SESSION["token_generator"]?>">	
+	<a href="<?=WEBSITE.LANG?>/user?t=<?=$val["su_companytype"]?>&amp;i=<?=$val["users_id"]?>&amp;p=<?=$val['id']?>">	
 		<div class="filter_content">
 			<div class="names"><?=$val["users_name"]?></div>
 			<div class="content_divs">

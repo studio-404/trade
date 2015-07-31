@@ -7,11 +7,11 @@
 <div class="container">
 	<div class="breadcrumbs">
 		<div class="your_are_here">Your are here: </div>
-			<li><a href="<?=WEBSITE.LANG?>/export-catalog?token=<?=$_SESSION["token_generator"]?>">Export Catalog</a></li><li>  &gt;  
+			<li><a href="<?=WEBSITE.LANG?>/export-catalog">Export Catalog</a></li><li>  &gt;  
 			</li><li><a href="javascript:;"><?=$data["fetch"]["namelname"]?></a></li><li>  
 	</li></div>
 	
-	<div class="back_to"><a href="<?=WEBSITE.LANG?>/export-catalog?token=<?=$_SESSION["token_generator"]?>">Back to catalog</a></div>
+	<div class="back_to"><a href="<?=WEBSITE.LANG?>/export-catalog">Back to catalog</a></div>
 	
 	<div class="page_title_5">
 		<?=$data["fetch"]["namelname"]?>

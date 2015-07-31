@@ -9,7 +9,7 @@
 	<div class="breadcrumbs">
 		<div class="your_are_here">Your are here: </div>
 			<li>
-				<a href="<?=WEBSITE.LANG?>/<?=(isset($_GET["t"]) && ($_GET["t"]=="individual" || $_GET["t"]=="company")) ? 'business-portal' : 'export-catalog'?>?token=<?=$_SESSION["token_generator"]?>">
+				<a href="<?=WEBSITE.LANG?>/<?=(isset($_GET["t"]) && ($_GET["t"]=="individual" || $_GET["t"]=="company")) ? 'business-portal' : 'export-catalog'?>">
 					<?=(isset($_GET["t"]) && ($_GET["t"]=="individual" || $_GET["t"]=="company")) ? 'Bussiness portal' : 'Export Catalog'?>
 				</a>
 			</li>
@@ -21,7 +21,7 @@
 			</li>
 		</div>
 	
-	<div class="back_to"><a href="<?=WEBSITE.LANG?>/<?=(isset($_GET["t"]) && ($_GET["t"]=="individual" || $_GET["t"]=="company")) ? 'business-portal' : 'export-catalog'?>?token=<?=$_SESSION["token_generator"]?>"><?=(isset($_GET["t"]) && ($_GET["t"]=="individual" || $_GET["t"]=="company")) ? 'Back to bussiness portal' : 'Back to catalog'?></a></div>
+	<div class="back_to"><a href="<?=WEBSITE.LANG?>/<?=(isset($_GET["t"]) && ($_GET["t"]=="individual" || $_GET["t"]=="company")) ? 'business-portal' : 'export-catalog'?>"><?=(isset($_GET["t"]) && ($_GET["t"]=="individual" || $_GET["t"]=="company")) ? 'Back to bussiness portal' : 'Back to catalog'?></a></div>
 	
 	<div class="page_title_5">
 		<?=$data["fetch"]["namelname"]?>

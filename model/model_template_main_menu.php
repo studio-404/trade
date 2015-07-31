@@ -14,11 +14,11 @@ class model_template_main_menu{
 					$active = ($menu_array->slug[$x]==$second_segment) ? 'active' : '';
 					if($menu_array->sub[$x]){ 
 						$o .= '<li class="dropdown '.$active.'">';
-						$o .= '<a href="'.MAIN_DIR.$menu_array->slug[$x].'?token='.$_SESSION["token_generator"].'">'.strtoupper($menu_array->title[$x]).'</a>';
+						$o .= '<a href="'.MAIN_DIR.$menu_array->slug[$x].'">'.strtoupper($menu_array->title[$x]).'</a>';
 						$o .= $this->sub($menu_array->sub[$x],$slug,"header"); 
 						$o .= '</li>'; 
 					}else{
-						$o .= '<li class="'.$active.'"><a href="'.MAIN_DIR.$menu_array->slug[$x].'?token='.$_SESSION["token_generator"].'">'.strtoupper($menu_array->title[$x]).'</a></li>'; 
+						$o .= '<li class="'.$active.'"><a href="'.MAIN_DIR.$menu_array->slug[$x].'">'.strtoupper($menu_array->title[$x]).'</a></li>'; 
 					}
 				}			
 			$o .= '</ul>';
@@ -50,7 +50,7 @@ class model_template_main_menu{
 		if(is_array($menu_array)){
 			foreach($menu_array as $val){
 				$active = ($val->slug==$third_segment) ? 'active' : '';
-				$o .= '<li class="'.$active.'"><a href="'.MAIN_DIR.$val->slug.'?token='.$_SESSION["token_generator"].'">'.$val->title.'</a></li>';
+				$o .= '<li class="'.$active.'"><a href="'.MAIN_DIR.$val->slug.'">'.$val->title.'</a></li>';
 			} 
 		}
 		return $o;
@@ -62,7 +62,7 @@ class model_template_main_menu{
 			$o = '<ul class="dropdown-menu dropdown-menu-2">'; 
 			for($x=0;$x<count($sub->date);$x++){
 				$active = ($sub->slug[$x]==$slug) ? 'active' : '';
-					$o .= '<li class="'.$active.'"><a href="'.MAIN_DIR.$sub->slug[$x].'?token='.$_SESSION["token_generator"].'">'.$sub->title[$x].'</a></li>'; 
+					$o .= '<li class="'.$active.'"><a href="'.MAIN_DIR.$sub->slug[$x].'">'.$sub->title[$x].'</a></li>'; 
 			}
 			$o .= '</ul>';
 		}else if($type=="footer"){
@@ -70,7 +70,7 @@ class model_template_main_menu{
 			for($x=0;$x<count($sub->date);$x++){
 				$active = ($sub->slug[$x]==$slug) ? 'active' : '';
 				$slash = (count($sub->date)!=($x+1)) ? ' / ' : '';
-				$o .= '<li><a href="'.MAIN_DIR.$sub->slug[$x].'?token='.$_SESSION["token_generator"].'">'.$sub->title[$x].'</a></li>'.$slash; 
+				$o .= '<li><a href="'.MAIN_DIR.$sub->slug[$x].'">'.$sub->title[$x].'</a></li>'.$slash; 
 			}
 		}
 		return $o;

@@ -21,7 +21,7 @@
 		
 		<div class="text_formats margin_top_20">
 			<?php if(!empty($data["news_general"][0]["pic"])) : ?>
-				<img src="<?=WEBSITE?>image?f=<?=WEBSITE.$data["news_general"][0]["pic"]?>&w=270&h=130" class="img-responsive" alt="" />
+				<img src="<?=WEBSITE?>image?f=<?=WEBSITE.$data["news_general"][0]["pic"]?>&amp;w=270&amp;h=130" class="img-responsive" alt="" />
 			<?php endif;?>
 
 			<?=$data["news_general"][0]["long_description"]?>

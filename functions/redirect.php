@@ -4,7 +4,7 @@ class redirect{
 		if(empty($url)){
 			echo '<meta http-equiv="refresh" content="0"/>';
 		}else{
-			header("Location: ".$url."");
+			//header("Location: ".$url."");
 			echo '<meta http-equiv="refresh" content="0; url='.$url.'"/>';
 		}
 		exit();
