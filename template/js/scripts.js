@@ -1761,7 +1761,6 @@ $(document).on("click","#recover_submit",function(){
 	var recoveremail = $("#recoveremail").val();
 	var recovercaptcha = $("#recovercaptcha").val();
 	$(".error_message").hide();
-
 	if(recoveremail==""){
 		$(".recover_email_required").fadeIn("slow"); 
 		return false;
@@ -1770,18 +1769,42 @@ $(document).on("click","#recover_submit",function(){
 		return false;
 	}else{
 		if(validateEmail(recoveremail)){
+			$(".boxarea").html("Please wait");
 			$.post("http://"+document.domain+"/en/ajax", {
 				passwordRecover:true, 
 				e:recoveremail, 
 				c:recovercaptcha 
 			}, function(r){
-				alert(r);
+				if(r=="Error"){
+					$(".boxarea").html("<p>Error</p><a href=\"javascript:;\" id=\"reload\">Reload</a>");
+				}else{
+					$(".boxarea").html(r);
+				}				
 			});
 		}else{
 			$(".recover_emailcorrect_required").fadeIn("slow"); 
 			return false;
 		}
 	}
+});
+
+$(document).on("click","#change_re_password",function(){
+	var npassword = $("#npassword").val();
+	var cpassword = $("#cpassword").val();
+	$(".error_message").hide();
+	if(npassword==""){
+		$(".npassword_required").fadeIn();
+		return false;
+	}else if(npassword.length < 6 || npassword.length > 20){
+		$(".npassword_must6cher").fadeIn();
+		return false;
+	}else if(npassword!=cpassword){
+		$(".cpassword_match_required").fadeIn();
+		return false;
+	}else {
+		$("#recoverPassword_form").submit();
+	}
+
 });
 
 function callChat(){
@@ -1868,7 +1891,6 @@ function nl2br(str) {
 
 function checkLength(ele,min,max){
 	var lengthx = $(ele).val().length;
-
 	if(lengthx<min){ 
 		return false;
 	}

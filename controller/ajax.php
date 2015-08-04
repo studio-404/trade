@@ -68,7 +68,6 @@ class ajax extends connection{
 			if($prepare->rowCount() > 0){
 				echo "Error";
 			}else{
-				//$this->send("::Registration::","Drear user",$email2,$msg);
 				$sql = 'SELECT `host`,`user`,`pass`,`from`,`fromname` FROM `studio404_newsletter` WHERE `id`=1';
 				$prepare = $conn->prepare($sql); 
 				$prepare->execute(); 
@@ -1891,6 +1890,49 @@ class ajax extends connection{
 					echo "Empty"; 
 				}
 				break;
+			}
+		}
+
+		if(Input::method("POST","passwordRecover")=="true" && Input::method("POST","e") && Input::method("POST","c")){
+			if($this->isValidEmail(Input::method("POST","e")) && Input::method("POST","c")===$_SESSION['protect_']){
+
+				$sql = 'SELECT `id` FROM `studio404_users` WHERE `username`=:username AND `status`!=1';
+				$prepare = $conn->prepare($sql); 
+				$prepare->execute(array(
+					":username"=>Input::method("POST","e")
+				));
+				if($prepare->rowCount()>0){
+					$recover = ustring::random(15);
+					$ufetch = $prepare->fetch(PDO::FETCH_ASSOC);
+					$setRecover = 'UPDATE `studio404_users` SET `recover`=:recover WHERE `id`=:id';
+					$setPrepare = $conn->prepare($setRecover); 
+					$setPrepare->execute(array(
+						":id"=>$ufetch['id'], 
+						":recover"=>$recover
+					));
+
+					$msg = '<div style="margin:0; padding:0; width:100%;"><img src="'.TEMPLATE.'img/mailheader.png" width="100%" alt="Mail header"/></div>';
+					$msg .= '<p style="font-size:14px; font-family:roboto">Password recover link: <a href="'.WEBSITE.LANG.'/recover?rl='.$recover.'&ui='.$ufetch['id'].'" style="color:red">Click here</a></p>';
+					$sql = 'SELECT `host`,`user`,`pass`,`from`,`fromname` FROM `studio404_newsletter` WHERE `id`=1';
+					$prepare = $conn->prepare($sql); 
+					$prepare->execute(); 
+					$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
+					
+					$host = $fetch["host"]; 
+					$user = $fetch["user"]; 
+					$pass = $fetch["pass"]; 
+					$from = $fetch["from"]; 
+					$fromname = $fetch["fromname"]; 
+
+					$send_email = new send_email(); 
+					$send_email->send($host,$user,$pass,$from,$fromname,Input::method("POST","e"),"::Recover password::",$msg); 
+					echo "Please check your email address !";
+
+				}else{
+					echo "Error";
+				}
+			}else{
+				echo "Error";
 			}
 		}
 
