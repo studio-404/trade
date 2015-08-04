@@ -12,18 +12,19 @@
 	<div class="col-sm-9" id="content">
 		<?php
 			$first = $data["eventsinside_general"];
+			if(!empty($first[0]->title)) :
 		?>
 		<div class="page_title_3">
-			<?=$first[0]->title?>
 			<div class="icons">
+				<div id="u" data-lang="<?=LANG?>" style="position:absolute; top:-1000px; text-indent:-9999px"><?=url_controll::current_link()?></div>
 				<div class="share"></div>
 				<div class="print"></div>
 			</div>
 		</div>
 		
 		<div class="row" id="event_div">
-			<div class="col-sm-4">
-				<img src="<?=WEBSITE?>image?f=<?=WEBSITE.$first[0]->pic?>&w=270&h=130" class="img-responsive" alt="" />
+			<div class="col-sm-4" id="event_image">
+				<img src="<?=WEBSITE?>image?f=<?=WEBSITE.$first[0]->pic?>&w=270&h=130" class="img-responsive" alt="" style="width:100%" />
 			</div>
 			<div class="col-sm-4 event_line_bg">
 				<div class="yellow_title">When:</div>
@@ -60,7 +61,7 @@
 
 		<div class="btn btn-yellow eventRegister" data-eventid="<?=$first[0]->idx?>" style="margin-top:30px;">REGISTER FOR  THIS EVENT</div>
 		
-
+		<?php endif; ?>
 
 	</div>
 </div>

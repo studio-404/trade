@@ -16,11 +16,13 @@ $ctext = new ctext();
 			<div class="container">
 				<div class="carousel-caption">
 					<div class="col-sm-4">
-						<div class="slider_info">
-							<div class="title"><?=$ctext->cut(strip_tags($val->title),55)?></div>
-							<div class="text"><?=$ctext->cut(strip_tags($val->desc),75)?></div>
-							<div class="url"><a href="<?=$val->url?>">Read more</a></div>
-						</div>
+						<a href="<?=$val->url?>">
+							<div class="slider_info">
+								<div class="title"><?=$ctext->cut(strip_tags($val->title),55)?></div>
+								<div class="text"><?=$ctext->cut(strip_tags($val->desc),75)?></div>
+								<div class="url">Read more</div>
+							</div>
+						</a>
 					</div>
 				</div>
 			</div>

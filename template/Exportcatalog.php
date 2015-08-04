@@ -145,7 +145,7 @@
 				<ul class="dropdown-menu">
 					<?php foreach($data["subsector"] as $subsector) : ?>
 					<li>
-						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>" <?=(isset($_GET['subsector']) && $_GET['subsector']==$subsector->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$subsector->title?></a> 
+						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector->idx?>&amp;products=&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>" <?=(isset($_GET['subsector']) && $_GET['subsector']==$subsector->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$subsector->title?></a> 
 					</li>
 					<?php endforeach; ?>					
 				</ul>

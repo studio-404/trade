@@ -1807,6 +1807,48 @@ $(document).on("click","#change_re_password",function(){
 
 });
 
+$(document).on("click",".share",function(){ 
+	var u = window.location.href; 
+	$("#u").html(u); 
+	$("#insertText").html("Please wait..."); 
+	$('#message_popup').modal('toggle');
+	copyMe("u"); 
+});
+
+$(document).on("click",".print",function(){ 
+	window.print();
+});
+
+
+function copyMe(e){ 
+	SelectText(e); 
+	window.getSelection(); 
+	try { 
+		var successful = document.execCommand('copy'); 
+		var msg = (successful) ? 'successful. Paste it any social network you would like.' : 'unsuccessful. Your browser does not support it.'; 
+		$("#insertText").html('Copy url command was ' + msg); 
+	}catch(err) { 
+		$("#insertText").html('Error'); 
+	} 
+	window.getSelection().removeAllRanges(); 
+} 
+
+function SelectText(element) { 
+	var doc = document, text = doc.getElementById(element), range, selection; 
+	if (doc.body.createTextRange) { 
+		range = document.body.createTextRange(); 
+		range.moveToElementText(text); 
+		range.select(); 
+	} else if (window.getSelection) { 
+		selection = window.getSelection(); 
+		range = document.createRange(); 
+		range.selectNodeContents(text); 
+		selection.removeAllRanges(); 
+		selection.addRange(range); 
+	} 
+}
+
+
 function callChat(){
 	$("#insertText").html("Please wait..."); 
 	$('#message_popup').modal('toggle');

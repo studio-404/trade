@@ -36,6 +36,46 @@ class model_admin_fusersstat extends connection{
 				":lang"=>LANG_ID
 			));
 			$out = 1;
+
+			if(isset($_FILES["pimage"]["name"])){
+				$imageFileType = explode(".",$_FILES["pimage"]["name"]);
+				$imageFileType = end($imageFileType); 
+				// http://trade.404.ge/image?f= 
+				$newfilename = md5(sha1(time())).".jpg";
+				$target_file = DIR."/files/usersproducts/".$newfilename; 
+				if($imageFileType=="jpg"){
+ 
+					if (move_uploaded_file($_FILES["pimage"]["tmp_name"], $target_file)) {
+						// remove old file 
+						$selfilename = 'SELECT `picture` FROM `studio404_module_item` WHERE `idx`=:idx AND `lang`=:lang AND `module_idx`=:module_idx';
+						$preparefilename = $conn->prepare($selfilename); 
+						$preparefilename->execute(array(
+							":idx"=>(int)$_GET['idx'], 
+							":lang"=>LANG_ID, 
+							":module_idx"=>3
+						));
+						if($preparefilename->rowCount()>0){
+							$fetchfilename = $preparefilename->fetch(PDO::FETCH_ASSOC);
+							if($fetchfilename['picture']){
+								@unlink(WEBSITE."/files/usersproducts/".$fetchfilename['picture']); 
+							}
+						}
+						//update db newfilename
+						$nfilename = 'UPDATE `studio404_module_item` SET `picture`=:picture WHERE `idx`=:idx AND `lang`=:lang AND `module_idx`=:module_idx';
+						$preparenew = $conn->prepare($nfilename);
+						$preparenew->execute(array(
+							":picture"=>$newfilename,
+							":idx"=>(int)$_GET['idx'], 
+							":lang"=>LANG_ID, 
+							":module_idx"=>3
+						));
+				       	$out = 1;
+				    } else {
+				       $out = 2;
+				    }
+				}
+			}
+
 		}else if($_GET['type']=="services" && is_numeric($_GET['idx'])){
 			$sql = 'UPDATE 
 			`studio404_module_item` SET  

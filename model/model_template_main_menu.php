@@ -14,11 +14,18 @@ class model_template_main_menu{
 					$active = ($menu_array->slug[$x]==$second_segment) ? 'active' : '';
 					if($menu_array->sub[$x]){ 
 						$o .= '<li class="dropdown '.$active.'">';
-						$o .= '<a href="'.MAIN_DIR.$menu_array->slug[$x].'">'.strtoupper($menu_array->title[$x]).'</a>';
+
+						if($menu_array->redirectlink[$x]!="false" && !empty($menu_array->redirectlink[$x])){
+							$gotoUrl = $menu_array->redirectlink[$x];
+						}else{
+							$gotoUrl = MAIN_DIR.$menu_array->slug[$x];
+						}
+
+						$o .= '<a href="'.$gotoUrl.'">'.strtoupper($menu_array->title[$x]).'</a>';
 						$o .= $this->sub($menu_array->sub[$x],$slug,"header"); 
 						$o .= '</li>'; 
 					}else{
-						$o .= '<li class="'.$active.'"><a href="'.MAIN_DIR.$menu_array->slug[$x].'">'.strtoupper($menu_array->title[$x]).'</a></li>'; 
+						$o .= '<li class="'.$active.'"><a href="'.$gotoUrl.'">'.strtoupper($menu_array->title[$x]).'</a></li>'; 
 					}
 				}			
 			$o .= '</ul>';
@@ -50,7 +57,14 @@ class model_template_main_menu{
 		if(is_array($menu_array)){
 			foreach($menu_array as $val){
 				$active = ($val->slug==$third_segment) ? 'active' : '';
-				$o .= '<li class="'.$active.'"><a href="'.MAIN_DIR.$val->slug.'">'.$val->title.'</a></li>';
+
+				if($val->redirectlink!="false" && !empty($val->redirectlink)){
+					$gotoUrl = $val->redirectlink;
+				}else{
+					$gotoUrl = MAIN_DIR.$val->slug;
+				}
+
+				$o .= '<li class="'.$active.'"><a href="'.$gotoUrl.'">'.$val->title.'</a></li>';
 			} 
 		}
 		return $o;
@@ -62,7 +76,13 @@ class model_template_main_menu{
 			$o = '<ul class="dropdown-menu dropdown-menu-2">'; 
 			for($x=0;$x<count($sub->date);$x++){
 				$active = ($sub->slug[$x]==$slug) ? 'active' : '';
-					$o .= '<li class="'.$active.'"><a href="'.MAIN_DIR.$sub->slug[$x].'">'.$sub->title[$x].'</a></li>'; 
+
+				if($sub->redirectlink[$x]!="false" && !empty($sub->redirectlink[$x])){
+					$gotoUrl = $sub->redirectlink[$x];
+				}else{
+					$gotoUrl = MAIN_DIR.$sub->slug[$x];
+				}
+				$o .= '<li class="'.$active.'"><a href="'.$gotoUrl.'">'.$sub->title[$x].'</a></li>'; 
 			}
 			$o .= '</ul>';
 		}else if($type=="footer"){
@@ -70,7 +90,14 @@ class model_template_main_menu{
 			for($x=0;$x<count($sub->date);$x++){
 				$active = ($sub->slug[$x]==$slug) ? 'active' : '';
 				$slash = (count($sub->date)!=($x+1)) ? ' / ' : '';
-				$o .= '<li><a href="'.MAIN_DIR.$sub->slug[$x].'">'.$sub->title[$x].'</a></li>'.$slash; 
+
+				if($sub->redirectlink[$x]!="false" && !empty($sub->redirectlink[$x])){
+					$gotoUrl = $sub->redirectlink[$x];
+				}else{
+					$gotoUrl = MAIN_DIR.$sub->slug[$x];
+				}
+
+				$o .= '<li><a href="'.$gotoUrl.'">'.$sub->title[$x].'</a></li>'.$slash; 
 			}
 		}
 		return $o;

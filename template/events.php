@@ -2,13 +2,7 @@
 <?php @include("parts/eventregister.php"); ?>
 
 <?php 
-// echo "<pre>";
-// print_r($data["event_list"]);  
-// echo "</pre>"; 
 $first = array_slice($data["event_list"], 0, 1); 
-// echo "<pre>";
-// print_r($first);  
-// echo "</pre>"; 
 ?>
 
 <div class="container" id="container">
@@ -20,17 +14,21 @@ $first = array_slice($data["event_list"], 0, 1);
 		</div>
 	</div>
 	<div class="col-sm-9" id="content">
+		<?php
+		if(!empty($first[0]["title"])) { 
+		?>
 		<div class="page_title_3">
 			<?=$first[0]["title"]?>
 			<div class="icons">
+				<div id="u" data-lang="<?=LANG?>" style="position:absolute; top:-1000px; text-indent:-9999px"><?=url_controll::current_link()?></div>
 				<div class="share"></div>
 				<div class="print"></div>
 			</div>
 		</div>	
 		
 		<div class="row" id="event_div">
-			<div class="col-sm-4">
-				<img src="<?=WEBSITE?>image?f=<?=WEBSITE.$first[0]["pic"]?>&amp;w=270&amp;h=130" class="img-responsive">
+			<div class="col-sm-4" id="event_image">
+				<img src="<?=WEBSITE?>image?f=<?=WEBSITE.$first[0]["pic"]?>&amp;w=270&amp;h=130" class="img-responsive" alt="" style="width:100%" />
 			</div>
 			<div class="col-sm-4 event_line_bg">
 				<div class="yellow_title">When:</div>
@@ -91,7 +89,7 @@ $first = array_slice($data["event_list"], 0, 1);
 			<a href="javascript:;" class="gray_link loadmore" data-type="eventslist"  data-from="9" data-load="10">Load more »</a>
 			
 		</div>
-		
+		<?php }else{ echo "<div class='text_formats'><p><strong>Sorry there is no data!</strong></p></div>";  } ?>
 		<!-- <a href="#" class="gray_link">Load Older Events »</a> -->
 		
 	</div>

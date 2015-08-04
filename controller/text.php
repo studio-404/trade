@@ -11,6 +11,14 @@ class text extends connection{
 		$text_general = $cache->index($c,"text_general");
 		$data["text_general"] = json_decode($text_general,true);
 
+		// echo "<pre>";
+		// print_r($data["text_general"]); 
+		// echo "</pre>";
+		// if($data["text_general"][0]["redirectlink"]!="false"){
+		// 	redirect::url($data["text_general"][0]["redirectlink"]); 
+		// 	exit(); 
+		// }
+
 		$text_files = $cache->index($c,"text_files");
 		$data["text_files"] = json_decode($text_files);
 

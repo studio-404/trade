@@ -14,6 +14,7 @@
 			<div class="date"><span><?=date("d",$data["news_general"][0]["date"])?></span> <?=date("M",$data["news_general"][0]["date"])?></div>
 			<?=$data["news_general"][0]["title"]?>
 			<div class="icons">
+				<div id="u" data-lang="<?=LANG?>" style="position:absolute; top:-1000px; text-indent:-9999px"><?=url_controll::current_link()?></div>
 				<div class="share"></div>
 				<div class="print"></div>
 			</div>

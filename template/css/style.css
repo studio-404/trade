@@ -19,6 +19,28 @@ html,body {
 }
 hr {border-bottom:solid #0278c1 1px; margin:0; margin:50px 0;}
 ul {margin:0; padding:0;}
+
+@media print{
+	*{ margin:0; padding:0; }
+	body{ height: auto !important; overflow:hidden !important; }
+	header{ display: none; }
+	.navbar{ display: none; }
+	#sidebar{ display: none; }
+	#content{ margin: 0; padding:0; border:0; outline: 0; width: 80%; float: left; }
+	.page_title_2{ display: none; }
+	.page_title_3{ margin: 0px; padding: 0px; }
+	.icons{ display: none; }
+	.page_title_4{ display: none; }
+	.news_div{ display: none; }
+	.eventRegister{ display: none; }
+	.page_title_4{ display: none; }
+	#events_items{ display: none; }
+	#event_div{ margin-top:10px; margin-bottom: 0px !important; padding: 0px; }
+	#event_div .event_line_bg{ min-height: 0px; }
+	#event_image{ margin:0 0 10px 0; padding:0; width: 100%; }
+	hr{ display: none; }
+	footer{ display: none; }
+}
 #header {
 	background:#0278c1 url('../img/header_bg.png') no-repeat center;
 	min-height:200px;
@@ -247,6 +269,7 @@ ul {margin:0; padding:0;}
 #home_slider {height:432px; width:100%;}
 
 #home_slider .carousel-inner { margin-top:-45px !important;}
+#home_slider .carousel-inner a:hover{ text-decoration: none; }
 #home_slider .carousel-control.left{background:none !important;}
 #home_slider .carousel-control.right{background:none !important;}
 .slider_arrow_left {width:23px; height:43px; background:url('../img/slider_arrow_left.png'); position:absolute; top:50%; margin-top:-22px; left:20px;}
@@ -333,8 +356,11 @@ ul {margin:0; padding:0;}
 	padding:0px 7px;
 	background:#0278c1;
 	color:#fff;
+	position: relative;
+	padding-right: 60px !important;
 }
-.page_title_3 > .icons {float:right; padding-top:2px;}
+/*.page_title_3 > .icons {float:right; padding-top:2px;}*/
+.page_title_3 > .icons { margin:0; padding: 0; width: 50px; height:50px; position: absolute; right: 7px; top:2px; }
 .page_title_3 > .icons > .share {background:url('../img/share_icon.png') no-repeat; width:18px; height:18px; display:inline-block; margin-right:5px; cursor:pointer;}
 .page_title_3 > .icons > .print {background:url('../img/print.png') no-repeat; width:21px; height:21px; display:inline-block; margin-top:1px; cursor:pointer;}
 .page_title_3 .date {
@@ -1288,6 +1314,8 @@ height:25px; width:25px; z-index:999999999999999999999999999;
 .filter_cols:hover{ background: #ffcf7c !important; }
 .filter_content:hover .names{ background-color: #0278c0 !important;  }
 .loader{ display: none; }
+table tr td p{ margin-bottom: 0px !important }
+
 @media (max-width: 992px){
 	#header{ min-height: 120px !important; }
 	.export_menu ul li {
