@@ -27,6 +27,7 @@ echo $header_data["title"];
 <?php
 include("login.php");
 include("register.php");
+include("recover_password.php");
 include("message.php");
 ?>
 
@@ -38,7 +39,8 @@ include("message.php");
 				<div id="members_area">	
 					<?php if(!isset($_SESSION["tradewithgeorgia_username"])) { ?>			
 					<a href="#" data-toggle="modal" data-target="#register_popup"><?=$data["language_data"]["register"]?></a> | 
-					<a href="#" data-toggle="modal" data-target="#login_popup"><?=$data["language_data"]["login"]?></a>
+					<a href="#" data-toggle="modal" data-target="#login_popup"><?=$data["language_data"]["login"]?></a> | 
+					<a href="#" data-toggle="modal" data-target="#recover_password"><?=$data["language_data"]["recoverpassword"]?></a>
 					<?php }else if(isset($_SESSION["tradewithgeorgia_company_type"])){ ?>
 					<a href="javascript:;">
 					<?php 

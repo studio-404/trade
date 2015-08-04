@@ -112,13 +112,25 @@
 						<div class="row">
 							<span class="cell primary" data-label="Vehicle">User lists</span>
 							<span class="cell" data-label="Action">
-								<a href="?action=userList"><i class="fa fa-pencil-square-o"></i></a>
+								<a href="?action=fusersstat&amp;load=users"><i class="fa fa-pencil-square-o"></i></a>
 							</span>
 						</div>
 						<div class="row">
-							<span class="cell primary" data-label="Vehicle">User rights</span>
+							<span class="cell primary" data-label="Vehicle">Product list</span>
 							<span class="cell" data-label="Action">
-								<a href="?action=userRights"><i class="fa fa-pencil-square-o"></i></a>
+								<a href="?action=fusersstat&amp;load=products"><i class="fa fa-pencil-square-o"></i></a>
+							</span>
+						</div>
+						<div class="row">
+							<span class="cell primary" data-label="Vehicle">Service list</span>
+							<span class="cell" data-label="Action">
+								<a href="?action=fusersstat&amp;load=services"><i class="fa fa-pencil-square-o"></i></a>
+							</span>
+						</div>
+						<div class="row">
+							<span class="cell primary" data-label="Vehicle">Enquire list</span>
+							<span class="cell" data-label="Action">
+								<a href="?action=fusersstat&amp;load=enquires"><i class="fa fa-pencil-square-o"></i></a>
 							</span>
 						</div>
 					</div>

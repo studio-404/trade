@@ -333,6 +333,13 @@ class model_admin_breadcrups extends connection{
 				$this->breadcrups .= '<a href="?action=charts">Google charts <i class="fa fa-caret-right"></i></a>';
 				$this->breadcrups .= '<a href="?action=addChart">Add charts <i class="fa fa-caret-right"></i></a>';
 				break;
+				case "fusersstat":
+				$this->breadcrups .= '<a href="?action=fusersstat">Front users statements <i class="fa fa-caret-right"></i></a>';
+				break; 
+				case "edituserstats":
+				$this->breadcrups .= '<a href="?action=fusersstat&load='.$_GET['type'].'">Front users statements <i class="fa fa-caret-right"></i></a>';	
+				$this->breadcrups .= '<a href="?action=edituserstats&idx='.$_GET['idx'].'&type='.$_GET['type'].'&token='.$_SESSION['token'].'">Edit statements <i class="fa fa-caret-right"></i></a>';	
+				break;
 			}
 			$this->breadcrups .= '</div>';
 		}

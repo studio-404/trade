@@ -1757,6 +1757,33 @@ $(document).on("click",".loadmore",function(){
 	newfrom++;
 });
 
+$(document).on("click","#recover_submit",function(){
+	var recoveremail = $("#recoveremail").val();
+	var recovercaptcha = $("#recovercaptcha").val();
+	$(".error_message").hide();
+
+	if(recoveremail==""){
+		$(".recover_email_required").fadeIn("slow"); 
+		return false;
+	}else if(recovercaptcha==""){
+		$(".recover_captcha_required").fadeIn("slow"); 
+		return false;
+	}else{
+		if(validateEmail(recoveremail)){
+			$.post("http://"+document.domain+"/en/ajax", {
+				passwordRecover:true, 
+				e:recoveremail, 
+				c:recovercaptcha 
+			}, function(r){
+				alert(r);
+			});
+		}else{
+			$(".recover_emailcorrect_required").fadeIn("slow"); 
+			return false;
+		}
+	}
+});
+
 function callChat(){
 	$("#insertText").html("Please wait..."); 
 	$('#message_popup').modal('toggle');

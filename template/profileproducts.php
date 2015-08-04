@@ -340,6 +340,11 @@
 							<li><span>About - </span>
 								<?=htmlentities($val["long_description"])?>
 							</li>
+							<?php if(!empty($val["admin_com"])) : ?>
+							<li style="color:red"><span>Admin comment - </span>
+								<?=htmlentities($val["admin_com"])?>
+							</li>
+							<?php endif; ?>
 						</ul>
 					</div>
 					<div class="col-sm-2 " style="margin-top:30px;">

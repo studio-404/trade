@@ -477,6 +477,11 @@ class model_admin_requests extends connection{
 			$data["outMessage"] = $model_admin_comments->add($c);
 		}
 
+		if(isset($_POST['edit_user_statements'])){
+			$model_admin_fusersstat = new model_admin_fusersstat();
+			$data["outMessage"] = $model_admin_fusersstat->edit($c);
+		}
+
 		if(isset($_GET['removeComment']) && is_numeric($_GET['removeComment'])){
 			$model_admin_comments = new model_admin_comments();
 			if($model_admin_comments->removeMe($c)){

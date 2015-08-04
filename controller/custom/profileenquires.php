@@ -96,6 +96,7 @@ class profileenquires extends connection{
 		`studio404_module_item`.`sector_id`,
 		`studio404_module_item`.`type`, 
 		`studio404_module_item`.`long_description`,
+		`studio404_module_item`.`admin_com`,
 		`studio404_module_item`.`visibility`
 		FROM 
 		`studio404_module_item`

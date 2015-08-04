@@ -93,7 +93,7 @@
 			<li class="text_formats">Address: <?=htmlentities(strip_tags($data["fetch"]["address"]))?></li>
 			<li class="text_formats">Mobile number: <?=htmlentities(strip_tags($data["fetch"]["mobile"]))?></li>
 			<li class="text_formats">Office phone: <?=htmlentities(strip_tags($data["fetch"]["office_phone"]))?></li>
-			<li class="text_formats">E-mail: <?=strip_tags($data["fetch"]["email"])?></li>
+			<li class="text_formats">E-mail: <script>document.write('<?=strip_tags($data["fetch"]["email"])?>')</script></li>
 			<?php
 			if($data["fetch"]["web_address"]):
 			$without = str_replace(array("http://","www."),array('',''),$data["fetch"]["web_address"]);

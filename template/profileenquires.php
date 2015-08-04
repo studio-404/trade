@@ -265,6 +265,9 @@
 						</div>
 						<div class="text">
 							<?=strip_tags(nl2br($val["long_description"]))?>
+							<?php if(!empty($val["admin_com"])) : ?>
+							<p style="color:red"><b>Admin comment:</b> <?=$val["admin_com"]?></p>
+							<?php endif; ?>
 						</div>
 					</div>	
 					<div class="col-sm-2">

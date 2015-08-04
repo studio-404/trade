@@ -32,8 +32,8 @@
 				<li><?=$data["language_data"]["hotlinevalue"]?></li>
 			</div>
 			<div class="col-sm-2 padding_0">
-				<li>Offline</li>
-				<li><a href="#"><?=$data["language_data"]["livechart"]?></a></li>
+				<li id="chatStatus">Offline</li>
+				<li><a href="javascript:;" class="callChatButton"><?=$data["language_data"]["livechart"]?></a></li>
 			</div>
 			<div class="col-sm-4 padding_0">
 				<li><?=$data["language_data"]["supportby"]?>:</li>

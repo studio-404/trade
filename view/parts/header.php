@@ -2,7 +2,7 @@
 	<div class="center">
 		<div class="navigation">
 			<div class="logo">
-				<a href="#">
+				<a href="javascript:;">
 					CMS 1.0.1
 				</a>
 			</div>
@@ -23,6 +23,7 @@
 					<li><a href="javascript:;"><i class="fa fa-cube"></i>&nbsp;&nbsp;&nbsp;Modules</a>
 						<ul>
 							<!-- <li><a href="?action=vectormap">Trade map</a></li> -->
+							<li><a href="?action=fusersstat">Front users & statements</a></li>
 							<li><a href="<?=(isset($_SESSION["user404"])) ? "?action=charts" : "javascript:;"?>">Google charts</a></li>
 							<li><a href="<?=(isset($_SESSION["user404"])) ? "?action=emailnewsletter" : "javascript:;"?>">Email newsletter</a></li>
 							

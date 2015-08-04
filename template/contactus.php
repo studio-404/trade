@@ -24,7 +24,7 @@
 				<!-- <div class="image"><img src="<?=TEMPLATE?>img/person_1.jpg" class="img-responsive"></div> -->
 				<div class="name"><?=$val["namelname"]?></div>
 				<div class="work_position"><?=$moreinfo["Position"]?></div>
-				<div class="email"><?=$moreinfo["email"]?></div>
+				<div class="email"><script>document.write("<?=$moreinfo["email"]?>")</script></div>
 			</div>
 		<?php endforeach; ?>
 		</div>
