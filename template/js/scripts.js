@@ -271,6 +271,13 @@ $(document).on("click","#save_changes",function(){
 		return false;
 	}else if(validateEmail(contactemail)!=true){
 		$("#requiredx_contactemail").fadeIn("slow");
+		return false;
+	}else if(webaddress!='' && isUrl(webaddress)!=true){
+		$("#requiredx_webformat").fadeIn("slow");
+		return false;
+	}else if(mobile!='' && isMobile(mobile)!=true){
+		$("#requiredx_mobile").fadeIn("slow");
+		return false;
 	}else{ 
 		$("#insertText").html("Please wait"); 
 		$('#message_popup').modal('toggle'); 
@@ -329,21 +336,6 @@ $(document).on("click","#save_company_changes",function(){
 	  sector[i] = $(selected).val(); 
 	});
 
-	// var subsector = []; 
-	// $('.sector_ids2:checked').each(function(i, selected){ 
-	//   subsector[i] = $(selected).val(); 
-	// });
-
-	// var products = []; 
-	// $('.sector_ids3:checked').each(function(i, selected){ 
-	//   products[i] = $(selected).val(); 
-	// });
-
-	// var exportmarkets = []; 
-	// $('.sector_ids4:checked').each(function(i, selected){ 
-	//   exportmarkets[i] = $(selected).val(); 
-	// });
-
 
 	if(companyname==""){
 		$("#requiredx_companyname").fadeIn("slow");
@@ -353,6 +345,13 @@ $(document).on("click","#save_company_changes",function(){
 		return false;
 	}else if(validateEmail(contactemail)!=true){
 		$("#requiredx_contactemail").fadeIn("slow");
+		return false;
+	}else if(webaddress!='' && isUrl(webaddress)!=true){
+		$("#requiredx_webformat").fadeIn("slow");
+		return false;
+	}else if(mobile!='' && isMobile(mobile)!=true){
+		$("#requiredx_mobile").fadeIn("slow");
+		return false;
 	}else{ 
 		$("#insertText").html("Please wait"); 
 		$('#message_popup').modal('toggle'); 
@@ -406,6 +405,12 @@ $(document).on("click","#save_individual_changes",function(){
 		$("#requiredx_contactemail").fadeIn("slow");
 	}else if(sector.length<=0){
 		$("#requiredx_sector").fadeIn("slow");
+		return false;
+	}else if(webaddress!='' && isUrl(webaddress)!=true){
+		$("#requiredx_webformat").fadeIn("slow");
+		return false;
+	}else if(mobile!='' && isMobile(mobile)!=true){
+		$("#requiredx_mobile").fadeIn("slow");
 		return false;
 	}else{ 
 		$("#insertText").html("Please wait"); 
@@ -2032,4 +2037,27 @@ function urlParamiters()
 		}
 	} 
 	return query_string;		
+}
+
+function isUrl(s) {
+	if(s.charAt(0)=="w" && s.charAt(1)=="w" && s.charAt(2)=="w" && s.charAt(3)=="."){
+		return true;
+	}else{
+		return false;	
+	}	
+}
+
+function isMobile(s) {
+	console.log(s.length);
+	if(s.charAt(0)=="+" && s.charAt(1)=="9" && s.charAt(2)=="9" && s.charAt(3)=="5"){
+		if(s.length == 13){
+			return true;
+		}else{
+			return false;
+		}
+	}else{
+		return false;	
+	}
+
+
 }

@@ -51,6 +51,7 @@
 			<div class="form-group">
 				<label>Mobile Number</label>
 				<input type="text" id="mobile" name="mobile" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" />
+				<font class="error-msg" id="requiredx_mobile">Mobile number mast start with +995 (13 character) !</font>
 			</div>
 			<div class="form-group">
 					<label>Contact email <font color="red">*</font></label>
@@ -193,7 +194,8 @@
 			</div>
 			<div class="form-group">
 				<label>Web Address</label>
-				<input type="text" id="webaddress" name="webaddress" class="form-control" value="<?=($_SESSION["user_data"]["webaddress"]) ? htmlentities($_SESSION["user_data"]["webaddress"]) : ''?>" placeholder="http://www.yourwebsite.com" />
+				<input type="text" id="webaddress" name="webaddress" class="form-control" value="<?=($_SESSION["user_data"]["webaddress"]) ? htmlentities($_SESSION["user_data"]["webaddress"]) : ''?>" placeholder="www.yourwebsite.com" />
+				<font class="error-msg" id="requiredx_webformat">Website mast start with www (www.yourwebsite.com) !</font>
 			</div>
 		</div>
 		<div class="col-sm-3">
