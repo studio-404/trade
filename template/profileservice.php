@@ -9,7 +9,7 @@
 ?>
 <div class="container" id="container">
 	<div class="page_title_1">
-		Profile (<?=ucfirst($_SESSION["tradewithgeorgia_company_type"])?>)
+		Profile (Service provider)
 	</div>
 	<div class="row">
 		<div class="col-sm-3">
@@ -41,7 +41,7 @@
 			</div>
 
 			<div class="form-group">
-				<label>production Capasity</label>
+				<label>Production capacity</label>
 				<input type="text" id="productioncapasity" name="productioncapasity" class="form-control" value="<?=($_SESSION["user_data"]["productioncapasity"]) ? htmlentities($_SESSION["user_data"]["productioncapasity"]) : ''?>" />
 			</div>
 			<div class="form-group">
@@ -298,11 +298,13 @@
 				</div>
 			</div>
 			<?php endforeach; ?>
+			<?php if($data["count"]>5) : ?>
 			<div style="clear:both"></div>
 			<div class="appends"></div>
 			<div style="clear:both"></div>
 			<div class="loader">Please wait...</div>
-			<a href="javascript:;" class="gray_link loadmore" data-type="profileservicelist"  data-from="5" data-load="10">Load more »</a>
+			<a href="javascript:;" class="gray_link loadmore" data-type="profileservicelist"  data-from="5" data-load="10" style="padding:0">Load more »</a>
+			<?php endif; ?>
 		</div>
 		
 	</div>

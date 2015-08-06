@@ -33,7 +33,7 @@ $first = array_slice($data["event_list"], 0, 1);
 			<div class="col-sm-4 event_line_bg">
 				<div class="yellow_title">When:</div>
 				<div class="text_formats_blue">
-					<?=$first[0]["event_when"]?>	
+					<?=date("d M Y G:i",$first[0]["date"])?>	
 				</div>
 				<div class="yellow_title">Fee:</div>
 				<div class="text_formats_blue">
@@ -60,14 +60,14 @@ $first = array_slice($data["event_list"], 0, 1);
 			<div class="title">Programme</div>
 			<?=$first[0]["long_description"]?>
 		</div>
-		
+		<?php if($first[0]["date"] > time()) : ?>		
 		<div class="btn btn-yellow eventRegister" data-eventid="<?=$first[0]["idx"]?>" style="margin-top:30px;">REGISTER FOR  THIS EVENT</div>
-		
+		<?php endif; ?>
 		<hr class="line_effect">
 		
 		<div class="page_title_4">Events Schedule</div>
 		<?php 
-		$other = array_slice($data["event_list"], 1, 9); 
+		$other = array_slice($data["event_list"], 1, 8); 
 		?>
 		<div class="row" id="events_items">
 
@@ -82,12 +82,13 @@ $first = array_slice($data["event_list"], 0, 1);
 				</a>	
 			</div>
 			<?php endforeach; ?>
+			<?php if($data["count"]>9) :?>
 			<div style="clear:both"></div>
 			<div class="appends"></div>
 			<div style="clear:both"></div>
 			<div class="loader">Please wait...</div>
 			<a href="javascript:;" class="gray_link loadmore" data-type="eventslist"  data-from="9" data-load="10">Load more »</a>
-			
+			<?php endif; ?>
 		</div>
 		<?php }else{ echo "<div class='text_formats'><p><strong>Sorry there is no data!</strong></p></div>";  } ?>
 		<!-- <a href="#" class="gray_link">Load Older Events »</a> -->

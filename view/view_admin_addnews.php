@@ -71,8 +71,8 @@
 						<label for="event_desc">Venue: </label>
 						<input type="text" name="event_desc" id="event_desc" value="" autocomplete="off">
 
-						<label for="event_when">Event when: </label>
-						<input type="text" name="event_when" id="event_when" value="" autocomplete="off">
+						<!-- <label for="event_when">Event when: </label>
+						<input type="text" name="event_when" id="event_when" value="" autocomplete="off"> -->
 
 						<label for="event_fee">Event fee: </label>
 						<input type="text" name="event_fee" id="event_fee" value="" autocomplete="off">

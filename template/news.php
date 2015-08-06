@@ -24,7 +24,9 @@
 		</div>
 		
 		<div class="text_formats margin_top_20">
+			<?php if($news_first[0]->pic) : ?>
 			<img src="<?=WEBSITE?>image?f=<?=WEBSITE.$news_first[0]->pic?>&w=270&h=130" class="img-responsive" alt="" />
+			<?php endif; ?>
 			<?=$news_first[0]->long_description?>
 		</div>
 		
@@ -37,7 +39,7 @@
 			$itemperpage = 10;
 			$path = WEBSITE.LANG."/".$data["text_general"][0]["slug"]; 
 			$model_template_pagination = new model_template_pagination();
-			$news_list = array_slice($data["news_list"],1);
+			$news_list = array_slice($data["news_list"],1,8);
 			$newslist = $model_template_pagination->pager($news_list,$itemperpage,$path);
 			$ctext = new ctext();
 			foreach ($newslist[0] as $val) {
@@ -55,11 +57,13 @@
 			<?php
 			}
 			?>
+			<?php if($data["count"]>9) : ?>
 			<div style="clear:both"></div>
 			<div class="appends"></div>
 			<div style="clear:both"></div>
 			<div class="loader">Please wait...</div>
 			<a href="javascript:;" class="gray_link loadmore" data-type="newslist"  data-from="9" data-load="10">Load more »</a>
+			<?php endif; ?>
 		</div>
 		
 		<!-- <a href="#" class="gray_link"><?=$data["language_data"]["viewmorenews"]?> »</a> -->

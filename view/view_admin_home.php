@@ -106,7 +106,7 @@
 				<div class="shortTable">
 					<div id="table">
 						<div class="header-row row">
-							<span class="cell primary">Users</span>
+							<span class="cell primary">Usefull links</span>
 							<span class="cell">Action</span>
 						</div>
 						<div class="row">
@@ -131,6 +131,18 @@
 							<span class="cell primary" data-label="Vehicle">Enquire list</span>
 							<span class="cell" data-label="Action">
 								<a href="?action=fusersstat&amp;load=enquires"><i class="fa fa-pencil-square-o"></i></a>
+							</span>
+						</div>
+						<div class="row">
+							<span class="cell primary" data-label="Vehicle">Events</span>
+							<span class="cell" data-label="Action">
+								<a href="?action=newsModule&amp;type=eventpage&amp;id=16&amp;super=1&amp;token=<?=$_SESSION["token"]?>"><i class="fa fa-pencil-square-o"></i></a>
+							</span>
+						</div>
+						<div class="row">
+							<span class="cell primary" data-label="Vehicle">News</span>
+							<span class="cell" data-label="Action">
+								<a href="?action=newsModule&amp;type=newspage&amp;id=17&amp;super=1&amp;token=<?=$_SESSION["token"]?>"><i class="fa fa-pencil-square-o"></i></a>
 							</span>
 						</div>
 					</div>

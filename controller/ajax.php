@@ -1890,6 +1890,43 @@ class ajax extends connection{
 					echo "Empty"; 
 				}
 				break;
+				case "usefulllinks":
+				$limit = ' LIMIT '.$from.', '.$load;
+				$sql = 'SELECT 
+				`studio404_components_inside`.`id`,
+				`studio404_components_inside`.`title`,
+				`studio404_components_inside`.`desc`,
+				`studio404_components_inside`.`image`,
+				`studio404_components_inside`.`url` 
+				FROM 
+				`studio404_components_inside`
+				WHERE 
+				`studio404_components_inside`.`cid`=3 AND 
+				`studio404_components_inside`.`status`!=:one 
+				ORDER BY `studio404_components_inside`.`position` ASC '.$limit;
+				$prepare = $conn->prepare($sql);
+				$prepare->execute(array(
+					":one"=>1
+				));
+				if($prepare->rowCount()>0){
+					$ctext = new ctext();
+					$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC);
+					$result = array();
+					$x = 0;
+					foreach($fetch as $val){
+						$result[$x]["id"] = $val["id"];  
+						$result[$x]["title"] = $val["title"];   
+						$result[$x]["titleShort"] = $ctext->cut($val["title"],110);   
+						$result[$x]["desc"] = $val["desc"];   						
+						$result[$x]["image"] = WEBSITE.'image?f='.WEBSITE_.$val["image"].'&amp;w=215&amp;h=80';   						
+						$result[$x]["url"] = $val["url"];  						
+						$x++; 
+					}
+					echo json_encode($result);
+				}else{
+					echo "Empty"; 
+				}
+				break;
 			}
 		}
 

@@ -1433,7 +1433,13 @@ $(document).on("click",".loadmore",function(){
 					insert += '<div class="col-sm-2 no-float itemssss">'; 
 					insert += '<a href="http://'+document.domain+'/en/user?t='+obj[i].su_companytype+'&amp;i='+obj[i].users_id+'&amp;token=nope" style="color:#0278c1; text-decoration:underline">'+obj[i].users_name+'</a>'; 
 					insert += '</div>'; 
-					insert += '<div class="col-sm-2 no-float itemssss">'+obj[i].sector_name+'</div>'; 
+					insert += '<div class="col-sm-2 no-float itemssss">';
+					insert += '<ul class="text_formats">';
+					insert += '<li>';
+					insert += obj[i].sector_name; 
+					insert += '</li>';
+					insert += '</ul>';
+					insert += '</div>';
 					insert += '</div><div style="clear:both"></div>'; 
 				}
 				$(".appends").append(insert);
@@ -1612,7 +1618,7 @@ $(document).on("click",".loadmore",function(){
 				$(".appends").append(insert);
 				$(".loadmore").show(); 
 			}else{
-				$(".appends").append("<p>Sorry, there is no more data!</p>");
+				$(".appends").append("<p style=\"width:100%; clear:both\">Sorry, there is no more data!</p>");
 			}
 		});
 	}else if(type=="newslist"){
@@ -1641,7 +1647,7 @@ $(document).on("click",".loadmore",function(){
 				$(".appends").append(insert);
 				$(".loadmore").show(); 
 			}else{
-				$(".appends").append("<p>Sorry, there is no more data!</p>");
+				$(".appends").append("<p style=\"width:100%; clear:both\">Sorry, there is no more data!</p>");
 			}
 		});
 	}else if(type=="userspageserviceprovider"){
@@ -1753,6 +1759,35 @@ $(document).on("click",".loadmore",function(){
 				$(".appends").append("<p>Sorry, there is no more data!</p>");
 			}
 		});
+	}else if(type=="usefulllinks"){
+		$(this).hide();
+		$(".loader").fadeIn("slow"); 
+		$.post("http://"+document.domain+"/en/ajax",{
+			loadmore:true, 
+			t:type,
+			f:from, 
+			l:load
+		},function(r){
+			nf = parseInt(load) * newfrom;
+			$(".loader").hide();
+			$(".loadmore").attr({"data-from":nf}); 
+			if(r!="Empty"){
+				var obj = jQuery.parseJSON(r);
+				var insert = '';
+				for(i=0; i<obj.length; i++){
+					insert += '<a href="'+obj[i].url+'" target="_blank" title="'+obj[i].title+'">';
+					insert += '<div class="col-sm-4 useful_item">';
+					insert += '<div class="image"><img src="'+obj[i].image+'" alt="" /></div>';
+					insert += '<div class="title" style="max-height:60px">'+obj[i].titleShort+' »</div>';
+					insert += '</div>';
+					insert += '</a>';
+				}
+				$(".appends").append(insert);
+				$(".loadmore").show(); 
+			}else{
+				$(".appends").append("<p style=\"width=100%; clear:both; padding:0 10px;\">Sorry, there is no more data!</p>");
+			}
+		});
 	}
 	newfrom++;
 });
@@ -1776,7 +1811,7 @@ $(document).on("click","#recover_submit",function(){
 				c:recovercaptcha 
 			}, function(r){
 				if(r=="Error"){
-					$(".boxarea").html("<p>Error</p><a href=\"javascript:;\" id=\"reload\">Reload</a>");
+					$(".boxarea").html("<p>We can not send recover email, Please make sure you are registed and register email is rigth! </p><a href=\"javascript:;\" id=\"reload\">Reload</a>");
 				}else{
 					$(".boxarea").html(r);
 				}				

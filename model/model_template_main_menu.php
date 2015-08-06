@@ -12,15 +12,14 @@ class model_template_main_menu{
 			$o = '<ul class="nav navbar-nav">';
 				for($x=0;$x<count($menu_array->date);$x++){
 					$active = ($menu_array->slug[$x]==$second_segment) ? 'active' : '';
+					if($menu_array->redirectlink[$x]!="false" && !empty($menu_array->redirectlink[$x])){
+							$gotoUrl = $menu_array->redirectlink[$x];
+					}else{
+						$gotoUrl = MAIN_DIR.$menu_array->slug[$x];
+					}
+					
 					if($menu_array->sub[$x]){ 
 						$o .= '<li class="dropdown '.$active.'">';
-
-						if($menu_array->redirectlink[$x]!="false" && !empty($menu_array->redirectlink[$x])){
-							$gotoUrl = $menu_array->redirectlink[$x];
-						}else{
-							$gotoUrl = MAIN_DIR.$menu_array->slug[$x];
-						}
-
 						$o .= '<a href="'.$gotoUrl.'">'.strtoupper($menu_array->title[$x]).'</a>';
 						$o .= $this->sub($menu_array->sub[$x],$slug,"header"); 
 						$o .= '</li>'; 

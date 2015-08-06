@@ -16,6 +16,9 @@ class eventsinside extends connection{
 		$events_general = $cache->index($c,"events_general");
 		$data["events_general"] = json_decode($events_general);
 
+		$event_list = $cache->index($c,"event_list");
+		$data["event_list"] = json_decode($event_list, true); 
+
 		/* languages */
 		$languages = $cache->index($c,"languages");
 		$data["languages"] = json_decode($languages); 
@@ -45,6 +48,9 @@ class eventsinside extends connection{
 		/* components */
 		$components = $cache->index($c,"components");
 		$data["components"] = json_decode($components); 
+
+		$db_count = new db_count();
+		$data["count"] = $db_count->retrieve($c,'studio404_module_item',' `status`!=1 AND `visibility`=2 AND `module_idx`=1');
 
 		@include($c["website.directory"]."/eventsinside.php"); 
 	}

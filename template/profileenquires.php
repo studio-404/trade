@@ -205,8 +205,8 @@
 			<div class="form-group">
 				<label>Type <font color="red">*</font></label>
 				<select class="form-control" id="etype" name="etype">
-					<option value="sell">I want to SELL</option>
-					<option value="buy">I want to BUY</option>
+					<option value="sell">SELL</option>
+					<option value="buy">BUY</option>
 				</select>
 				<font class="error-msg" id="enquire_type_required">Type is required !</font>
 			</div>
@@ -280,11 +280,13 @@
 					<div style="clear:both"></div>
 				</div>
 			<?php endforeach; ?>
-			<div style="clear:both"></div>
+			<?php if($data["count"]>5) : ?>
+				<div style="clear:both"></div>
 				<div class="appends"></div>
 				<div style="clear:both"></div>
 				<div class="loader">Please wait...</div>
-				<a href="javascript:;" class="gray_link loadmore" data-type="profileenquirelist"  data-from="5" data-load="10">Load more »</a>
+				<a href="javascript:;" class="gray_link loadmore" data-type="profileenquirelist"  data-from="5" data-load="10" style="padding:0">Load more »</a>
+			<?php endif; ?>
 			</div>
 		</div>
 

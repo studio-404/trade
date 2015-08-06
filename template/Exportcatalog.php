@@ -27,7 +27,9 @@
 	</div>
 	
 	
-	<?php if(Input::method("GET","view")=="companies" || !Input::method("GET","view")) : ?>
+	<?php 
+	$ctext = new ctext();
+	if(Input::method("GET","view")=="companies" || !Input::method("GET","view")) : ?>
 	<div class="export_companies">
 		<div class="filters_div">
 			<div class="col-sm-2 filter_cols">
@@ -40,7 +42,8 @@
 					Sub sector <span class="caret"></span> <?=(isset($_GET['subsector']) && !empty($_GET['subsector'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="subsector"></div>' : ''?>
 				</a>
 				<ul class="dropdown-menu">
-					<?php foreach($data["subsector"] as $subsector) : ?>
+					<?php 
+					foreach($data["subsector"] as $subsector) : ?>
 					<li>
 						<a href="?view=<?=$data["get_view"]?>&amp;sort=<?=$data["get_sort"]?>&amp;subsector=<?=$subsector->idx?>&amp;products=<?=$data["get_products"]?>&amp;exportmarkets=<?=$data["get_exportmarkets"]?>&amp;certificate=<?=$data["get_certificate"]?>&amp;search=<?=$data["get_search"]?>&amp;pn=<?=$data["get_pn"]?>" <?=(isset($_GET['subsector']) && $_GET['subsector']==$subsector->idx) ? 'style="color:#f97900 !important;"' : ''?>><?=$subsector->title?></a> 
 					</li>
@@ -101,17 +104,17 @@
 				<div class="col-sm-2 no-float itemssss"><img src="<?=$logo?>" class="img-responsive"></div>
 				<div class="col-sm-2 no-float itemssss">
 					<ul class="text_formats">
-					<li><?=$retrieve_users_info->retrieveDb($val["su_sub_sector_id"])?></li>
+					<li><?=$ctext->cut($retrieve_users_info->retrieveDb($val["su_sub_sector_id"]),35)?></li>
 					</ul>
 				</div>
 				<div class="col-sm-2 no-float itemssss">
 					<ul class="text_formats">
-						<li><?=$retrieve_users_info->retrieveDb($val["su_products"])?></li>
+						<li><?=$ctext->cut($retrieve_users_info->retrieveDb($val["su_products"]),35)?></li>
 					</ul>
 				</div>
 				<div class="col-sm-4 no-float itemssss">
 					<ul class="text_formats">
-						<li><?=$retrieve_users_info->retrieveDb($val["su_export_markets_id"])?></li>
+						<li><?=$ctext->cut($retrieve_users_info->retrieveDb($val["su_export_markets_id"]),35)?></li>
 					</ul>
 				</div>
 				<div class="col-sm-2 no-float itemssss">
@@ -123,11 +126,13 @@
 		</div>
 	</a>
 	<?php } ?>
+	<?php if($data["count"]>10) : ?>
 	<div style="clear:both"></div>
 	<div class="appends"></div>
 	<div style="clear:both"></div>
 	<div class="loader">Please wait...</div>
-	<a href="javascript:;" class="gray_link loadmore" data-type="companylist" data-subsector="<?=Input::method("GET","subsector")?>" data-products="<?=Input::method("GET","products")?>" data-exportmarkets="<?=Input::method("GET","exportmarkets")?>" data-certificate="<?=Input::method("GET","certificate")?>" data-from="10" data-load="10">Load more »</a>
+	<a href="javascript:;" class="gray_link loadmore" data-type="companylist" data-subsector="<?=Input::method("GET","subsector")?>" data-products="<?=Input::method("GET","products")?>" data-exportmarkets="<?=Input::method("GET","exportmarkets")?>" data-certificate="<?=Input::method("GET","certificate")?>" data-from="10" data-load="10" style="padding:0">Load more »</a>
+	<?php endif;?>
 <?php endif; ?>
 
 <?php if(Input::method("GET","view")=="products") : ?>
@@ -192,12 +197,12 @@
 					<div class="col-sm-2 no-float itemssss"><img src="<?=$logo?>" class="img-responsive" width="100%" alt="" /></div>
 					<div class="col-sm-2 no-float itemssss">
 						<ul class="text_formats">
-							<li><?=$retrieve_users_info->retrieve_subsector_from_product(strip_tags($val["products"]))?></li>
+							<li><?=$ctext->cut($retrieve_users_info->retrieve_subsector_from_product(strip_tags($val["products"])),35)?></li>
 						</ul>
 					</div>
 					<div class="col-sm-2 no-float itemssss">
 						<ul class="text_formats">
-							<li><?=$retrieve_users_info->retrieveDb(strip_tags($val["products"]))?></li>
+							<li><?=$ctext->cut($retrieve_users_info->retrieveDb(strip_tags($val["products"])),35)?></li>
 						</ul>
 					</div>
 					<div class="col-sm-2 no-float itemssss">
@@ -219,12 +224,13 @@
 			</div>
 		</a>
 		<?php endforeach; ?>	
+		<?php if($data["count"]>10) : ?>
 		<div style="clear:both"></div>
 		<div class="appends"></div>
 		<div style="clear:both"></div>
 		<div class="loader">Please wait...</div>
-		<a href="javascript:;" class="gray_link loadmore" data-type="productslist" data-subsector="<?=Input::method("GET","subsector")?>" data-products="<?=Input::method("GET","products")?>"  data-from="10" data-load="10">Load more »</a>
-
+		<a href="javascript:;" class="gray_link loadmore" data-type="productslist" data-subsector="<?=Input::method("GET","subsector")?>" data-products="<?=Input::method("GET","products")?>"  data-from="10" data-load="10" style="padding:0">Load more »</a>
+		<?php endif; ?>
 	</div>
 <?php endif; ?>
 
@@ -277,7 +283,6 @@
 	// echo "</pre>";
 	
 	$retrieve_users_info = new retrieve_users_info();
-	$ctext = new ctext();
 	foreach($data["fetch"] as $val) :
 	?>		
 	<a href="<?=WEBSITE.LANG?>/user?t=<?=$val["su_companytype"]?>&amp;i=<?=$val["users_id"]?>&amp;p=<?=$val['id']?>">	
@@ -292,12 +297,12 @@
 				</div>
 				<div class="col-sm-2 no-float itemssss">
 					<ul class="text_formats">
-						<li><?=$retrieve_users_info->retrieveDb($val["sub_sector_id"])?></li>
+						<li><?=$ctext->cut($retrieve_users_info->retrieveDb($val["sub_sector_id"]),35)?></li>
 					</ul>
 				</div>
 				<div class="col-sm-2 no-float itemssss">
 					<ul class="text_formats">
-						<li><?=$retrieve_users_info->retrieveDb($val["products"])?></li>
+						<li><?=$ctext->cut($retrieve_users_info->retrieveDb($val["products"]),35)?></li>
 					</ul>
 				</div>
 				<div class="col-sm-6 no-float itemssss">
@@ -311,11 +316,13 @@
 	<?php
 	endforeach;
 	?>
+	<?php if($data["count"]>10) : ?>
 	<div style="clear:both"></div>
 	<div class="appends"></div>
 	<div style="clear:both"></div>
 	<div class="loader">Please wait...</div>
-	<a href="javascript:;" class="gray_link loadmore" data-type="servicelist" data-subsector="<?=Input::method("GET","subsector")?>" data-products="<?=Input::method("GET","products")?>"  data-from="10" data-load="10">Load more »</a>
+	<a href="javascript:;" class="gray_link loadmore" data-type="servicelist" data-subsector="<?=Input::method("GET","subsector")?>" data-products="<?=Input::method("GET","products")?>"  data-from="10" data-load="10" style="padding:0">Load more »</a>
+	<?php endif; ?>
 </div>
 <?php endif; ?>
 	

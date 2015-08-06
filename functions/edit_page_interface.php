@@ -680,8 +680,8 @@ class edit_page_interface extends connection{
 			$out .= '<label for="event_desc">Venue: </label>';
 			$out .= '<input type="text" name="event_desc" id="event_desc" value="'.htmlentities($fetch["smi_event_desc"]).'" autocomplete="off">';
 
-			$out .= '<label for="event_when">Event when: </label>';
-			$out .= '<input type="text" name="event_when" id="event_when" value="'.htmlentities($fetch["smi_event_when"]).'" autocomplete="off">';
+			// $out .= '<label for="event_when">Event when: </label>';
+			// $out .= '<input type="text" name="event_when" id="event_when" value="'.htmlentities($fetch["smi_event_when"]).'" autocomplete="off">';
 
 			$out .= '<label for="event_fee">Event fee: </label>';
 			$out .= '<input type="text" name="event_fee" id="event_fee" value="'.htmlentities($fetch["smi_event_fee"]).'" autocomplete="off">';

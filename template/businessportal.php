@@ -76,16 +76,20 @@
 					</div>
 				</a>
 				<div class="col-sm-2 no-float itemssss">
-					<a href="<?=WEBSITE.LANG?>/user?t=<?=$val["su_companytype"]?>&amp;i=<?=$val["users_id"]?>" style="color:#0278c1; text-decoration:underline"><?=$val['users_name']?></a>
+					<ul class="text_formats">
+						<li><a href="<?=WEBSITE.LANG?>/user?t=<?=$val["su_companytype"]?>&amp;i=<?=$val["users_id"]?>" style="color:#0278c1; text-decoration:underline"><?=$val['users_name']?></a><li>
+					</ul>
 				</div>
-				<div class="col-sm-2 no-float itemssss"><?=$val['sector_name']?></div>
+				<div class="col-sm-2 no-float itemssss"><?=$ctext->cut($val['sector_name'],35)?></div>
 			</div><div style="clear:both"></div>
 		<?php endforeach; ?>
+		<?php if($data["count"]>10) : ?>
 			<div style="clear:both"></div>
 			<div class="appends"></div>
 			<div style="clear:both"></div>
 			<div class="loader">Please wait...</div>
-			<a href="javascript:;" class="gray_link loadmore" data-type="enquirelist" data-view="<?=Input::method("GET","view")?>" data-typex="<?=Input::method("GET","type")?>" data-sector="<?=Input::method("GET","sector")?>"  data-from="10" data-load="10">Load more »</a>
+			<a href="javascript:;" class="gray_link loadmore" data-type="enquirelist" data-view="<?=Input::method("GET","view")?>" data-typex="<?=Input::method("GET","type")?>" data-sector="<?=Input::method("GET","sector")?>"  data-from="10" data-load="10" style="padding:0">Load more »</a>
+		<?php endif; ?>
 		</div>
 	
 

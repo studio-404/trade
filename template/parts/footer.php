@@ -4,12 +4,36 @@
 		<div id="footer" class="container">
 			<div class="col-sm-9 padding_0">
 				<div id="footer_links">
-					<?=$data["footer_menu"]?>
+					<?php
+					//echo $data["footer_menu"];
+					?>
+
+					<ul>
+						<span>Country profile: &nbsp;</span>
+						<li><a href="<?=WEBSITE.LANG?>/country-profile/facts-about-georgia">Facts about Georgia</a></li> / 
+						<li><a href="<?=WEBSITE.LANG?>/country-profile/why-trade-with-Georgia">Why trade with Georgia</a></li> / 
+						<li><a href="<?=WEBSITE.LANG?>/country-profile/doing-bussiness-in-Georgia">Doing bussiness in Georgia</a></li>
+					</ul>
+					<ul>
+						<span>Export catalog: &nbsp;</span>
+						<li><a href="<?=WEBSITE.LANG?>/export-catalog">Companies</a></li> / 
+						<li><a href="<?=WEBSITE.LANG?>/export-catalog?view=products">Products</a></li> / 
+						<li><a href="<?=WEBSITE.LANG?>/export-catalog?view=services">Services</a></li> / 
+						<li><a href="<?=WEBSITE.LANG?>/en/business-portal">Enquires</a></li>
+					</ul>
+					<ul>
+						<span>About us: &nbsp;</span>
+						<li><a href="<?=WEBSITE.LANG?>/about-us/our-services">Our services</a></li> / 
+						<li><a href="<?=WEBSITE.LANG?>/about-us/events">Events</a></li> / 
+						<li><a href="<?=WEBSITE.LANG?>/about-us/news">News</a></li> / 
+						<li><a href="<?=WEBSITE.LANG?>/about-us/contact-us">Contact us</a></li>
+					</ul>	
+
 				</div>
 			</div>
 			<div class="col-sm-3 text-right padding_0" id="footer_fb">
 				
-				<?php
+					<?php
 					foreach($data["components"] as $val){
 						if($val->com_name != "social networks"){ continue; }
 					?>
@@ -20,6 +44,7 @@
 					<?php
 					}
 					?>
+
 				
 			</div>
 		</div>	

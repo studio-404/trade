@@ -43,6 +43,8 @@ class businessportal extends connection{
 		$data["get_search"] = (Input::method("GET","search")) ? Input::method("GET","search") : '';
 		$data["get_pn"] = (Input::method("GET","pn")) ? Input::method("GET","pn") : 1;
 		$data["get_token"] = (Input::method("GET","token")) ? Input::method("GET","token") : '';
+		$db_count = new db_count();
+		$data["count"] = $db_count->retrieve($c,'studio404_module_item',' `status`!=1 AND `visibility`=2 AND `module_idx`=5');
 
 		$limit = ' LIMIT '.(($data["get_pn"]-1)*10).', 10';
 		$orderBy = ' ORDER BY `studio404_module_item`.`date` DESC';

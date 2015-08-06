@@ -369,12 +369,14 @@
 			</div>
 		</div>
 	<?php endforeach; ?>
+
+	<?php if($data["count"]>5) : ?>
 	<div style="clear:both"></div>
 	<div class="appends"></div>
 	<div style="clear:both"></div>
 	<div class="loader">Please wait...</div>
-	<a href="javascript:;" class="gray_link loadmore" data-type="profileproductlist"  data-from="5" data-load="10">Load more »</a>
-		
+	<a href="javascript:;" class="gray_link loadmore" data-type="profileproductlist"  data-from="5" data-load="10" style="padding:0">Load more »</a>
+	<?php endif; ?>
 		
 	</div>
 <?php 

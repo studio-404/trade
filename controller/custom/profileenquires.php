@@ -113,6 +113,9 @@ class profileenquires extends connection{
 		));
 		$data["myenquire"] = $prepare_product->fetchAll(PDO::FETCH_ASSOC); 
 
+		$db_count = new db_count();
+		$session_user_id = (int)$_SESSION["tradewithgeorgia_user_id"];
+		$data["count"] = $db_count->retrieve($c,'studio404_module_item',' `status`!=1 AND `module_idx`=5 AND `insert_admin`='.$session_user_id);
 
 		@include($c["website.directory"]."/profileenquires.php"); 
 	}

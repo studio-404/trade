@@ -5,10 +5,60 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><?php 
-$template_title = new template_title();
-$header_data = $template_title->getTitle($data);
-echo $header_data["title"]; 
+if(!empty($data["news_general"][0]["title"])){
+	$title =  $data["news_general"][0]["title"];
+	$desc =  $data["news_general"][0]["short_description"];
+	$first = array_slice($data["last_news_files"], 0, 1);
+	if($first[0]->file){ $shareImage = WEBSITE.'image?f='.WEBSITE.$first[0]->file.'&w=600&h=315'; }
+	else{ $shareImage = TEMPLATE.'img/logoshare.png';  }
+	$tags = $data["news_general"][0]["keywords"];
+}else if(!empty($data["event_list"])){
+	$first = array_slice($data["event_list"],0,1);
+	$title = $first[0]["title"];
+	$desc = $first[0]["short_description"];
+	$first = array_slice($data["event_list"], 0, 1);
+	if($first[0]["pic"]){ $shareImage = WEBSITE.'image?f='.WEBSITE.$first[0]["pic"].'&w=600&h=315'; }
+	else{ $shareImage = TEMPLATE.'img/logoshare.png';  }
+	$tags = $first[0]["keywords"];
+}else if(!empty($data["news_list"])){
+	$news_first = array_slice($data["news_list"],0,1);
+	$title = $news_first[0]->title; 	
+	$desc = $news_first[0]->short_description; 	
+	$first = array_slice($data["last_news_files"], 0, 1);
+	if($first[0]->file){ $shareImage = WEBSITE.'image?f='.WEBSITE.$first[0]->file.'&w=600&h=315'; }
+	else{ $shareImage = TEMPLATE.'img/logoshare.png';  }
+	$tags = $news_first[0]->keywords;
+}else if(!empty($data["team_general"][0]["title"])){
+	$title = $data["team_general"][0]["title"];
+	$desc = $data["team_general"][0]["short_description"];
+	$shareImage = TEMPLATE.'img/logoshare.png';
+	$tags = $data["team_general"][0]["keywords"];
+}else if(!empty($data["text_general"][0]["title"])){
+	$title = $data["text_general"][0]["title"]; 
+	$desc = $data["text_general"][0]["description"]; 
+	$first = array_slice($data["text_files"], 0, 1);
+	if($first[0]->file){ $shareImage = WEBSITE.'image?f='.WEBSITE.$first[0]->file.'&w=600&h=315'; }
+	else{ $shareImage = TEMPLATE.'img/logoshare.png'; }
+	$tags = $data["text_general"][0]["keywords"];
+}else{
+	$title = $data["language_data"]["mainpage"]; 
+	$desc = $title." - Enterprise Georgia"; 
+	$shareImage = TEMPLATE.'img/logoshare.png';
+	$tags = $data["language_data"]["tags"];
+}
+echo $title; 
 ?> - Trade with Georgia</title>
+<!-- FB Meta tags (start) -->
+<meta property="og:title" content="<?=htmlentities(strip_tags($title))?> - Enterprise Georgia" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="<?=WEBSITE_.$_SERVER['REQUEST_URI']?>"/>
+<meta property="og:image" content="<?=$shareImage?>" />
+<meta property="og:site_name" content="Enterprise Georgia"/>
+<meta property="og:description" content="<?=htmlentities(strip_tags($desc))?>"/>
+<!-- FB Meta tags (end)-->
+<meta name="description" content="<?=htmlentities(strip_tags($desc))?>">
+<meta name="keywords" content="<?=$tags?>">
+<meta name="author" content="Studio 404, Niki Getsadze"/>
 <link type="text/plain" rel="author" href="<?php echo WEBSITE;?>humans.txt" />
 <link href="<?php echo TEMPLATE;?>css/bootstrap.css" type="text/css" rel="stylesheet"/>
 <link href="<?php echo TEMPLATE;?>css/bootstrap-theme.css" type="text/css" rel="stylesheet"/>
@@ -73,7 +123,9 @@ include("message.php");
 				</div>
 			</div>
 			<div class="col-sm-2 header_map text-right">
-				<img src="<?=TEMPLATE?>img/enterprise_georgia.png"/>
+				<a href="http://enterprise.gov.ge" target="_blank">
+					<img src="<?=TEMPLATE?>img/enterprise_georgia.png"/>
+				</a>
 			</div>
 		</div>
 	</div>

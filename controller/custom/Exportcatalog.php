@@ -58,6 +58,7 @@ class exportcatalog extends connection{
 		$certificates = $cache->index($c,"certificates");
 		$data["certificates"] = json_decode($certificates); 
 
+		$db_count = new db_count();
 		if(Input::method("GET","view")=="companies" OR empty(Input::method("GET","view"))) : 
 			$data["get_view"] = (Input::method("GET","view")) ? Input::method("GET","view") : 'companies';
 			$data["get_sort"] = (Input::method("GET","sort") && Input::method("GET","sort")=="desc") ? "DESC" : 'ASC';
@@ -68,8 +69,7 @@ class exportcatalog extends connection{
 			$data["get_search"] = (Input::method("GET","search")) ? Input::method("GET","search") : '';
 			$data["get_pn"] = (Input::method("GET","pn")) ? Input::method("GET","pn") : 1;
 			$data["get_token"] = (Input::method("GET","token")) ? Input::method("GET","token") : '';
-
-
+			$data["count"] = $db_count->retrieve($c,'studio404_users',' `status`!=1 AND `user_type`="website" AND (`company_type`="manufacturer" OR `company_type`="serviceprovider")');
 
 			$limit = ' LIMIT '.(($data["get_pn"]-1)*10).', 10';
 			$orderBy = ' ORDER BY `studio404_users`.`id` DESC';
@@ -121,8 +121,7 @@ class exportcatalog extends connection{
 			$data["get_search"] = (Input::method("GET","search")) ? Input::method("GET","search") : '';
 			$data["get_pn"] = (Input::method("GET","pn")) ? Input::method("GET","pn") : 1;
 			$data["get_token"] = (Input::method("GET","token")) ? Input::method("GET","token") : '';
-
-
+			$data["count"] = $db_count->retrieve($c,'studio404_module_item',' `status`!=1 AND `visibility`=2 AND `module_idx`=3');
 
 			$limit = ' LIMIT '.(($data["get_pn"]-1)*10).', 10';
 			$orderBy = ' ORDER BY `studio404_module_item`.`date` '.urlencode($data["get_sort"]);
@@ -175,8 +174,7 @@ class exportcatalog extends connection{
 			$data["get_search"] = (Input::method("GET","search")) ? Input::method("GET","search") : '';
 			$data["get_pn"] = (Input::method("GET","pn")) ? Input::method("GET","pn") : 1;
 			$data["get_token"] = (Input::method("GET","token")) ? Input::method("GET","token") : '';
-
-
+			$data["count"] = $db_count->retrieve($c,'studio404_module_item',' `status`!=1 AND `visibility`=2 AND `module_idx`=4');
 
 			$limit = ' LIMIT '.(($data["get_pn"]-1)*10).', 10';
 			$orderBy = ' ORDER BY `studio404_module_item`.`date` '.urlencode($data["get_sort"]);
