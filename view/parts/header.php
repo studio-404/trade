@@ -52,6 +52,7 @@
 							<li><a href="<?=(isset($_SESSION["user404"])) ? "?action=languages" : "javascript:;"?>">Languages</a></li>
 							<li><a href="<?=(isset($_SESSION["user404"])) ? "?action=languageData" : "javascript:;"?>"><i class="fa fa-minus"></i> Languages data</a></li>
 							<li><a href="<?=(isset($_SESSION["user404"])) ? "?action=websiteSettings" : "javascript:;"?>">Website settings</a></li>
+							<li><a href="<?=(isset($_SESSION["user404"])) ? "?action=exelator" : "javascript:;"?>">Exelator</a></li>
 							<li><a href="<?=(isset($_SESSION["user404"])) ? "?action=textConverter" : "javascript:;"?>">Text converter</a></li>
 							<li><a href="<?=(isset($_SESSION["user404"])) ? "?action=log" : "javascript:;"?>">Log</a></li>
 							<li><a href="<?=(isset($_SESSION["user404"])) ? "?action=backup" : "javascript:;"?>">Backup</a></li>							

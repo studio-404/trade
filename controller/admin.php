@@ -576,6 +576,16 @@ class admin extends connection{
 				if($data["data"]){
 				@include("view/view_admin_edituserstats.php");
 				}else{ redirect::url(WEBSITE.LANG.'/'.ADMIN_SLUG.'?action=welcome'); }
+			}else if(isset($action) && $action=="exelator"){
+				$data["website_title"] = "Exelator / Admin Panel - v: ".$c['cmsversion'];
+				$model_admin_showtables = new model_admin_showtables();
+				$data["table"] = $model_admin_showtables->showtables($c); 
+
+				$model_admin_sqlcommand = new model_admin_sqlcommand();
+				$data["sqlcommand"] = $model_admin_sqlcommand->load($c);
+
+				@include("view/view_admin_exelator.php");
+				//redirect::url(WEBSITE.LANG.'/'.ADMIN_SLUG.'?action=welcome'); 
 			}else{ 
 				$data["website_title"] = "Welcome / Admin Panel - v: ".$c['cmsversion'];
 				$data["c"] = $c;
