@@ -33,9 +33,13 @@ $first = array_slice($data["event_list"], 0, 1);
 			<div class="col-sm-4 event_line_bg">
 				<div class="yellow_title">When:</div>
 				<div class="text_formats_blue">
-					<?=date("d M Y G:i",$first[0]["date"])?>	
+				Start <?=date("d M Y G:i",$first[0]["date"])?>
+				<?php if($first[0]["date"]!=$first[0]["expiredate"]) : ?>
+				<br />
+				End <?=date("d M Y G:i",$first[0]["expiredate"])?>
+				<?php endif; ?>
 				</div>
-				<div class="yellow_title">Fee:</div>
+				<div class="yellow_title">Place:</div>
 				<div class="text_formats_blue">
 					<?=$first[0]["event_fee"]?>
 				</div>
@@ -45,9 +49,9 @@ $first = array_slice($data["event_list"], 0, 1);
 				<div class="text_formats_blue">
 					<?=$first[0]["event_desc"]?>	
 				</div>
-				<div class="yellow_title">Website:</div>
+				<div class="yellow_title">Web page:</div>
 				<div class="text_formats_blue">
-					<?=$first[0]["event_website"]?>	
+					<a href="<?=$first[0]["event_website"]?>" target="_blank"><?=$first[0]["event_website"]?></a>
 				</div>
 			</div>			
 		</div>
@@ -60,8 +64,8 @@ $first = array_slice($data["event_list"], 0, 1);
 			<div class="title">Programme</div>
 			<?=$first[0]["long_description"]?>
 		</div>
-		<?php if($first[0]["date"] > time()) : ?>		
-		<div class="btn btn-yellow eventRegister" data-eventid="<?=$first[0]["idx"]?>" style="margin-top:30px;">REGISTER FOR  THIS EVENT</div>
+		<?php if($first[0]["expiredate"] > time()) : ?>	
+		<div class="btn btn-yellow eventRegister" data-homepage="false" data-eventid="<?=$first[0]["idx"]?>" style="margin-top:30px;">REGISTER FOR  THIS EVENT</div>
 		<?php endif; ?>
 		<hr class="line_effect">
 		

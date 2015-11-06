@@ -60,10 +60,11 @@ class profileenquires extends connection{
 		
 
 		if(!isset($_SESSION["user_data"]["companyname"]) && isset($_SESSION["tradewithgeorgia_username"])){
-			$sql = 'SELECT * FROM `studio404_users` WHERE `username`=:username AND `allow`!=:one AND `status`!=:one';
+			$sql = 'SELECT * FROM `studio404_users` WHERE `id`=:companyId AND `username`=:username AND `allow`!=:one AND `status`!=:one';
 			$prepare = $conn->prepare($sql);
 			$prepare->execute(array(
 				":username"=>$_SESSION["tradewithgeorgia_username"], 
+				":companyId"=>$_SESSION["tradewithgeorgia_user_id"], 
 				":one"=>1
 			));
 			$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 

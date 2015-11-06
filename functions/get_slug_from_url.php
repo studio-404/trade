@@ -1,6 +1,5 @@
 <?php if(!defined("DIR")){ exit(); }
 class get_slug_from_url {
-
 	public function slug(){
 		$actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 		$removeQ = explode("?",$actual_link);
@@ -10,6 +9,5 @@ class get_slug_from_url {
 		else{ $out = $slug[1]; }
 		return $out;
 	}
-
 }
 ?>

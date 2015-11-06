@@ -1,30 +1,30 @@
-<html>
-  <head>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'test1', 'test2', 'test3', 'test4', 'test5'],
-          ['2013',  1000, 400, 500, 120, 155],
-          ['2014',  1170, 460, 600, 222, 233],
-          ['2015',  660, 1120, 120, 124, 555],
-          ['2016',  1030, 540, 10, 11, 133]
-        ]);
-
-        var options = {
-          title: 'Company Performance',
-          vAxis: { minValue: 0 }, 
-          colors:  ['#1279bb','#94bed7','#68a6cd','#3d90c4','#93bdd6', '#a4cde6','#b1dcf5', '#c1e4f9', '#f37b4b','#e16a3b', '#cc5a2e']
-        };
-
-        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script>
-  </head>
-  <body>
-    <div id="chart_div" style="width: 100%"></div>
-  </body>
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'test1', 'test2', 'test3', 'test4', 'test5'],
+          ['2013',  1000, 400, 500, 120, 155],
+          ['2014',  1170, 460, 600, 222, 233],
+          ['2015',  660, 1120, 120, 124, 555],
+          ['2016',  1030, 540, 10, 11, 133]
+        ]);
+
+        var options = {
+          title: 'Company Performance',
+          vAxis: { minValue: 0 }, 
+          colors:  ['#1279bb','#94bed7','#68a6cd','#3d90c4','#93bdd6', '#a4cde6','#b1dcf5', '#c1e4f9', '#f37b4b','#e16a3b', '#cc5a2e']
+        };
+
+        var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="chart_div" style="width: 100%"></div>
+  </body>
 </html>

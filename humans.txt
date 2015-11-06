@@ -1,25 +1,25 @@
-/* TEAM */
-	Project manager & Web developer:  Giorgi Gvazava
-	Contact: giorgigvazava87[at]gmail.com 
-	Website: http://404.ge/ 
-	From: Georgia, Tbilisi
-
-	Web developer: Valerian Apkhazava
-	Contact: v.apkhazava[at]gmail.com
-	Website: http://404.ge/
-	From: Georgia, Batumi
-
-	Designer: Niki Getsadze
-	Contact: ngetsadze[at]gmail.com
-	Website: http://getsadze.co.uk/
-	From: Georgia, Tbilisi
-
-	Front end developer: Zviad Ruxadze
-	Contact: zviadruxadze[at]gmail.com 
-	From: Georgia Tbilisi
-
-/* SITE */
-	Last update: 2015/06/30
-	Language: Georgian / English
-	Doctype: HTML5
+/* TEAM */
+	Project manager & Web developer:  Giorgi Gvazava
+	Contact: giorgigvazava87[at]gmail.com 
+	Website: http://404.ge/ 
+	From: Georgia, Tbilisi
+
+	Web developer: Valerian Apkhazava
+	Contact: v.apkhazava[at]gmail.com
+	Website: http://404.ge/
+	From: Georgia, Batumi
+
+	Designer: Niki Getsadze
+	Contact: ngetsadze[at]gmail.com
+	Website: http://getsadze.co.uk/
+	From: Georgia, Tbilisi
+
+	Front end developer: Zviad Ruxadze
+	Contact: zviadruxadze[at]gmail.com 
+	From: Georgia Tbilisi
+
+/* SITE */
+	Last update: 2015/06/30
+	Language: Georgian / English
+	Doctype: HTML5
 	IDE: Sublime Text, Notepad++, FileZilla, Photoshop

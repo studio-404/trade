@@ -17,8 +17,8 @@ class profileproducts extends connection{
 		$model_template_upload_user_logo = new model_template_upload_user_logo();
 		$upload = $model_template_upload_user_logo->upload($c);
 
-		// $sectors_subsectors_products = new sectors_subsectors_products(); 
-		// $data["sectors"] = $sectors_subsectors_products->sectors($c); 
+		$sectors_subsectors_products = new sectors_subsectors_products(); 
+		$data["sectors"] = $sectors_subsectors_products->sectors($c); 
 
 		$cache = new cache();
 		$text_general = $cache->index($c,"text_general");
@@ -65,10 +65,11 @@ class profileproducts extends connection{
 		$data["components"] = json_decode($components);  
 
 		if(!isset($_SESSION["user_data"]["companyname"]) && isset($_SESSION["tradewithgeorgia_username"])){
-			$sql = 'SELECT * FROM `studio404_users` WHERE `username`=:username AND `allow`!=:one AND `status`!=:one';
+			$sql = 'SELECT * FROM `studio404_users` WHERE `id`=:companyId AND `username`=:username AND `allow`!=:one AND `status`!=:one';
 			$prepare = $conn->prepare($sql);
 			$prepare->execute(array(
 				":username"=>$_SESSION["tradewithgeorgia_username"], 
+				":companyId"=>$_SESSION["tradewithgeorgia_user_id"], 
 				":one"=>1
 			));
 			$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
