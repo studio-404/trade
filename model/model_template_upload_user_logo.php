@@ -50,6 +50,7 @@ class model_template_upload_user_logo extends connection{
 			}
 		}
 
+
 		if(isset($_FILES["inputUserLogo"]["name"]) && !empty($_FILES["inputUserLogo"]["name"]) && isset($_SESSION["tradewithgeorgia_username"])){
 			$ext = explode(".",$_FILES["inputUserLogo"]["name"]);
 			$ext = strtolower(end($ext));
@@ -97,7 +98,8 @@ class model_template_upload_user_logo extends connection{
 		}
 
 
-		if(Input::method("POST","pi") && isset($_FILES["productfile"]["name"]) && !empty($_FILES["productfile"]["name"])){
+
+		if(Input::method("POST","pix") && isset($_FILES["productfile"]["name"]) && !empty($_FILES["productfile"]["name"])){
 			$ext = explode(".",$_FILES["productfile"]["name"]);
 			$ext = strtolower(end($ext));
 
@@ -117,7 +119,7 @@ class model_template_upload_user_logo extends connection{
 				 	$sql = 'UPDATE `studio404_module_item` SET `picture`=:picture WHERE `idx`=:idx AND `module_idx`=3 AND `insert_admin`=:insert_admin'; 
 				 	$prepare = $conn->prepare($sql); 
 				 	$prepare->execute(array(
-				 		":idx"=>(int)Input::method("POST","pi"), 
+				 		":idx"=>(int)Input::method("POST","pix"), 
 				 		":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"], 
 				 		":picture"=>$fileName
 				 	));
@@ -127,6 +129,47 @@ class model_template_upload_user_logo extends connection{
     			}
 			}
 
+		}
+//echo $_FILES["productAnalysis"]["name"]." ".$_FILES["productfile"]["name"]." ".Input::method("POST","pix");
+		if(isset($_FILES["productAnalysis"]["name"]) && !empty($_FILES["productAnalysis"]["name"]) && Input::method("POST","pix")){
+			$ext = explode(".",$_FILES["productAnalysis"]["name"]);
+			$ext = strtolower(end($ext));
+
+			if($ext!="pdf"){
+				return 2;
+			}else if($_FILES["productAnalysis"]["size"]>3000000){
+				return 2;
+			}else{
+				$fileName = md5(time()).'.'.$ext; 
+				
+				$target_file = DIR . 'files/document/'.$fileName;
+				 if (move_uploaded_file($_FILES["productAnalysis"]["tmp_name"],$target_file)) { 
+				 	$conn = $this->conn($c); 
+
+				 	$check = 'SELECT `productanalisis` FROM `studio404_module_item` WHERE `idx`=:pid AND `status`!=:one'; 
+				 	$pre_check = $conn->prepare($check);
+				 	$pre_check->execute(array(
+				 		":pid"=>(int)Input::method("POST","pix"), 
+				 		":one"=>1
+				 	));
+				 	$ch_fetch = $pre_check->fetch(PDO::FETCH_ASSOC); 
+				 	if(!empty($ch_fetch["productanalisis"])){
+				 		$old_pic = DIR . 'files/document/'.$ch_fetch["productanalisis"]; 
+				 		@unlink($old_pic);
+				 	}
+
+				 	$sql = 'UPDATE `studio404_module_item` SET `productanalisis`=:productanalisis WHERE `idx`=:pid AND `status`!=:one'; 
+				 	$prepare = $conn->prepare($sql); 
+				 	$prepare->execute(array(
+				 		":pid"=>(int)Input::method("POST","pix"), 
+				 		":one"=>1, 
+				 		":productanalisis"=>$fileName
+				 	));
+        			return 1;
+    			}else{
+    				return 2; 
+    			}
+			}
 		}
 
 

@@ -70,7 +70,7 @@
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown4" id="drop_sector4">
 						<div class="selectItem44">
-							<input type="text" id="searchExportMarket" class="form-control searchExportMarket" placeholder="Search Country" value="" />
+							<input type="text" id="searchExportMarket" class="form-control searchExportMarket" placeholder="Search Country" value="" autocomplete="off" />
 						</div>
 						<div class="loadCountriesExport">
 						<?php 
@@ -340,6 +340,7 @@
 	</div>
 	
 		<div class="row">
+			<form action="" method="post" name="addproduct" id="addproduct" enctype="multipart/form-data">
 			<div class="col-sm-3">
 				<div class="form-group">
 					<label>Avtivity <font color="red">*</font></label>
@@ -381,7 +382,7 @@
 				<div class="form-group" style="position:relative">
 					<label>HS Code <font color="red">*</font></label>
 					<input type="hidden" name="hscode_id" class="hscode_id" id="hscode_id" value="" />
-					<input type="text" name="hscode" class="form-control hscode" value="" placeholder="Type minimum 3 letter.." />
+					<input type="text" name="hscode" class="form-control hscode" value="" placeholder="Type minimum 3 letter.." autocomplete="off" />
 					<div class="results"><ul></ul></div>
 					<font class="error-msg" id="requiredx_add_hscode">HS code is required !</font>
 				</div>
@@ -391,20 +392,20 @@
 				</div>
 			</div>	
 			<div class="col-sm-3">
-				<form action="" method="post" name="addproduct" id="addproduct" enctype="multipart/form-data">
+				
 				<input type="hidden" name="t" value="<?=$_SESSION["token_generator"]?>" />
-				<input type="hidden" name="pi" id="pi" class="pi" value="" />
+				<input type="hidden" name="pix" id="pix" class="pix" value="" />
 				<div class="form-group">
 					<label>Product Photo <font color="red">*</font></label> 
 					<div class="upload_img_tmp">
 						<img src="<?=TEMPLATE?>img/img_upload.png" id="product_picture" class="img-responsive" width="100%" alt="" />
 					</div>
 					<div class="btn btn-upload btn-block"> 
-						UPLOAD LOGO <input type="file" id="productfile" name="productfile" class="input_type_file" value="" />
+						UPLOAD PHOTO <input type="file" id="productfile" name="productfile" class="input_type_file" value="" />
 					</div> 
 					<font class="error-msg" id="requiredx_add_photo">Product photo is required !</font>
 				</div>
-				</form>
+				
 			</div>
 			<div class="admin_inputs">
 				<div class="col-sm-9">
@@ -421,6 +422,7 @@
 					</div>
 				</div>
 			</div>	
+			</form>
 		</div>
 		
 		<hr>

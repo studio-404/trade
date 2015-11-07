@@ -599,7 +599,7 @@ $(document).on("click","#post_product",function(){
 			d:nl2br(product_description)
 		}, function(r){
 			if(r!="Error"){
-				$("#pi").val(r); 
+				$("#pix").val(r); 
 				$("#addproduct").submit(); 
 			}else{
 				$("#insertText").html("Error"); 
@@ -614,8 +614,6 @@ $(document).on("change","#productfile",function(e){
 	e.stopPropagation();
 	e.preventDefault();
 	var files = e.target.files;
-
-
 	var ex = files[0].name.split(".");
 	var extLast = ex[ex.length - 1].toLowerCase();
 	console.log(extLast);
