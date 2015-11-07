@@ -625,7 +625,7 @@ class ajax extends connection{
 		}
 
 		if(Input::method("POST","hscode") && Input::method("POST","hscode")=="true" && Input::method("POST","s") && strlen(Input::method("POST","s"))>=3){
-			$sql = 'SELECT `idx`,`title` FROM `studio404_pages` WHERE `cid`=:cid AND `title` LIKE "%'.Input::method("POST","s").'%" AND `status`!=:one ORDER BY `title` ASC';
+			$sql = 'SELECT `idx`,`title` FROM `studio404_pages` WHERE `cid`=:cid AND `title` LIKE "'.Input::method("POST","s").'%" AND `status`!=:one ORDER BY `title` ASC';
 			$prepare = $conn->prepare($sql); 
 			$prepare->execute(array(
 				":cid"=>769, 

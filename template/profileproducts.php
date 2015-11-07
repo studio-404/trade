@@ -237,11 +237,11 @@
 				<?php
 				if(!empty($_SESSION["user_data"]["picture"])){
 					?>
-					<img src="<?=WEBSITE?>image?f=<?=WEBSITE?>files/usersimage/<?=$_SESSION["user_data"]["picture"]?>&amp;w=270&amp;h=160" id="product_picture" class="img-responsive" width="100%" alt="" />
+					<img src="<?=WEBSITE?>image?f=<?=WEBSITE?>files/usersimage/<?=$_SESSION["user_data"]["picture"]?>&amp;w=270&amp;h=160" id="profile_logo" class="img-responsive" width="100%" alt="" />
 					<?php
 				}else{
 				?>
-					<img src="<?=TEMPLATE?>img/img_upload.png" id="product_picture" class="img-responsive" width="100%" alt="" />
+					<img src="<?=TEMPLATE?>img/img_upload.png" id="profile_logo" class="img-responsive" width="100%" alt="" />
 				<?php
 				}
 				?>
