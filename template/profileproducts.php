@@ -228,7 +228,7 @@
 	
 	<!--Forth column START-->
 	<div class="col-lg-3">
-		<form action="" method="post" name="addproduct" id="addproduct" enctype="multipart/form-data">
+		<form action="" method="post" name="uploadImageForm" id="uploadImageForm" enctype="multipart/form-data">
 		<input type="hidden" name="t" value="<?=$_SESSION["token_generator"]?>" />
 		<input type="hidden" name="pi" id="pi" class="pi" value="" />
 		<div class="form-group">
@@ -247,7 +247,7 @@
 				?>
 			</div>
 			<div class="btn btn-upload btn-block"> 
-				UPLOAD LOGO <input type="file" id="productfile" name="productfile" class="input_type_file" value="" />
+				UPLOAD LOGO <input type="file" id="inputUserLogo" name="inputUserLogo" class="input_type_file" value="" />
 			</div> 
 			<font class="error-msg" id="requiredx_add_photo">Product photo is required !</font>
 		</div>
