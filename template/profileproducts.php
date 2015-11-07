@@ -93,7 +93,7 @@
 			</div>
 			<div class="form-group">
 				<label>Upload Catalogue <span style="font-size:10px; color:#555555">PDF</span></label>
-				<input type="file" id="attachment" name="attachment" class="form-control" value="" />
+				<input type="file" id="ad_upload_catalog" name="ad_upload_catalog" class="form-control" value="" />
 			</div>
 		</div>
 	<!--First column END-->
@@ -227,7 +227,17 @@
 		<div class="form-group">
 			<label>Product Photo <font color="red">*</font></label> 
 			<div class="upload_img_tmp">
-				<img src="<?=TEMPLATE?>img/img_upload.png" id="product_picture" class="img-responsive" width="100%" alt="" />
+				<?php
+				if(!empty($_SESSION["user_data"]["picture"])){
+					?>
+					<img src="<?=WEBSITE?>image?f=<?=WEBSITE?>files/usersimage/<?=$_SESSION["user_data"]["picture"]?>&amp;w=270&amp;h=160" id="product_picture" class="img-responsive" width="100%" alt="" />
+					<?php
+				}else{
+				?>
+					<img src="<?=TEMPLATE?>img/img_upload.png" id="product_picture" class="img-responsive" width="100%" alt="" />
+				<?php
+				}
+				?>
 			</div>
 			<div class="btn btn-upload btn-block"> 
 				UPLOAD LOGO <input type="file" id="productfile" name="productfile" class="input_type_file" value="" />

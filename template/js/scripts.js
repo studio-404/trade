@@ -239,6 +239,7 @@ $(document).on("click","#save_changes",function(){
 	var ad_position2 = $("#ad_position2").val(); 
 	var ad_mobile2 = $("#ad_mobile2").val(); 
 	var ad_email2 = $("#ad_email2").val(); 
+	var ad_upload_catalog = $("#ad_upload_catalog").val();
 	
 
 	var contactemail = $("#contactemail").val(); 
