@@ -328,6 +328,19 @@ class ajax extends connection{
 			$p_ad_position2 = strip_tags(Input::method("POST","p_ad_position2"));
 			$p_ad_mobile2 = strip_tags(Input::method("POST","p_ad_mobile2"));
 			$p_ad_email2 = strip_tags(Input::method("POST","p_ad_email2"));
+
+			if(Input::method("POST","p_ad_upload_catalog")!=""){
+				$extention = explode(".",Input::method("POST","p_ad_upload_catalog")); 
+				$ext = strtolower(end($extention)); 
+				if($ext=="pdf"){
+					$str = file_get_contents("php://input");
+					$p_ad_upload_catalog = md5(time())."manu.pdf";
+					$path = DIR.'/files_pre/'.$p_ad_upload_catalog;
+					$path2 = DIR.'/files/document/'.$p_ad_upload_catalog;
+					file_put_contents($path, $str);
+					rename($path, $path2);
+				}
+			}
 			
 			$p_contactemail = strip_tags(Input::method("POST","p_contactemail"));
 			$p_about = strip_tags(nl2br(Input::method("POST","p_about")));
@@ -374,6 +387,7 @@ class ajax extends connection{
 			`ad_position2`=:ad_position2, 
 			`ad_mobile2`=:ad_mobile2, 
 			`ad_email2`=:ad_email2, 
+			`ad_upload_catalog`=:ad_upload_catalog, 
 			`email`=:email, 
 			`about`=:about, 
 			`products`=:products, 
@@ -405,6 +419,7 @@ class ajax extends connection{
 				":ad_position2"=>$p_ad_position2, 
 				":ad_mobile2"=>$p_ad_mobile2, 
 				":ad_email2"=>$p_ad_email2, 
+				":ad_upload_catalog"=>$p_ad_upload_catalog, 
 				":email"=>$p_contactemail, 
 				":about"=>$p_about, 
 				":products"=>$p_products, 
@@ -440,7 +455,7 @@ class ajax extends connection{
 			$_SESSION["user_data"]["products"] = $p_products;
 			$_SESSION["user_data"]["exportmarkets"] = $p_exportmarkets;
 
-			echo "Done";
+			//echo "Done";
 		}
 
 	

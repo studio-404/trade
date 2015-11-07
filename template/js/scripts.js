@@ -322,6 +322,7 @@ $(document).on("click","#save_changes",function(){
 			p_ad_position2:ad_position2, 
 			p_ad_mobile2:ad_mobile2, 
 			p_ad_email2:ad_email2, 
+			p_ad_upload_catalog:ad_upload_catalog, 
 			p_contactemail:contactemail, 
 			p_about:nl2br(about), 
 			p_products:JSON.stringify(products), 
