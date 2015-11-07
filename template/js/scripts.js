@@ -897,9 +897,7 @@ $(document).on("click",".selectItem2",function(e){
     	r2++;
 	});
 	$(".selectBoxWithCheckbox3").html("Choose");
-	if(r2>0){
-		$(".selectBoxWithCheckbox2").html("Selected "+ (r2) +" items");
-	}
+	$(".selectBoxWithCheckbox2").html("Selected "+ (r2) +" items");
 	$("#drop_sector3").html("Please wait...");
 	$("#products2").html("Please wait...");
 	$.post("http://"+document.domain+"/en/ajax", { loadproducts:true, sval:JSON.stringify(names2) }, function(d){
@@ -994,10 +992,7 @@ $(document).on("click",".selectItem3",function(e){
 	$('.sector_ids3:checked').each(function() {
     	r3++;
 	});
-
-	if(r3>0){
-		$(".selectBoxWithCheckbox3").html("Selected "+ (r3) +" items");
-	}
+	$(".selectBoxWithCheckbox3").html("Selected "+ (r3) +" items");
 });
 
 $(document).on("click",".selectItem4",function(e){
@@ -1010,9 +1005,8 @@ $(document).on("click",".selectItem4",function(e){
     	r4++;
 	});
 
-	if(r4>0){
-		$(".selectBoxWithCheckbox4").html("Selected "+ (r4) +" items");
-	}
+	$(".selectBoxWithCheckbox4").html("Selected "+ (r4) +" items");
+
 });
 
 $(document).on("click",".selectItem5",function(e){
@@ -1025,9 +1019,7 @@ $(document).on("click",".selectItem5",function(e){
     	r5++;
 	});
 
-	if(r5>0){
-		$(".selectBoxWithCheckbox5").html("Selected "+ (r5) +" items");
-	}
+	$(".selectBoxWithCheckbox5").html("Selected "+ (r5) +" items");
 });
 
 
