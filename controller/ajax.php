@@ -309,7 +309,7 @@ class ajax extends connection{
 			}
 		}
 
-		if(Input::method("POST","changeprofile")=="true" && $_SESSION["tradewithgeorgia_username"]){
+		if(Input::method("POST","changeprofile")=="true" && $_SESSION["tradewithgeorgia_username"] && strlen(Input::method("POST","p_about")) <= 250){
 			$p_companyname = strip_tags(Input::method("POST","p_companyname")); 
 			$p_establishedin = strip_tags(Input::method("POST","p_establishedin"));
 			$p_productioncapasity = strip_tags(Input::method("POST","p_productioncapasity"));

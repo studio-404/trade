@@ -463,7 +463,25 @@ $(document).on("click","#save_individual_changes",function(){
 	}
 });
 
-
+$(document).on("change","#ad_upload_catalog",function(e){
+	e.stopPropagation();
+	e.preventDefault();
+	var files = e.target.files;
+	var ex = files[0].name.split(".");
+	var extLast = ex[ex.length - 1].toLowerCase();
+	if(extLast!="pdf"){
+		$('#message_popup').modal('toggle'); 
+		$("#insertText").html("Please choose pdf file !"); 
+	}else if(files[0].size > 3000000){
+		$('#message_popup').modal('toggle'); 
+		$("#insertText").html("File size must be under 3 MB !"); 
+		return false;
+	}else if(files[0].name){
+		$("#uploadcatalogform").submit();
+		$('#message_popup').modal('toggle'); 
+		$("#insertText").html("Please wait !"); 
+	}
+});
 
 $(document).on("change","#inputUserLogo",function(e){
 	e.stopPropagation();

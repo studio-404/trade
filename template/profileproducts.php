@@ -92,8 +92,15 @@
 				<font class="error-msg" id="requiredx_exportmarkets">Please check minimum one export market</font>
 			</div>
 			<div class="form-group">
-				<label>Upload Catalogue <span style="font-size:10px; color:#555555">PDF</span></label>
-				<input type="file" id="ad_upload_catalog" name="ad_upload_catalog" class="form-control" value="" />
+				<form action="" method="post" id="uploadcatalogform" enctype="multipart/form-data">
+					<label>Upload Catalogue <span style="font-size:10px; color:#555555">PDF</span></label>
+					<input type="file" id="ad_upload_catalog" name="ad_upload_catalog" class="form-control" value="" />
+				</form>
+				<?php if($_SESSION["user_data"]["ad_upload_catalog"]) : ?>
+				<div class="catalogpdf_block" style="margin:5px 0">
+					<a href="<?=WEBSITE?>files/document/<?=$_SESSION["user_data"]["ad_upload_catalog"]?>" target="_blank">View Catalogue</a>
+				</div>
+				<?php endif; ?>
 			</div>
 		</div>
 	<!--First column END-->
@@ -225,7 +232,7 @@
 		<input type="hidden" name="t" value="<?=$_SESSION["token_generator"]?>" />
 		<input type="hidden" name="pi" id="pi" class="pi" value="" />
 		<div class="form-group">
-			<label>Product Photo <font color="red">*</font></label> 
+			<label>Company logo <font color="red">*</font></label> 
 			<div class="upload_img_tmp">
 				<?php
 				if(!empty($_SESSION["user_data"]["picture"])){
