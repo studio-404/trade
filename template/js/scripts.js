@@ -239,7 +239,7 @@ $(document).on("click","#save_changes",function(){
 	var ad_position2 = $("#ad_position2").val(); 
 	var ad_mobile2 = $("#ad_mobile2").val(); 
 	var ad_email2 = $("#ad_email2").val(); 
-	var ad_upload_catalog = $("#ad_upload_catalog").val();
+	//var ad_upload_catalog = $("#ad_upload_catalog").val();
 	
 
 	var contactemail = $("#contactemail").val(); 
@@ -296,6 +296,10 @@ $(document).on("click","#save_changes",function(){
 	}else if(mobile!='' && isMobile(mobile)!=true){
 		$("#requiredx_mobile").fadeIn("slow");
 		return false;
+	}else if(strlen(about) > 250){
+		$("#insertText").html("Description is too long !"); 
+		$('#message_popup').modal('toggle'); 
+		return false;
 	}else{ 
 		$("#insertText").html("Please wait"); 
 		$('#message_popup').modal('toggle'); 
@@ -322,7 +326,6 @@ $(document).on("click","#save_changes",function(){
 			p_ad_position2:ad_position2, 
 			p_ad_mobile2:ad_mobile2, 
 			p_ad_email2:ad_email2, 
-			p_ad_upload_catalog:ad_upload_catalog, 
 			p_contactemail:contactemail, 
 			p_about:nl2br(about), 
 			p_products:JSON.stringify(products), 
@@ -2279,22 +2282,6 @@ function isMobile(s) {
 }
 
 function strlen(string) {
-  //  discuss at: http://phpjs.org/functions/strlen/
-  // original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-  // improved by: Sakimori
-  // improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
-  //    input by: Kirk Strobeck
-  // bugfixed by: Onno Marsman
-  //  revised by: Brett Zamir (http://brett-zamir.me)
-  //        note: May look like overkill, but in order to be truly faithful to handling all Unicode
-  //        note: characters and to this function in PHP which does not count the number of bytes
-  //        note: but counts the number of characters, something like this is really necessary.
-  //   example 1: strlen('Kevin van Zonneveld');
-  //   returns 1: 19
-  //   example 2: ini_set('unicode.semantics', 'on');
-  //   example 2: strlen('A\ud87e\udc04Z');
-  //   returns 2: 3
-
   var str = string + '';
   var i = 0,
     chr = '',
