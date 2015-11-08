@@ -340,7 +340,7 @@
 	</div>
 	
 		<div class="row">
-			<form action="" method="post" name="addproduct" id="addproduct" enctype="multipart/form-data">
+			<form action="#productAddRequest" method="post" name="addproduct" id="addproduct" enctype="multipart/form-data">
 			<div class="col-sm-3">
 				<div class="form-group">
 					<label>Avtivity <font color="red">*</font></label>
