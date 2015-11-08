@@ -446,7 +446,9 @@
 							<li><span><?=htmlentities($val["title"])?> - </span>HS code: <?=$val["hs_title"]?></li>
 							<li><span>Packaging </span><?=htmlentities($val["packaging"])?> </li>
 							<li><span>Awards </span><?=htmlentities($val["awards"])?></li>
-							<li><span>Product Analysis </span><a href="" style="color:#337ab7">PDF</a></li>
+							<?php if($val['productanalisis']) : ?>
+							<li><span>Product Analysis </span><a href="<?=WEBSITE?>files/document/<?=$val['productanalisis']?>" style="color:#337ab7" target="_blank">PDF</a></li>
+							<?php endif; ?>
 						</ul>
 					</div>
 					<div class="col-sm-12 col-md-8 col-xs-12 col-gl-8 product_info padding_0">

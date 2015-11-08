@@ -145,6 +145,7 @@ class profileproducts extends connection{
 		`studio404_module_item`.`packaging`,
 		`studio404_module_item`.`awards`,
 		`studio404_module_item`.`long_description`,
+		`studio404_module_item`.`productanalisis`,
 		`studio404_module_item`.`admin_com`,
 		`studio404_module_item`.`visibility`, 
 		`studio404_pages`.`title` AS hs_title

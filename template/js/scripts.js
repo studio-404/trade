@@ -1433,7 +1433,11 @@ $(document).on("click",".loadmore",function(){
 					insert += '<div class="filter_content">';
 					insert += '<div class="names">'+obj[i].title+'</div>';
 					insert += '<div class="content_divs">';
-					insert += '<div class="col-sm-2 no-float itemssss"><img src="http://'+document.domain+'/image?f=http://'+document.domain+'/files/usersproducts/'+obj[i].picture+'&w=175&h=175" class="img-responsive" width="100%" alt="" /></div>';
+					if(obj[i].picture!=""){
+						insert += '<div class="col-sm-2 no-float itemssss">p<img src="http://'+document.domain+'/image?f=http://'+document.domain+'/files/usersproducts/'+obj[i].picture+'&w=175&h=175" class="img-responsive" width="100%" alt="" /></div>';
+					}else{
+						insert += '<div class="col-sm-2 no-float itemssss"><img src="http://'+document.domain+'/template/img/p.png" class="img-responsive" width="100%" alt="" /></div>';
+					}
 					insert += '<div class="col-sm-2 no-float itemssss">';
 					insert += '<ul class="text_formats">';
 					insert += '<li>'+obj[i].sub_sector_id+'</li>';
@@ -1454,6 +1458,9 @@ $(document).on("click",".loadmore",function(){
 					insert += '<li><span>Packiging:</span> '+obj[i].packaging+'</li>';
 					insert += '<li><span>Shelf Life:</span> '+obj[i].shelf_life+'</li>';
 					insert += '<li><span>Awards:</span> '+obj[i].awards+'</li>';
+					if(obj[i].productanalisis){
+						insert += '<li><span>Product Analysis:</span> <a href="http://'+document.domain+'/files/document/'+obj[i].productanalisis+'" style="color:#337ab7" target="_blank">PDF</a></li>';
+					}
 					insert += '</ul>';
 					insert += '<ul class="text_formats" style="margin-top:20px;">';
 					insert += '<li><span>About:</span> '+obj[i].long_description+'</li>';
@@ -1631,7 +1638,11 @@ $(document).on("click",".loadmore",function(){
 					insert += '<div class="products">';
 					insert += '<div class="col-sm-12 col-md-12 col-xs-12 col-gl-12 product_item">';
 					insert += '<div class="col-sm-12 col-md-2 col-xs-12 col-lg-2 padding_0" style="padding-bottom:10px;">';
-					insert += '<div class="image"><img src="http://'+document.domain+'/image?f=http://'+document.domain+'/files/usersproducts/'+obj[i].picture+'&w=180&h=180" class="img-responsive" width="100%" alt="" /></div>';
+					if(obj[i].picture!=""){
+						insert += '<div class="image"><img src="http://'+document.domain+'/image?f=http://'+document.domain+'/files/usersproducts/'+obj[i].picture+'&w=180&h=180" class="img-responsive" width="100%" alt="" /></div>';
+					}else{
+						insert += '<div class="image"><img src="http://'+document.domain+'/template/img/p.png" class="img-responsive" width="100%" alt="" /></div>';
+					}
 					insert += '</div>';
 					insert += '<div class="col-sm-12 col-md-7 col-xs-12 col-gl-7 product_info padding_0">';
 					insert += '<ul>';

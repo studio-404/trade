@@ -123,7 +123,6 @@ class model_template_upload_user_logo extends connection{
 				 		":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"], 
 				 		":picture"=>$fileName
 				 	));
-        			return 1;
     			}else{
     				return 2; 
     			}
@@ -165,7 +164,6 @@ class model_template_upload_user_logo extends connection{
 				 		":one"=>1, 
 				 		":productanalisis"=>$fileName
 				 	));
-        			return 1;
     			}else{
     				return 2; 
     			}
