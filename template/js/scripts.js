@@ -776,11 +776,7 @@ $(document).on("click","#change_product",function(){
 		}, function(r){
 
 			if(r=="Done"){
-				if($("#p_image").val()){
-					document.getElementById('changeProductImage').submit();
-				}else{
-					location.reload();
-				}
+				$('#changeProductImagePopup').submit();
 			}else{
 				alert("Error"); 
 			}
@@ -1648,7 +1644,10 @@ $(document).on("click",".loadmore",function(){
 					insert += '<ul>';
 					insert += '<li><span>'+obj[i].title+' - </span>HS code: '+obj[i].hs_title+'</li>';
 					insert += '<li><span>Packaging </span> '+obj[i].packaging+'</li>';
-					insert += '<li><span>Awards </span> '+obj[i].awards+'</li>';
+					insert += '<li><span>Awardsxx </span> '+obj[i].awards+'</li>';
+					if(obj[i].productanalisis){
+						insert += '<li><span>Product Analysis:</span> <a href="http://'+document.domain+'/files/document/'+obj[i].productanalisis+'" style="color:#337ab7" target="_blank">PDF</a></li>';
+					}
 					insert += '</ul>';
 					insert += '</div>';
 					insert += '<div class="col-sm-12 col-md-8 col-xs-12 col-gl-8 product_info padding_0">';

@@ -1769,6 +1769,7 @@ class ajax extends connection{
 				`studio404_module_item`.`packaging`,
 				`studio404_module_item`.`awards`,
 				`studio404_module_item`.`long_description`,
+				`studio404_module_item`.`productanalisis`,
 				`studio404_module_item`.`visibility`, 
 				`studio404_pages`.`title` AS hs_title
 				FROM 
@@ -1798,6 +1799,7 @@ class ajax extends connection{
 						$result[$x]["packaging"] = $val["packaging"];  						
 						$result[$x]["awards"] = $val["awards"];  						
 						$result[$x]["long_description"] = $val["long_description"];  						
+						$result[$x]["productanalisis"] = $val["productanalisis"];  						
 						$result[$x]["visibility"] = $val["visibility"];  						
 						$result[$x]["hs_title"] = $val["hs_title"];  						
 						$x++; 

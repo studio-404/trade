@@ -11,9 +11,9 @@ class model_template_upload_user_logo extends connection{
 			$ext = strtolower(end($ext));
 
 			if($ext!="pdf"){
-				return 2;
+				//return 2;
 			}else if($_FILES["ad_upload_catalog"]["size"]>3000000){
-				return 2;
+				//return 2;
 			}else{
 				$fileName = md5(time()).'.'.$ext; 
 				
@@ -43,9 +43,9 @@ class model_template_upload_user_logo extends connection{
 				 		":ad_upload_catalog"=>$fileName
 				 	));
 				 	$_SESSION["user_data"]["ad_upload_catalog"] = $fileName;
-        			return 1;
+        			//return 1;
     			}else{
-    				return 2; 
+    				//return 2; 
     			}
 			}
 		}
@@ -56,9 +56,9 @@ class model_template_upload_user_logo extends connection{
 			$ext = strtolower(end($ext));
 
 			if($ext!="jpeg" && $ext!="jpg" && $ext!="png" && $ext!="gif"){
-				return 2;
+				//return 2;
 			}else if($_FILES["inputUserLogo"]["size"]>1000000){
-				return 2;
+				//return 2;
 			}else{
 				$prefix = explode("@",$_SESSION["tradewithgeorgia_username"].$_SESSION["tradewithgeorgia_user_id"]);
 				if(is_array($prefix) && !empty($prefix[0])){ $prefix = $prefix[0];  }else{ $prefix = '_'; }
@@ -90,9 +90,9 @@ class model_template_upload_user_logo extends connection{
 				 		":picture"=>$fileName
 				 	));
 				 	$_SESSION["user_data"]["picture"] = $fileName;
-        			return 1;
+        			//return 1;
     			}else{
-    				return 2; 
+    				//return 2; 
     			}
 			}
 		}
@@ -104,9 +104,9 @@ class model_template_upload_user_logo extends connection{
 			$ext = strtolower(end($ext));
 
 			if($ext!="jpeg" && $ext!="jpg" && $ext!="png" && $ext!="gif"){
-				return 2;
+				//return 2;
 			}else if($_FILES["productfile"]["size"]>1000000){
-				return 2;
+				//return 2;
 			}else{
 				$prefix = explode("@",$_SESSION["tradewithgeorgia_username"]);
 				if(is_array($prefix) && !empty($prefix[0])){ $prefix = $prefix[0];  }else{ $prefix = '_'; }
@@ -124,20 +124,20 @@ class model_template_upload_user_logo extends connection{
 				 		":picture"=>$fileName
 				 	));
     			}else{
-    				return 2; 
+    				//return 2; 
     			}
 			}
 
 		}
-//echo $_FILES["productAnalysis"]["name"]." ".$_FILES["productfile"]["name"]." ".Input::method("POST","pix");
+
 		if(isset($_FILES["productAnalysis"]["name"]) && !empty($_FILES["productAnalysis"]["name"]) && Input::method("POST","pix")){
 			$ext = explode(".",$_FILES["productAnalysis"]["name"]);
 			$ext = strtolower(end($ext));
 
 			if($ext!="pdf"){
-				return 2;
+				//return 2;
 			}else if($_FILES["productAnalysis"]["size"]>3000000){
-				return 2;
+				//return 2;
 			}else{
 				$fileName = md5(time()).'.'.$ext; 
 				
@@ -164,11 +164,81 @@ class model_template_upload_user_logo extends connection{
 				 		":one"=>1, 
 				 		":productanalisis"=>$fileName
 				 	));
-    			}else{
-    				return 2; 
     			}
 			}
 		}
+
+		if(Input::method("POST","p_id") && isset($_FILES["p_image"]["name"])){
+			$ex = explode(".",$_FILES["p_image"]["name"]); 
+			$ex = strtolower(end($ex));
+			$uex = explode("@",$_SESSION["tradewithgeorgia_username"]); 
+			if($ex == "jpg" || $ex == "jpeg" && $_FILES["p_image"]["size"]<=1000000){
+				$f = $uex[0].md5(time()).".jpg";
+				$fn =  DIR . 'files/usersproducts/'.$f;
+				$conn = $this->conn($c); 
+				/*remove old pic*/
+				$sql_select = 'SELECT `idx`,`picture` FROM `studio404_module_item` WHERE `id`=:id AND `insert_admin`=:insert_admin';
+				$prepare_select = $conn->prepare($sql_select);
+				$prepare_select->execute(array(
+					":id"=>(int)Input::method("POST","p_id"), 
+					":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"]
+				));
+				$fet = $prepare_select->fetch(PDO::FETCH_ASSOC); 
+				if($fet["picture"]){
+					$old_pic = DIR . 'files/usersproducts/'.$fet["picture"]; 
+			 		@unlink($old_pic);
+				}
+
+				/* insert new */
+				if(move_uploaded_file($_FILES["p_image"]["tmp_name"], $fn)){
+					$sqlup = 'UPDATE `studio404_module_item` SET `picture`=:picture WHERE `idx`=:idx AND `insert_admin`=:insert_admin';
+					$prup = $conn->prepare($sqlup);
+					$prup->execute(array(
+						":picture"=>$f, 
+						":idx"=>$fet["idx"], 
+						":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"]
+					));
+				}
+
+			}
+		}
+
+		//echo Input::method("POST","p_id").$_FILES["pa_product_analysis"]["name"];
+		if(Input::method("POST","p_id") && isset($_FILES["pa_product_analysis"]["name"])){
+			$ex = explode(".",$_FILES["pa_product_analysis"]["name"]); 
+			$ex = strtolower(end($ex));
+
+			if($ex == "pdf" && $_FILES["pa_product_analysis"]["size"]<=3000000){
+				$f = md5(time()).".pdf";
+				$fn =  DIR . 'files/document/'.$f;
+				$conn = $this->conn($c); 
+				/*remove old pic*/
+				$sql_select = 'SELECT `productanalisis` FROM `studio404_module_item` WHERE `id`=:id AND `insert_admin`=:insert_admin';
+				$prepare_select = $conn->prepare($sql_select);
+				$prepare_select->execute(array(
+					":id"=>(int)Input::method("POST","p_id"), 
+					":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"]
+				));
+				$fet = $prepare_select->fetch(PDO::FETCH_ASSOC); 
+				if($fet["productanalisis"]){
+					$old_pic = DIR . 'files/document/'.$fet["productanalisis"]; 
+			 		@unlink($old_pic);
+				}
+
+				/* insert new */
+				if(move_uploaded_file($_FILES["pa_product_analysis"]["tmp_name"], $fn)){
+					$sqlup = 'UPDATE `studio404_module_item` SET `productanalisis`=:productanalisis WHERE `id`=:id AND `insert_admin`=:insert_admin';
+					$prup = $conn->prepare($sqlup);
+					$prup->execute(array(
+						":productanalisis"=>$f, 
+						":id"=>(int)Input::method("POST","p_id"), 
+						":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"]
+					));
+				}
+
+			}
+		}
+
 
 
 	} 

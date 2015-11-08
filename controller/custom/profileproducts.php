@@ -102,41 +102,6 @@ class profileproducts extends connection{
 			$_SESSION["user_data"]["exportmarkets"] = $fetch["export_markets_id"];
 		}
 
-		if(Input::method("POST","p_id") && isset($_FILES["p_image"]["name"])){
-			$ex = explode(".",$_FILES["p_image"]["name"]); 
-			$ex = strtolower(end($ex));
-			$uex = explode("@",$_SESSION["tradewithgeorgia_username"]); 
-			if($ex == "jpg" || $ex == "jpeg" && $_FILES["p_image"]["size"]<=1000000){
-				$f = $uex[0].md5(time()).".jpg";
-				$fn =  DIR . 'files/usersproducts/'.$f;
-
-				/*remove old pic*/
-				$sql_select = 'SELECT `idx`,`picture` FROM `studio404_module_item` WHERE `id`=:id AND `insert_admin`=:insert_admin';
-				$prepare_select = $conn->prepare($sql_select);
-				$prepare_select->execute(array(
-					":id"=>(int)Input::method("POST","p_id"), 
-					":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"]
-				));
-				$fet = $prepare_select->fetch(PDO::FETCH_ASSOC); 
-				if($fet["picture"]){
-					$old_pic = DIR . 'files/usersproducts/'.$fet["picture"]; 
-			 		@unlink($old_pic);
-				}
-
-				/* insert new */
-				if(move_uploaded_file($_FILES["p_image"]["tmp_name"], $fn)){
-					$sqlup = 'UPDATE `studio404_module_item` SET `picture`=:picture WHERE `idx`=:idx AND `insert_admin`=:insert_admin';
-					$prup = $conn->prepare($sqlup);
-					$prup->execute(array(
-						":picture"=>$f, 
-						":idx"=>$fet["idx"], 
-						":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"]
-					));
-				}
-
-			}
-		}
-
 		// select products
 		$products_sql = 'SELECT 
 		`studio404_module_item`.`idx`,
