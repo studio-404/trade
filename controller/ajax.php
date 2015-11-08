@@ -1334,7 +1334,7 @@ class ajax extends connection{
 					$out .= '<div class="form-group"><b>Shelf life:</b> '.$fetch["shelf_life"].'</div>';
 					$out .= '<div class="form-group"><b>Awards:</b> '.$fetch["awards"].'</div>';
 					$out .= '<div class="form-group"><b>Description:</b> '.nl2br(strip_tags($fetch["long_description"])).'</div>';
-					$out .= '<div class="form-group"><b>Product Analysis:</b> <a href="">PDF</a></div>';
+					$out .= '<div class="form-group"><b>Product Analysis:</b> <a href="'.WEBSITE.'files/document/'.$fetch["productanalisis"].'" target="_blank">PDF</a></div>';
 					$out .= '<div class="form-group"><b>User:</b> '.$fetch["com_name"].'</div>';
 					$out .= '</div>';
 				}else if($fetch["com_type"]=="serviceprovider"){
