@@ -55,7 +55,9 @@
 					<div class="form-group">
 						<label>Describe what are you offering or looking for <font color="red">*</font></label>
 						<textarea class="form-control p_describe" id="p_describe" name="p_describe"></textarea>
-						<div class="error_message p_describe_required">Describtion field is required !</div>
+						<div class="error_message p_describe_required">Description field is required !</div>
+						<div class="error_message p_describe_lngz">Description is too long !</div>
+						<div id="maxlengthproductpopup" style="width:100%; text-align:left; color:#555555">0 / 250</div>
 					</div>	
 
 					<div style="clear:both"></div>
