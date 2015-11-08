@@ -245,44 +245,43 @@
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Position</label>
-						<input type="text" id="contactpersonposition" name="contactpersonposition" class="form-control" value="" />
+						<input type="text" id="ad_position1" name="ad_position1" class="form-control" value="<?=($_SESSION["user_data"]["ad_position1"]) ? htmlentities($_SESSION["user_data"]["ad_position1"]) : ''?>" />
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Mobile Number</label>
 						<input type="text" id="mobile" name="mobile" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" />
-						<font class="error-msg" id="requiredx_mobile">Mobile number mast start with +995 (13 character) !</font>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Email</label>
-						<input type="text" id="contactpersonemail" name="contactpersonemail" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" />
+						<input type="text" id="ad_email1" name="ad_email1" class="form-control" value="<?=($_SESSION["user_data"]["ad_email1"]) ? htmlentities($_SESSION["user_data"]["ad_email1"]) : ''?>" />
 					</div>
-				</div>
+				</div> 
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Person 2</label>
-						<input type="text" id="contactperson" name="contactperson" class="form-control" value="<?=($_SESSION["user_data"]["contactpersones"]) ? htmlentities($_SESSION["user_data"]["contactpersones"]) : ''?>" />
+						<input type="text" id="ad_person2" name="ad_person2" class="form-control" value="<?=($_SESSION["user_data"]["ad_person2"]) ? htmlentities($_SESSION["user_data"]["ad_person2"]) : ''?>" />
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Position</label>
-						<input type="text" id="contactpersonposition" name="contactpersonposition" class="form-control" value="" />
+						<input type="text" id="ad_position2" name="ad_position2" class="form-control" value="<?=($_SESSION["user_data"]["ad_position2"]) ? htmlentities($_SESSION["user_data"]["ad_position2"]) : ''?>" />
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Mobile Number</label>
-						<input type="text" id="mobile" name="mobile" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" />
+						<input type="text" id="ad_mobile2" name="ad_mobile2" class="form-control" value="<?=($_SESSION["user_data"]["ad_mobile2"]) ? htmlentities($_SESSION["user_data"]["ad_mobile2"]) : ''?>" />
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Email</label>
-						<input type="text" id="contactpersonemail" name="contactpersonemail" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" />
+						<input type="text" id="ad_email2" name="ad_email2" class="form-control" value="<?=($_SESSION["user_data"]["ad_email2"]) ? htmlentities($_SESSION["user_data"]["ad_email2"]) : ''?>" />
 					</div>
 				</div>
 			</div>
