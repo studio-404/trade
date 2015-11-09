@@ -745,9 +745,11 @@ $(document).on("click","#change_service",function(e){
 		$("#s_service").val(prpr);
 		$("#s_service_x").val(obj[0].title);
 		var regex = /<br\s*[\/]?>/gi;
+		var desc_length = strlen(obj[0].long_description); 
+		$("#maxlengthservicePopup").html(desc_length + " / 250"); 
 		$("#s_sdescription").val(obj[0].long_description.replace(regex, "\n"));
 	});
-	$('#makeservicechange').modal('toggle');
+	$('#makeservicechange').modal('toggle'); 
 });
 
 $(document).on("click","#change_service_inside",function(e){
@@ -755,17 +757,34 @@ $(document).on("click","#change_service_inside",function(e){
 	var s_service = $("#s_service").val();
 	var s_service_x = $("#s_service_x").val();
 	var s_sdescription = $("#s_sdescription").val();
-	$.post("http://"+document.domain+"/en/ajax", {
-		changeservice: true, 
-		i:s_id, 
-		s:s_service, 
-		t:s_service_x, 
-		d:nl2br(s_sdescription) 
-	}, function(r){
-		if(r=="Done"){
-			location.reload();
-		}
-	});
+	$(".error_message").fadeOut("slow"); 
+	if(s_id==""){
+		alert("something went wrong!");
+	}else if(s_service==""){
+		$(".p_prname_required").fadeIn("slow"); 
+		return false;
+	}else if(s_service_x==""){
+		$(".p_prname_required_x").fadeIn("slow"); 
+		return false;
+	}else if(s_sdescription==""){
+		$(".s_sdescription_required").fadeIn("slow"); 
+		return false;
+	}else if(strlen(s_sdescription) > 250){
+		$(".s_sdescription_length").fadeIn("slow"); 
+		return false;
+	}else{
+		$.post("http://"+document.domain+"/en/ajax", {
+			changeservice: true, 
+			i:s_id, 
+			s:s_service, 
+			t:s_service_x, 
+			d:nl2br(s_sdescription) 
+		}, function(r){
+			if(r=="Done"){
+				location.reload();
+			}
+		});
+	}
 });
 
 $(document).on("click","#change_product",function(){
@@ -939,6 +958,7 @@ $(document).on("click","#post_service",function(e){
 	var title = $("#service_title").val();
 	var service = $("#service_real_title").val();
 	var desc = $("#service_description").val();
+	var desc_length = strlen($("#service_description").val());
 	$(".error_message").hide(); 
 	if(title==""){
 		$("#servicetitle_required").fadeIn("slow"); 
@@ -949,6 +969,9 @@ $(document).on("click","#post_service",function(e){
 	}else if(desc==""){
 		$("#servicedesc_required").fadeIn("slow"); 
 		return false;
+	}else if(desc_length>250){
+		$("#insertText").html("Description is too long !"); 
+		$('#message_popup').modal('toggle');
 	}else{
 		$("#insertText").html("Please wait"); 
 		$('#message_popup').modal('toggle');
@@ -2107,6 +2130,14 @@ $(document).on("keyup","#p_describe",function(){
 	if(num>250){ $(this).css({"color":"red"}); }
 	else{ $(this).css({"color":"#3895ce"}); }
 	$("#maxlengthproductpopup").html(num+' / 250');
+});
+
+$(document).on("keyup","#s_sdescription",function(){
+	var ab = $(this).val();
+	var num = strlen(ab);
+	if(num>250){ $(this).css({"color":"red"}); }
+	else{ $(this).css({"color":"#3895ce"}); }
+	$("#maxlengthservicePopup").html(num+' / 250');
 });
 
 function copyMe(e){ 

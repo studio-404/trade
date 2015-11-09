@@ -91,6 +91,13 @@ class user extends connection{
 				`studio404_users`.`office_phone`, 
 				`studio404_users`.`email`, 
 				`studio404_users`.`web_address`, 
+				`studio404_users`.`contact_person`, 
+				`studio404_users`.`ad_position1`, 
+				`studio404_users`.`ad_email1`, 
+				`studio404_users`.`ad_person2`, 
+				`studio404_users`.`ad_position2`, 
+				`studio404_users`.`ad_mobile2`, 
+				`studio404_users`.`ad_email2`, 
 				`studio404_users`.`about` 
 				';	
 			}else if(Input::method("GET","t")=="company"){
