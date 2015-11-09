@@ -467,6 +467,14 @@ class ajax extends connection{
 			$p_officephone = strip_tags(Input::method("POST","p_officephone"));
 			$p_companysize = strip_tags(Input::method("POST","p_companysize"));
 			$p_webaddress = strip_tags(Input::method("POST","p_webaddress"));
+
+			$p_ad_position1 = strip_tags(Input::method("POST","p_ad_position1"));
+			$p_ad_email1 = strip_tags(Input::method("POST","p_ad_email1"));
+			$p_ad_person2 = strip_tags(Input::method("POST","p_ad_person2"));
+			$p_ad_position2 = strip_tags(Input::method("POST","p_ad_position2"));
+			$p_ad_mobile2 = strip_tags(Input::method("POST","p_ad_mobile2"));
+			$p_ad_email2 = strip_tags(Input::method("POST","p_ad_email2"));
+
 			$p_contactemail = strip_tags(Input::method("POST","p_contactemail"));
 			$p_about = strip_tags(nl2br(Input::method("POST","p_about")));
 			
@@ -496,6 +504,12 @@ class ajax extends connection{
 			`office_phone`=:office_phone, 
 			`company_size`=:company_size, 
 			`web_address`=:web_address, 
+			`ad_position1`=:ad_position1, 
+			`ad_email1`=:ad_email1, 
+			`ad_person2`=:ad_person2, 
+			`ad_position2`=:ad_position2, 
+			`ad_mobile2`=:ad_mobile2, 
+			`ad_email2`=:ad_email2, 
 			`email`=:email, 
 			`about`=:about, 
 			`products`=:products, 
@@ -521,6 +535,12 @@ class ajax extends connection{
 				":office_phone"=>$p_officephone, 
 				":company_size"=>$p_companysize, 
 				":web_address"=>$p_webaddress, 
+				":ad_position1"=>$p_ad_position1, 
+				":ad_email1"=>$p_ad_email1, 
+				":ad_person2"=>$p_ad_person2, 
+				":ad_position2"=>$p_ad_position2, 
+				":ad_mobile2"=>$p_ad_mobile2, 
+				":ad_email2"=>$p_ad_email2, 
 				":email"=>$p_contactemail, 
 				":about"=>$p_about, 
 				":products"=>$p_products, 
@@ -540,6 +560,14 @@ class ajax extends connection{
 			$_SESSION["user_data"]["officephone"] = $p_officephone;
 			$_SESSION["user_data"]["companysize"] = $p_companysize;
 			$_SESSION["user_data"]["webaddress"] = $p_webaddress;
+
+			$_SESSION["user_data"]["ad_position1"] = $p_ad_position1;
+			$_SESSION["user_data"]["ad_email1"] = $p_ad_email1;
+			$_SESSION["user_data"]["ad_person2"] = $p_ad_person2;
+			$_SESSION["user_data"]["ad_position2"] = $p_ad_position2;
+			$_SESSION["user_data"]["ad_mobile2"] = $p_ad_mobile2;
+			$_SESSION["user_data"]["ad_email2"] = $p_ad_email2;
+			
 			$_SESSION["user_data"]["contactemail"] = $p_contactemail;
 			$_SESSION["user_data"]["about"] = $p_about;
 		

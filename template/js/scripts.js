@@ -368,9 +368,16 @@ $(document).on("click","#save_company_changes",function(){
 	var officephone = $("#officephone").val(); 
 	var companysize = $("#companysize").val(); 
 	var webaddress = $("#webaddress").val(); 
+
+	var ad_position1 = $("#ad_position1").val(); 
+	var ad_email1 = $("#ad_email1").val(); 
+	var ad_person2 = $("#ad_person2").val(); 
+	var ad_position2 = $("#ad_position2").val(); 
+	var ad_mobile2 = $("#ad_mobile2").val(); 
+	var ad_email2 = $("#ad_email2").val(); 
+
 	var contactemail = $("#contactemail").val(); 
 	var about = $("#about").val(); 
-
 
 	var sector = []; 
 	$('.sector_ids:checked').each(function(i, selected){ 
@@ -414,13 +421,18 @@ $(document).on("click","#save_company_changes",function(){
 			p_officephone:officephone, 
 			p_companysize:companysize, 
 			p_webaddress:webaddress, 
+			p_ad_position1:ad_position1, 
+			p_ad_email1:ad_email1, 
+			p_ad_person2:ad_person2, 
+			p_ad_position2:ad_position2, 
+			p_ad_mobile2:ad_mobile2, 
+			p_ad_email2:ad_email2, 
 			p_contactemail:contactemail, 
 			p_about:nl2br(about), 
-			p_file: f
+			p_file: f 
 		}, 
 		function(d){
 			if(d=="Done"){ 
-				//$("#insertText").html("Data updated !"); 
 				location.reload();
 			} 
 		});

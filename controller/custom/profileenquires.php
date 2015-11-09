@@ -82,6 +82,15 @@ class profileenquires extends connection{
 			$_SESSION["user_data"]["officephone"] = $fetch["office_phone"];
 			$_SESSION["user_data"]["companysize"] = $fetch["company_size"];
 			$_SESSION["user_data"]["webaddress"] = $fetch["web_address"];
+
+			$_SESSION["user_data"]["ad_position1"] = $fetch["ad_position1"];
+			$_SESSION["user_data"]["ad_email1"] = $fetch["ad_email1"];
+			$_SESSION["user_data"]["ad_person2"] = $fetch["ad_person2"];
+			$_SESSION["user_data"]["ad_position2"] = $fetch["ad_person2"];
+			$_SESSION["user_data"]["ad_mobile2"] = $fetch["ad_mobile2"];
+			$_SESSION["user_data"]["ad_email2"] = $fetch["ad_email2"];
+			//$_SESSION["user_data"]["ad_upload_catalog"] = $fetch["ad_upload_catalog"];
+
 			$_SESSION["user_data"]["contactemail"] = $fetch["email"];
 			$_SESSION["user_data"]["about"] = $fetch["about"];
 			$_SESSION["user_data"]["products"] = $fetch["products"];
@@ -96,7 +105,7 @@ class profileenquires extends connection{
 		`studio404_module_item`.`title`,
 		`studio404_module_item`.`sector_id`,
 		`studio404_module_item`.`type`, 
-		`studio404_module_item`.`long_description`,
+		`studio404_module_item`.`long_description`, 
 		`studio404_module_item`.`admin_com`,
 		`studio404_module_item`.`visibility`
 		FROM 
