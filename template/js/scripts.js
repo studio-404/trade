@@ -954,7 +954,6 @@ $(document).on("click",".selectItem2",function(e){
 });
 
 $(document).on("click","#post_service",function(e){ 
-
 	var title = $("#service_title").val();
 	var service = $("#service_real_title").val();
 	var desc = $("#service_description").val();
@@ -982,7 +981,9 @@ $(document).on("click","#post_service",function(e){
 			d:nl2br(desc)
 		}, function(r){
 			if(r=="Done"){
-				location.reload();
+				//history.pushState("", document.title, window.location.pathname);
+				//location.reload();
+				location.href = "http://"+ document.domain + "/en/profile-service#serviceadded"; 
 			}else{
 				$("#insertText").html("Error"); 
 			}
@@ -2406,8 +2407,16 @@ function strlen(string) {
 }
 
 function scrollProducts(){
+	//serviceadded
+	var hh = window.location.hash; 
+	//alert(hh);
+	if(hh=="#serviceadded"){
+		var classx = '.services';
+	}else{
+		var classx = '.product_box';
+	}
 	$('html, body').animate({
-        scrollTop: $(".product_box").first().offset().top
+        scrollTop: $(classx).first().offset().top
     }, 2000, function(){
     	history.pushState("", document.title, window.location.pathname);
     });
