@@ -997,7 +997,6 @@ $(document).on("click","#post_service",function(e){
 			d:nl2br(desc)
 		}, function(r){
 			if(r=="Done"){
-				//location.href = "http://"+ document.domain + "/en/profile-service#serviceadded"; 
 				history.pushState("", document.title, "#serviceadded");
 				location.reload();
 			}else{
@@ -1040,8 +1039,6 @@ $(document).on("click",".postEnquires",function(){
 			d:description 
 		}, function(r){
 			if(r=="Done"){
-				//location.reload();
-				//location.href = "http://"+ document.domain + "/en/profile-enquires#enquireadded"; 
 				history.pushState("", document.title, "#enquireadded");
 				location.reload();
 			}else{
@@ -1110,6 +1107,8 @@ $(document).on("click","#change_enquires",function(e){
 		$("#e_title").val(obj[0].title);
 
 		var regex = /<br\s*[\/]?>/gi;
+		var desc_length = strlen(obj[0].long_description);
+		$("#maxlengthenquirePopup").html(desc_length + " / 250"); 
 		$("#e_description").val(obj[0].long_description.replace(regex, "\n"));
 	});
 	$('#makeenquireschange').modal('toggle');
@@ -1123,18 +1122,37 @@ $(document).on("click","#change_enquire_inside",function(e){
 	var e_title = $("#e_title").val();
 	var e_description = nl2br($("#e_description").val());
 	
-	$.post("http://"+document.domain+"/en/ajax", {
-		changeenquire: true, 
-		i:e_eid, 
-		t:e_type, 
-		s:e_sector, 
-		ti:e_title, 
-		d:e_description
-	}, function(r){
-		if(r=="Done"){
-			location.reload();
-		}
-	});
+	if(e_eid==""){
+		alert("something went wrong");
+	}else if(e_type==""){
+		$(".e_type_required").fadeIn("slow"); 
+		return false;
+	}else if(e_sector==""){
+		$("#e_sector_required").fadeIn("slow"); 
+		return false;
+	}else if(e_title==""){
+		$("#e_title_required").fadeIn("slow"); 
+		return false;
+	}else if(e_description==""){
+		$("#e_description_required").fadeIn("slow"); 
+		return false;
+	}else if(strlen(e_description) > 250){
+		$(".s_sdescription_length").fadeIn("slow"); 
+		return false;
+	}else{
+		$.post("http://"+document.domain+"/en/ajax", {
+			changeenquire: true, 
+			i:e_eid, 
+			t:e_type, 
+			s:e_sector, 
+			ti:e_title, 
+			d:e_description
+		}, function(r){
+			if(r=="Done"){
+				location.reload();
+			}
+		});
+	}
 });
 
 $(document).on("click",".subscribeproductsenquires",function(){
@@ -2162,6 +2180,14 @@ $(document).on("keyup","#s_sdescription",function(){
 	if(num>250){ $(this).css({"color":"red"}); }
 	else{ $(this).css({"color":"#3895ce"}); }
 	$("#maxlengthservicePopup").html(num+' / 250');
+});
+
+$(document).on("keyup","#e_description",function(){
+	var ab = $(this).val();
+	var num = strlen(ab);
+	if(num>250){ $(this).css({"color":"red"}); }
+	else{ $(this).css({"color":"#3895ce"}); }
+	$("#maxlengthenquirePopup").html(num+' / 250');
 });
 
 function copyMe(e){ 
