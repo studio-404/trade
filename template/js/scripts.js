@@ -978,7 +978,7 @@ $(document).on("click","#post_service",function(e){
 		$.post("http://"+document.domain+"/en/ajax", {
 			addservice:true, 
 			t:title, 
-			s:title, 
+			s:service, 
 			d:nl2br(desc)
 		}, function(r){
 			if(r=="Done"){
