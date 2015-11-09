@@ -997,7 +997,9 @@ $(document).on("click","#post_service",function(e){
 			d:nl2br(desc)
 		}, function(r){
 			if(r=="Done"){
-				location.href = "http://"+ document.domain + "/en/profile-service#serviceadded"; 
+				//location.href = "http://"+ document.domain + "/en/profile-service#serviceadded"; 
+				history.pushState("", document.title, "#serviceadded");
+				location.reload();
 			}else{
 				$("#insertText").html("Error"); 
 			}
@@ -1020,10 +1022,10 @@ $(document).on("click",".postEnquires",function(){
 	}else if(etitle==''){
 		$("#enquire_title_required").fadeIn("slow"); 
 		return false;
-	}else if(edescription==''){
+	}else if(description==''){
 		$("#enquire_description_required").fadeIn("slow"); 
 		return false;
-	}else if(strlen(edescription) > 250){
+	}else if(strlen(description) > 250){
 		$("#insertText").html("Description is too long !"); 
 		$('#message_popup').modal('toggle');
 		return false;
@@ -1038,6 +1040,9 @@ $(document).on("click",".postEnquires",function(){
 			d:description 
 		}, function(r){
 			if(r=="Done"){
+				//location.reload();
+				//location.href = "http://"+ document.domain + "/en/profile-enquires#enquireadded"; 
+				history.pushState("", document.title, "#enquireadded");
 				location.reload();
 			}else{
 				$("#insertText").html("Error"); 
@@ -2430,6 +2435,8 @@ function scrollProducts(){
 	//alert(hh);
 	if(hh=="#serviceadded"){
 		var classx = '.services';
+	}else if(hh=="#enquireadded"){
+		var classx = '.enquire';
 	}else{
 		var classx = '.product_box';
 	}
