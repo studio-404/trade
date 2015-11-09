@@ -393,6 +393,10 @@ $(document).on("click","#save_company_changes",function(){
 	}else if(mobile!='' && isMobile(mobile)!=true){
 		$("#requiredx_mobile").fadeIn("slow");
 		return false;
+	}else if(strlen(about) > 250){
+		$("#insertText").html("Description is too long !"); 
+		$('#message_popup').modal('toggle'); 
+		return false;
 	}else{ 
 		$("#insertText").html("Please wait"); 
 		$('#message_popup').modal('toggle'); 
@@ -981,8 +985,6 @@ $(document).on("click","#post_service",function(e){
 			d:nl2br(desc)
 		}, function(r){
 			if(r=="Done"){
-				//history.pushState("", document.title, window.location.pathname);
-				//location.reload();
 				location.href = "http://"+ document.domain + "/en/profile-service#serviceadded"; 
 			}else{
 				$("#insertText").html("Error"); 
@@ -1008,6 +1010,10 @@ $(document).on("click",".postEnquires",function(){
 		return false;
 	}else if(edescription==''){
 		$("#enquire_description_required").fadeIn("slow"); 
+		return false;
+	}else if(strlen(edescription) > 250){
+		$("#insertText").html("Description is too long !"); 
+		$('#message_popup').modal('toggle');
 		return false;
 	}else{
 		$("#insertText").html("Please wait"); 
