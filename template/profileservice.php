@@ -178,7 +178,7 @@
 				<font class="error-msg" id="requiredx_products">Please select minimum one service !</font>
 			</div>
 			<div class="form-group">
-				<label>Export Markets <font color="red">*</font></label>
+				<label>Export Markets</label>
 				<?php $markets = explode(",",$_SESSION["user_data"]["exportmarkets"]); ?>
 				<div class="multiselectBox4">
 					<div class="selectBoxWithCheckbox4" data-toggle="drop_sector4">
@@ -238,31 +238,35 @@
 			<div class="col-sm-9" style="margin:0 -10px 0 0; padding:0">
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
-						<label>Person 1</label>
+						<label>Contact Person 1 <font color="red">*</font></label>
 						<input type="text" id="contactperson" name="contactperson" class="form-control" value="<?=($_SESSION["user_data"]["contactpersones"]) ? htmlentities($_SESSION["user_data"]["contactpersones"]) : ''?>" />
+						<font class="error-msg" id="requiredx_contactperson1">Contact person is required !</font>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
-						<label>Position</label>
+						<label>Position <font color="red">*</font></label>
 						<input type="text" id="ad_position1" name="ad_position1" class="form-control" value="<?=($_SESSION["user_data"]["ad_position1"]) ? htmlentities($_SESSION["user_data"]["ad_position1"]) : ''?>" />
+						<font class="error-msg" id="requiredx_position1">Position is required !</font>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
-						<label>Mobile Number</label>
+						<label>Mobile Number <font color="red">*</font></label>
 						<input type="text" id="mobile" name="mobile" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" />
+						<font class="error-msg" id="requiredx_mobilenumber1">Mobilenumber is required !</font>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
-						<label>Email</label>
+						<label>Email <font color="red">*</font></label>
 						<input type="text" id="ad_email1" name="ad_email1" class="form-control" value="<?=($_SESSION["user_data"]["ad_email1"]) ? htmlentities($_SESSION["user_data"]["ad_email1"]) : ''?>" />
+						<font class="error-msg" id="requiredx_email1">Email is required !</font>
 					</div>
 				</div> 
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
-						<label>Person 2</label>
+						<label>Contact Person 2</label>
 						<input type="text" id="ad_person2" name="ad_person2" class="form-control" value="<?=($_SESSION["user_data"]["ad_person2"]) ? htmlentities($_SESSION["user_data"]["ad_person2"]) : ''?>" />
 					</div>
 				</div>
@@ -314,7 +318,7 @@
 	<hr>
 	
 	<div class="page_title_1">
-		Add New Service
+		Add New Service <span style="font-size:10px; color:#555555">( * Add as many service as you have )</span>
 	</div>
 	
 		<div class="row">

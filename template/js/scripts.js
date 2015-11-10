@@ -183,7 +183,7 @@ $(document).on("click","#login_user",function(e){
 		$(".modal-title small").hide();
 		$.post("http://"+document.domain+"/en/ajax",{ logintry:true, lg:logAs, e:emailaddress3, p:password3, c:captcha }, function(d){
 			if(d=="Done"){ location.reload(); }
-			else{ $("#finalstep3").html("<div>Username, password or captcha code is incorrect, or you do not have permition to access your account yet</div>"); $(".reloadbutton").show(); }
+			else{ $("#finalstep3").html("<div>Username, password or security code is incorrect, or you do not have permition to access your account yet</div>"); $(".reloadbutton").show(); }
 		});
 	}
 });
@@ -297,14 +297,27 @@ $(document).on("click","#save_changes",function(){
 	}else if(products.length<=0){
 		$("#requiredx_products").fadeIn("slow");
 		return false;
-	}else if(exportmarkets.length<=0){ 
-		$("#requiredx_exportmarkets").fadeIn("slow");
-		return false;
 	}else if(validateEmail(contactemail)!=true){
 		$("#requiredx_contactemail").fadeIn("slow");
 		return false;
 	}else if(webaddress!='' && isUrl(webaddress)!=true){
 		$("#requiredx_webformat").fadeIn("slow");
+		return false;
+	}else if(contactperson==''){
+		////contactperson ad_position1 mobile ad_email1
+		$("#requiredx_contactperson1").fadeIn("slow");
+		return false;
+	}else if(ad_position1==''){
+		////contactperson ad_position1 mobile ad_email1
+		$("#requiredx_position1").fadeIn("slow");
+		return false;
+	}else if(ad_email1==''){
+		////contactperson ad_position1 mobile ad_email1
+		$("#requiredx_email1").fadeIn("slow");
+		return false;
+	}else if(mobile==''){
+		////contactperson ad_position1 mobile ad_email1  
+		$("#requiredx_mobilenumber1").fadeIn("slow");
 		return false;
 	}else if(mobile!='' && isMobile(mobile)!=true){
 		$("#requiredx_mobile").fadeIn("slow");
