@@ -34,7 +34,7 @@
 				<label>Sector <font color="red">*</font></label>
 				<div class="multiselectBox">
 					<div class="selectBoxWithCheckbox" data-toggle="drop_sector">
-						<?=(count($sector_array)>0) ? 'Selected '.count($sector_array).' sectors' : 'Choose'?>
+						<?=(count($sector_array)>0) ? 'Selected '.count($sector_array).' sectors' : 'Select'?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown" id="drop_sector">
 						<?php 
@@ -55,7 +55,7 @@
 			<div class="form-group">
 				<label>Company Size</label>
 				<select id="companysize" name="companysize" class="form-control">
-					<option value="">Choose</option>
+					<option value="">Select</option>
 					<?php foreach($data["companysize"] as $companysize) : ?>
 					<option value="<?=$companysize->idx?>" <?=($_SESSION["user_data"]["companysize"]==$companysize->idx) ? 'selected="selected"' : ''?>><?=$companysize->title?></option>
 					<?php endforeach; ?>
@@ -84,7 +84,7 @@
 				<label>Sub-Sector <font color="red">*</font></label>
 				<div class="multiselectBox2">
 					<div class="selectBoxWithCheckbox2" data-toggle="drop_sector2">
-						<?=(count($sector_array2)>0) ? 'Selected '.count($sector_array2).' sub-sector' : 'Choose'?>
+						<?=(count($sector_array2)>0) ? 'Selected '.count($sector_array2).' sub-sector' : 'Select'?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown2" id="drop_sector2">
 						<?php 
@@ -117,7 +117,7 @@
 				<label>Certificates</label>
 				<div class="multiselectBox5">
 					<div class="selectBoxWithCheckbox5" data-toggle="drop_sector5">
-						<?=(count($sector_array5)>0) ? 'Selected '.count($sector_array5).' certificates' : 'Choose'?>
+						<?=(count($sector_array5)>0) ? 'Selected '.count($sector_array5).' certificates' : 'Select'?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown5" id="drop_sector5">
 						<?php 
@@ -152,7 +152,7 @@
 				<label>Activity <font color="red">*</font></label>
 				<div class="multiselectBox3">
 					<div class="selectBoxWithCheckbox3" data-toggle="drop_sector3">
-						<?=(count($sector_array3)>0) ? 'Selected '.count($sector_array3).' activities' : 'Choose'?>
+						<?=(count($sector_array3)>0) ? 'Selected '.count($sector_array3).' activities' : 'Select'?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown3" id="drop_sector3">
 						<?php 
@@ -182,7 +182,7 @@
 				<?php $markets = explode(",",$_SESSION["user_data"]["exportmarkets"]); ?>
 				<div class="multiselectBox4">
 					<div class="selectBoxWithCheckbox4" data-toggle="drop_sector4">
-						<?=(count($markets) > 0) ? "Selected ".count($markets)." countries" : "Choose"?>
+						<?=(count($markets) > 0) ? "Selected ".count($markets)." countries" : "Select"?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown4" id="drop_sector4">
 						<div class="selectItem44">
@@ -227,7 +227,7 @@
 						<span id="txtFupload">UPLOAD LOGO</span> <input type="file" name="inputUserLogo" class="input_type_file" accept="image/*" id="inputUserLogo" />
 					</div>
 				</form> 
-				<font class="error-msg" style="padding:5px 15px 0 0;" id="imageWarning">Please choose 300x170 px photo or system resizes it itself !</font>
+				<font class="error-msg" style="padding:5px 15px 0 0;" id="imageWarning">Please select 300x170 px photo or system resizes it itself !</font>
 			</div>
 		</div>
 		<!--Fourth colum START-->
@@ -322,7 +322,7 @@
 				<div class="form-group">
 					<label for="service_title">Activity <font color="red">*</font></label>
 					<select class="form-control" id="service_title" class="service_title" name="service_title">
-						<option value="">Choose</option>
+						<option value="">Select</option>
 						<?php 
 						foreach($fetch2 as $val){	
 							if(!in_array($val["idx"], $sector_array3)){ continue; }
