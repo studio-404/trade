@@ -1087,8 +1087,8 @@ $(document).on("click",".selectItem5",function(e){
 	$('.sector_ids5:checked').each(function() {
     	r5++;
 	});
-
-	$(".selectBoxWithCheckbox5").html("Selected "+ (r5) +" items");
+	var selectedname = $(this).data("selectedname");
+	$(".selectBoxWithCheckbox5").html("Selected "+ (r5) +" "+selectedname);
 });
 
 
