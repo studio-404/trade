@@ -931,7 +931,8 @@ $(document).on("click",".selectItem",function(e){
     	names[r] = $(this).val() + ',';
     	r++;
 	});
-	$(".selectBoxWithCheckbox").html("Selected "+ (r) +" items");
+	var selectedName = $(this).data("selectedname"); 
+	$(".selectBoxWithCheckbox").html("Selected "+ (r) +" "+selectedName);
 	if(document.getElementById("drop_sector2")){
 		$(".selectBoxWithCheckbox2").html("Choose");
 		$(".selectBoxWithCheckbox3").html("Choose"); 
@@ -954,7 +955,8 @@ $(document).on("click",".selectItem2",function(e){
     	r2++;
 	});
 	$(".selectBoxWithCheckbox3").html("Choose");
-	$(".selectBoxWithCheckbox2").html("Selected "+ (r2) +" items");
+	var selectedname = $(this).data("selectedname");
+	$(".selectBoxWithCheckbox2").html("Selected "+ (r2) +" "+selectedname);
 	$("#drop_sector3").html("Please wait...");
 	$("#products2").html("Please wait...");
 	$.post("http://"+document.domain+"/en/ajax", { loadproducts:true, sval:JSON.stringify(names2) }, function(d){
@@ -1058,7 +1060,8 @@ $(document).on("click",".selectItem3",function(e){
 	$('.sector_ids3:checked').each(function() {
     	r3++;
 	});
-	$(".selectBoxWithCheckbox3").html("Selected "+ (r3) +" items");
+	var selectedname = $(this).data("selectedname");
+	$(".selectBoxWithCheckbox3").html("Selected "+ (r3) +" "+selectedname);
 });
 
 $(document).on("click",".selectItem4",function(e){
@@ -1070,8 +1073,8 @@ $(document).on("click",".selectItem4",function(e){
 	$('.sector_ids4:checked').each(function() {
     	r4++;
 	});
-
-	$(".selectBoxWithCheckbox4").html("Selected "+ (r4) +" items");
+	var selectedname = $(this).data("selectedname");
+	$(".selectBoxWithCheckbox4").html("Selected "+ (r4) +" "+selectedname);
 
 });
 

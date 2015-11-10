@@ -34,13 +34,13 @@
 				<label>Sector <font color="red">*</font></label>
 				<div class="multiselectBox">
 					<div class="selectBoxWithCheckbox" data-toggle="drop_sector">
-						<?=(count($sector_array)>0) ? 'Selected '.count($sector_array).' items' : 'Choose'?>
+						<?=(count($sector_array)>0) ? 'Selected '.count($sector_array).' sector' : 'Choose'?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown" id="drop_sector">
 						<?php 
 						$x = 1;
 						foreach($data["sector"] as $sector) : ?>
-						<div class="selectItem" data-checkbox="selectItem<?=$x?>">
+						<div class="selectItem" data-checkbox="selectItem<?=$x?>" data-selectedname="sector">
 							<input type="checkbox" name="selectItem[]" class="sector_ids selectItem<?=$x?>" value="<?=$sector->idx?>" <?=(in_array($sector->idx, $sector_array)) ? 'checked="checked"' : ''?> />
 							<span><?=htmlentities($sector->title)?></span>
 						</div>
@@ -66,7 +66,7 @@
 				<?php $markets = explode(",",$_SESSION["user_data"]["exportmarkets"]); ?>
 				<div class="multiselectBox4">
 					<div class="selectBoxWithCheckbox4" data-toggle="drop_sector4">
-						<?=(count($markets) > 0) ? "Selected ".count($markets)." items" : "Choose"?>
+						<?=(count($markets) > 0) ? "Selected ".count($markets)." countries" : "Choose"?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown4" id="drop_sector4">
 						<div class="selectItem44">
@@ -77,7 +77,7 @@
 						$x=0;
 						foreach($data["countries"] as $countries) : 
 						?>
-						<div class="selectItem4" data-checkbox="selectItemxxx<?=$x?>">
+						<div class="selectItem4" data-checkbox="selectItemxxx<?=$x?>" data-selectedname="countries">
 							<input type="checkbox" name="selectItem4[]" class="sector_ids4" id="selectItemxxx<?=$x?>" value="<?=$countries->idx?>" <?=(in_array($countries->idx,$markets)) ? 'checked="checked"' : ''?> />
 							<span><?=htmlentities($countries->title)?></span>
 						</div>
@@ -120,7 +120,7 @@
 			<label>Sub-Sector <font color="red">*</font></label>
 			<div class="multiselectBox2">
 				<div class="selectBoxWithCheckbox2" data-toggle="drop_sector2">
-					<?=(count($sector_array2)>0) ? 'Selected '.count($sector_array2).' items' : 'Choose'?>
+					<?=(count($sector_array2)>0) ? 'Selected '.count($sector_array2).' sub-sector' : 'Choose'?>
 				</div>
 				<div class="selectBoxWithCheckbox_dropdown2" id="drop_sector2">
 					<?php 
@@ -130,7 +130,7 @@
 					$x = 1;
 					foreach($fetch as $val){
 						?>
-						<div class="selectItem2" data-checkbox="selectItemx<?=$x?>">
+						<div class="selectItem2" data-checkbox="selectItemx<?=$x?>" data-selectedname="sub-sector">
 							<input type="checkbox" name="selectItem2[]" class="sector_ids2" id="selectItemx<?=$x?>" value="<?=$val["idx"]?>" <?=(in_array($val["idx"], $sector_array2)) ? 'checked="checked"' : ''?> />
 							<span><?=htmlentities($val['title'])?></span>
 						</div>
@@ -171,7 +171,7 @@
 				<label>Activity <font color="red">*</font></label>
 				<div class="multiselectBox3">
 					<div class="selectBoxWithCheckbox3" data-toggle="drop_sector3">
-						<?=(count($sector_array3)>0) ? 'Selected '.count($sector_array3).' items' : 'Choose'?>
+						<?=(count($sector_array3)>0) ? 'Selected '.count($sector_array3).' activities' : 'Choose'?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown3" id="drop_sector3">
 
@@ -183,7 +183,7 @@
 						foreach($fetch2 as $val){
 							?>
 
-							<div class="selectItem3" data-checkbox="selectItemxx<?=$x?>">
+							<div class="selectItem3" data-checkbox="selectItemxx<?=$x?>" data-selectedname="activities">
 								<input type="checkbox" name="selectItem3[]" class="sector_ids3" id="selectItemxx<?=$x?>" value="<?=$val["idx"]?>" <?=(in_array($val["idx"], $sector_array3)) ? 'checked="checked"' : ''?> />
 								<span><?=htmlentities($val['title'])?></span>
 							</div>
