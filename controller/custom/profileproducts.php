@@ -109,6 +109,7 @@ class profileproducts extends connection{
 		`studio404_module_item`.`picture`,
 		`studio404_module_item`.`packaging`,
 		`studio404_module_item`.`awards`,
+		`studio404_module_item`.`production_capacity`,
 		`studio404_module_item`.`long_description`,
 		`studio404_module_item`.`productanalisis`,
 		`studio404_module_item`.`admin_com`,

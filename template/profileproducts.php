@@ -91,17 +91,7 @@
 				</div>
 				<font class="error-msg" id="requiredx_exportmarkets">Please check minimum one export market</font>
 			</div>
-			<div class="form-group">
-				<form action="" method="post" id="uploadcatalogform" enctype="multipart/form-data">
-					<label>Upload Catalogue <span style="font-size:10px; color:#555555">PDF</span></label>
-					<input type="file" id="ad_upload_catalog" name="ad_upload_catalog" class="form-control" value="" />
-				</form>
-				<?php if($_SESSION["user_data"]["ad_upload_catalog"]) : ?>
-				<div class="catalogpdf_block" style="margin:5px 0">
-					<a href="<?=WEBSITE?>files/document/<?=$_SESSION["user_data"]["ad_upload_catalog"]?>" target="_blank">View Catalogue</a>
-				</div>
-				<?php endif; ?>
-			</div>
+			
 		</div>
 	<!--First column END-->
 	
@@ -143,14 +133,32 @@
 			</div>
 			<font class="error-msg" id="requiredx_subsector">Please select minimum one Sub-Sector !</font>
 		</div>		
-		<div class="form-group">
-			<label>Production Capacity</label>
-			<input type="text" id="productioncapasity" name="productioncapasity" class="form-control" value="<?=($_SESSION["user_data"]["productioncapasity"]) ? htmlentities($_SESSION["user_data"]["productioncapasity"]) : ''?>" />
-		</div>
+
 		<div class="form-group">
 			<label>Web Page</label>
 			<input type="text" id="webaddress" name="webaddress" class="form-control" value="<?=($_SESSION["user_data"]["webaddress"]) ? htmlentities($_SESSION["user_data"]["webaddress"]) : ''?>" placeholder="www.yourwebsite.com" />
 			<font class="error-msg" id="requiredx_webformat">Website mast start with www (www.yourwebsite.com) !</font>
+		</div>
+		<div class="form-group">
+			<label>Certificates</label>
+			<div class="multiselectBox5">
+				<div class="selectBoxWithCheckbox5" data-toggle="drop_sector5">
+					<?=(count($sector_array5)>0) ? 'Selected '.count($sector_array5).' items' : 'Choose'?>
+				</div>
+				<div class="selectBoxWithCheckbox_dropdown5" id="drop_sector5">
+					<?php 
+					$x = 1;
+					foreach($data['certificates'] as $val) :
+						echo '<div class="selectItem5" data-checkbox="selectItemxxxxxxxxxx'.$x.'">';
+						$checked = (is_array($sector_array5) && in_array($val->idx, $sector_array5)) ? 'checked="checked"' : '';
+						echo '<input type="checkbox" name="selectItem5[]" class="sector_ids5" id="selectItemxxxxxxxxxx'.$x.'" value="'.$val->idx.'" '.$checked.' />';
+						echo '<span> '.htmlentities($val->title).'</span>';
+						echo '</div>';
+						$x++;
+					endforeach;
+					?>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!--Second column END-->
@@ -203,25 +211,15 @@
 			<input type="text" id="numemploy" name="numemploy" class="form-control" value="<?=($_SESSION["user_data"]["numemploy"]) ? htmlentities($_SESSION["user_data"]["numemploy"]) : ''?>" />
 		</div>
 		<div class="form-group">
-			<label>Certificates</label>
-			<div class="multiselectBox5">
-				<div class="selectBoxWithCheckbox5" data-toggle="drop_sector5">
-					<?=(count($sector_array5)>0) ? 'Selected '.count($sector_array5).' items' : 'Choose'?>
-				</div>
-				<div class="selectBoxWithCheckbox_dropdown5" id="drop_sector5">
-					<?php 
-					$x = 1;
-					foreach($data['certificates'] as $val) :
-						echo '<div class="selectItem5" data-checkbox="selectItemxxxxxxxxxx'.$x.'">';
-						$checked = (is_array($sector_array5) && in_array($val->idx, $sector_array5)) ? 'checked="checked"' : '';
-						echo '<input type="checkbox" name="selectItem5[]" class="sector_ids5" id="selectItemxxxxxxxxxx'.$x.'" value="'.$val->idx.'" '.$checked.' />';
-						echo '<span> '.htmlentities($val->title).'</span>';
-						echo '</div>';
-						$x++;
-					endforeach;
-					?>
-				</div>
+			<form action="" method="post" id="uploadcatalogform" enctype="multipart/form-data">
+				<label>Upload Catalogue <span style="font-size:10px; color:#555555">PDF</span></label>
+				<input type="file" id="ad_upload_catalog" name="ad_upload_catalog" class="form-control" value="" />
+			</form>
+			<?php if($_SESSION["user_data"]["ad_upload_catalog"]) : ?>
+			<div class="catalogpdf_block" style="margin:5px 0">
+				<a href="<?=WEBSITE?>files/document/<?=$_SESSION["user_data"]["ad_upload_catalog"]?>" target="_blank">View Catalogue</a>
 			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 	<!--Third column END-->
@@ -336,7 +334,7 @@
 	<hr>
 	
 	<div class="page_title_1">
-		Add New Products <span style="font-size:10px; color:#555555">( * Add as many product as you wish )</span>
+		Add New Products <span style="font-size:10px; color:#555555">( * Add as many product as you have )</span>
 	</div>
 	
 		<div class="row">
@@ -363,8 +361,8 @@
 					<input type="text" id="shelf_life" name="shelf_life" class="form-control" value="" />
 				</div>
 				<div class="form-group">
-					<label>Product Analysis <span style="font-size:10px; color:#555555">PDF</span></label>
-					<input type="file" id="productAnalysis" name="productAnalysis" class="form-control" value="" />
+					<label>Production Capacity</label>
+					<input type="text" id="productioncapasity" name="productioncapasity" class="form-control" value="" />
 				</div>
 			</div>	
 			<div class="col-sm-3">
@@ -376,6 +374,10 @@
 				<div class="form-group">
 					<label>Packaging</label>
 					<input type="text" name="packinging" id="packinging" class="form-control" value="" />
+				</div>
+				<div class="form-group">
+					<label>Product Analysis <span style="font-size:10px; color:#555555">PDF</span></label>
+					<input type="file" id="productAnalysis" name="productAnalysis" class="form-control" value="" />
 				</div>
 			</div>
 			<div class="col-sm-3">
@@ -446,6 +448,7 @@
 							<li><span><?=htmlentities($val["title"])?> - </span>HS code: <?=$val["hs_title"]?></li>
 							<li><span>Packaging </span><?=htmlentities($val["packaging"])?> </li>
 							<li><span>Awards </span><?=htmlentities($val["awards"])?></li>
+							<li><span>Product capacity </span><?=htmlentities($val["production_capacity"])?></li>
 							<?php if($val['productanalisis']) : ?>
 							<li><span>Product Analysis </span><a href="<?=WEBSITE?>files/document/<?=$val['productanalisis']?>" style="color:#337ab7" target="_blank">PDF</a></li>
 							<?php endif; ?>

@@ -49,6 +49,12 @@
 						<input type="file" name="p_image" id="p_image" class="form-control" value="" autocomplete="off" />
 						<div class="error_message p_image_required">Product name is required !</div>
 					</div>
+
+					<div class="form-group">
+						<label for="production_capacity">Product Capacity</label>
+						<input type="text" name="p_production_capacity" id="p_production_capacity" class="form-control" value="" autocomplete="off" />
+					</div>
+
 				</div>
 					
 				<div class="col-sm-12">

@@ -25,13 +25,13 @@
 				<label>Sector <font color="red">*</font></label>
 				<div class="multiselectBox">
 					<div class="selectBoxWithCheckbox" data-toggle="drop_sector">
-						<?=(count($sector_array)>0) ? 'Selected '.count($sector_array).' items' : 'Choose'?>
+						<?=(count($sector_array)>0) ? 'Selected '.count($sector_array).' sectors' : 'Choose'?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown" id="drop_sector">
 						<?php 
 						$x = 1;
 						foreach($data["sector"] as $sector) : ?>
-						<div class="selectItem" data-checkbox="selectItem<?=$x?>">
+						<div class="selectItem" data-checkbox="selectItem<?=$x?>" data-selectedname="sectors">
 							<input type="checkbox" name="selectItem[]" class="sector_ids selectItem<?=$x?>" value="<?=$sector->idx?>" <?=(in_array($sector->idx, $sector_array)) ? 'checked="checked"' : ''?> />
 							<span><?=htmlentities($sector->title)?></span>
 						</div>
@@ -218,13 +218,13 @@
 				<label>Sector <font color="red">*</font></label>
 				<div class="multiselectBox">
 					<div class="selectBoxWithCheckbox" data-toggle="drop_sector">
-						<?=(count($sector_array)>0) ? 'Selected '.count($sector_array).' items' : 'Choose'?>
+						<?=(count($sector_array)>0) ? 'Selected '.count($sector_array).' sectors' : 'Choose'?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown" id="drop_sector">
 						<?php 
 						$x = 1;
 						foreach($data["sector"] as $sector) : ?>
-						<div class="selectItem" data-checkbox="selectItem<?=$x?>">
+						<div class="selectItem" data-checkbox="selectItem<?=$x?>" data-selectedname="sectors">
 							<input type="checkbox" name="selectItem[]" class="sector_ids selectItem<?=$x?>" value="<?=$sector->idx?>" <?=(in_array($sector->idx, $sector_array)) ? 'checked="checked"' : ''?> />
 							<span><?=htmlentities($sector->title)?></span>
 						</div>

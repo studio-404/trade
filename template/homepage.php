@@ -228,7 +228,7 @@ $ctext = new ctext();
 						<div class="text">Find out more about our or international events <br/> and register </div>
 						<div class="form-group">
 							<div class="input-group">  
-								<div class="btn-home btn-home-2 eventRegister" data-homepage="true">Subscribe</div>
+								<div class="btn-home btn-home-2 eventRegister" data-homepage="true">Register</div>
 							</div>
 						</div>
 					</div>

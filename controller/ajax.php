@@ -760,6 +760,7 @@ class ajax extends connection{
 			$shelf_life = strip_tags(Input::method("POST","s"));
 			$packaging = strip_tags(Input::method("POST","pkg"));
 			$awards = strip_tags(Input::method("POST","a"));
+			$prcap = strip_tags(Input::method("POST","prcap"));
 
 			$check_product = 'SELECT `cid` FROM `studio404_pages` WHERE `idx`=:idx AND `status`!=:one'; 
 			$prepare = $conn->prepare($check_product); 
@@ -814,6 +815,7 @@ class ajax extends connection{
 				`shelf_life`=:shelf_life, 
 				`packaging`=:packaging, 
 				`awards`=:awards, 
+				`production_capacity`=:production_capacity, 
 				`long_description`=:long_description, 
 				`slug`=:slug, 
 				`insert_admin`=:insert_admin, 
@@ -835,6 +837,7 @@ class ajax extends connection{
 					":shelf_life"=>$shelf_life, 
 					":packaging"=>$packaging, 
 					":awards"=>$awards, 
+					":production_capacity"=>$prcap, 
 					":long_description"=>strip_tags(nl2br(Input::method("POST","d"))), 
 					":slug"=>$slug, 
 					":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"], 
@@ -862,6 +865,7 @@ class ajax extends connection{
 			`studio404_module_item`.`shelf_life`,
 			`studio404_module_item`.`packaging`,
 			`studio404_module_item`.`awards`,
+			`studio404_module_item`.`production_capacity`,
 			`studio404_module_item`.`long_description`,
 			`studio404_module_item`.`visibility`, 
 			`studio404_pages`.`idx` AS hs_id,
@@ -990,12 +994,14 @@ class ajax extends connection{
 			$pp = Input::method("POST","pp"); 
 			$pa = Input::method("POST","pa"); 
 			$pd = Input::method("POST","pd"); 
+			$prdcap = Input::method("POST","prdcap"); 
 			$sql = 'UPDATE `studio404_module_item` SET 
 			`title`=:title, 
 			`hscode`=:hscode, 
 			`shelf_life`=:shelf_life, 
 			`packaging`=:packaging, 
 			`awards`=:awards, 
+			`production_capacity`=:production_capacity, 
 			`long_description`=:long_description, 
 			`visibility`=:one  
 			WHERE 
@@ -1010,6 +1016,7 @@ class ajax extends connection{
 				":packaging"=>$pp, 
 				":awards"=>$pa, 
 				":long_description"=>$pd, 
+				":production_capacity"=>$prdcap, 
 				":id"=>$pi, 
 				":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"], 
 				":one"=>1

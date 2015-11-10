@@ -602,6 +602,7 @@ $(document).on("click","#post_product",function(){
 	var hscode_id = $("#hscode_id").val(); 
 	var awards = $("#awards").val(); 
 	var productfile = $("#productfile").val(); 
+	var productioncapasity = $("#productioncapasity").val(); 
 	var product_description = $("#product_description").val(); 
 	var product_desc_length = strlen(product_description);
 	$(".error-msg").hide();
@@ -633,6 +634,7 @@ $(document).on("click","#post_product",function(){
 			s:shelf_life, 
 			pn:product_name, 
 			pkg:packinging, 
+			prcap:productioncapasity, 
 			c:hscode_id, 
 			a:awards, 
 			d:nl2br(product_description)
@@ -741,6 +743,7 @@ $(document).on("click",".makeitchange",function(e){
 		$("#p_shelf_life").val(obj[0].shelf_life);
 		$("#p_packaging").val(obj[0].packaging);
 		$("#p_awards").val(obj[0].awards);
+		$("#p_production_capacity").val(obj[0].production_capacity);
 		$("#p_describe").val(obj[0].long_description);
 		var num = strlen(obj[0].long_description); 
 		$("#maxlengthproductpopup").html(num+' / 250');
@@ -810,6 +813,7 @@ $(document).on("click","#change_product",function(){
 	var p_shelf_life = $("#p_shelf_life").val();
 	var p_packaging = $("#p_packaging").val();
 	var p_awards = $("#p_awards").val();
+	var p_production_capacity = $("#p_production_capacity").val();
 	var p_describe = $("#p_describe").val();
 	var p_describe_length = strlen($("#p_describe").val());
 	if(p_pid==""){
@@ -835,6 +839,7 @@ $(document).on("click","#change_product",function(){
 			psl: p_shelf_life, 
 			pp: p_packaging, 
 			pa: p_awards, 
+			prdcap: p_production_capacity, 
 			pd: p_describe
 		}, function(r){
 
