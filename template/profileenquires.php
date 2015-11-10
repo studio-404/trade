@@ -25,7 +25,7 @@
 				<label>Sector <font color="red">*</font></label>
 				<div class="multiselectBox">
 					<div class="selectBoxWithCheckbox" data-toggle="drop_sector">
-						<?=(count($sector_array)>0) ? 'Selected '.count($sector_array).' sectors' : 'Choose'?>
+						<?=(count($sector_array)>0) ? 'Selected '.count($sector_array).' sectors' : 'Selected'?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown" id="drop_sector">
 						<?php 
@@ -65,7 +65,7 @@
 			<div class="form-group">
 				<label>Company Size</label>
 				<select id="companysize" name="companysize" class="form-control">
-					<option value="">Choose</option>
+					<option value="">Select</option>
 					<?php foreach($data["companysize"] as $companysize) : ?>
 					<option value="<?=$companysize->idx?>" <?=($_SESSION["user_data"]["companysize"]==$companysize->idx) ? 'selected="selected"' : ''?>><?=$companysize->title?></option>
 					<?php endforeach; ?>
@@ -218,7 +218,7 @@
 				<label>Sector <font color="red">*</font></label>
 				<div class="multiselectBox">
 					<div class="selectBoxWithCheckbox" data-toggle="drop_sector">
-						<?=(count($sector_array)>0) ? 'Selected '.count($sector_array).' sectors' : 'Choose'?>
+						<?=(count($sector_array)>0) ? 'Selected '.count($sector_array).' sectors' : 'Selected'?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown" id="drop_sector">
 						<?php 
