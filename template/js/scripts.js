@@ -194,10 +194,20 @@ $(document).on("click","#login_user",function(e){
 		$("#finalstep3").html("<div>Please wait...</div>");
 		$(".modal-title small").hide();
 		$.post("http://"+document.domain+"/en/ajax",{ logintry:true, lg:logAs, e:emailaddress3, p:password3, c:captcha }, function(d){
-			if(d=="Done"){ location.reload(); }
+			if(d=="Done"){ 
+				if(logAs=="manufacturer"){
+					location.href = "/en/profile-products";
+				}else if(logAs=="serviceprovider"){
+					location.href = "/en/profile-service";
+				}else if(logAs=="company"){
+					location.href = "/en/profile-enquires";
+				}else if(logAs=="individual"){
+					location.href = "/en/profile-enquires";
+				}
+			}
 			else{ $("#finalstep3").html("<div>Username, password or security code is incorrect, or you do not have permition to access your account yet</div>"); $(".reloadbutton").show(); }
 		});
-	}
+n	}
 });
 
 $(document).on("click","#logoutbutton",function(e){
