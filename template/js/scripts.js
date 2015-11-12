@@ -18,13 +18,28 @@ $(document).ready(function(){
 		$("."+thisData).html("<ul>"+htmlLoad+"</ul>");
 	});
 
+	var tk = urlParamiters();
+	if(tk['popup']=="true"){
+		$("#insertText").html("Please wait..."); 
+		$('#message_popup').modal('toggle'); 
+		$.post("http://"+document.domain+"/en/ajax", { finalregister:"true", e:tk['email'], h:tk["hash"]  }, function(d){
+			history.pushState("", document.title, "/");
+			if(d=="Done"){
+				$('#message_popup').modal('toggle'); 
+				$('#login_popup').modal('toggle'); 
+			}else{
+				$("#insertText").html("Unknown error occurred ! Please try it again later."); 
+			}
+		});
+	}
+
 	if(window.location.hash){
 		scrollProducts();
 	}
 });
 
 $(document).on("click","#register_catalog",function(e){
-	var companytype1 = $("#companytype1").val();
+	//var companytype1 = $("#companytype1").val();
 	var emailaddress1 = $("#emailaddress1").val();
 	var password1 = $("#password1").val();
 	var repeatpassword1 = $("#repeatpassword1").val();
@@ -36,9 +51,7 @@ $(document).on("click","#register_catalog",function(e){
 	}
 	$(".error_message").fadeOut("slow");
 
-	if(checkEmpty(companytype1,"#companytype1")!=true){
-		$(".companytype1_required").fadeIn("slow"); 
-	}else if(checkEmpty(emailaddress1,"#emailaddress1")!=true){
+	if(checkEmpty(emailaddress1,"#emailaddress1")!=true){
 		$(".emailaddress1_required").fadeIn("slow");
 	}else if(validateEmail(emailaddress1)!=true){
 		$(".emailaddress1_message").fadeIn("slow");
@@ -51,11 +64,10 @@ $(document).on("click","#register_catalog",function(e){
 	}else if(agree1==2){
 		$(".agree_required").fadeIn("slow");
 	}else{ 
-		setCookie("companytype1", companytype1, "1");
 		setCookie("emailaddress1", emailaddress1, "1");
 		setCookie("password1", password1, "1");
 		setCookie("repeatpassword1", repeatpassword1, "1");
-		$.post("http://"+document.domain+"/en/ajax",{ sendemail1:true, type1:companytype1, email1:emailaddress1 },function(data){
+		$.post("http://"+document.domain+"/en/ajax",{ sendemail1:true, email1:emailaddress1 },function(data){
 			if(data=="Error"){
 				$(".emailaddress1_exists").fadeIn("slow");
 			}else{

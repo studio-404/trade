@@ -1,57 +1,60 @@
-# turn new php version
-AddHandler application/x-httpd-php55 .php .php5 .php4 .php3 
-
-# Turn on Expires and set default to 0
-ExpiresActive On
-ExpiresDefault A0
- 
-# Set up caching on media files for 1 year (forever?)
-<FilesMatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav)$">
-ExpiresDefault A29030400
-Header append Cache-Control "public"
-</FilesMatch>
- 
-# Set up caching on media files for 1 week
-<FilesMatch "\.(gif|jpg|jpeg|png|swf)$">
-ExpiresDefault A604800
-Header append Cache-Control "public"
-</FilesMatch>
- 
-# Set up 2 Hour caching on commonly updated files
-<FilesMatch "\.(xml|txt|html|js|css)$">
-ExpiresDefault A7200
-Header append Cache-Control "proxy-revalidate"
-</FilesMatch>
- 
-# Force no caching for dynamic files
-<FilesMatch "\.(php|cgi|pl|htm)$">
-ExpiresActive Off
-Header set Cache-Control "private, no-cache, no-store, proxy-revalidate, no-transform"
-Header set Pragma "no-cache"
-</FilesMatch>
-
-#images|styles|scripts|uploads|_manager|_website|_cache|
-RewriteRule ^(images|styles|scripts|flash|files|files_pre|_plugins|.*\.(doc|docx|xls|xlsx|css|js|jpg|mp3|jpeg|gif|swf|xml|png|pdf|ico|zip|rar|php|html|txt|sql|woff|eot|ttf|svg|csv)) - [L]
-
-RewriteCond %{REQUEST_FILENAME} !-f [OR]
-RewriteCond %{REQUEST_FILENAME} !-d
-
-RewriteRule . open.php [QSA,L]
-# choose opener file
-DirectoryIndex open.php 
-
-# block access to some sensible files
-<Files ~ "^sftp-config.json|.git|.htaccess|config.php|functions|backup|controller|model|view|_plugins|_temporaty">
-  Order allow,deny
-  Deny from all
-</Files>
-
-<IfModule php5_module>
-    php_flag session.cookie_httponly on
-</IfModule>
-
-# force non-www domain
-RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+# turn new php version
+AddHandler application/x-httpd-php55 .php .php5 .php4 .php3 
+
+# Turn on Expires and set default to 0
+ExpiresActive On
+ExpiresDefault A0
+
+
+# Set up caching on media files for 1 year (forever?)
+<FilesMatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav)$">
+ExpiresDefault A29030400
+Header append Cache-Control "public"
+</FilesMatch>
+ 
+# Set up caching on media files for 1 week
+<FilesMatch "\.(gif|jpg|jpeg|png|swf)$">
+ExpiresDefault A604800
+Header append Cache-Control "public"
+</FilesMatch>
+ 
+
+# Set up 2 Hour caching on commonly updated files
+<FilesMatch "\.(xml|txt|html|js|css)$">
+ExpiresDefault A7200
+Header append Cache-Control "proxy-revalidate"
+</FilesMatch>
+ 
+# Force no caching for dynamic files
+<FilesMatch "\.(php|cgi|pl|htm)$">
+ExpiresActive Off
+Header set Cache-Control "private, no-cache, no-store, proxy-revalidate, no-transform"
+Header set Pragma "no-cache"
+</FilesMatch>
+
+#images|styles|scripts|uploads|_manager|_website|_cache|
+RewriteRule ^(images|styles|scripts|flash|files|files_pre|_plugins|.*\.(doc|docx|xls|xlsx|css|js|jpg|mp3|jpeg|gif|swf|xml|png|pdf|ico|zip|rar|php|html|txt|sql|woff|eot|ttf|svg|csv)) - [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f [OR]
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule . open.php [QSA,L]
+# choose opener file
+
+DirectoryIndex open.php 
+
+# block access to some sensible files
+<Files ~ "^sftp-config.json|.git|.htaccess|config.php|functions|backup|controller|model|view|_plugins|_temporaty">
+  Order allow,deny
+  Deny from all
+</Files>
+
+<IfModule php5_module>
+    php_flag session.cookie_httponly on
+</IfModule>
+
+# force non-www domain
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 <Files 403.shtml>
 order allow,deny

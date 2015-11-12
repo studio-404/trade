@@ -17,13 +17,15 @@ class ajax extends connection{
 
 	public function requests($c){
 		$conn = $this->conn($c); 
-		if(Input::method("POST","sendemail1")) : 
+		if(Input::method("POST","sendemail1") && Input::method("POST","email1") && isset($_COOKIE["password1"])) : 
 			$sendemail1 = Input::method("POST","sendemail1");
-			$type = Input::method("POST","type");
 			$email1 = Input::method("POST","email1");
-			$_SESSION["register_code_tradewithgeorgia"] = ustring::random(6);
-			$msg = '<div style="margin:0; padding:0; width:100%;"><img src="'.TEMPLATE.'img/mailheader.png" width="100%" alt="Mail header"/></div>';
-			$msg .= '<p style="font-size:14px; font-family:roboto">Hello dear user, you have registered to our website: <b>'.WEBSITE.'</b>; Your registration code is: <font color="red">'.$_SESSION["register_code_tradewithgeorgia"].'</font></p>';
+			$email2 = explode("@",$email1);
+			if(is_array($email2)){ $email2 = $email2[0]; }else{ $email2 = "none"; }
+			$hash = ustring::random(18);
+			$msg = '<div style="margin:0; padding:0; width:100%;"><img src="'.TEMPLATE.'img/mailheader2.png" width="100%" alt="Mail header"/></div>';
+			$msg .= '<p style="font-size:14px; font-family:roboto">Hello dear user, you have registered to our website: <b>'.WEBSITE.'</b>; To complete registration follow the link: </font></p>';
+			$msg .= '<p><a href="http://trade.404.ge/en/start?popup=true&email='.$email2.'&hash='.$hash.'">http://trade.404.ge/en/start?popup=true&email='.$email2.'&hash='.$hash.'</a></p>';
 			
 			$sql = 'SELECT `id` FROM `studio404_users` WHERE `username`=:email AND `status`!=:status';
 			$prepare = $conn->prepare($sql);
@@ -35,6 +37,16 @@ class ajax extends connection{
 				echo "Error";
 			}else{
 				//$this->send("::Registration::","Dear user",$email1,$msg);
+				$insert_pre = 'INSERT INTO `studio404_users_pre` SET `date`=:datex, `ip`=:ip, `hash`=:hash, `email`=:email, `password`=:password, `status`=1';
+				$prepare = $conn->prepare($insert_pre); 
+				$prepare->execute(array(
+					":datex"=>time(), 
+					":ip"=>get_ip::ip(), 
+					":hash"=>$hash, 
+					":email"=>$email1, 
+					":password"=>$_COOKIE["password1"]
+				));
+
 				$sql = 'SELECT `host`,`user`,`pass`,`from`,`fromname` FROM `studio404_newsletter` WHERE `id`=1';
 				$prepare = $conn->prepare($sql); 
 				$prepare->execute(); 
@@ -45,7 +57,6 @@ class ajax extends connection{
 				$pass = $fetch["pass"]; 
 				$from = $fetch["from"]; 
 				$fromname = $fetch["fromname"]; 
-				$subject = "::Event registration:: - Trade with georgia"; 
 
 				$send_email = new send_email(); 
 				$send_email->send($host,$user,$pass,$from,$fromname,$email1,"::Registration::",$msg); 
@@ -84,23 +95,41 @@ class ajax extends connection{
 			}
 		endif;
 
-		if(Input::method("POST","finalregister")) : 
-			if(empty(Input::method("POST","code")) || Input::method("POST","code")!=$_SESSION["register_code_tradewithgeorgia"]){
-				echo "Error"; 
-			}else if(!Input::method("POST","t") || !Input::method("POST","e") || !Input::method("POST","p") || !Input::method("POST","p2")){
-				echo "Error"; 
-			}else if(!$this->isValidEmail(Input::method("POST","e"))){
+		if(Input::method("POST","finalregister")=="true") : 
+			if(!Input::method("POST","e") || !Input::method("POST","h")){
 				echo "Error"; 
 			}else{
 				$e = Input::method("POST","e");
-				$p = Input::method("POST","p");
-				$t = Input::method("POST","t");
+				$h = Input::method("POST","h");
+				
+				$sqlCheckPre = 'SELECT * FROM `studio404_users_pre` WHERE `email` LIKE "'.$e.'%" AND `hash`=:hash AND `status`=1';
+				$preparePre = $conn->prepare($sqlCheckPre);
+				$preparePre->execute(array(
+					":hash"=>$h
+				));
+				if($preparePre->rowCount() > 0){
+					$fetchPre = $preparePre->fetch(PDO::FETCH_ASSOC); 
+					$email_pre = $fetchPre['email'];
+					$password_pre = $fetchPre['password'];
+					$id_pre = $fetchPre['id'];
+
+					$sqlUpdatePre = 'UPDATE `studio404_users_pre` SET `status`=2 WHERE `id`=:id';
+					$prepareUpdatePre = $conn->prepare($sqlUpdatePre);
+					$prepareUpdatePre->execute(array(
+						":id"=>$id_pre
+					)); 
+				}else{
+					echo "Error"; 
+					return 2;
+				}
+
+
 				$ip = get_ip::ip();
 
 				$sql = 'SELECT `id` FROM `studio404_users` WHERE `username`=:email AND `status`!=:status';
 				$prepare = $conn->prepare($sql);
 				$prepare->execute(array(
-					":email"=>$e, 
+					":email"=>$email_pre, 
 					":status"=>1
 				));
 				if($prepare->rowCount() > 0){
@@ -108,15 +137,14 @@ class ajax extends connection{
 				}else{
 					$companyUserTypes = array("manufacturer","serviceprovider","company","individual");
 					foreach($companyUserTypes as $ctype) :
-						$sql2 = 'INSERT INTO `studio404_users` SET `registered_date`=:registered_date, `registered_ip`=:registered_ip, `username`=:email, `password`=:password, `company_type`=:company_type, `main_company_type`=:main_company_type, `user_type`=:user_type, `allow`=:allow';
+						$sql2 = 'INSERT INTO `studio404_users` SET `registered_date`=:registered_date, `registered_ip`=:registered_ip, `username`=:email, `password`=:password, `company_type`=:company_type, `user_type`=:user_type, `allow`=:allow';
 						$prepare2 = $conn->prepare($sql2);
 						$prepare2->execute(array(
 							":registered_date"=>time(), 
 							":registered_ip"=>$ip, 
-							":email"=>$e, 
-							":password"=>md5($p), 
+							":email"=>$email_pre, 
+							":password"=>md5($password_pre), 
 							":company_type"=>$ctype, 
-							":main_company_type"=>$t, 
 							":user_type"=>'website', 
 							":allow"=>2
 						));
@@ -2030,42 +2058,44 @@ class ajax extends connection{
 
 		if(Input::method("POST","passwordRecover")=="true" && Input::method("POST","e") && Input::method("POST","c")){
 			if($this->isValidEmail(Input::method("POST","e")) && Input::method("POST","c")===$_SESSION['protect_']){
-
-				$sql = 'SELECT `id` FROM `studio404_users` WHERE `username`=:username AND `status`!=1';
-				$prepare = $conn->prepare($sql); 
-				$prepare->execute(array(
-					":username"=>Input::method("POST","e")
-				));
-				if($prepare->rowCount()>0){
-					$recover = ustring::random(15);
-					$ufetch = $prepare->fetch(PDO::FETCH_ASSOC);
-					$setRecover = 'UPDATE `studio404_users` SET `recover`=:recover WHERE `id`=:id';
-					$setPrepare = $conn->prepare($setRecover); 
-					$setPrepare->execute(array(
-						":id"=>$ufetch['id'], 
-						":recover"=>$recover
-					));
-
-					$msg = '<div style="margin:0; padding:0; width:100%;"><img src="'.TEMPLATE.'img/mailheader.png" width="100%" alt="Mail header"/></div>';
-					$msg .= '<p style="font-size:14px; font-family:roboto">Password recover link: <a href="'.WEBSITE.LANG.'/recover?rl='.$recover.'&ui='.$ufetch['id'].'" style="color:red">Click here</a></p>';
-					$sql = 'SELECT `host`,`user`,`pass`,`from`,`fromname` FROM `studio404_newsletter` WHERE `id`=1';
+				try{
+					$sql = 'SELECT `id` FROM `studio404_users` WHERE `username`=:username AND `status`!=1';
 					$prepare = $conn->prepare($sql); 
-					$prepare->execute(); 
-					$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
-					
-					$host = $fetch["host"]; 
-					$user = $fetch["user"]; 
-					$pass = $fetch["pass"]; 
-					$from = $fetch["from"]; 
-					$fromname = $fetch["fromname"]; 
+					$prepare->execute(array(
+						":username"=>Input::method("POST","e")
+					));
+					if($prepare->rowCount()>0){
+						$recover = ustring::random(15);
+						$ufetch = $prepare->fetch(PDO::FETCH_ASSOC);
+						$setRecover = 'UPDATE `studio404_users` SET `recover`=:recover WHERE `id`=:id';
+						$setPrepare = $conn->prepare($setRecover); 
+						$setPrepare->execute(array(
+							":id"=>$ufetch['id'], 
+							":recover"=>$recover
+						));
 
-					$send_email = new send_email(); 
-					$send_email->send($host,$user,$pass,$from,$fromname,Input::method("POST","e"),"::Recover password::",$msg); 
-					echo "Please check your email address !";
+						$msg = '<div style="margin:0; padding:0; width:100%;"><img src="'.TEMPLATE.'img/mailheader.png" width="100%" alt="Mail header"/></div>';
+						$msg .= '<p style="font-size:14px; font-family:roboto">Password recover link: <a href="'.WEBSITE.LANG.'/recover?rl='.$recover.'&ui='.$ufetch['id'].'" style="color:red">Click here</a></p>';
+						$sql = 'SELECT `host`,`user`,`pass`,`from`,`fromname` FROM `studio404_newsletter` WHERE `id`=1';
+						$prepare = $conn->prepare($sql); 
+						$prepare->execute(); 
+						$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
+						
+						$host = $fetch["host"]; 
+						$user = $fetch["user"]; 
+						$pass = $fetch["pass"]; 
+						$from = $fetch["from"]; 
+						$fromname = $fetch["fromname"]; 
 
-				}else{
+						$send_email = new send_email(); 
+						$send_email->send($host,$user,$pass,$from,$fromname,Input::method("POST","e"),"::Recover password::",$msg); 
+						echo "Please check your email address !";
+					}else{
+						echo "Error";
+					}
+				}catch(Exception $e){
 					echo "Error";
-				}
+				}				
 			}else{
 				echo "Error";
 			}

@@ -7,6 +7,9 @@
 			<h3 class="modal-title"><?=$data["language_data"]["login"]?> <small data-toggle="modal" data-target="#register_popup" onclick="$('#login_popup').modal('hide')"><?=$data["language_data"]["register"]?></small></h3>
 			<div id="finalstep3">
 				<div class="form-group">
+					<?php if(isset($_GET['hash'])) : ?>
+					<p><font color="green">You have registered successfully !</font></p>
+					<?php endif; ?>
 					<label for="logAs">Log In As</label>
 					<select class="form-control" id="logAs">
 						<option value="manufacturer">Product manufacturer</option>

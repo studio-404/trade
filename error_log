@@ -1326,3 +1326,221 @@ Stack trace:
 #3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
 #4 {main}
   thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2006
+[06-Nov-2015 16:17:32 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2006
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2006): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2006
+[06-Nov-2015 16:17:33 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2006
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2006): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2006
+[06-Nov-2015 16:17:34 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2006
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2006): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2006
+[06-Nov-2015 16:17:35 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2006
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2006): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2006
+[06-Nov-2015 16:17:35 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2006
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2006): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2006
+[06-Nov-2015 16:17:50 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2006
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2006): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2006
+[07-Nov-2015 16:29:50 Asia/Tbilisi] PHP Warning:  file_put_contents(files_pre/): failed to open stream: Is a directory in /home/geoweb/trade.404.ge/controller/ajax.php on line 337
+[07-Nov-2015 16:29:50 Asia/Tbilisi] PHP Warning:  rename(files_pre/,files/document/): Directory not empty in /home/geoweb/trade.404.ge/controller/ajax.php on line 338
+[07-Nov-2015 16:31:12 Asia/Tbilisi] PHP Warning:  file_put_contents(/files_pre/): failed to open stream: Is a directory in /home/geoweb/trade.404.ge/controller/ajax.php on line 337
+[07-Nov-2015 16:31:12 Asia/Tbilisi] PHP Warning:  rename(/files_pre/,/files/document/): No such file or directory in /home/geoweb/trade.404.ge/controller/ajax.php on line 338
+[07-Nov-2015 17:46:54 Asia/Tbilisi] PHP Warning:  filesize(): stat failed for changeprofile=true&amp;p_companyname=MADLOBA+LTD&amp;p_sector=%5B%2233%22%5D&amp;p_subsector=%5B%22114%22%5D&amp;p_establishedin=2015&amp;p_productioncapasity=100000&amp;p_address=Beliashvili+55&amp;p_mobiles=%2B995577610101&amp;p_numemploy=25&amp;p_certificates=%5B%22756%22%2C%22761%22%2C%22762%22%5D&amp;p_contactpersones=eka+mrgkrgjnrk&amp;p_officephone=454565654&amp;p_companysize=766&amp;p_webaddress=www.madloba.ge&amp;p_ad_position1=web+developer&amp;p_ad_email1=web%40404.ge&amp;p_ad_person2=soso+sulamanidze&amp;p_ad_position2=web+administrator&amp;p_ad_mobile2=%2B995599656568&amp;p_ad_email2=admin%40404.ge&amp;p_ad_upload_catalog=C%3A%5Cfakepath%5Ca.pdf&amp;p_contactemail=giorgigvazava87%40gmail.com&amp;p_about=ghghgjghgdfdhgkkljghfgjlkjhggvv&amp;p_products=%5B%22152%22%5D&amp;p_exportmarkets=%5B%22562%22%5D in /home/geoweb/trade.404.ge/controller/ajax.php on line 341
+[07-Nov-2015 17:46:54 Asia/Tbilisi] PHP Warning:  filesize(): stat failed for /home/geoweb/trade.404.ge//files/document/1b89aa8925fa476bba02cdf17e4eeaf0manu.pdf in /home/geoweb/trade.404.ge/controller/ajax.php on line 342
+[07-Nov-2015 17:48:21 Asia/Tbilisi] PHP Warning:  filesize(): stat failed for changeprofile=true&amp;p_companyname=MADLOBA+LTD&amp;p_sector=%5B%2233%22%5D&amp;p_subsector=%5B%22114%22%5D&amp;p_establishedin=2015&amp;p_productioncapasity=100000&amp;p_address=Beliashvili+55&amp;p_mobiles=%2B995577610101&amp;p_numemploy=25&amp;p_certificates=%5B%22756%22%2C%22761%22%2C%22762%22%5D&amp;p_contactpersones=eka+mrgkrgjnrk&amp;p_officephone=454565654&amp;p_companysize=766&amp;p_webaddress=www.madloba.ge&amp;p_ad_position1=web+developer&amp;p_ad_email1=web%40404.ge&amp;p_ad_person2=soso+sulamanidze&amp;p_ad_position2=web+administrator&amp;p_ad_mobile2=%2B995599656568&amp;p_ad_email2=admin%40404.ge&amp;p_ad_upload_catalog=C%3A%5Cfakepath%5Ca.pdf&amp;p_contactemail=giorgigvazava87%40gmail.com&amp;p_about=ghghgjghgdfdhgkkljghfgjlkjhggvv&amp;p_products=%5B%22152%22%5D&amp;p_exportmarkets=%5B%22562%22%5D in /home/geoweb/trade.404.ge/controller/ajax.php on line 341
+[07-Nov-2015 17:48:21 Asia/Tbilisi] PHP Warning:  filesize(): stat failed for /home/geoweb/trade.404.ge/files/document/fd99d54bbe95ef8e426e4306734fa833manu.pdf in /home/geoweb/trade.404.ge/controller/ajax.php on line 342
+[07-Nov-2015 18:06:24 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens' in /home/geoweb/trade.404.ge/controller/ajax.php:416
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(416): PDOStatement->execute(Array)
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 416
+[07-Nov-2015 18:06:37 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens' in /home/geoweb/trade.404.ge/controller/ajax.php:416
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(416): PDOStatement->execute(Array)
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 416
+[07-Nov-2015 18:29:52 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens' in /home/geoweb/trade.404.ge/controller/custom/profileproducts.php:189
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/custom/profileproducts.php(189): PDOStatement->execute(Array)
+#1 /home/geoweb/trade.404.ge/controller/custom/profileproducts.php(9): profileproducts->template(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(205): profileproducts->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/custom/profileproducts.php on line 189
+[07-Nov-2015 19:35:34 Asia/Tbilisi] PHP Fatal error:  Call to a member function prepare() on a non-object in /home/geoweb/trade.404.ge/model/model_template_upload_user_logo.php on line 97
+[09-Nov-2015 09:54:01 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2049
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2049): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2049
+[09-Nov-2015 09:54:02 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2049
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2049): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2049
+[09-Nov-2015 09:54:04 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2049
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2049): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2049
+[09-Nov-2015 09:54:05 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2049
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2049): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2049
+[09-Nov-2015 09:54:05 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2049
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2049): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2049
+[09-Nov-2015 09:54:05 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2049
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2049): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2049
+[09-Nov-2015 09:54:06 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2049
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2049): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2049
+[09-Nov-2015 09:54:06 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2049
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2049): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2049
+[09-Nov-2015 09:54:06 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2049
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2049): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2049
+[09-Nov-2015 09:54:07 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2049
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2049): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2049
+[09-Nov-2015 09:54:07 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2049
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2049): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2049
+[09-Nov-2015 09:54:07 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2049
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2049): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2049
+[09-Nov-2015 09:54:07 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2049
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2049): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2049
+[09-Nov-2015 10:38:19 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2049
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2049): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2049
+[09-Nov-2015 10:38:20 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `status`!=1 ORDER BY `title` ASC' at line 1' in /home/geoweb/trade.404.ge/controller/ajax.php:2049
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(2049): PDOStatement->execute()
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 2049
+[09-Nov-2015 07:37:57 America/Chicago] PHP Warning:  Missing boundary in multipart/form-data POST data in Unknown on line 0
+[09-Nov-2015 07:43:59 America/Chicago] PHP Warning:  Missing boundary in multipart/form-data POST data in Unknown on line 0
+[09-Nov-2015 07:47:24 America/Chicago] PHP Warning:  Missing boundary in multipart/form-data POST data in Unknown on line 0
+[09-Nov-2015 07:50:21 America/Chicago] PHP Warning:  Missing boundary in multipart/form-data POST data in Unknown on line 0
+[09-Nov-2015 07:53:15 America/Chicago] PHP Warning:  Missing boundary in multipart/form-data POST data in Unknown on line 0
+[09-Nov-2015 08:06:34 America/Chicago] PHP Warning:  Missing boundary in multipart/form-data POST data in Unknown on line 0
+[09-Nov-2015 08:09:34 America/Chicago] PHP Warning:  Missing boundary in multipart/form-data POST data in Unknown on line 0
+[09-Nov-2015 08:09:54 America/Chicago] PHP Warning:  Missing boundary in multipart/form-data POST data in Unknown on line 0
+[09-Nov-2015 08:40:14 America/Chicago] PHP Warning:  Missing boundary in multipart/form-data POST data in Unknown on line 0
+[10-Nov-2015 15:51:21 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'production_capacity' cannot be null' in /home/geoweb/trade.404.ge/controller/ajax.php:848
+Stack trace:
+#0 /home/geoweb/trade.404.ge/controller/ajax.php(848): PDOStatement->execute(Array)
+#1 /home/geoweb/trade.404.ge/controller/ajax.php(15): ajax->requests(Array)
+#2 /home/geoweb/trade.404.ge/functions/controller.php(51): ajax->__construct(Array)
+#3 /home/geoweb/trade.404.ge/open.php(144): controller->loadpage(Object(url_controll), Array)
+#4 {main}
+  thrown in /home/geoweb/trade.404.ge/controller/ajax.php on line 848
