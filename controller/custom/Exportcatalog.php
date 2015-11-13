@@ -94,6 +94,9 @@ class exportcatalog extends connection{
 			WHERE 
 			`studio404_users`.`user_type`=:user_type AND 
 			`studio404_users`.`allow`!=:one AND 
+			`studio404_users`.`picture`<>"" AND 
+			`studio404_users`.`sector_id`<>"" AND 
+			`studio404_users`.`sub_sector_id`<>"" AND 
 			'.$subsectors.' 
 			'.$products.' 
 			'.$exportmarkets.' 
@@ -102,6 +105,7 @@ class exportcatalog extends connection{
 			(`studio404_users`.`company_type`=:manufacturer OR `studio404_users`.`company_type`=:serviceprovider) AND 
 			`studio404_users`.`status`!=:one '.$orderBy.' '.$limit.'
 			';
+
 			$prepare = $conn->prepare($sql); 
 			$prepare->execute(array(
 				":manufacturer"=>'manufacturer', 
@@ -109,7 +113,14 @@ class exportcatalog extends connection{
 				":user_type"=>'website', 
 				":one"=>1
 			));
-			$data["fetch"] = $prepare->fetchAll(PDO::FETCH_ASSOC);
+			if($prepare->rowCount() > 0){
+				$data["fetch"] = $prepare->fetchAll(PDO::FETCH_ASSOC);
+				// echo "<pre>";
+				// print_r($data["fetch"]);
+				// echo "</pre>";
+			}else{
+				$data["fetch"] = array();
+			}
 		endif;
 
 

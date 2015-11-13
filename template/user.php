@@ -77,7 +77,7 @@
 			<li class="text_formats"><?=htmlentities(strip_tags($data["fetch"]["production_capacity"]))?></li>
 		</ul> -->
 		<ul class="text_formats_ul">
-			<li class="text_formats"><span>Established In</span></li>
+			<li class="text_formats"><span>Founded</span></li>
 			<li class="text_formats"><?=htmlentities(strip_tags($data["fetch"]["established_in"]))?></li>
 		</ul>
 		<ul class="text_formats_ul">

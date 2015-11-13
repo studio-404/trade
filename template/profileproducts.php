@@ -166,8 +166,8 @@
 	<!--Third column START-->
 	<div class="col-lg-3">
 		<div class="form-group">
-			<label>Established In</label>
-			<input type="text" id="establishedin" name="establishedin" class="form-control" value="<?=($_SESSION["user_data"]["establishedin"]) ? htmlentities($_SESSION["user_data"]["establishedin"]) : ''?>" />
+			<label>Founded</label>
+			<input type="text" id="establishedin" name="establishedin" class="form-control" placeholder="Year" value="<?=($_SESSION["user_data"]["establishedin"]) ? htmlentities($_SESSION["user_data"]["establishedin"]) : ''?>" />
 		</div>
 		<div class="form-group">
 			<label>Email <font color="red">*</font></label>
