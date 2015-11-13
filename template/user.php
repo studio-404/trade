@@ -61,7 +61,7 @@
 			</li>
 		</ul>
 		<ul class="text_formats_ul">
-			<li class="text_formats"><span>Export Markets</span></li>
+			<li class="text_formats"><span>Exporting</span></li>
 			<li class="text_formats">
 				<?=$retrieve_users_info->retrieveDb($data["fetch"]["export_markets_id"])?>
 			</li>
@@ -117,13 +117,13 @@
 			<li class="text_formats"><b>Person:</b> <?=strip_tags($data["fetch"]["contact_person"])?></li>
 			<li class="text_formats"><b>Position:</b> <?=strip_tags($data["fetch"]["ad_position1"])?></li>
 			<li class="text_formats"><b>Mobile Number:</b> <?=strip_tags($data["fetch"]["mobile"])?></li>
-			<li class="text_formats"><b>Email:</b> <?=strip_tags($data["fetch"]["ad_email1"])?></li>
+			<li class="text_formats"><b>Email:</b> <a href="mailto:<?=strip_tags($data["fetch"]["ad_email1"])?>"><?=strip_tags($data["fetch"]["ad_email1"])?></a></li>
 			<li class="text_formats">&nbsp;</li>
 			<li class="text_formats"><b>Contact person 2</b></li>
 			<li class="text_formats"><b>Person:</b> <?=strip_tags($data["fetch"]["ad_person2"])?></li>
 			<li class="text_formats"><b>Position:</b> <?=strip_tags($data["fetch"]["ad_position2"])?></li>
 			<li class="text_formats"><b>Mobile Number:</b> <?=strip_tags($data["fetch"]["ad_mobile2"])?></li>
-			<li class="text_formats"><b>Email:</b> <?=strip_tags($data["fetch"]["ad_email2"])?></li>
+			<li class="text_formats"><b>Email:</b> <a href="mailto:<?=strip_tags($data["fetch"]["ad_email2"])?>"><?=strip_tags($data["fetch"]["ad_email2"])?></a></li>
 			<?php endif; ?>
 		</ul>
 

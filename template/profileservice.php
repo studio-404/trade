@@ -178,7 +178,7 @@
 				<font class="error-msg" id="requiredx_products">Please select minimum one service !</font>
 			</div>
 			<div class="form-group">
-				<label>Export Markets</label>
+				<label>Exporting</label>
 				<?php $markets = explode(",",$_SESSION["user_data"]["exportmarkets"]); ?>
 				<div class="multiselectBox4">
 					<div class="selectBoxWithCheckbox4" data-toggle="drop_sector4">

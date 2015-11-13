@@ -681,7 +681,12 @@ class ajax extends connection{
 		}
 
 		if(Input::method("POST","hscode") && Input::method("POST","hscode")=="true" && Input::method("POST","s") && strlen(Input::method("POST","s"))>=3){
-			$sql = 'SELECT `idx`,`title` FROM `studio404_pages` WHERE `cid`=:cid AND `title` LIKE "'.Input::method("POST","s").'%" AND `status`!=:one ORDER BY `title` ASC';
+			if(is_numeric(Input::method("POST","s"))){
+				$like = ' AND `title` LIKE "'.Input::method("POST","s").'%" ';
+			}else{
+				$like = ' AND `title` LIKE "%'.Input::method("POST","s").'%" ';
+			}
+			$sql = 'SELECT `idx`,`title` FROM `studio404_pages` WHERE `cid`=:cid '.$like.' AND `status`!=:one ORDER BY `title` ASC';
 			$prepare = $conn->prepare($sql); 
 			$prepare->execute(array(
 				":cid"=>769, 
@@ -1458,9 +1463,11 @@ class ajax extends connection{
 				WHERE 
 				`studio404_users`.`user_type`=:user_type AND 
 				`studio404_users`.`allow`!=:one AND 
+				`studio404_users`.`namelname`<>"" AND 
 				`studio404_users`.`picture`<>"" AND 
 				`studio404_users`.`sector_id`<>"" AND 
 				`studio404_users`.`sub_sector_id`<>"" AND 
+				`studio404_users`.`products`<>"" AND 
 				'.$subsectors.' 
 				'.$products.' 
 				'.$exportmarkets.' 

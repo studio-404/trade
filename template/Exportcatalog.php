@@ -41,7 +41,7 @@
 				<div class="dropsubSectors hidedUlli" style="display:none"></div>
 			<div class="chooseMe" data-sect="dropproduct" data-load="lproducts" data-turn="off">Activity <span class="downArrow"></span></div>
 				<div class="dropproduct hidedUlli" style="display:none"></div>
-			<div class="chooseMe" data-sect="dropexportmarkets" data-load="lexportmarkets" data-turn="off">Export markets <span class="downArrow"></span></div>
+			<div class="chooseMe" data-sect="dropexportmarkets" data-load="lexportmarkets" data-turn="off">Exporting <span class="downArrow"></span></div>
 				<div class="dropexportmarkets hidedUlli" style="display:none"></div>
 			<div class="chooseMe" data-sect="dropcertificates" data-load="lsertificates" data-turn="off">Certificate <span class="downArrow"></span></div>
 				<div class="dropcertificates hidedUlli" style="display:none"></div>
@@ -86,7 +86,7 @@
 			</div>
 			<div class="col-sm-4 filter_cols<?=(isset($_GET['exportmarkets']) && !empty($_GET['exportmarkets'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					Export markets <span class="caret"></span> <?=(isset($_GET['exportmarkets']) && !empty($_GET['exportmarkets'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="exportmarkets"></div>' : ''?>
+					Exporting <span class="caret"></span> <?=(isset($_GET['exportmarkets']) && !empty($_GET['exportmarkets'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="exportmarkets"></div>' : ''?>
 				</a>
 				<ul class="dropdown-menu lexportmarkets">
 					<?php foreach($data["countries"] as $countries) : ?>

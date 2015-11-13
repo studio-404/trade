@@ -94,9 +94,11 @@ class exportcatalog extends connection{
 			WHERE 
 			`studio404_users`.`user_type`=:user_type AND 
 			`studio404_users`.`allow`!=:one AND 
+			`studio404_users`.`namelname`<>"" AND 
 			`studio404_users`.`picture`<>"" AND 
 			`studio404_users`.`sector_id`<>"" AND 
 			`studio404_users`.`sub_sector_id`<>"" AND 
+			`studio404_users`.`products`<>"" AND 
 			'.$subsectors.' 
 			'.$products.' 
 			'.$exportmarkets.' 
