@@ -1,4 +1,4 @@
-<!-- START LOGIN POPUP -->
+<!--START LOGIN POPUP -->
 <div id="login_popup" class="modal fade" role="dialog">
   <div class="modal-dialog" style="width:340px;">
     <!-- Modal content-->
@@ -14,9 +14,9 @@
 					<select class="form-control" id="logAs">
 						<option value="manufacturer">Product manufacturer</option>
 						<option value="serviceprovider">Service provider</option>
-						<option value="company">Company</option>
-						<option value="individual">Individual</option>
 					</select>
+					<!-- <option value="company">Company</option>
+					<option value="individual">Individual</option> -->
 				</div>
 				<div class="form-group">
 					<label for="emailaddress3"><?=$data["language_data"]["emailaddress"]?></label>
@@ -45,4 +45,4 @@
     </div>
   </div>
 </div>
-<!-- END LOGIN POPUP -->
+<!-- END LOGIN POPUP

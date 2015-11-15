@@ -1873,8 +1873,10 @@ $(document).on("click",".loadmore",function(){
 			if(r!="Empty"){
 				var obj = jQuery.parseJSON(r);
 				var insert = '';
+				var old = '';
 				for(i=0; i<obj.length; i++){
-					insert += '<div class="col-sm-4 col-md-3 col-xs-4 event_item">';
+					old = (obj[i].datetime < time()) ? 'style="opacity:0.4"' : '';
+					insert += '<div class="col-sm-4 col-md-3 col-xs-4 event_item" '+old+'>';
 					insert += '<a href="http://'+document.domain+'/en/'+obj[i].slug+'">';
 					insert += '<div class="date">'+obj[i].date+'</div>';
 					insert += '<div class="image"><img src="http://'+document.domain+'/image?f=http://'+document.domain+'/'+obj[i].pic+'&amp;w=270&amp;h=130" class="img-responsive" alt="" /></div>';
@@ -2442,11 +2444,7 @@ function isUrl(s) {
 function isMobile(s) {
 	console.log(s.length);
 	if(s.charAt(0)=="+" && s.charAt(1)=="9" && s.charAt(2)=="9" && s.charAt(3)=="5"){
-		if(s.length == 13){
-			return true;
-		}else{
-			return false;
-		}
+		return true;
 	}else{
 		return false;	
 	}
@@ -2514,4 +2512,8 @@ function scrollProducts(){
     }, 2000, function(){
     	history.pushState("", document.title, window.location.pathname);
     });
+}
+
+function time() {
+  return Math.floor(new Date().getTime() / 1000);
 }

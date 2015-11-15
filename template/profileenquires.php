@@ -111,7 +111,7 @@
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Mobile Number <font color="red">*</font></label>
-						<input type="text" id="mobile" name="mobile" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" />
+						<input type="text" id="mobile" name="mobile" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" placeholder="+995 5** ** **" />
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
@@ -135,7 +135,7 @@
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Mobile Number</label>
-						<input type="text" id="ad_mobile2" name="ad_mobile2" class="form-control" value="<?=($_SESSION["user_data"]["ad_mobile2"]) ? htmlentities($_SESSION["user_data"]["ad_mobile2"]) : ''?>" />
+						<input type="text" id="ad_mobile2" name="ad_mobile2" class="form-control" value="<?=($_SESSION["user_data"]["ad_mobile2"]) ? htmlentities($_SESSION["user_data"]["ad_mobile2"]) : ''?>" placeholder="+995 5** ** **" />
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
@@ -182,7 +182,7 @@
 			</div>
 			<div class="form-group">
 				<label>Mobile Number</label>
-				<input type="text" id="mobile" name="mobile" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" />
+				<input type="text" id="mobile" name="mobile" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" placeholder="+995 5** ** **" />
 				<font class="error-msg" id="requiredx_mobile">Mobile number mast start with +995 (13 character) !</font>
 			</div>
 			<div class="form-group">

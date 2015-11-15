@@ -179,10 +179,14 @@
 			</div>
 			<div class="form-group">
 				<label>Exporting</label>
-				<?php $markets = explode(",",$_SESSION["user_data"]["exportmarkets"]); ?>
+				<?php 
+					$markets = explode(",",$_SESSION["user_data"]["exportmarkets"]); 
+					$markets = clearemptyvalues::cl($markets);
+					$markets_count = (!empty($markets)) ? count($markets) : 0;
+				?>
 				<div class="multiselectBox4">
 					<div class="selectBoxWithCheckbox4" data-toggle="drop_sector4">
-						<?=(count($markets) > 0) ? "Selected ".count($markets)." countries" : "Select"?>
+						<?=(count($markets) > 0) ? "Selected ".$markets_count." countries" : "Select"?>
 					</div>
 					<div class="selectBoxWithCheckbox_dropdown4" id="drop_sector4">
 						<div class="selectItem44">
@@ -253,8 +257,8 @@
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Mobile Number <font color="red">*</font></label>
-						<input type="text" id="mobile" name="mobile" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" />
-						<font class="error-msg" id="requiredx_mobilenumber1">Mobilenumber is required !</font>
+						<input type="text" id="mobile" name="mobile" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" placeholder="+995 5** ** **" />
+						<font class="error-msg" id="requiredx_mobilenumber1">Mobile number is required !</font>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
@@ -279,7 +283,7 @@
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Mobile Number</label>
-						<input type="text" id="ad_mobile2" name="ad_mobile2" class="form-control" value="<?=($_SESSION["user_data"]["ad_mobile2"]) ? htmlentities($_SESSION["user_data"]["ad_mobile2"]) : ''?>" />
+						<input type="text" id="ad_mobile2" name="ad_mobile2" class="form-control" value="<?=($_SESSION["user_data"]["ad_mobile2"]) ? htmlentities($_SESSION["user_data"]["ad_mobile2"]) : ''?>" placeholder="+995 5** ** **" />
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">

@@ -1720,6 +1720,7 @@ class ajax extends connection{
 				$sql = 'SELECT 
 				`studio404_module_item`.`slug`, 
 				`studio404_module_item`.`date`, 
+				`studio404_module_item`.`expiredate`, 
 				`studio404_module_item`.`title`, 
 				( 
 					SELECT `studio404_gallery_file`.`file` FROM 
@@ -1771,7 +1772,8 @@ class ajax extends connection{
 					$result = array();
 					$x = 0;
 					foreach($fetch as $val){
-						$result[$x]["date"] = date("d M",$val["date"]);  
+						$result[$x]["datetime"] = $val["expiredate"];  
+						$result[$x]["date"] = date("d M Y",$val["date"]);  
 						$result[$x]["slug"] = $val["slug"];  
 						$result[$x]["pic"] = $val["pic"];  
 						$result[$x]["title"] = $ctext->cut($val["title"],30);  						

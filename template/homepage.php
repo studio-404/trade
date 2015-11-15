@@ -75,10 +75,11 @@ $ctext = new ctext();
 		<div class="row" id="events_items">
 			<?php 
 			foreach($eventArray1 as $val){
+				$old = ($val->expiredate < time()) ? ' style="opacity:0.4;"' : '';
 			?>
-				<div class="col-sm-4 col-md-2 col-xs-4 event_item">
+				<div class="col-sm-4 col-md-2 col-xs-4 event_item"<?=$old?>>
 					<a href="<?=WEBSITE.LANG."/".htmlentities($val->slug)?>">
-						<div class="date"><?=date("d M",$val->date)?></div>
+						<div class="date"><?=date("d M Y",$val->date)?></div>
 						<div class="image"><img src="<?=WEBSITE?>image?f=<?=WEBSITE.$val->pic?>&amp;w=170&amp;h=90" class="img-responsive" alt="" /></div>
 						<div class="text"><?=$ctext->cut($val->title,50)?></div>
 					</a>	
