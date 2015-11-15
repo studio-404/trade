@@ -81,7 +81,10 @@ $ctext = new ctext();
 					<a href="<?=WEBSITE.LANG."/".htmlentities($val->slug)?>">
 						<div class="date"><?=date("d M Y",$val->date)?></div>
 						<div class="image"><img src="<?=WEBSITE?>image?f=<?=WEBSITE.$val->pic?>&amp;w=170&amp;h=90" class="img-responsive" alt="" /></div>
-						<div class="text"><?=$ctext->cut($val->title,50)?></div>
+						<div class="text">
+							<?=$ctext->cut($val->title,50)?>
+							<p class="booth"><b>Booth №:</b> <?=$ctext->cut($val->event_booth,50)?></p>
+						</div>
 					</a>	
 				</div>
 			<?php

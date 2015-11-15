@@ -43,6 +43,10 @@ $first = array_slice($data["event_list"], 0, 1);
 				<div class="text_formats_blue">
 					<?=$first[0]["event_fee"]?>
 				</div>
+				<div class="yellow_title">Booth №:</div>
+				<div class="text_formats_blue">
+					<?=$first[0]["event_booth"]?>
+				</div>
 			</div>
 			<div class="col-sm-4 event_line_bg">
 				<div class="yellow_title">Venue:</div>
@@ -84,7 +88,10 @@ $first = array_slice($data["event_list"], 0, 1);
 				<a href="<?=WEBSITE.LANG?>/<?=$val["slug"]?>">
 					<div class="date"><?=date("d M Y",$val["date"])?></div>
 					<div class="image"><img src="<?=WEBSITE?>image?f=<?=WEBSITE.$val["pic"]?>&amp;w=270&amp;h=130" class="img-responsive" alt="" /></div>
-					<div class="text"><?=$ctext->cut($val["title"],30)?></div>
+					<div class="text">
+						<?=$ctext->cut($val["title"],30)?>
+						<p class="booth"><b>Booth №:</b> <?=$ctext->cut($val["event_booth"],50)?></p>
+					</div>
 				</a>	
 			</div>
 			<?php endforeach; ?>
