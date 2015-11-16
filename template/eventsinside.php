@@ -66,7 +66,7 @@
 
 		<div style="clear:both"></div>
 		<div class="event_prog" style="margin:0">
-			<div class="title" style="padding:10px 0;"><?=$data["language_data"]["programme"]?></div>
+			<div class="title" style="padding:10px 0;">Participants</div>
 			<?=$first[0]->long_description?>
 		</div>
 		<?php if($first[0]->date > time()) : ?>

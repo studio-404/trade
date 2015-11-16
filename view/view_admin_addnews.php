@@ -100,7 +100,7 @@
 
                     <?php
 					if(isset($_GET['type']) && $_GET['type']=="eventpage"){
-						echo '<label>Programme: <font color="RED">*</font></label>';
+						echo '<label>Participants: <font color="RED">*</font></label>';
 					}else{
 						echo '<label>Description: <font color="RED">*</font></label>';
 					}

@@ -61,7 +61,7 @@
 			</li>
 		</ul>
 		<ul class="text_formats_ul">
-			<li class="text_formats"><span>Exporting</span></li>
+			<li class="text_formats"><span>Exporting To</span></li>
 			<li class="text_formats">
 				<?=$retrieve_users_info->retrieveDb($data["fetch"]["export_markets_id"])?>
 			</li>
@@ -86,8 +86,8 @@
 		</ul>
 		<?php if($data["get_type"]=="manufacturer" && $data["fetch"]["ad_upload_catalog"]) : ?>
 		<ul class="text_formats_ul">
-			<li class="text_formats"><span>Uploaded Catalogue</span></li>
-			<li class="text_formats"><a href="<?=WEBSITE?>files/document/<?=$data["fetch"]["ad_upload_catalog"]?>" target="_blank">View Catalogue</a></li>
+			<li class="text_formats"><span>Attachment</span></li>
+			<li class="text_formats"><a href="<?=WEBSITE?>files/document/<?=$data["fetch"]["ad_upload_catalog"]?>" target="_blank">View Attachment</a></li>
 		</ul>
 		<?php endif; ?>
 		

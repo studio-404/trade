@@ -804,7 +804,7 @@ class edit_page_interface extends connection{
 		$out = '<label>Short description: </label>';
 		$out .= '<textarea name="short_description" class="tinyMce">'.htmlentities($fetch['smi_short_description']).'</textarea>';
 		if($fetch["sma_page_type"]=="eventpage"){ // if eventpage
-			$out .= '<label>Programme: </label>';
+			$out .= '<label>Participants: </label>';
 		}else{
 			$out .= '<label>Long description: </label>';
 		}

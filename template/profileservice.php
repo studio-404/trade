@@ -26,10 +26,6 @@
 				<label>Username <font color="red">*</font></label>
 				<input type="text" class="form-control" value="<?=$_SESSION["tradewithgeorgia_username"]?>" readonly="readonly" />
 			</div>
-			<div class="form-group">
-				<label>Address</label>
-				<input type="text" id="address" name="address" class="form-control" value="<?=($_SESSION["user_data"]["address"]) ? htmlentities($_SESSION["user_data"]["address"]) : ''?>" />
-			</div>
 			<div class="form-group ">
 				<label>Sector <font color="red">*</font></label>
 				<div class="multiselectBox">
@@ -62,9 +58,41 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label>Web Page</label>
-				<input type="text" id="webaddress" name="webaddress" class="form-control" value="<?=($_SESSION["user_data"]["webaddress"]) ? htmlentities($_SESSION["user_data"]["webaddress"]) : ''?>" placeholder="www.yourwebsite.com" />
-				<font class="error-msg" id="requiredx_webformat">Website mast start with www (www.yourwebsite.com) !</font>
+				<label>Exporting To</label>
+				<?php 
+					$markets = explode(",",$_SESSION["user_data"]["exportmarkets"]); 
+					$markets = clearemptyvalues::cl($markets);
+					$markets_count = (!empty($markets)) ? count($markets) : 0;
+				?>
+				<div class="multiselectBox4">
+					<div class="selectBoxWithCheckbox4" data-toggle="drop_sector4">
+						<?=(count($markets) > 0) ? "Selected ".$markets_count." countries" : "Select"?>
+					</div>
+					<div class="selectBoxWithCheckbox_dropdown4" id="drop_sector4">
+						<div class="selectItem44">
+							<input type="text" id="searchExportMarket" class="form-control searchExportMarket" placeholder="Search Country" value="" />
+						</div>
+						<div class="loadCountriesExport"> 
+						<?php 
+						$x=0;
+						foreach($data["countries"] as $countries) : 
+						?>
+						<div class="selectItem4" data-checkbox="selectItemxxx<?=$x?>" data-selectedname="countries">
+							<input type="checkbox" name="selectItem4[]" class="sector_ids4" id="selectItemxxx<?=$x?>" value="<?=$countries->idx?>" <?=(in_array($countries->idx,$markets)) ? 'checked="checked"' : ''?> />
+							<span><?=htmlentities($countries->title)?></span>
+						</div>
+						<?php 
+						$x++;
+						endforeach; ?>
+						</div>
+					</div>
+				</div>
+				<font class="error-msg" id="requiredx_exportmarkets">Please check minimum one export market</font>
+			</div>
+			<div class="form-group">
+				<label>Email <font color="red">*</font></label>
+				<input type="text" id="contactemail" name="contactemail" class="form-control" value="<?=($_SESSION["user_data"]["contactemail"]) ? htmlentities($_SESSION["user_data"]["contactemail"]) : ''?>" />
+				<font class="error-msg" id="requiredx_contactemail">Please check contact email field !</font>
 			</div>
 		</div>
 		<!--first column END-->
@@ -75,10 +103,6 @@
 				<label>Company Name <font color="red">*</font></label>
 				<input type="text" id="companyname" name="companyname" class="form-control" value="<?=($_SESSION["user_data"]["companyname"]) ? htmlentities($_SESSION["user_data"]["companyname"]) : ''?>" />
 				<font class="error-msg" id="requiredx_companyname">Please fill company name field !</font>
-			</div>
-			<div class="form-group">
-				<label>Office Number</label>
-				<input type="text" id="officephone" name="officephone" class="form-control" value="<?=($_SESSION["user_data"]["officephone"]) ? htmlentities($_SESSION["user_data"]["officephone"]) : ''?>" />
 			</div>
 			<div class="form-group ">
 				<label>Sub-Sector <font color="red">*</font></label>
@@ -114,25 +138,13 @@
 				<input type="text" id="numemploy" name="numemploy" class="form-control" value="<?=($_SESSION["user_data"]["numemploy"]) ? htmlentities($_SESSION["user_data"]["numemploy"]) : ''?>" />
 			</div>
 			<div class="form-group">
-				<label>Certificates</label>
-				<div class="multiselectBox5">
-					<div class="selectBoxWithCheckbox5" data-toggle="drop_sector5">
-						<?=(count($sector_array5)>0) ? 'Selected '.count($sector_array5).' certificates' : 'Select'?>
-					</div>
-					<div class="selectBoxWithCheckbox_dropdown5" id="drop_sector5">
-						<?php 
-						$x = 1;
-						foreach($data['certificates'] as $val) :
-							echo '<div class="selectItem5" data-checkbox="selectItemxxxxxxxxxx'.$x.'" data-selectedname="certificates">';
-							$checked = (is_array($sector_array5) && in_array($val->idx, $sector_array5)) ? 'checked="checked"' : '';
-							echo '<input type="checkbox" name="selectItem5[]" class="sector_ids5" id="selectItemxxxxxxxxxx'.$x.'" value="'.$val->idx.'" '.$checked.' />';
-							echo '<span> '.htmlentities($val->title).'</span>';
-							echo '</div>';
-							$x++;
-						endforeach;
-						?>
-					</div>
-				</div>
+				<label>Address</label>
+				<input type="text" id="address" name="address" class="form-control" value="<?=($_SESSION["user_data"]["address"]) ? htmlentities($_SESSION["user_data"]["address"]) : ''?>" />
+			</div>
+			<div class="form-group">
+				<label>Web Page</label>
+				<input type="text" id="webaddress" name="webaddress" class="form-control" value="<?=($_SESSION["user_data"]["webaddress"]) ? htmlentities($_SESSION["user_data"]["webaddress"]) : ''?>" placeholder="www.yourwebsite.com" />
+				<font class="error-msg" id="requiredx_webformat">Website mast start with www (www.yourwebsite.com) !</font>
 			</div>
 		</div>
 		<!--Second colum END-->
@@ -142,11 +154,6 @@
 			<div class="form-group">
 				<label>Founded</label>
 				<input type="text" id="establishedin" name="establishedin" placeholder="Year" class="form-control" value="<?=($_SESSION["user_data"]["establishedin"]) ? htmlentities($_SESSION["user_data"]["establishedin"]) : ''?>" />
-			</div>
-			<div class="form-group">
-				<label>Email <font color="red">*</font></label>
-				<input type="text" id="contactemail" name="contactemail" class="form-control" value="<?=($_SESSION["user_data"]["contactemail"]) ? htmlentities($_SESSION["user_data"]["contactemail"]) : ''?>" />
-				<font class="error-msg" id="requiredx_contactemail">Please check contact email field !</font>
 			</div>
 			<div class="form-group">
 				<label>Activity <font color="red">*</font></label>
@@ -177,38 +184,34 @@
 				</div>
 				<font class="error-msg" id="requiredx_products">Please select minimum one service !</font>
 			</div>
+
 			<div class="form-group">
-				<label>Exporting</label>
-				<?php 
-					$markets = explode(",",$_SESSION["user_data"]["exportmarkets"]); 
-					$markets = clearemptyvalues::cl($markets);
-					$markets_count = (!empty($markets)) ? count($markets) : 0;
-				?>
-				<div class="multiselectBox4">
-					<div class="selectBoxWithCheckbox4" data-toggle="drop_sector4">
-						<?=(count($markets) > 0) ? "Selected ".$markets_count." countries" : "Select"?>
+				<label>Certificates</label>
+				<div class="multiselectBox5">
+					<div class="selectBoxWithCheckbox5" data-toggle="drop_sector5">
+						<?=(count($sector_array5)>0) ? 'Selected '.count($sector_array5).' certificates' : 'Select'?>
 					</div>
-					<div class="selectBoxWithCheckbox_dropdown4" id="drop_sector4">
-						<div class="selectItem44">
-							<input type="text" id="searchExportMarket" class="form-control searchExportMarket" placeholder="Search Country" value="" />
-						</div>
-						<div class="loadCountriesExport"> 
+					<div class="selectBoxWithCheckbox_dropdown5" id="drop_sector5">
 						<?php 
-						$x=0;
-						foreach($data["countries"] as $countries) : 
+						$x = 1;
+						foreach($data['certificates'] as $val) :
+							echo '<div class="selectItem5" data-checkbox="selectItemxxxxxxxxxx'.$x.'" data-selectedname="certificates">';
+							$checked = (is_array($sector_array5) && in_array($val->idx, $sector_array5)) ? 'checked="checked"' : '';
+							echo '<input type="checkbox" name="selectItem5[]" class="sector_ids5" id="selectItemxxxxxxxxxx'.$x.'" value="'.$val->idx.'" '.$checked.' />';
+							echo '<span> '.htmlentities($val->title).'</span>';
+							echo '</div>';
+							$x++;
+						endforeach;
 						?>
-						<div class="selectItem4" data-checkbox="selectItemxxx<?=$x?>" data-selectedname="countries">
-							<input type="checkbox" name="selectItem4[]" class="sector_ids4" id="selectItemxxx<?=$x?>" value="<?=$countries->idx?>" <?=(in_array($countries->idx,$markets)) ? 'checked="checked"' : ''?> />
-							<span><?=htmlentities($countries->title)?></span>
-						</div>
-						<?php 
-						$x++;
-						endforeach; ?>
-						</div>
 					</div>
 				</div>
-				<font class="error-msg" id="requiredx_exportmarkets">Please check minimum one export market</font>
 			</div>
+
+			<div class="form-group">
+				<label>Office Number</label>
+				<input type="text" id="officephone" name="officephone" class="form-control" value="<?=($_SESSION["user_data"]["officephone"]) ? htmlentities($_SESSION["user_data"]["officephone"]) : ''?>" />
+			</div>
+			
 			<!--<div class="form-group">
 				<label>Upload Catalogue <span style="font-size:10px; color:red">PDF</span></label>
 				<input type="file" id="attachment" name="attachment" class="form-control" value="" />

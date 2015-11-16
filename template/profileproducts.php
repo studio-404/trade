@@ -26,10 +26,6 @@
 				<label>Username <font color="red">*</font></label>
 				<input type="text" class="form-control" value="<?=$_SESSION["tradewithgeorgia_username"]?>" readonly="readonly" />
 			</div>
-			<div class="form-group">
-				<label>Address</label>
-				<input type="text" id="address" name="address" class="form-control" value="<?=($_SESSION["user_data"]["address"]) ? htmlentities($_SESSION["user_data"]["address"]) : ''?>" />
-			</div>
 			<div class="form-group ">
 				<label>Sector <font color="red">*</font></label>
 				<div class="multiselectBox">
@@ -51,7 +47,8 @@
 					</div>
 				</div>
 				<font class="error-msg" id="requiredx_sector">Please select minimum one sector !</font>
-			</div>			
+			</div>
+
 			<div class="form-group">
 				<label>Company Size</label>
 				<select id="companysize" name="companysize" class="form-control">
@@ -60,9 +57,10 @@
 					<option value="<?=$companysize->idx?>" <?=($_SESSION["user_data"]["companysize"]==$companysize->idx) ? 'selected="selected"' : ''?>><?=$companysize->title?></option>
 					<?php endforeach; ?>
 				</select>
-			</div>
+			</div>	
+			
 			<div class="form-group">
-				<label>Exporting</label>
+				<label>Exporting To</label>
 				<?php 
 					$markets = explode(",",$_SESSION["user_data"]["exportmarkets"]); 
 					$markets = clearemptyvalues::cl($markets);
@@ -95,6 +93,12 @@
 				</div>
 				<font class="error-msg" id="requiredx_exportmarkets">Please check minimum one export market</font>
 			</div>
+
+			<div class="form-group">
+				<label>Email <font color="red">*</font></label>
+				<input type="text" id="contactemail" name="contactemail" class="form-control" value="<?=($_SESSION["user_data"]["contactemail"]) ? htmlentities($_SESSION["user_data"]["contactemail"]) : ''?>" />
+				<font class="error-msg" id="requiredx_contactemail">Please check contact email field !</font>
+			</div>
 			
 		</div>
 	<!--First column END-->
@@ -106,10 +110,7 @@
 			<input type="text" id="companyname" name="companyname" class="form-control" value="<?=($_SESSION["user_data"]["companyname"]) ? htmlentities($_SESSION["user_data"]["companyname"]) : ''?>" />
 			<font class="error-msg" id="requiredx_companyname">Please fill company name field !</font>
 		</div>
-		<div class="form-group">
-			<label>Office Number</label>
-			<input type="text" id="officephone" name="officephone" class="form-control" value="<?=($_SESSION["user_data"]["officephone"]) ? htmlentities($_SESSION["user_data"]["officephone"]) : ''?>" />
-		</div>
+		
 		<div class="form-group ">
 			<label>Sub-Sector <font color="red">*</font></label>
 			<div class="multiselectBox2">
@@ -136,34 +137,23 @@
 				</div>
 			</div>
 			<font class="error-msg" id="requiredx_subsector">Please select minimum one Sub-Sector !</font>
-		</div>		
+		</div>
 
 		<div class="form-group">
-			<label>Web Page</label>
-			<input type="text" id="webaddress" name="webaddress" class="form-control" value="<?=($_SESSION["user_data"]["webaddress"]) ? htmlentities($_SESSION["user_data"]["webaddress"]) : ''?>" placeholder="www.yourwebsite.com" />
-			<font class="error-msg" id="requiredx_webformat">Website mast start with www (www.yourwebsite.com) !</font>
+			<label>Number of Employees</label>
+			<input type="text" id="numemploy" name="numemploy" class="form-control" value="<?=($_SESSION["user_data"]["numemploy"]) ? htmlentities($_SESSION["user_data"]["numemploy"]) : ''?>" />
 		</div>
+
 		<div class="form-group">
-			<label>Certificates</label>
-			<div class="multiselectBox5">
-				<div class="selectBoxWithCheckbox5" data-toggle="drop_sector5">
-					<?=(count($sector_array5)>0) ? 'Selected '.count($sector_array5).' items' : 'Select'?>
-				</div>
-				<div class="selectBoxWithCheckbox_dropdown5" id="drop_sector5">
-					<?php 
-					$x = 1;
-					foreach($data['certificates'] as $val) :
-						echo '<div class="selectItem5" data-checkbox="selectItemxxxxxxxxxx'.$x.'">';
-						$checked = (is_array($sector_array5) && in_array($val->idx, $sector_array5)) ? 'checked="checked"' : '';
-						echo '<input type="checkbox" name="selectItem5[]" class="sector_ids5" id="selectItemxxxxxxxxxx'.$x.'" value="'.$val->idx.'" '.$checked.' />';
-						echo '<span> '.htmlentities($val->title).'</span>';
-						echo '</div>';
-						$x++;
-					endforeach;
-					?>
-				</div>
+				<label>Address</label>
+				<input type="text" id="address" name="address" class="form-control" value="<?=($_SESSION["user_data"]["address"]) ? htmlentities($_SESSION["user_data"]["address"]) : ''?>" />
 			</div>
-		</div>
+
+		<div class="form-group">
+				<label>Web Page</label>
+				<input type="text" id="webaddress" name="webaddress" class="form-control" value="<?=($_SESSION["user_data"]["webaddress"]) ? htmlentities($_SESSION["user_data"]["webaddress"]) : ''?>" placeholder="www.yourwebsite.com" />
+				<font class="error-msg" id="requiredx_webformat">Website mast start with www (www.yourwebsite.com) !</font>
+			</div>
 	</div>
 	<!--Second column END-->
 	
@@ -172,11 +162,6 @@
 		<div class="form-group">
 			<label>Founded</label>
 			<input type="text" id="establishedin" name="establishedin" class="form-control" placeholder="Year" value="<?=($_SESSION["user_data"]["establishedin"]) ? htmlentities($_SESSION["user_data"]["establishedin"]) : ''?>" />
-		</div>
-		<div class="form-group">
-			<label>Email <font color="red">*</font></label>
-			<input type="text" id="contactemail" name="contactemail" class="form-control" value="<?=($_SESSION["user_data"]["contactemail"]) ? htmlentities($_SESSION["user_data"]["contactemail"]) : ''?>" />
-			<font class="error-msg" id="requiredx_contactemail">Please check contact email field !</font>
 		</div>
 		
 		<div class="form-group">
@@ -210,18 +195,42 @@
 				</div>
 				<font class="error-msg" id="requiredx_products">Please select minimum one product !</font>
 			</div>
+
 		<div class="form-group">
-			<label>Number of Employees</label>
-			<input type="text" id="numemploy" name="numemploy" class="form-control" value="<?=($_SESSION["user_data"]["numemploy"]) ? htmlentities($_SESSION["user_data"]["numemploy"]) : ''?>" />
+			<label>Certificates</label>
+			<div class="multiselectBox5">
+				<div class="selectBoxWithCheckbox5" data-toggle="drop_sector5">
+					<?=(count($sector_array5)>0) ? 'Selected '.count($sector_array5).' items' : 'Select'?>
+				</div>
+				<div class="selectBoxWithCheckbox_dropdown5" id="drop_sector5">
+					<?php 
+					$x = 1;
+					foreach($data['certificates'] as $val) :
+						echo '<div class="selectItem5" data-checkbox="selectItemxxxxxxxxxx'.$x.'">';
+						$checked = (is_array($sector_array5) && in_array($val->idx, $sector_array5)) ? 'checked="checked"' : '';
+						echo '<input type="checkbox" name="selectItem5[]" class="sector_ids5" id="selectItemxxxxxxxxxx'.$x.'" value="'.$val->idx.'" '.$checked.' />';
+						echo '<span> '.htmlentities($val->title).'</span>';
+						echo '</div>';
+						$x++;
+					endforeach;
+					?>
+				</div>
+			</div>
 		</div>
+
+		<div class="form-group">
+			<label>Office Number</label>
+			<input type="text" id="officephone" name="officephone" class="form-control" value="<?=($_SESSION["user_data"]["officephone"]) ? htmlentities($_SESSION["user_data"]["officephone"]) : ''?>" />
+		</div>	
+
 		<div class="form-group">
 			<form action="" method="post" id="uploadcatalogform" enctype="multipart/form-data">
-				<label>Upload Catalogue <span style="font-size:10px; color:#555555">PDF</span></label>
+				<label>Attachment <span style="font-size:10px; color:#555555">PDF</span></label>
 				<input type="file" id="ad_upload_catalog" name="ad_upload_catalog" class="form-control" value="" />
 			</form>
 			<?php if($_SESSION["user_data"]["ad_upload_catalog"]) : ?>
 			<div class="catalogpdf_block" style="margin:5px 0">
-				<a href="<?=WEBSITE?>files/document/<?=$_SESSION["user_data"]["ad_upload_catalog"]?>" target="_blank">View Catalogue</a>
+				<a href="<?=WEBSITE?>files/document/<?=$_SESSION["user_data"]["ad_upload_catalog"]?>" target="_blank">View Attachment</a>
 			</div>
 			<?php endif; ?>
 		</div>

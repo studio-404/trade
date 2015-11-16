@@ -65,7 +65,7 @@ $first = array_slice($data["event_list"], 0, 1);
 		</div>
 		
 		<div class="event_prog">
-			<div class="title">Programme</div>
+			<div class="title">Participants</div>
 			<?=$first[0]["long_description"]?>
 		</div>
 		<?php if($first[0]["expiredate"] > time()) : ?>	
