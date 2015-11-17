@@ -12,7 +12,16 @@
 	
 	<div class="export_search_div">
 		<div class="col-sm-10 padding_0">
-			<input type="text" class="form-control" id="svalue" placeholder="Search By Name Or Phrase" value="<?=$data["get_search"]?>" />
+			<?php 
+			if(Input::method("GET","view")=="services"){
+				$placeholder = "Search Service";
+			}else if(Input::method("GET","view")=="companies"){
+				$placeholder = "Search Company";
+			}else if(Input::method("GET","view")=="products"){
+				$placeholder = "Search Product";
+			}
+			?>
+			<input type="text" class="form-control" id="svalue" placeholder="<?=$placeholder?>" value="<?=$data["get_search"]?>" />
 		</div>
 		<div class="col-sm-2 padding_0" style="padding-left:5px;" id="serachMe">
 			<button class="btn btn-block btn-sm btn-yellow">SEARCH</button>

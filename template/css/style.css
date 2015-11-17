@@ -1313,7 +1313,8 @@ height:25px; width:25px; z-index:999999999999999999999999999;
 .multiselectBox4 .selectBoxWithCheckbox4{ margin: 0; padding: 0 12px; height: 34px; line-height: 34px; color:#3895ce; font-size: 15px; position: relative; }
 .multiselectBox4 .selectBoxWithCheckbox4:after{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: left center; position: absolute; left:0px; }
 .multiselectBox4 .selectBoxWithCheckbox4:before{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: right center; position: absolute; right: 0px; }
-.multiselectBox4 .selectBoxWithCheckbox_dropdown4{ margin: 0; padding: 0; line-height: 17px; max-height: 225px; position: absolute; top:32px; left:0; z-index: 1000; width: 100%; background-color: white; border: solid 1px #3895ce; border-top: none; overflow-y:auto; display: none; }
+.multiselectBox4 .selectBoxWithCheckbox_dropdown4{ margin: 0; padding: 0; line-height: 17px; position: absolute; top:32px; left:0; z-index: 1000; width: 100%; background-color: white; border: solid 1px #3895ce; border-top: none; display: none; }
+.multiselectBox4 .selectBoxWithCheckbox_dropdown4 .loadCountriesExport{ margin: 0; padding: 0; max-height: 200px; overflow: auto; }
 .multiselectBox4::after{ content: ''; width: 6px; height:6px; background-image: url('../img/drop.png'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
 .multiselectBox4 .selectBoxWithCheckbox_dropdown4 .selectItem4{ margin: 0 10px; padding: 5px 0; line-height: 17px; border-bottom: 1px solid #f2f2f2; cursor: pointer; }
 .selectItem44{ margin: 0 10px; padding: 5px 0; line-height: 17px; border-bottom: 1px solid #f2f2f2; cursor: pointer; }

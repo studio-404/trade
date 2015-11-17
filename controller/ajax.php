@@ -17,6 +17,7 @@ class ajax extends connection{
 
 	public function requests($c){
 		$conn = $this->conn($c); 
+
 		if(Input::method("POST","sendemail1") && Input::method("POST","email1") && isset($_COOKIE["password1"])) : 
 			$sendemail1 = Input::method("POST","sendemail1");
 			$email1 = Input::method("POST","email1");
@@ -1362,6 +1363,41 @@ class ajax extends connection{
 				echo "Error";
 			}
 
+		}
+
+		if(Input::method("POST","asktoaddcertificate")=="true" && Input::method("POST","c") && $_SESSION["tradewithgeorgia_user_id"]){
+			
+			$sql = 'SELECT `id` FROM `studio404_pages` WHERE `title`=:title AND `cid`=755 AND `status`!=1';
+			$prepare = $conn->prepare($sql); 
+			$prepare->execute(array(
+				":title"=>Input::method("POST","c")
+			));
+			if($prepare->rowCount() > 0){
+				echo "Exists";
+			}else{
+				$max = 'SELECT `id`, (SELECT MAX(`idx`) FROM `studio404_pages`) AS maxidx, (SELECT MAX(`position`) FROM `studio404_pages` WHERE `cid`=755 AND `status`!=1) AS maxposition FROM `studio404_pages` LIMIT 1';
+				$prepareMax = $conn->prepare($max);
+				$prepareMax->execute();
+				$fetchMax = $prepareMax->fetch(PDO::FETCH_ASSOC); 
+
+				$c = Input::method("POST","c");
+				$slug = slug_generation::gen($c);
+				$maxidx = ($fetchMax["maxidx"]+1);
+				$maxposition = ($fetchMax["maxposition"]+1);
+				
+				$sqlinsert = 'INSERT INTO `studio404_pages` SET `idx`=:maxidx, `cid`=755, `date`=:datex, `menu_type`="sub", `page_type`="textpage", `title`=:title, `shorttitle`=:title, `redirectlink`="false", `slug`=:slug, `insert_admin`=:insert_admin, `lang`=5, `visibility`=1, `position`=:maxposition ';
+				
+				$prepareinsert = $conn->prepare($sqlinsert); 
+				$prepareinsert->execute(array(
+					":maxidx"=>$maxidx, 
+					":maxposition"=>$maxposition,
+					":datex"=>time(), 
+					":title"=>$c, 
+					":slug"=>$slug, 
+					":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"]
+				));
+				echo "Done";
+			}
 		}
 
 		if(Input::method("POST","loadreadmore")=="true" && is_numeric(Input::method("POST","u")) && is_numeric(Input::method("POST","p"))){

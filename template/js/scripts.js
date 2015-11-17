@@ -2235,6 +2235,26 @@ $(document).on("keyup","#e_description",function(){
 	$("#maxlengthenquirePopup").html(num+' / 250');
 });
 
+$(document).on("click","#askToAddCertificate",function(){
+	var certi = $("#certi").val(); 
+	$(".error_message").fadeOut("slow");
+	if(certi==""){
+		$(".certi_required").fadeIn("slow");
+		return false;
+	}else{
+		$("#certificateAddBox").html("<div class=\"form-group\"><p>Please wait...</p></div>"); 
+		$.post("http://"+document.domain+"/en/ajax",{ asktoaddcertificate:true, c:certi },function(r){
+			if(r=="Done"){
+				$("#certificateAddBox").html("<div class=\"form-group\"><p>Thank you, Your request received successfully ! Certificate will be added after administrator permision.</p></div>"); 
+			}else if(r=="Exists"){
+				$("#certificateAddBox").html("<div class=\"form-group\"><p>Sorry, Certificate already exists !</p></div>"); 
+			}else{
+				$("#certificateAddBox").html("<div class=\"form-group\"><p>Sorry, error occurred !</p></div>"); 
+			}
+		});
+	}
+});
+
 function copyMe(e){ 
 	SelectText(e); 
 	window.getSelection(); 

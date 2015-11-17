@@ -197,7 +197,7 @@
 			</div>
 
 		<div class="form-group">
-			<label>Certificates</label>
+			<label>Certificates <span style="font-size:10px; color:#555555"><a href="" data-toggle="modal" data-target="#addCertificate">Ask to add</a></span></label>
 			<div class="multiselectBox5">
 				<div class="selectBoxWithCheckbox5" data-toggle="drop_sector5">
 					<?=(count($sector_array5)>0) ? 'Selected '.count($sector_array5).' items' : 'Select'?>
