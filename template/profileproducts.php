@@ -418,7 +418,7 @@
 				<input type="hidden" name="t" value="<?=$_SESSION["token_generator"]?>" />
 				<input type="hidden" name="pix" id="pix" class="pix" value="" />
 				<div class="form-group">
-					<label>Product Photo <font color="red">*</font></label> 
+					<label>Product Photo <font color="red">*</font> <span style="font-size:10px; color:#555555">JPG (Dimensions 300x170)</span></label> 
 					<div class="upload_img_tmp">
 						<img src="<?=TEMPLATE?>img/img_upload.png" id="product_picture" class="img-responsive" width="100%" alt="" />
 					</div>

@@ -103,7 +103,7 @@ $ctext = new ctext();
 				<div class="col-sm-4 col-md-2 col-xs-4 news_item">
 					<a href="<?=WEBSITE.LANG."/".htmlentities($val->slug)?>">
 						<div class="date"><span><?=date("d",$val->date)?></span> <?=date("M",$val->date)?></div>
-						<div class="text"><?=$ctext->cut($val->title,40)?></div>
+						<div class="text"><?=$ctext->cut($val->title,120)?></div>
 					</a>	
 				</div>
 			<?php

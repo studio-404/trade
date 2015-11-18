@@ -19,6 +19,8 @@
 				$placeholder = "Search Company";
 			}else if(Input::method("GET","view")=="products"){
 				$placeholder = "Search Product";
+			}else{
+				$placeholder = "Search Company";
 			}
 			?>
 			<input type="text" class="form-control" id="svalue" placeholder="<?=$placeholder?>" value="<?=$data["get_search"]?>" />

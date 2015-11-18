@@ -26,7 +26,7 @@
 						<input type="text" name="p_shelf_life" id="p_shelf_life" class="form-control" value="" autocomplete="off" />
 					</div>
 					<div class="form-group">
-						<label for="p_image">Product Analysis <span style="font-size:10px; color:red">PDF</span></label>
+						<label for="p_image">Product Analysis <span style="font-size:9px; color:#555555">PDF, DOC, DOCX, XLS, XLSX, JPG</span></label>
 						<input type="file" name="pa_product_analysis" id="pa_product_analysis" class="form-control" value="" autocomplete="off" />
 					</div>
 				</div>
@@ -44,7 +44,7 @@
 					</div>
 
 					<div class="form-group">
-						<label for="p_image">Image</label>
+						<label for="p_image">Image <span style="font-size:10px; color:#555555">JPG (Dimensions 300x170)</span></label>
 						<input type="hidden" name="p_id" id="p_pid" valiue="" />
 						<input type="file" name="p_image" id="p_image" class="form-control" value="" autocomplete="off" />
 						<div class="error_message p_image_required">Product name is required !</div>
@@ -63,7 +63,7 @@
 						<textarea class="form-control p_describe" id="p_describe" name="p_describe"></textarea>
 						<div class="error_message p_describe_required">Description field is required !</div>
 						<div class="error_message p_describe_lngz">Description is too long !</div>
-						<div id="maxlengthproductpopup" style="width:100%; text-align:left; color:#555555">0 / 250</div>
+						<div id="maxlengthproductpopup" style="width:100%; text-align:left; color:#555555">0 / 350</div>
 					</div>	
 
 					<div style="clear:both"></div>

@@ -54,7 +54,7 @@ class model_template_upload_user_logo extends connection{
 			$ext = explode(".",$_FILES["inputUserLogo"]["name"]);
 			$ext = strtolower(end($ext));
 
-			if($ext!="jpeg" && $ext!="jpg" && $ext!="png" && $ext!="gif"){
+			if($ext!="jpeg"){
 				//return 2;
 			}else if($_FILES["inputUserLogo"]["size"]>1000000){
 				//return 2;
@@ -102,7 +102,7 @@ class model_template_upload_user_logo extends connection{
 			$ext = explode(".",$_FILES["productfile"]["name"]);
 			$ext = strtolower(end($ext));
 
-			if($ext!="jpeg" && $ext!="jpg" && $ext!="png" && $ext!="gif"){
+			if($ext!="jpg"){
 				//return 2;
 			}else if($_FILES["productfile"]["size"]>1000000){
 				//return 2;
@@ -133,9 +133,9 @@ class model_template_upload_user_logo extends connection{
 			$ext = explode(".",$_FILES["productAnalysis"]["name"]);
 			$ext = strtolower(end($ext));
 
-			if($ext!="pdf"){
+			if($ext!="pdf" && $ext!="doc" && $ext!="docx" && $ext!="xls" && $ext!="xlsx" && $ext!="jpg"){
 				//return 2;
-			}else if($_FILES["productAnalysis"]["size"]>3000000){
+			}else if($_FILES["productAnalysis"]["size"]>5000000){
 				//return 2;
 			}else{
 				$fileName = md5(time()).'.'.$ext; 
@@ -207,8 +207,8 @@ class model_template_upload_user_logo extends connection{
 			$ex = explode(".",$_FILES["pa_product_analysis"]["name"]); 
 			$ex = strtolower(end($ex));
 
-			if($ex == "pdf" && $_FILES["pa_product_analysis"]["size"]<=3000000){
-				$f = md5(time()).".pdf";
+			if($ext!="pdf" && $ext!="doc" && $ext!="docx" && $ext!="xls" && $ext!="xlsx" && $ext!="jpg" && $_FILES["pa_product_analysis"]["size"]<=5000000){
+				$f = md5(time()).'.'.$ex;
 				$fn =  DIR . 'files/document/'.$f;
 				$conn = $this->conn($c); 
 				/*remove old pic*/

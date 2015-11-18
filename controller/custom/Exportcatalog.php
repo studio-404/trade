@@ -77,8 +77,28 @@ class exportcatalog extends connection{
 			$products = ($data["get_products"] && is_numeric($data["get_products"])) ? ' FIND_IN_SET('.$data["get_products"].',`studio404_users`.`products`) AND ' : '';
 			$exportmarkets = ($data["get_exportmarkets"] && is_numeric($data["get_exportmarkets"])) ? ' FIND_IN_SET('.$data["get_exportmarkets"].',`studio404_users`.`export_markets_id`) AND ' : '';
 			$certificates = ($data["get_certificate"] && is_numeric($data["get_certificate"])) ? ' FIND_IN_SET('.$data["get_certificate"].',`studio404_users`.`certificates`) AND ' : '';
-			$search = (!empty($data["get_search"])) ? '`studio404_users`.`namelname` LIKE "%'.$data["get_search"].'%" AND ' : '';
-			 
+			
+			if(!empty($data["get_search"])){	
+				$searchPages = 'SELECT `idx` FROM `studio404_pages` WHERE `title` LIKE "%'.$data["get_search"].'%" AND `slug` LIKE "selectoption%" AND `status`!=1';
+				$prepareSearch = $conn->prepare($searchPages); 
+				$prepareSearch->execute();
+				$s = '';
+				if($prepareSearch->rowCount() > 0){
+					$fetchPages = $prepareSearch->fetchAll(PDO::FETCH_ASSOC);
+					foreach ($fetchPages as $value) {
+						$s .= ' OR ( FIND_IN_SET("'.$value['idx'].'",`sector_id`) OR FIND_IN_SET("'.$value['idx'].'",`sub_sector_id`) OR FIND_IN_SET("'.$value['idx'].'",`products`) OR FIND_IN_SET("'.$value['idx'].'",`export_markets_id`) OR FIND_IN_SET("'.$value['idx'].'",`certificates`) ) '; 
+					}
+				}
+				if($s!=''){
+					$search ='(`studio404_users`.`namelname` LIKE "'.$data["get_search"].'%" '.$s.') AND ';
+				}else{
+					$search ='`studio404_users`.`namelname` LIKE "'.$data["get_search"].'%" AND ';	
+				}
+				
+			}else{
+				$search = "";
+			}
+
 			$sql = 'SELECT 
 			`studio404_users`.`id` AS su_id,
 			`studio404_users`.`username` AS su_username,
@@ -140,8 +160,31 @@ class exportcatalog extends connection{
 			$orderBy = ' ORDER BY `studio404_module_item`.`date` '.urlencode($data["get_sort"]);
 			$subsectors = ($data["get_subsector"] && is_numeric($data["get_subsector"])) ? ' FIND_IN_SET('.$data["get_subsector"].',`studio404_module_item`.`sub_sector_id`) AND ' : '';
 			$products = ($data["get_products"] && is_numeric($data["get_products"])) ? ' FIND_IN_SET('.$data["get_products"].',`studio404_module_item`.`products`) AND ' : '';
-			$search = (!empty($data["get_search"])) ? '`studio404_module_item`.`title` LIKE "%'.$data["get_search"].'%" AND ' : '';
-			 
+			
+			
+			if(!empty($data["get_search"])){	
+				$searchPages = 'SELECT `idx` FROM `studio404_pages` WHERE `title` LIKE "%'.$data["get_search"].'%" AND `slug` LIKE "selectoption%" AND `status`!=1';
+				$prepareSearch = $conn->prepare($searchPages); 
+				$prepareSearch->execute();
+				$s = '';
+				if($prepareSearch->rowCount() > 0){
+					$fetchPages = $prepareSearch->fetchAll(PDO::FETCH_ASSOC);
+					foreach ($fetchPages as $value) {
+						$s .= ' OR ( FIND_IN_SET("'.$value['idx'].'",`studio404_module_item`.`sector_id`) OR FIND_IN_SET("'.$value['idx'].'",`studio404_module_item`.`sub_sector_id`) OR FIND_IN_SET("'.$value['idx'].'",`studio404_module_item`.`products`) ) '; 
+					}
+				}
+				if($s!=''){
+					$search ='(`studio404_module_item`.`title` LIKE "'.$data["get_search"].'%" OR `studio404_module_item`.`long_description` LIKE "'.$data["get_search"].'%" OR `studio404_users`.`namelname` LIKE "%'.$data["get_search"].'%" '.$s.') AND ';
+					//$search = (!empty($data["get_search"])) ? '`studio404_module_item`.`title` LIKE "%'.$data["get_search"].'%" AND ' : '';
+				}else{
+					$search ='(`studio404_module_item`.`title` LIKE "'.$data["get_search"].'%" OR `studio404_module_item`.`long_description` LIKE "'.$data["get_search"].'%" OR `studio404_users`.`namelname` LIKE "%'.$data["get_search"].'%") AND';	
+				}
+				
+			}else{
+				$search = "";
+			}
+			//echo $search;
+
 			$sql = 'SELECT 
 			`studio404_module_item`.`id`, 
 			`studio404_module_item`.`idx`, 
@@ -193,7 +236,30 @@ class exportcatalog extends connection{
 			$orderBy = ' ORDER BY `studio404_module_item`.`date` '.urlencode($data["get_sort"]);
 			$subsectors = ($data["get_subsector"] && is_numeric($data["get_subsector"])) ? ' FIND_IN_SET('.$data["get_subsector"].',`studio404_module_item`.`sub_sector_id`) AND ' : '';
 			$services = ($data["get_services"] && is_numeric($data["get_services"])) ? ' FIND_IN_SET('.$data["get_services"].',`studio404_module_item`.`products`) AND ' : '';
-			$search = (!empty($data["get_search"])) ? '`studio404_module_item`.`long_description` LIKE "%'.$data["get_search"].'%" AND ' : '';
+			
+			if(!empty($data["get_search"])){	
+				$searchPages = 'SELECT `idx` FROM `studio404_pages` WHERE `title` LIKE "%'.$data["get_search"].'%" AND `slug` LIKE "selectoption%" AND `status`!=1';
+				$prepareSearch = $conn->prepare($searchPages); 
+				$prepareSearch->execute();
+				$s = '';
+				if($prepareSearch->rowCount() > 0){
+					$fetchPages = $prepareSearch->fetchAll(PDO::FETCH_ASSOC);
+					foreach ($fetchPages as $value) {
+						$s .= ' OR ( FIND_IN_SET("'.$value['idx'].'",`studio404_module_item`.`sector_id`) OR FIND_IN_SET("'.$value['idx'].'",`studio404_module_item`.`sub_sector_id`) OR FIND_IN_SET("'.$value['idx'].'",`studio404_module_item`.`products`) ) '; 
+					}
+				}
+				if($s!=''){
+					$search ='(`studio404_module_item`.`title` LIKE "'.$data["get_search"].'%" OR `studio404_module_item`.`long_description` LIKE "'.$data["get_search"].'%" OR `studio404_users`.`namelname` LIKE "%'.$data["get_search"].'%" '.$s.') AND ';
+					//$search = (!empty($data["get_search"])) ? '`studio404_module_item`.`title` LIKE "%'.$data["get_search"].'%" AND ' : '';
+				}else{
+					$search ='(`studio404_module_item`.`title` LIKE "'.$data["get_search"].'%" OR `studio404_module_item`.`long_description` LIKE "'.$data["get_search"].'%" OR `studio404_users`.`namelname` LIKE "%'.$data["get_search"].'%") AND';	
+				}
+				
+			}else{
+				$search = "";
+			}
+			//echo $search;
+			//$search = (!empty($data["get_search"])) ? '`studio404_module_item`.`long_description` LIKE "%'.$data["get_search"].'%" AND ' : '';
 			 
 			$sql = 'SELECT 
 			`studio404_module_item`.`id`, 

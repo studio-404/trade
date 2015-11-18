@@ -19,6 +19,7 @@ html,body {
 }
 hr {border-bottom:solid #0278c1 1px; margin:0; margin:50px 0;}
 ul {margin:0; padding:0;}
+.highlight{ font-weight: bold; color:#fea100; }
 iframe{ margin: 0 !important; padding: 0 !important; border: 0 !important; width: 100% !important; overflow: hidden !important; }
 @media print{
 	*{ margin:0; padding:0; }
@@ -703,8 +704,12 @@ table td:nth-child(odd) {
 .news_div .news_item .text {
     border-bottom:solid #cccccc 1px;
 	padding-bottom:9px;
+	padding-right: 9px;
 	padding-top: 1px;
 	line-height:14px;
+}
+.news_div .news_item:last-child .text{
+	/*border-right: none !important; */
 }
 .news_item:hover a{
 	/*opacity: 0.7;
@@ -1257,7 +1262,8 @@ height:25px; width:25px; z-index:999999999999999999999999999;
 .carousel-control{ width: 5%; }
 #events_items .event_item .text{ min-height: 60px; max-height: 60px; position:relative; }
 #events_items .event_item .text .booth{ min-height: 20px; max-height: 20px; margin:0; padding:0; position: absolute; bottom:0px; }
-.news_div .news_item .text{ min-height: 50px; max-height: 50px; color: #3895ce; overflow: hidden; }
+/*.news_div .news_item .text{ min-height: 50px; max-height: 50px; color: #3895ce; overflow: hidden; display: flex; align-items: center; }*/
+.news_div .news_item .text{ min-height: 50px; height: 100px; color: #3895ce; overflow: hidden; overflow: hidden;  }
 .event_prog ul{ margin: 0; padding: 0; list-style-type: none; position: relative; }
 .event_prog ul li{ position: relative; }
 .event_prog ul li::after{
