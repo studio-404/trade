@@ -226,7 +226,7 @@
 
 		<div class="form-group">
 			<!-- <form action="" method="post"  enctype="multipart/form-data"> -->
-				<label>Attachment <span style="font-size:10px; color:#555555">PDF</span></label>
+				<label>Attachment <span style="font-size:10px; color:#555555">PDF, DOC, DOCX, XLS, XLSX, JPG</span></label>
 				<input type="file" id="ad_upload_catalog" name="ad_upload_catalog" class="form-control" value="" />
 			<!-- </form> -->
 			<?php if($_SESSION["user_data"]["ad_upload_catalog"]) : ?>
@@ -244,7 +244,7 @@
 		<input type="hidden" name="t" value="<?=$_SESSION["token_generator"]?>" />
 		<input type="hidden" name="pi" id="pi" class="pi" value="" />
 		<div class="form-group">
-			<label>Company logo <font color="red">*</font></label> 
+			<label>Company logo <font color="red">*</font> <span style="font-size:10px; color:#555555">JPG (Dimensions 300x170)</span></label> 
 			<div class="upload_img_tmp">
 				<?php
 				if(!empty($_SESSION["user_data"]["picture"])){
@@ -337,7 +337,7 @@
 				<div class="form-group">
 					<label>Company Description</label>
 					<textarea id="about" name="about" class="form-control"><?=($_SESSION["user_data"]["about"]) ? htmlentities($_SESSION["user_data"]["about"]) : ''?></textarea>
-					<div id="maxlength" style="width:100%; text-align:left; color:#555555"><?=strlen($_SESSION["user_data"]["about"])?> / 250</div>
+					<div id="maxlength" style="width:100%; text-align:left; color:#555555"><?=strlen($_SESSION["user_data"]["about"])?> / 350</div>
 				</div>
 			</div>
 			<div class="col-sm-9">
@@ -396,7 +396,7 @@
 					<input type="text" name="packinging" id="packinging" class="form-control" value="" />
 				</div>
 				<div class="form-group">
-					<label>Product Analysis <span style="font-size:10px; color:#555555">PDF</span></label>
+					<label>Product Analysis <span style="font-size:10px; color:#555555">PDF, DOC, DOCX, XLS, XLSX, JPG</span></label>
 					<input type="file" id="productAnalysis" name="productAnalysis" class="form-control" value="" />
 				</div>
 			</div>
@@ -434,7 +434,7 @@
 					<div class="form-group">
 						<label>Product Description <font color="red">*</font></label>
 						<textarea class="form-control" id="product_description" name="product_description"></textarea>
-						<div id="maxlengthproduct" style="width:100%; text-align:left; color:#555555">0 / 250</div>
+						<div id="maxlengthproduct" style="width:100%; text-align:left; color:#555555">0 / 350</div>
 						<font class="error-msg" id="requiredx_add_describe">Description field is required !</font>
 					</div>				
 				</div>	
@@ -470,7 +470,7 @@
 							<li><span>Awards </span><?=htmlentities($val["awards"])?></li>
 							<li><span>Product capacity </span><?=htmlentities($val["production_capacity"])?></li>
 							<?php if($val['productanalisis']) : ?>
-							<li><span>Product Analysis </span><a href="<?=WEBSITE?>files/document/<?=$val['productanalisis']?>" style="color:#337ab7" target="_blank">PDF</a></li>
+							<li><span>Product Analysis </span><a href="<?=WEBSITE?>files/document/<?=$val['productanalisis']?>" style="color:#337ab7" target="_blank">View Analysis</a></li>
 							<?php endif; ?>
 						</ul>
 					</div>

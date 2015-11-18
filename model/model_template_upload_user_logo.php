@@ -10,13 +10,12 @@ class model_template_upload_user_logo extends connection{
 			$ext = explode(".",$_FILES["ad_upload_catalog"]["name"]);
 			$ext = strtolower(end($ext));
 
-			if($ext!="pdf"){
+			if($ext!="pdf" && $ext!="doc" && $ext!="docx" && $ext!="xls" && $ext!="xlsx" && $ext!="jpg"){
 				//return 2;
-			}else if($_FILES["ad_upload_catalog"]["size"]>3000000){
+			}else if($_FILES["ad_upload_catalog"]["size"]>5000000){
 				//return 2;
 			}else{
 				$fileName = md5(time()).'.'.$ext; 
-				
 				$target_file = DIR . 'files/document/'.$fileName;
 				 if (move_uploaded_file($_FILES["ad_upload_catalog"]["tmp_name"],$target_file)) { 
 				 	$conn = $this->conn($c); 

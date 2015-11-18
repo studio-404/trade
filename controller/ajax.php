@@ -338,7 +338,7 @@ class ajax extends connection{
 			}
 		}
 
-		if(Input::method("POST","changeprofile")=="true" && $_SESSION["tradewithgeorgia_username"] && strlen(Input::method("POST","p_about")) <= 250){
+		if(Input::method("POST","changeprofile")=="true" && $_SESSION["tradewithgeorgia_username"] && strlen(Input::method("POST","p_about")) <= 350){
 			$p_companyname = strip_tags(Input::method("POST","p_companyname")); 
 			$p_establishedin = strip_tags(Input::method("POST","p_establishedin"));
 			$p_productioncapasity = strip_tags(Input::method("POST","p_productioncapasity"));
@@ -788,7 +788,7 @@ class ajax extends connection{
 			echo "Done"; 
 		}
 
-		if(Input::method("POST","addproduct")=="true" && Input::method("POST","p") && Input::method("POST","pn") && Input::method("POST","d"))
+		if(Input::method("POST","addproduct")=="true" && Input::method("POST","p") && Input::method("POST","pn") && Input::method("POST","d") && strlen(Input::method("POST","d")) <= 350)
 		{
 			$products = (int)Input::method("POST","p");
 			$shelf_life = strip_tags(Input::method("POST","s"));

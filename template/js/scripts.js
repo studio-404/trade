@@ -362,7 +362,7 @@ $(document).on("click","#save_changes",function(){
 		$("#insertText").html("Please check mobile number field !"); 
 		$('#message_popup').modal('toggle'); 
 		return false;
-	}else if(strlen(about) > 250){
+	}else if(strlen(about) > 350){
 		$("#insertText").html("Description is too long !"); 
 		$('#message_popup').modal('toggle'); 
 		return false;
@@ -546,25 +546,25 @@ $(document).on("click","#save_individual_changes",function(){
 	}
 });
 
-// $(document).on("change","#ad_upload_catalog",function(e){
-// 	e.stopPropagation();
-// 	e.preventDefault();
-// 	var files = e.target.files;
-// 	var ex = files[0].name.split(".");
-// 	var extLast = ex[ex.length - 1].toLowerCase();
-// 	if(extLast!="pdf"){
-// 		$('#message_popup').modal('toggle'); 
-// 		$("#insertText").html("Please choose pdf file !"); 
-// 	}else if(files[0].size > 3000000){
-// 		$('#message_popup').modal('toggle'); 
-// 		$("#insertText").html("File size must be under 3 MB !"); 
-// 		return false;
-// 	}else if(files[0].name){
-// 		$("#uploadcatalogform").submit();
-// 		$('#message_popup').modal('toggle'); 
-// 		$("#insertText").html("Please wait !"); 
-// 	}
-// });
+$(document).on("change","#ad_upload_catalog",function(e){
+	e.stopPropagation();
+	e.preventDefault();
+	var files = e.target.files;
+	var ex = files[0].name.split(".");
+	var extLast = ex[ex.length - 1].toLowerCase();
+	if(extLast!="pdf" && extLast!="doc" && extLast!="docx" && extLast!="xls" && extLast!="xlsx" && extLast!="jpg"){
+		$('#message_popup').modal('toggle'); 
+		$("#insertText").html("Please choose pdf, doc, docx, xls, xlsx or jpg file !"); 
+	}else if(files[0].size > 5000000){
+		$('#message_popup').modal('toggle'); 
+		$("#insertText").html("File size must be under 5 MB !"); 
+		return false;
+	}else if(files[0].name){
+		// $("#uploadcatalogform").submit();
+		// $('#message_popup').modal('toggle'); 
+		// $("#insertText").html("Please wait !"); 
+	}
+});
 
 $(document).on("change","#inputUserLogo",function(e){
 	e.stopPropagation();
@@ -680,7 +680,7 @@ $(document).on("click","#post_product",function(){
 	}else if(productfile==""){
 		$("#requiredx_add_photo").fadeIn("slow"); 
 		return false;
-	}else if(product_desc_length>250){
+	}else if(product_desc_length>350){
 		$('#message_popup').modal('toggle'); 
 		$("#insertText").html("Product description is loo long!"); 
 		return false;
@@ -2206,17 +2206,17 @@ $(document).on("click",".chooseMe",function(){
 $(document).on("keyup","#about",function(){
 	var ab = $(this).val();
 	var num = strlen(ab);
-	if(num>250){ $(this).css({"color":"red"}); }
+	if(num>350){ $(this).css({"color":"red"}); }
 	else{ $(this).css({"color":"#3895ce"}); }
-	$("#maxlength").html(num+' / 250');
+	$("#maxlength").html(num+' / 350');
 });
 
 $(document).on("keyup","#product_description",function(){
 	var ab = $(this).val();
 	var num = strlen(ab);
-	if(num>250){ $(this).css({"color":"red"}); }
+	if(num>350){ $(this).css({"color":"red"}); }
 	else{ $(this).css({"color":"#3895ce"}); }
-	$("#maxlengthproduct").html(num+' / 250');
+	$("#maxlengthproduct").html(num+' / 350');
 });
 
 $(document).on("keyup","#service_description",function(){
