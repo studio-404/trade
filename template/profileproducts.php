@@ -20,6 +20,7 @@
 		Profile (<?=ucfirst($_SESSION["tradewithgeorgia_company_type"])?>)
 	</div>
 	<div class="row">
+		<form action="" method="post" id="uploadDocuments" name="uploadImageForm" enctype="multipart/form-data">
 	<!--First column START-->
 		<div class="col-lg-3">
 			<div class="form-group">
@@ -193,7 +194,7 @@
 
 					</div>
 				</div>
-				<font class="error-msg" id="requiredx_products">Please select minimum one product !</font>
+				<font class="error-msg" id="requiredx_products">Please select minimum one activity !</font>
 			</div>
 
 		<div class="form-group">
@@ -224,10 +225,10 @@
 		</div>	
 
 		<div class="form-group">
-			<form action="" method="post" id="uploadcatalogform" enctype="multipart/form-data">
+			<!-- <form action="" method="post"  enctype="multipart/form-data"> -->
 				<label>Attachment <span style="font-size:10px; color:#555555">PDF</span></label>
 				<input type="file" id="ad_upload_catalog" name="ad_upload_catalog" class="form-control" value="" />
-			</form>
+			<!-- </form> -->
 			<?php if($_SESSION["user_data"]["ad_upload_catalog"]) : ?>
 			<div class="catalogpdf_block" style="margin:5px 0">
 				<a href="<?=WEBSITE?>files/document/<?=$_SESSION["user_data"]["ad_upload_catalog"]?>" target="_blank">View Attachment</a>
@@ -239,7 +240,7 @@
 	
 	<!--Forth column START-->
 	<div class="col-lg-3">
-		<form action="" method="post" name="uploadImageForm" id="uploadImageForm" enctype="multipart/form-data">
+		<!-- <form action="" method="post" name="uploadImageForm" id="uploadImageForm" enctype="multipart/form-data"> -->
 		<input type="hidden" name="t" value="<?=$_SESSION["token_generator"]?>" />
 		<input type="hidden" name="pi" id="pi" class="pi" value="" />
 		<div class="form-group">
@@ -247,8 +248,9 @@
 			<div class="upload_img_tmp">
 				<?php
 				if(!empty($_SESSION["user_data"]["picture"])){
+					$img = WEBSITE."image?f=".WEBSITE."files/usersimage/".$_SESSION["user_data"]["picture"]."&amp;w=270&amp;h=160";
 					?>
-					<img src="<?=WEBSITE?>image?f=<?=WEBSITE?>files/usersimage/<?=$_SESSION["user_data"]["picture"]?>&amp;w=270&amp;h=160" id="profile_logo" class="img-responsive" width="100%" alt="" />
+					<img src="<?=$img?>" data-oldimage="<?=$img?>" id="profile_logo" class="img-responsive" width="100%" alt="" />
 					<?php
 				}else{
 				?>
@@ -262,7 +264,7 @@
 			</div> 
 			<font class="error-msg" id="requiredx_add_photo">Product photo is required !</font>
 		</div>
-		</form>
+		<!-- </form> -->
 	</div>
 	<!--Forth column END-->
 		
@@ -347,6 +349,7 @@
 				<button class="btn btn-yellow" id="save_changes">SAVE CHANGES</button>
 			</div>
 		</div>
+	</form>
 	</div>
 	<hr>
 	

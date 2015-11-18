@@ -309,40 +309,58 @@ $(document).on("click","#save_changes",function(){
 
 	if(companyname==""){
 		$("#requiredx_companyname").fadeIn("slow");
+		$("#insertText").html("Please fill/select all required fields !"); 
+		$('#message_popup').modal('toggle'); 
 		return false;
 	}else if(sector.length<=0){
 		$("#requiredx_sector").fadeIn("slow");
+		$("#insertText").html("Please fill/select all required fields !"); 
+		$('#message_popup').modal('toggle'); 
 		return false;
 	}else if(subsector.length<=0){
 		$("#requiredx_subsector").fadeIn("slow");
+		$("#insertText").html("Please fill/select all required fields !"); 
+		$('#message_popup').modal('toggle'); 
 		return false;
 	}else if(products.length<=0){
 		$("#requiredx_products").fadeIn("slow");
+		$("#insertText").html("Please fill/select all required fields !"); 
+		$('#message_popup').modal('toggle'); 
 		return false;
 	}else if(validateEmail(contactemail)!=true){
 		$("#requiredx_contactemail").fadeIn("slow");
+		$("#insertText").html("Please check email address field !"); 
+		$('#message_popup').modal('toggle'); 
 		return false;
 	}else if(webaddress!='' && isUrl(webaddress)!=true){
 		$("#requiredx_webformat").fadeIn("slow");
+		$("#insertText").html("Please check web page url field !"); 
+		$('#message_popup').modal('toggle'); 
 		return false;
 	}else if(contactperson==''){
-		////contactperson ad_position1 mobile ad_email1
 		$("#requiredx_contactperson1").fadeIn("slow");
+		$("#insertText").html("Please fill/select all required fields !"); 
+		$('#message_popup').modal('toggle'); 
 		return false;
 	}else if(ad_position1==''){
-		////contactperson ad_position1 mobile ad_email1
 		$("#requiredx_position1").fadeIn("slow");
+		$("#insertText").html("Please fill/select all required fields !"); 
+		$('#message_popup').modal('toggle'); 
 		return false;
 	}else if(ad_email1==''){
-		////contactperson ad_position1 mobile ad_email1
 		$("#requiredx_email1").fadeIn("slow");
+		$("#insertText").html("Please fill/select all required fields !"); 
+		$('#message_popup').modal('toggle'); 
 		return false;
-	}else if(mobile==''){
-		////contactperson ad_position1 mobile ad_email1  
+	}else if(mobile==''){ 
 		$("#requiredx_mobilenumber1").fadeIn("slow");
+		$("#insertText").html("Please fill/select all required fields !"); 
+		$('#message_popup').modal('toggle'); 
 		return false;
 	}else if(mobile!='' && isMobile(mobile)!=true){
 		$("#requiredx_mobile").fadeIn("slow");
+		$("#insertText").html("Please check mobile number field !"); 
+		$('#message_popup').modal('toggle'); 
 		return false;
 	}else if(strlen(about) > 250){
 		$("#insertText").html("Description is too long !"); 
@@ -383,7 +401,8 @@ $(document).on("click","#save_changes",function(){
 		function(d){
 			if(d=="Done"){ 
 				//$("#insertText").html("Data updated !"); 
-				location.reload();
+				//location.reload();
+				$("#uploadDocuments").submit();
 			} 
 		});
 	}
@@ -527,47 +546,52 @@ $(document).on("click","#save_individual_changes",function(){
 	}
 });
 
-$(document).on("change","#ad_upload_catalog",function(e){
-	e.stopPropagation();
-	e.preventDefault();
-	var files = e.target.files;
-	var ex = files[0].name.split(".");
-	var extLast = ex[ex.length - 1].toLowerCase();
-	if(extLast!="pdf"){
-		$('#message_popup').modal('toggle'); 
-		$("#insertText").html("Please choose pdf file !"); 
-	}else if(files[0].size > 3000000){
-		$('#message_popup').modal('toggle'); 
-		$("#insertText").html("File size must be under 3 MB !"); 
-		return false;
-	}else if(files[0].name){
-		$("#uploadcatalogform").submit();
-		$('#message_popup').modal('toggle'); 
-		$("#insertText").html("Please wait !"); 
-	}
-});
+// $(document).on("change","#ad_upload_catalog",function(e){
+// 	e.stopPropagation();
+// 	e.preventDefault();
+// 	var files = e.target.files;
+// 	var ex = files[0].name.split(".");
+// 	var extLast = ex[ex.length - 1].toLowerCase();
+// 	if(extLast!="pdf"){
+// 		$('#message_popup').modal('toggle'); 
+// 		$("#insertText").html("Please choose pdf file !"); 
+// 	}else if(files[0].size > 3000000){
+// 		$('#message_popup').modal('toggle'); 
+// 		$("#insertText").html("File size must be under 3 MB !"); 
+// 		return false;
+// 	}else if(files[0].name){
+// 		$("#uploadcatalogform").submit();
+// 		$('#message_popup').modal('toggle'); 
+// 		$("#insertText").html("Please wait !"); 
+// 	}
+// });
 
 $(document).on("change","#inputUserLogo",function(e){
 	e.stopPropagation();
 	e.preventDefault();
 	var files = e.target.files;
-
-
+	var nowFile = $("#profile_logo").data("oldimage");
+	 
+	var plz = "http://"+document.domain+"/template/img/plz.jpg";  
+	$("#profile_logo").attr({ "src" : plz }); 
 	var ex = files[0].name.split(".");
 	var extLast = ex[ex.length - 1].toLowerCase();
 	console.log(extLast);
 	if(extLast!="jpeg" && extLast!="jpg" && extLast!="png" && extLast!="gif"){
 		$('#message_popup').modal('toggle'); 
 		$("#insertText").html("Please choose jpeg, jpg, gif or png file !"); 
+		$("#profile_logo").attr({ "src" : nowFile }); 
 		return false;
 	}else if(files[0].size > 1000000){
 		$('#message_popup').modal('toggle'); 
 		$("#insertText").html("File size must be under 1 MB !"); 
+		$("#profile_logo").attr({ "src" : nowFile }); 
 		return false;
 	}else if(files[0].name){
-		$("#uploadImageForm").submit();
-		$('#message_popup').modal('toggle'); 
-		$("#insertText").html("Please wait !"); 
+		$("#profile_logo").attr({ "src" : URL.createObjectURL(e.target.files[0]) }); 
+		//$("#uploadImageForm").submit();
+		// $('#message_popup').modal('toggle'); 
+		// $("#insertText").html("Please wait !"); 
 	}
 });
 
