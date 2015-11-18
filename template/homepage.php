@@ -75,15 +75,15 @@ $ctext = new ctext();
 		<div class="row" id="events_items">
 			<?php 
 			foreach($eventArray1 as $val){
-				$old = ($val->expiredate < time()) ? ' style="opacity:0.4;"' : '';
+				$old = ($val->expiredate < time()) ? ' oldeventitem' : '';
 			?>
-				<div class="col-sm-4 col-md-2 col-xs-4 event_item"<?=$old?>>
+				<div class="col-sm-4 col-md-2 col-xs-4 event_item<?=$old?>">
 					<a href="<?=WEBSITE.LANG."/".htmlentities($val->slug)?>">
 						<div class="date"><?=date("d M Y",$val->date)?></div>
 						<div class="image"><img src="<?=WEBSITE?>image?f=<?=WEBSITE.$val->pic?>&amp;w=170&amp;h=90" class="img-responsive" alt="" /></div>
 						<div class="text">
-							<?=$ctext->cut($val->title,50)?>
-							<p class="booth"><b>Booth №:</b> <?=$ctext->cut($val->event_booth,50)?></p>
+							<b><?=$ctext->cut($val->title,20)?></b>
+							<p class="booth">Booth N: <?=$ctext->cut($val->event_booth,40)?></p>
 						</div>
 					</a>	
 				</div>
@@ -97,10 +97,10 @@ $ctext = new ctext();
 		<div class="row news_div">
 
 			<?php 
-			$newArray1 = array_slice($data["news"], 0, 6, true);
+			$newArray1 = array_slice($data["news"], 0, 3, true);
 			foreach($newArray1 as $val){
 			?>
-				<div class="col-sm-4 col-md-2 col-xs-4 news_item">
+				<div class="col-sm-4 col-md-4 col-xs-4 news_item">
 					<a href="<?=WEBSITE.LANG."/".htmlentities($val->slug)?>">
 						<div class="date"><span><?=date("d",$val->date)?></span> <?=date("M",$val->date)?></div>
 						<div class="text"><?=$ctext->cut($val->title,120)?></div>

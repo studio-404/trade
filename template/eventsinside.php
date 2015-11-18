@@ -42,7 +42,7 @@
 				<div class="text_formats_blue">
 					<?=$first[0]->event_fee?>	
 				</div>
-				<div class="yellow_title">Booth №:</div>
+				<div class="yellow_title">Booth N:</div>
 				<div class="text_formats_blue">
 					<?=$first[0]->event_booth?>
 				</div>
@@ -84,15 +84,15 @@
 			<?php 
 			$ctext = new ctext();
 			foreach($other as $val) : 
-				$old = ($val["expiredate"] < time()) ? ' style="opacity:0.4;"' : '';
+				$old = ($val["expiredate"] < time()) ? ' oldeventitem' : '';
 			?>
-			<div class="col-sm-4 col-md-3 col-xs-4 event_item"<?=$old?>>
+			<div class="col-sm-4 col-md-3 col-xs-4 event_item<?=$old?>">
 				<a href="<?=WEBSITE.LANG?>/<?=$val["slug"]?>">
 					<div class="date"><?=date("d M Y",$val["date"])?></div>
 					<div class="image"><img src="<?=WEBSITE?>image?f=<?=WEBSITE.$val["pic"]?>&amp;w=270&amp;h=130" class="img-responsive" alt="" /></div>
 					<div class="text">
-						<?=$ctext->cut($val["title"],30)?>
-						<p class="booth"><b>Booth №:</b> <?=$ctext->cut($val["event_booth"],50)?></p>
+						<b><?=$ctext->cut($val["title"],30)?></b>
+						<p class="booth">Booth N: <?=$ctext->cut($val["event_booth"],50)?></p>
 					</div>
 				</a>	
 			</div>

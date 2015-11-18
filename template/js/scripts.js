@@ -1973,12 +1973,12 @@ $(document).on("click",".loadmore",function(){
 				var insert = '';
 				var old = '';
 				for(i=0; i<obj.length; i++){
-					old = (obj[i].datetime < time()) ? 'style="opacity:0.4"' : '';
-					insert += '<div class="col-sm-4 col-md-3 col-xs-4 event_item" '+old+'>';
+					old = (obj[i].datetime < time()) ? ' oldeventitem' : '';
+					insert += '<div class="col-sm-4 col-md-3 col-xs-4 event_item'+old+'">';
 					insert += '<a href="http://'+document.domain+'/en/'+obj[i].slug+'">';
 					insert += '<div class="date">'+obj[i].date+'</div>';
 					insert += '<div class="image"><img src="http://'+document.domain+'/image?f=http://'+document.domain+'/'+obj[i].pic+'&amp;w=270&amp;h=130" class="img-responsive" alt="" /></div>';
-					insert += '<div class="text">'+obj[i].title+'</div>';
+					insert += '<div class="text"><b>'+obj[i].title+'</b> <p class="booth">Booth N: '+obj[i].event_booth+'</p></div>';
 					insert += '</a>';
 					insert += '</div>';
 				}

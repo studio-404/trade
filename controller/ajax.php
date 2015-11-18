@@ -1758,6 +1758,7 @@ class ajax extends connection{
 				`studio404_module_item`.`date`, 
 				`studio404_module_item`.`expiredate`, 
 				`studio404_module_item`.`title`, 
+				`studio404_module_item`.`event_booth`, 
 				( 
 					SELECT `studio404_gallery_file`.`file` FROM 
 					`studio404_gallery_attachment`,`studio404_gallery`,`studio404_gallery_file` 
