@@ -89,7 +89,8 @@ $ctext = new ctext();
 				</div>
 			<?php
 			}
-			?>
+			?><div style="clear:both"></div>
+			<div class="alleventsLink"><a href="<?=WEBSITE?>en/about-us/events">View More Events »</a></div>
 		</div>
 	
 		<div class="page_title_4"><?=$data["language_data"]["latestnews"]?></div>
@@ -108,7 +109,8 @@ $ctext = new ctext();
 				</div>
 			<?php
 			}
-			?>
+			?><div style="clear:both"></div>
+			<div class="alleventsLink"><a href="<?=WEBSITE?>en/about-us/news">View More News »</a></div>
 		</div>
 		
 		<div class="home_div_3">

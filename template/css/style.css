@@ -1263,6 +1263,7 @@ height:25px; width:25px; z-index:999999999999999999999999999;
 #events_items .event_item .text{ min-height: 48px; max-height: 48px; position:relative; }
 #events_items .event_item .text .booth{ min-height: 25px; max-height: 25px; line-height:25px; margin:0; padding:0; position: absolute; bottom:0px; border-top: solid #cdcdcd 1px; display: block; width: 100%; }
 #events_items .oldeventitem .date{ background-color: #cccccc; }
+.alleventsLink{ margin: -10px 0 0 0; padding:0 10px; float:left; width:100%; text-align: right }
 
 .news_div .news_item .text{ min-height: 50px; max-height: 50px; color: #3895ce; overflow: hidden; display: flex; align-items: center; }
 /*.news_div .news_item .text{ min-height: 50px; height: 100px; color: #3895ce; overflow: hidden; overflow: hidden;  }*/
