@@ -83,11 +83,12 @@ $first = array_slice($data["event_list"], 0, 1);
 			$ctext = new ctext();
 			foreach($other as $val) : 
 				$old = ($val["expiredate"] < time()) ? ' oldeventitem' : '';
+				$bw = ($val["expiredate"] < time()) ? '&amp;bw=1' : '';
 			?>
 			<div class="col-sm-4 col-md-3 col-xs-4 event_item<?=$old?>">
 				<a href="<?=WEBSITE.LANG?>/<?=$val["slug"]?>">
 					<div class="date"><?=date("d M Y",$val["date"])?></div>
-					<div class="image"><img src="<?=WEBSITE?>image?f=<?=WEBSITE.$val["pic"]?>&amp;w=270&amp;h=130" class="img-responsive" alt="" /></div>
+					<div class="image"><img src="<?=WEBSITE?>image?f=<?=WEBSITE.$val["pic"]?>&amp;w=270&amp;h=130<?=$bw?>" class="img-responsive" alt="" /></div>
 					<div class="text">
 						<b><?=$ctext->cut($val["title"],30)?></b>
 						<p class="booth">Booth N: <?=$ctext->cut($val["event_booth"],50)?></p>

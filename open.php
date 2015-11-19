@@ -1,7 +1,7 @@
 <?php 
 function my_session_start()
 {
-	session_set_cookie_params(time()+600,'/','trade.404.ge',false,true); 
+	session_set_cookie_params(time()+6000,'/','trade.404.ge',false,true); 
 	//session_name("studio404");
 	if (ini_get('session.use_cookies') && isset($_COOKIE['PHPSESSID'])) {
 		$sessid = $_COOKIE['PHPSESSID'];

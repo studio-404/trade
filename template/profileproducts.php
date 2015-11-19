@@ -17,7 +17,14 @@
 ?>
 <div class="container" id="container">
 	<div class="page_title_1">
-		Profile (<?=ucfirst($_SESSION["tradewithgeorgia_company_type"])?>)
+		<span class="profile-header-procent">Profile (<?=ucfirst($_SESSION["tradewithgeorgia_company_type"])?>)</span>
+
+		<div class="procent-box">
+			<div class="procent-publish"></div>
+			<div class="procent-complete"></div>
+			<div class="procent-text">30%</div>
+			<div class="procent-outertext">50% left to published | 70% left to complete</div>
+		</div><div style="clear:both"></div>
 	</div>
 	<div class="row">
 		<form action="" method="post" id="uploadDocuments" name="uploadImageForm" enctype="multipart/form-data">
@@ -250,11 +257,11 @@
 				if(!empty($_SESSION["user_data"]["picture"])){
 					$img = WEBSITE."image?f=".WEBSITE."files/usersimage/".$_SESSION["user_data"]["picture"]."&amp;w=270&amp;h=160";
 					?>
-					<img src="<?=$img?>" data-oldimage="<?=$img?>" id="profile_logo" class="img-responsive" width="100%" alt="" />
+					<img src="<?=$img?>" data-oldimage="<?=$img?>" id="profile_logo" data-uploaded="image" class="img-responsive" width="100%" alt="" />
 					<?php
 				}else{
 				?>
-					<img src="<?=TEMPLATE?>img/img_upload.png" id="profile_logo" class="img-responsive" width="100%" alt="" />
+					<img src="<?=TEMPLATE?>img/img_upload.png" id="profile_logo" data-uploaded="noimage" class="img-responsive" width="100%" alt="" />
 				<?php
 				}
 				?>
@@ -262,7 +269,7 @@
 			<div class="btn btn-upload btn-block"> 
 				UPLOAD LOGO <input type="file" id="inputUserLogo" name="inputUserLogo" class="input_type_file" value="" />
 			</div> 
-			<font class="error-msg" id="requiredx_add_photo">Product photo is required !</font>
+			<font class="error-msg companylogo_required">Company logo is required !</font>
 		</div>
 		<!-- </form> -->
 	</div>

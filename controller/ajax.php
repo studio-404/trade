@@ -2156,21 +2156,33 @@ class ajax extends connection{
 			$selectMarket = 'SELECT `export_markets_id` FROM `studio404_users` WHERE `id`="'.(int)$userId.'"';
 			$prepare = $conn->prepare($selectMarket); 
 			$prepare->execute();
-			$fetch = $prepare->fetch(PDO::FETCH_ASSOC);
-			
-			$select0 = 'SELECT `idx`,`title`,(SELECT `idx` FROM `studio404_users` LIMIT 1) AS xx FROM `studio404_pages` WHERE `cid`="561" AND `idx` IN('.$fetch["export_markets_id"].') AND `status`!=1 ORDER BY `title` ASC';
-			$prepare0 = $conn->prepare($select0);
-			$prepare0->execute();
-			$fetch0 = $prepare0->fetchAll(PDO::FETCH_ASSOC);
-			if(!empty(Input::method("POST","v"))){
-				$v = '`title` LIKE "'.$val.'%" AND ';
-			}else{ $v = ''; }
-			$select = 'SELECT `idx`,`title`,(SELECT `idx` FROM `studio404_users` WHERE `id`=0 LIMIT 1) AS xx FROM `studio404_pages` WHERE '.$v.' `cid`="561" AND `idx` NOT IN('.$fetch["export_markets_id"].') AND `status`!=1 ORDER BY `title` ASC';
-			$prepare2 = $conn->prepare($select);
-			$prepare2->execute();
-			$fetch2 = $prepare2->fetchAll(PDO::FETCH_ASSOC);
-			$result = array_merge($fetch2, $fetch0); 			
-			echo json_encode($result);
+			if($prepare->rowCount() > 0){
+				$fetch = $prepare->fetch(PDO::FETCH_ASSOC);
+				if($fetch["export_markets_id"]!=""){
+					$selectxx = 'SELECT `idx`,`title`,(SELECT `id` FROM `studio404_users` LIMIT 1) AS xx FROM `studio404_pages` WHERE `cid`="561" AND `idx` IN('.$fetch["export_markets_id"].') AND `status`!=1 ORDER BY `title` ASC';
+					$preparexx = $conn->prepare($selectxx);
+					$preparexx->execute();
+					$fetchxx = $preparexx->fetchAll(PDO::FETCH_ASSOC);
+					if(!empty(Input::method("POST","v"))){
+						$v = '`title` LIKE "'.$val.'%" AND ';
+					}else{ $v = ''; }
+				}else{
+					$fetchxx = array();
+					if(!empty(Input::method("POST","v"))){
+						$v = '`title` LIKE "'.$val.'%" AND ';
+					}else{ $v = ''; }
+					$fetch["export_markets_id"] = 5555;
+				}
+
+				$select = 'SELECT `idx`,`title`,(SELECT `id` FROM `studio404_users` WHERE `id`=0 LIMIT 1) AS xx FROM `studio404_pages` WHERE '.$v.' `cid`="561" AND `idx` NOT IN('.$fetch["export_markets_id"].') AND `status`!=1 ORDER BY `title` ASC';
+				$preparexxx = $conn->prepare($select);
+				$preparexxx->execute();
+				$fetchxxx = $preparexxx->fetchAll(PDO::FETCH_ASSOC);
+
+				$result = array_merge($fetchxxx, $fetchxx); 			
+				
+				echo json_encode($result);
+			}
 		}
 
 	}

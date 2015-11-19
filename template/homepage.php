@@ -67,7 +67,7 @@ $ctext = new ctext();
 
 
 
-<div class="container" id="container">	
+<div class="container" id="container" style="margin-top:30px">	
 		<div class="page_title_4"><?=$data["language_data"]["eventschedule"]?></div>
 		<?php 
 		$eventArray1 = array_slice($data["events"], 0, 6, true);
@@ -76,11 +76,12 @@ $ctext = new ctext();
 			<?php 
 			foreach($eventArray1 as $val){
 				$old = ($val->expiredate < time()) ? ' oldeventitem' : '';
+				$bw = ($val->expiredate < time()) ? '&amp;bw=1' : '';
 			?>
 				<div class="col-sm-4 col-md-2 col-xs-4 event_item<?=$old?>">
 					<a href="<?=WEBSITE.LANG."/".htmlentities($val->slug)?>">
 						<div class="date"><?=date("d M Y",$val->date)?></div>
-						<div class="image"><img src="<?=WEBSITE?>image?f=<?=WEBSITE.$val->pic?>&amp;w=170&amp;h=90" class="img-responsive" alt="" /></div>
+						<div class="image"><img src="<?=WEBSITE?>image?f=<?=WEBSITE.$val->pic?>&amp;w=170&amp;h=90<?=$bw?>" class="img-responsive" alt="" /></div>
 						<div class="text">
 							<b><?=$ctext->cut($val->title,20)?></b>
 							<p class="booth">Booth N: <?=$ctext->cut($val->event_booth,40)?></p>

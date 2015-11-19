@@ -277,8 +277,7 @@ $(document).on("click","#save_changes",function(){
 	var ad_person2 = $("#ad_person2").val(); 
 	var ad_position2 = $("#ad_position2").val(); 
 	var ad_mobile2 = $("#ad_mobile2").val(); 
-	var ad_email2 = $("#ad_email2").val(); 
-	//var ad_upload_catalog = $("#ad_upload_catalog").val();
+	var ad_email2 = $("#ad_email2").val();
 	
 
 	var contactemail = $("#contactemail").val(); 
@@ -310,8 +309,14 @@ $(document).on("click","#save_changes",function(){
 	  certificates[i] = $(selected).val(); 
 	});
 
-
-	if(companyname==""){
+	//alert(document.getElementById("inputUserLogo").files.length + " " + picture_load);
+	var picture_load = $("#profile_logo").data("uploaded");
+	if(picture_load == "noimage"){
+		$(".companylogo_required").fadeIn("slow");
+		$("#insertText").html("Please fill/select all required fields !"); 
+		$('#message_popup').modal('toggle'); 
+		return false;
+	}else if(companyname==""){
 		$("#requiredx_companyname").fadeIn("slow");
 		$("#insertText").html("Please fill/select all required fields !"); 
 		$('#message_popup').modal('toggle'); 
@@ -663,6 +668,7 @@ $(document).on("change","#inputUserLogo",function(e){
 		return false;
 	}else if(files[0].name){
 		$("#profile_logo").attr({ "src" : URL.createObjectURL(e.target.files[0]) }); 
+		$("#profile_logo").data("uploaded","image"); 
 		//$("#uploadImageForm").submit();
 		// $('#message_popup').modal('toggle'); 
 		// $("#insertText").html("Please wait !"); 
@@ -1972,12 +1978,14 @@ $(document).on("click",".loadmore",function(){
 				var obj = jQuery.parseJSON(r);
 				var insert = '';
 				var old = '';
+				var bw = '';
 				for(i=0; i<obj.length; i++){
 					old = (obj[i].datetime < time()) ? ' oldeventitem' : '';
+					bw = (obj[i].datetime < time()) ? '&amp;bw=1' : '';
 					insert += '<div class="col-sm-4 col-md-3 col-xs-4 event_item'+old+'">';
 					insert += '<a href="http://'+document.domain+'/en/'+obj[i].slug+'">';
 					insert += '<div class="date">'+obj[i].date+'</div>';
-					insert += '<div class="image"><img src="http://'+document.domain+'/image?f=http://'+document.domain+'/'+obj[i].pic+'&amp;w=270&amp;h=130" class="img-responsive" alt="" /></div>';
+					insert += '<div class="image"><img src="http://'+document.domain+'/image?f=http://'+document.domain+'/'+obj[i].pic+'&amp;w=270&amp;h=130'+bw+'" class="img-responsive" alt="" /></div>';
 					insert += '<div class="text"><b>'+obj[i].title+'</b> <p class="booth">Booth N: '+obj[i].event_booth+'</p></div>';
 					insert += '</a>';
 					insert += '</div>';

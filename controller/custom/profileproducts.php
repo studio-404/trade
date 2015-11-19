@@ -73,14 +73,14 @@ class profileproducts extends connection{
 				":one"=>1
 			));
 			$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
-			$_SESSION["user_data"]["picture"] = $fetch["picture"];
-			$_SESSION["user_data"]["companyname"] = $fetch["namelname"];
-			$_SESSION["user_data"]["sector"] = $fetch["sector_id"];
-			$_SESSION["user_data"]["subsector"] = $fetch["sub_sector_id"];
+			$_SESSION["user_data"]["picture"] = $fetch["picture"]; // *
+			$_SESSION["user_data"]["companyname"] = $fetch["namelname"]; // *
+			$_SESSION["user_data"]["sector"] = $fetch["sector_id"]; // *
+			$_SESSION["user_data"]["subsector"] = $fetch["sub_sector_id"]; // *
 			$_SESSION["user_data"]["establishedin"] = $fetch["established_in"];
 			$_SESSION["user_data"]["productioncapasity"] = $fetch["production_capacity"];
 			$_SESSION["user_data"]["address"] = $fetch["address"];
-			$_SESSION["user_data"]["mobiles"] = $fetch["mobile"];
+			$_SESSION["user_data"]["mobiles"] = $fetch["mobile"]; // *
 			$_SESSION["user_data"]["numemploy"] = $fetch["number_of_employes"];
 			$_SESSION["user_data"]["certificates"] = $fetch["certificates"];
 			$_SESSION["user_data"]["contactpersones"] = $fetch["contact_person"];
@@ -88,19 +88,22 @@ class profileproducts extends connection{
 			$_SESSION["user_data"]["companysize"] = $fetch["company_size"];
 			$_SESSION["user_data"]["webaddress"] = $fetch["web_address"];
 
-			$_SESSION["user_data"]["ad_position1"] = $fetch["ad_position1"];
-			$_SESSION["user_data"]["ad_email1"] = $fetch["ad_email1"];
+			$_SESSION["user_data"]["ad_position1"] = $fetch["ad_position1"]; // *
+			$_SESSION["user_data"]["ad_email1"] = $fetch["ad_email1"]; //*
 			$_SESSION["user_data"]["ad_person2"] = $fetch["ad_person2"];
 			$_SESSION["user_data"]["ad_position2"] = $fetch["ad_person2"];
 			$_SESSION["user_data"]["ad_mobile2"] = $fetch["ad_mobile2"];
 			$_SESSION["user_data"]["ad_email2"] = $fetch["ad_email2"];
 			$_SESSION["user_data"]["ad_upload_catalog"] = $fetch["ad_upload_catalog"];
 			
-			$_SESSION["user_data"]["contactemail"] = $fetch["email"];
-			$_SESSION["user_data"]["about"] = $fetch["about"];
+			$_SESSION["user_data"]["contactemail"] = $fetch["email"]; // *
+			$_SESSION["user_data"]["about"] = $fetch["about"]; // *
 			$_SESSION["user_data"]["products"] = $fetch["products"];
 			$_SESSION["user_data"]["exportmarkets"] = $fetch["export_markets_id"];
 		}
+
+		// calculate
+		$calculate = calculate::filled($_SESSION["user_data"]);
 
 		// select products
 		$products_sql = 'SELECT 

@@ -54,9 +54,9 @@ class model_template_upload_user_logo extends connection{
 			$ext = explode(".",$_FILES["inputUserLogo"]["name"]);
 			$ext = strtolower(end($ext));
 
-			if($ext!="jpeg"){
+			if($ext!="jpg"){
 				//return 2;
-			}else if($_FILES["inputUserLogo"]["size"]>1000000){
+			}else if($_FILES["inputUserLogo"]["size"]>5000000){
 				//return 2;
 			}else{
 				$prefix = explode("@",$_SESSION["tradewithgeorgia_username"].$_SESSION["tradewithgeorgia_user_id"]);
@@ -64,7 +64,7 @@ class model_template_upload_user_logo extends connection{
 				$fileName = $prefix.md5(time()).'.'.$ext; 
 				
 				$target_file = DIR . 'files/usersimage/'.$fileName;
-				 if (move_uploaded_file($_FILES["inputUserLogo"]["tmp_name"],$target_file)) { 
+				 if (move_uploaded_file($_FILES["inputUserLogo"]["tmp_name"],$target_file)) {
 				 	$conn = $this->conn($c); 
 
 				 	$check = 'SELECT `picture` FROM `studio404_users` WHERE `id`=:companyId AND `username`=:username AND `allow`!=:one AND `status`!=:one'; 

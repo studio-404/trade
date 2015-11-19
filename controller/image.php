@@ -108,21 +108,23 @@ class image extends connection{
 	public function ImageToBlackAndWhite($im) {
 		try
 		{
-			for ($x = imagesx($im); $x--;) {
-		        for ($y = imagesy($im); $y--;) {
-		            $rgb = imagecolorat($im, $x, $y);
-		            $r = ($rgb >> 16) & 0xFF;
-		            $g = ($rgb >> 8 ) & 0xFF;
-		            $b = $rgb & 0xFF;
-		            $gray = ($r + $g + $b) / 3;
-		            if ($gray < 0xFF) {
-		                imagesetpixel($im, $x, $y, 0xFFFFFF);
-		            }else{
-		                imagesetpixel($im, $x, $y, 0x000000);
-		            }
-		        }
-		    }
-		    imagefilter($im, IMG_FILTER_NEGATE);
+			// for ($x = imagesx($im); $x--;) {
+		 //        for ($y = imagesy($im); $y--;) {
+		 //            $rgb = imagecolorat($im, $x, $y);
+		 //            $r = ($rgb >> 16) & 0xFF;
+		 //            $g = ($rgb >> 8 ) & 0xFF;
+		 //            $b = $rgb & 0xFF;
+		 //            $gray = ($r + $g + $b) / 3;
+		 //            if ($gray < 0xFF) {
+		 //                imagesetpixel($im, $x, $y, 0xFFFFFF);
+		 //            }else{
+		 //                imagesetpixel($im, $x, $y, 0x000000);
+		 //            }
+		 //        }
+		 //    }
+		 //    imagefilter($im, IMG_FILTER_NEGATE);
+			imagefilter($im, IMG_FILTER_GRAYSCALE);
+			imagefilter($im, IMG_FILTER_CONTRAST, -100);
 		}catch(Exception $e){ die(); }
 	}
 }
