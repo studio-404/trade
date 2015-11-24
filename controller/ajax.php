@@ -790,6 +790,8 @@ class ajax extends connection{
 
 		if(Input::method("POST","addproduct")=="true" && Input::method("POST","p") && Input::method("POST","pn") && Input::method("POST","d") && strlen(Input::method("POST","d")) <= 350)
 		{
+			$topublish = calculate::filled($_SESSION["user_data"]);
+			if($topublish<100){ exit(); }
 			$products = (int)Input::method("POST","p");
 			$shelf_life = strip_tags(Input::method("POST","s"));
 			$packaging = strip_tags(Input::method("POST","pkg"));

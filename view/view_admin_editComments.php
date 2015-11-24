@@ -13,7 +13,6 @@
 	<script src="<?=SCRIPTS?>drop_files.js" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" href="<?=PLUGINS?>jquery-ui-1.11.4.custom/jquery-ui.css">
 	<script src="<?=PLUGINS?>jquery-ui-1.11.4.custom/jquery-ui.js"></script>
-	<script src="<?=PLUGINS?>/tinymce/tinymce.min.js"></script>
 	<!--Fancybox popup START-->
 	<script type="text/javascript" src="<?=PLUGINS?>jquery.fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
 	<script type="text/javascript" src="<?=PLUGINS?>jquery.fancybox/source/jquery.fancybox.pack.js"></script>

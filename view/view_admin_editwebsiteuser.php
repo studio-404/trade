@@ -12,7 +12,6 @@
 	<link href="<?=STYLES?>general.css" type="text/css" rel="stylesheet" /> 
 	<script src="<?=SCRIPTS?>jquery-1.11.2.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="<?=SCRIPTS?>javascript.js" type="text/javascript" charset="utf-8"></script>
-	<script src="<?=PLUGINS?>/tinymce/tinymce.min.js"></script>
 	<?php @include("view/parts/tinyMce.php"); ?>
 </head>
 <body>

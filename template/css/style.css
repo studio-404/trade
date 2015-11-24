@@ -267,7 +267,7 @@ iframe{ margin: 0 !important; padding: 0 !important; border: 0 !important; width
 
 
 
-#home_slider {height:432px; width:1140px; margin:0 auto;}
+#home_slider {height:432px; width:100%; margin:0 auto;}
 
 #home_slider .carousel-inner { margin-top:-45px !important;}
 #home_slider .carousel-inner a:hover{ text-decoration: none; }
@@ -729,14 +729,17 @@ table td:nth-child(odd) {
 .home_div_3 .item .title {
 	font-size:25px;
 	font-weight:bold;
+	position: relative;
 }
 
 .home_div_3 .item .title:after {
 	content:" ";
-	float:right;
-	background:url('../img/link_icon.png'); width:16px; height:16px;
-	margin-top:10px;
-	margin-right:5px;
+	background:url('../img/link_icon.png'); 
+	width:16px; 
+	height:16px;
+	position: absolute;
+    top: 10px;
+    right: 5px;
 }
 
 .home_div_3 .trade_map {background:#1279bb url('../img/trade_map_bg.png') no-repeat left; background-size:100% 100%;}

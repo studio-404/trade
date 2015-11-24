@@ -12,21 +12,23 @@ $ctext = new ctext();
 			if($val->com_name != "Slider"){ continue; }
 		?>
 		<div class="<?=($x==1) ? 'active ' : ''?>item">
+			<a href="<?=$val->url?>">
 			<img class="first-slide" src="<?=WEBSITE?>image?f=<?=WEBSITE_.$val->image?>&amp;w=1140&amp;h=435" alt="First slide">
 			<!-- <img class="first-slide" src="<?=WEBSITE_.$val->image?>" alt="<?=strip_tags($val->title)?>" /> -->
-			<div class="container">
+			<!--<div class="container">
 				<div class="carousel-caption">
 					<div class="col-sm-4">
-						<a href="<?=$val->url?>">
+						
 							<div class="slider_info">
 								<div class="title"><?=$ctext->cut(strip_tags($val->title),55)?></div>
 								<div class="text"><?=$ctext->cut(strip_tags($val->desc),75)?></div>
 								<div class="url">Read more</div>
 							</div>
-						</a>
+						
 					</div>
 				</div>
-			</div>
+			</div>-->
+			</a>
         </div>
 		<?php
 			$x++;
@@ -94,7 +96,7 @@ $ctext = new ctext();
 			<div class="alleventsLink"><a href="<?=WEBSITE?>en/about-us/events">View More Events »</a></div>
 		</div>
 	
-		<div class="page_title_4"><?=$data["language_data"]["latestnews"]?></div>
+		<!--<div class="page_title_4"><?=$data["language_data"]["latestnews"]?></div>
 		
 		<div class="row news_div">
 
@@ -112,7 +114,7 @@ $ctext = new ctext();
 			}
 			?><div style="clear:both"></div>
 			<div class="alleventsLink"><a href="<?=WEBSITE?>en/about-us/news">View More News »</a></div>
-		</div>
+		</div>-->
 		
 		<div class="home_div_3">
 			<div class="row">
@@ -125,16 +127,16 @@ $ctext = new ctext();
 			?>
 		     <div class="col-sm-4">
 					<a href="<?=$expl[0]?>" <?=$target?> class="homePageSmallBanner" style="display:block">
-						<div class="item" style="background-image:url('<?=WEBSITE?>image?f=<?=WEBSITE_.$val->image?>&w=366&h=85')">					
-							<div class="title"><?=$ctext->cut(strip_tags($val->title),55)?></div>
-							<div class="text">
+						<div class="item" style="background-image:url('<?=WEBSITE?>image?f=<?=WEBSITE_.$val->image?>&amp;w=366&amp;h=85')">					
+							<div class="title"><p style="padding-top:25px; text-align:center"><?=$ctext->cut(strip_tags($val->title),55)?></p></div>
+							<!--<div class="text">
 								<?=$ctext->cut(strip_tags($val->desc),53)?><br/>
 								<?php
 								$repl = str_replace(array('http://','www.'), "", $val->url);
 								$repl = rtrim($repl,'/');
 								echo 'www.'.$repl;
 								?>
-							</div>							
+							</div>-->							
 						</div>
 					</a>	
 			</div>

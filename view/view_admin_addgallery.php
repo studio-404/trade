@@ -11,7 +11,6 @@
 	<script src="<?=SCRIPTS?>javascript.js" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" href="<?=PLUGINS?>jquery-ui-1.11.4.custom/jquery-ui.css">
 	<script src="<?=PLUGINS?>jquery-ui-1.11.4.custom/jquery-ui.js"></script>
-	<script src="<?=PLUGINS?>/tinymce/tinymce.min.js"></script>
 	<!--Start timepicker-->
 	<link href="<?=STYLES?>jquery-ui-timepicker-addon.css" type="text/css" rel="stylesheet" /> 
 	<script src="<?=SCRIPTS?>jquery-ui-timepicker-addon.js" type="text/javascript" charset="utf-8"></script>

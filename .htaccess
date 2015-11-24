@@ -54,7 +54,8 @@ DirectoryIndex open.php
 </IfModule>
 
 # force non-www domain
-RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC,OR]
+RewriteCond %{HTTP_REFERER} web\.proxygogo\.info
 RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
 <Files 403.shtml>
 order allow,deny

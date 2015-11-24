@@ -103,7 +103,7 @@ class profileproducts extends connection{
 		}
 
 		// calculate
-		$calculate = calculate::filled($_SESSION["user_data"]);
+		$data["calculate"] = calculate::filled($_SESSION["user_data"]);
 
 		// select products
 		$products_sql = 'SELECT 

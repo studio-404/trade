@@ -12,7 +12,6 @@
 	<script src="<?=SCRIPTS?>drop.js" type="text/javascript" charset="utf-8"></script>
 	<link rel="stylesheet" href="<?=PLUGINS?>jquery-ui-1.11.4.custom/jquery-ui.css">
 	<script src="<?=PLUGINS?>jquery-ui-1.11.4.custom/jquery-ui.js"></script>
-	<script src="<?=PLUGINS?>/tinymce/tinymce.min.js"></script>
 	<?php @include("view/parts/tinyMce.php"); ?>
 </head>
 <body>

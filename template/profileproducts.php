@@ -20,10 +20,10 @@
 		<span class="profile-header-procent">Profile (<?=ucfirst($_SESSION["tradewithgeorgia_company_type"])?>)</span>
 
 		<div class="procent-box">
-			<div class="procent-publish"></div>
-			<div class="procent-complete"></div>
-			<div class="procent-text">30%</div>
-			<div class="procent-outertext">50% left to published | 70% left to complete</div>
+			<div class="procent-publish" style="width:<?=$data["calculate"]["topublish"]?>%"></div>
+			<div class="procent-complete" style="width:<?=($data["calculate"]["tocomplete"])?>%"></div>
+			<div class="procent-text" style="left:<?=($data["calculate"]["tocomplete"]*5)?>px"><?=($data["calculate"]["tocomplete"])?>%</div>
+			<div class="procent-outertext"><?=(100-$data["calculate"]["topublish"])?>% left to published | <?=(100-$data["calculate"]["tocomplete"])?>% left to complete</div>
 		</div><div style="clear:both"></div>
 	</div>
 	<div class="row">
@@ -359,7 +359,7 @@
 	</form>
 	</div>
 	<hr>
-	
+	<?php if($data["calculate"]["topublish"]>=100) { ?>
 	<div class="page_title_1">
 		Add New Products <span style="font-size:10px; color:#555555">( * Add as many product as you have )</span>
 	</div>
@@ -523,7 +523,7 @@
 	<div class="loader">Please wait...</div>
 	<a href="javascript:;" class="gray_link loadmore" data-type="profileproductlist"  data-from="5" data-load="10" style="padding:0">Load more »</a>
 	<?php endif; ?>
-		
+		<?php } ?>
 	</div>
 <?php 
 $make = phparray_to_jsarray::sectorSelects();
