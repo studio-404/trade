@@ -1,0 +1,44 @@
+[21-Nov-2015 14:43:39 Europe/Rome] PHP Warning:  scandir(/files/manager/): failed to open dir: No such file or directory in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 462
+[21-Nov-2015 14:43:39 Europe/Rome] PHP Warning:  scandir(): (errno 2): No such file or directory in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 462
+[21-Nov-2015 14:43:39 Europe/Rome] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 471
+[21-Nov-2015 14:43:39 Europe/Rome] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 950
+[21-Nov-2015 14:44:21 Europe/Rome] PHP Warning:  scandir(../../../files/manager/): failed to open dir: No such file or directory in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 462
+[21-Nov-2015 14:44:21 Europe/Rome] PHP Warning:  scandir(): (errno 2): No such file or directory in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 462
+[21-Nov-2015 14:44:21 Europe/Rome] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 471
+[21-Nov-2015 14:44:21 Europe/Rome] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 950
+[21-Nov-2015 14:45:53 Europe/Rome] PHP Warning:  scandir(/../../../../files/manager/): failed to open dir: No such file or directory in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 462
+[21-Nov-2015 14:45:53 Europe/Rome] PHP Warning:  scandir(): (errno 2): No such file or directory in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 462
+[21-Nov-2015 14:45:53 Europe/Rome] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 471
+[21-Nov-2015 14:45:53 Europe/Rome] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 950
+[21-Nov-2015 14:46:17 Europe/Rome] PHP Warning:  scandir(/../../../files/manager/): failed to open dir: No such file or directory in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 462
+[21-Nov-2015 14:46:17 Europe/Rome] PHP Warning:  scandir(): (errno 2): No such file or directory in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 462
+[21-Nov-2015 14:46:17 Europe/Rome] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 471
+[21-Nov-2015 14:46:17 Europe/Rome] PHP Warning:  Invalid argument supplied for foreach() in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 950
+[21-Nov-2015 18:34:29 Asia/Tbilisi] PHP Warning:  array_merge(): Argument #2 is not an array in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/config/config.php on line 349
+[21-Nov-2015 18:34:29 Asia/Tbilisi] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/config/config.php:349) in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 45
+[21-Nov-2015 18:34:29 Asia/Tbilisi] PHP Warning:  implode(): Invalid arguments passed in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 279
+[21-Nov-2015 18:34:29 Asia/Tbilisi] PHP Warning:  in_array() expects parameter 2 to be array, null given in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/dialog.php on line 761
+[22-Nov-2015 18:36:23 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'Exception' with message 'file ../../../../files/manager/website/structure/structure_eng.svg is missing or invalid' in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/include/php_image_magician.php:346
+Stack trace:
+#0 /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/include/utils.php(218): imageLib->resizeImage(122, 91, 'crop')
+#1 /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/upload.php(93): create_img('../../../../fil...', '../../../../fil...', 122, 91)
+#2 {main}
+  thrown in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/include/php_image_magician.php on line 346
+[22-Nov-2015 18:40:29 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'Exception' with message 'file ../../../../files/manager/website/structure/structure_eng.svg is missing or invalid' in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/include/php_image_magician.php:346
+Stack trace:
+#0 /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/include/utils.php(218): imageLib->resizeImage(122, 91, 'crop')
+#1 /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/upload.php(93): create_img('../../../../fil...', '../../../../fil...', 122, 91)
+#2 {main}
+  thrown in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/include/php_image_magician.php on line 346
+[22-Nov-2015 18:42:58 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'Exception' with message 'file ../../../../files/manager/website/structure/structure_eng.svg is missing or invalid' in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/include/php_image_magician.php:346
+Stack trace:
+#0 /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/include/utils.php(218): imageLib->resizeImage(122, 91, 'crop')
+#1 /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/upload.php(93): create_img('../../../../fil...', '../../../../fil...', 122, 91)
+#2 {main}
+  thrown in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/include/php_image_magician.php on line 346
+[22-Nov-2015 18:43:08 Asia/Tbilisi] PHP Fatal error:  Uncaught exception 'Exception' with message 'file ../../../../files/manager/website/structure/structure_geo.svg is missing or invalid' in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/include/php_image_magician.php:346
+Stack trace:
+#0 /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/include/utils.php(218): imageLib->resizeImage(122, 91, 'crop')
+#1 /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/upload.php(93): create_img('../../../../fil...', '../../../../fil...', 122, 91)
+#2 {main}
+  thrown in /home/geoweb/enterprise.404.ge/_plugins/tinymce/js/filemanager/include/php_image_magician.php on line 346
