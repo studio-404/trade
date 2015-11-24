@@ -6,7 +6,7 @@ $c['website.mode'] = 'WorkingMode'; // UnderDeveloper or WorkingMode
 $c['developer.message'] = 'Website is under developer !'; // Developer message when under developer
 $c['allowes.ips'] = array('176.73.234.42'); // allowed ips when website is under developer
 // SITE CONFIGURATION
-$c['site.url'] = 'http://trade.404.ge/'; 
+$c['site.url'] = 'http://tradewithgeorgia.ge/'; 
 $c["welcome.page.class"] = 'homepage';
 $c["welcome.page.slug"] = 'start';
 $c['site.name'] = 'Developer CMS';

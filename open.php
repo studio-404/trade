@@ -1,7 +1,7 @@
 <?php 
 function my_session_start()
 {
-	session_set_cookie_params(time()+6000,'/','trade.404.ge',false,true); 
+	session_set_cookie_params(time()+6000,'/','tradewithgeorgia.ge',false,true); 
 	//session_name("studio404");
 	if (ini_get('session.use_cookies') && isset($_COOKIE['PHPSESSID'])) {
 		$sessid = $_COOKIE['PHPSESSID'];
@@ -34,8 +34,8 @@ header("Content-type: text/html; charset=utf-8");
 
 $dir_explode = explode("open.php",__FILE__);
 define("DIR",$dir_explode[0]);
-define("WEBSITE","http://trade.404.ge/");
-define("WEBSITE_","http://trade.404.ge");
+define("WEBSITE","http://tradewithgeorgia.ge/");
+define("WEBSITE_","http://tradewithgeorgia.ge");
 define('START_TIME', microtime(TRUE));
 define('START_MEMORY', memory_get_usage());
 define('PLUGINS', WEBSITE.'_plugins/');
