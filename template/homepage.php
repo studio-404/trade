@@ -11,11 +11,11 @@ $ctext = new ctext();
 		foreach($data["components"] as $val){
 			if($val->com_name != "Slider"){ continue; }
 		?>
-		<div class="<?=($x==1) ? 'active ' : ''?>item">
-			<a href="<?=$val->url?>">
-			<img class="first-slide" src="<?=WEBSITE?>image?f=<?=WEBSITE_.$val->image?>&amp;w=1140&amp;h=435" alt="First slide">
-			<!-- <img class="first-slide" src="<?=WEBSITE_.$val->image?>" alt="<?=strip_tags($val->title)?>" /> -->
-			<!--<div class="container">
+		<div class="<?=($x==1) ? 'active ' : ''?>item" style="background-image:url('<?=WEBSITE_.$val->image?>'); background-repeat:no-repeat; background-size: cover;">
+			<a href="<?=$val->url?>" style="display:block; width:100%; height:432px;">
+			<!-- <img class="first-slide" src="" alt="First slide">  
+				<img class="first-slide" src="<?=WEBSITE_.$val->image?>" alt="<?=strip_tags($val->title)?>" /> 
+				<div class="container">
 				<div class="carousel-caption">
 					<div class="col-sm-4">
 						
