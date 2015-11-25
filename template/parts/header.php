@@ -74,15 +74,16 @@ echo $title;
 </head>
 <body id="menu_responsive">
 	<!-- <div style="margin:0; padding:0; width:100%; text-align:center; background-color:#ffa100; color:white; line-height:25px; font-size:14px">Under Development</div> -->
-<?php
+<?php 
+/* captcha code generation */
+$_SESSION['protect_x'] = uid::captcha(2).ustring::random(2); 
 include("login.php");
 include("register.php");
 include("recover_password.php");
 include("message.php");
 include("addcertificate.php");
 ?>
-
- 
+<center>Website Is Under Development</center>
 <header id="header" class="container-fluid" style="padding:0;">
 	<div class="container">
 		<div id="header_line">

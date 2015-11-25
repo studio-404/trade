@@ -1,23 +1,24 @@
 <?php 
-function my_session_start()
-{
-	session_set_cookie_params(time()+6000,'/','tradewithgeorgia.ge',false,true); 
-	//session_name("studio404");
-	if (ini_get('session.use_cookies') && isset($_COOKIE['PHPSESSID'])) {
-		$sessid = $_COOKIE['PHPSESSID'];
-	} elseif (!ini_get('session.use_only_cookies') && isset($_GET['PHPSESSID'])) {
-		$sessid = $_GET['PHPSESSID'];
-	} else {
-	session_start();
-		return false;
-	}
-	if (!preg_match('/^[a-z0-9]{32}$/', $sessid)) {
-		return false;
-	}
-	session_start();
-	return true;
-}
-my_session_start();  
+// function my_session_start()
+// {
+// 	session_set_cookie_params(time()+6000,'/','tradewithgeorgia.com',false,true); 
+// 	//session_name("studio404");
+// 	if (ini_get('session.use_cookies') && isset($_COOKIE['PHPSESSID'])) {
+// 		$sessid = $_COOKIE['PHPSESSID'];
+// 	} elseif (!ini_get('session.use_only_cookies') && isset($_GET['PHPSESSID'])) {
+// 		$sessid = $_GET['PHPSESSID'];
+// 	} else {
+// 	session_start();
+// 		return false;
+// 	}
+// 	if (!preg_match('/^[a-z0-9]{32}$/', $sessid)) {
+// 		return false;
+// 	}
+// 	session_start();
+// 	return true;
+// }
+// my_session_start();  
+session_start();
 
 /*check last activity*/
 if (!isset($_SESSION['CREATED'])) {
@@ -34,8 +35,8 @@ header("Content-type: text/html; charset=utf-8");
 
 $dir_explode = explode("open.php",__FILE__);
 define("DIR",$dir_explode[0]);
-define("WEBSITE","http://tradewithgeorgia.ge/");
-define("WEBSITE_","http://tradewithgeorgia.ge");
+define("WEBSITE","http://tradewithgeorgia.com/");
+define("WEBSITE_","http://tradewithgeorgia.com");
 define('START_TIME', microtime(TRUE));
 define('START_MEMORY', memory_get_usage());
 define('PLUGINS', WEBSITE.'_plugins/');
@@ -119,7 +120,6 @@ insert log
 // $file_manipulate->insertLog("[".$ip."][".date("d-m-Y G:m:s")."] - ".WEBSITE_.$actual_link);
 /* token */
 $_SESSION["token_generator"] = ustring::random(10);
-
 /*
 ** some more define
 */

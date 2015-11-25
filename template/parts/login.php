@@ -12,8 +12,8 @@
 					<?php endif; ?>
 					<label for="logAs">Log In As</label>
 					<select class="form-control" id="logAs">
-						<option value="manufacturer">Product manufacturer</option>
-						<option value="serviceprovider">Service provider</option>
+						<option value="manufacturer">Product</option>
+						<option value="serviceprovider">Service</option>
 					</select>
 					<!-- <option value="company">Company</option>
 					<option value="individual">Individual</option> -->
@@ -34,7 +34,6 @@
 					<input type="text" name="captcha" id="captcha" class="form-control" value="" autocomplete="off" />
 					<div class="error_message captcha_required"><?=$data["language_data"]["captcharquired"]?> !</div>
 					<div style="clear:both"></div>
-					<?php $_SESSION['protect_'] = uid::captcha(7); ?>
 					<img src="<?=WEBSITE?>protect.php" alt="" style="float:left; margin-top:15px; border:solid 1px #3895ce; width:95px; height:35px;" class="protectimage" />
 				</div>
 				<div style="clear:both"></div>

@@ -1383,6 +1383,10 @@ table tr td p{ margin-bottom: 0px !important }
 .procent-complete{ margin: 0; padding: 0; width: 150px; height: 10px; border-radius: 10px; background-color: #fea100; position: absolute; top:0; left: 0; z-index: 2; }
 .procent-publish{ margin: 0; padding: 0; width:250px; height: 10px; border-radius: 10px; background-color: #edd1a2; position: absolute; top: 0; left: 0; z-index: 1; }
 .procent-outertext{ margin: 0; padding: 0; width: 250px; line-height: 14px; font-size: 12px; color:#b9b9b9; font-family: 'roboto'; position: absolute; top: -2px; left: 520px; }
+.text_formats ul{ margin: 0; padding: 0; list-style-type: none; }
+.text_formats ul li{ margin: 0; padding: 0; width: 100%; position: relative; line-height: 25px; }
+.text_formats ul li:hover{ text-decoration: underline; }
+.text_formats ul li:after{ margin: 0; padding: 0; content: ''; width: 10px; height: 10px; position: absolute; top: 6px; left: -15px; background-image: url('../img/bullet.jpg'); background-size: 10px 10px; background-repeat: no-repeat; }
 
 @media (max-width: 992px){
 	#header{ min-height: 120px !important; }

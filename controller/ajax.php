@@ -26,7 +26,7 @@ class ajax extends connection{
 			$hash = ustring::random(18);
 			$msg = '<div style="margin:0; padding:0; width:100%;"><img src="'.TEMPLATE.'img/mailheader2.png" width="100%" alt="Mail header"/></div>';
 			$msg .= '<p style="font-size:14px; font-family:roboto">Hello dear user, you have registered to our website: <b>'.WEBSITE.'</b>; To complete registration follow the link: </font></p>';
-			$msg .= '<p><a href="http://trade.404.ge/en/start?popup=true&email='.$email2.'&hash='.$hash.'">http://trade.404.ge/en/start?popup=true&email='.$email2.'&hash='.$hash.'</a></p>';
+			$msg .= '<p><a href="'.WEBSITE.'en/start?popup=true&email='.$email2.'&hash='.$hash.'">'.WEBSITE.'en/start?popup=true&email='.$email2.'&hash='.$hash.'</a></p>';
 			
 			$sql = 'SELECT `id` FROM `studio404_users` WHERE `username`=:email AND `status`!=:status';
 			$prepare = $conn->prepare($sql);
@@ -199,7 +199,7 @@ class ajax extends connection{
 		if(Input::method("POST","logintry")) :
 			if(!Input::method("POST","lg") || !Input::method("POST","e") || !Input::method("POST","p") || !Input::method("POST","c")){
 				echo "Error empty";
-			}else if(Input::method("POST","c")!=$_SESSION['protect_']){
+			}else if(Input::method("POST","c")!=$_SESSION['protect_x']){
 				echo "Error code";
 			}else{
 				$e = Input::method("POST","e");
@@ -2108,7 +2108,7 @@ class ajax extends connection{
 		}
 
 		if(Input::method("POST","passwordRecover")=="true" && Input::method("POST","e") && Input::method("POST","c")){
-			if($this->isValidEmail(Input::method("POST","e")) && Input::method("POST","c")===$_SESSION['protect_']){
+			if($this->isValidEmail(Input::method("POST","e")) && Input::method("POST","c")===$_SESSION['protect_x']){
 				try{
 					$sql = 'SELECT `id` FROM `studio404_users` WHERE `username`=:username AND `status`!=1';
 					$prepare = $conn->prepare($sql); 

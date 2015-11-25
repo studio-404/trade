@@ -46,8 +46,6 @@ class usefulllinks extends connection{
 		/* components */
 		$components = $cache->index($c,"components");
 		$data["components"] = json_decode($components); 
-		
-
 
 		@include($c["website.directory"]."/usefulllinks.php"); 
 	}

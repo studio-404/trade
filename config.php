@@ -6,7 +6,7 @@ $c['website.mode'] = 'WorkingMode'; // UnderDeveloper or WorkingMode
 $c['developer.message'] = 'Website is under developer !'; // Developer message when under developer
 $c['allowes.ips'] = array('176.73.234.42'); // allowed ips when website is under developer
 // SITE CONFIGURATION
-$c['site.url'] = 'http://tradewithgeorgia.ge/'; 
+$c['site.url'] = 'http://tradewithgeorgia.com/'; 
 $c["welcome.page.class"] = 'homepage';
 $c["welcome.page.slug"] = 'start';
 $c['site.name'] = 'Developer CMS';
@@ -16,11 +16,11 @@ $c['folders.upload'] = DIR . 'files/';
 $c['folders.backup'] = 'backup/'; 
 $c['folders.plugins'] = '_plugins/';
 
-$c['database.hostname'] = '127.0.0.1';
+$c['database.hostname'] = 'mysql1.tradewithgeorgia.com';
 $c['database.charset'] = 'UTF8';
-$c['database.username'] = 'geoweb_enterpris';
-$c['database.password'] = 'q+B14sx$Gp08H6UcO4';
-$c['database.name'] = 'geoweb_trade';
+$c['database.username'] = 'tradegeorgia';
+$c['database.password'] = 'georgiadbtrade';
+$c['database.name'] = 'tradegeorgia';
 // SITE CONFIGURATION
 $c['date.timezone'] = 'Asia/Tbilisi';
 $c['date.format'] = 'Y-m-d H:i:s';
