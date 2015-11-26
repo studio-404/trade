@@ -97,7 +97,7 @@ iframe{ margin: 0 !important; padding: 0 !important; border: 0 !important; width
 	font-weight:bold;
 	color:#ffffff;
 	font-size:17px;
-	background:url('../img/live_chat_icon.png') no-repeat right;
+	background:url('../img/live_chat_icon.svg') no-repeat right;
 	padding:2px 30px 2px 0;
 }
 #live_chat_div a {color:#fff; text-decoration:none;}

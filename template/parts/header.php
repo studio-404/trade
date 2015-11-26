@@ -114,7 +114,7 @@ include("addcertificate.php");
 		<div id="header_2">
 			<div class="col-sm-5 col-md-5 col-xs-5 col-lg-5 padding_0 logo_text">
 				<a href="<?=MAIN_PAGE?>">
-					<img src="<?=TEMPLATE?>img/logo.png"/>
+					<img src="<?=TEMPLATE?>img/logo.svg" width="195" height="107" alt="Trade With Georgia Logo" />
 				</a>
 			</div>
 			<div class="col-sm-5 head_contact text-right">
@@ -126,7 +126,7 @@ include("addcertificate.php");
 			</div>
 			<div class="col-sm-2 header_map text-right">
 				<a href="http://enterprise.gov.ge" target="_blank">
-					<img src="<?=TEMPLATE?>img/enterprise_georgia.png"/>
+					<img src="<?=TEMPLATE?>img/enterprise_georgia.svg" width="118" height="74" alt="Enterprise Georgia Logo" />
 				</a>
 			</div>
 		</div>

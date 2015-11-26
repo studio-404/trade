@@ -44,15 +44,15 @@ if(isset($_GET['title'])){
   .searchMap .traderegimes .content .checked::after{ content:" "; margin:0; padding: 0; width: 14px; height: 14px; background-image: url('checked.png'); background-repeat: no-repeat; background-position: center center; position: absolute; top: 3px; left: 3px }
   .searchMap .traderegimes .content .unchecked::after{ content:" "; margin:0; padding: 0; width: 14px; height: 14px; background-image: url('uncheked.png'); background-repeat: no-repeat; background-position: center center; position: absolute; top: 3px; left: 3px; }
   #map1{ width: 100%; height:400px; }
-  .openmap{ margin: 0; padding: 0; width: 16px; height: 16px; background-image: url('openmap.png'); position: absolute; right: 10px; top: 10px; z-index: 1001 }
-  .openmap a{ margin: 0; padding: 0; width: 16px; height: 16px; display: block; text-decoration: none; }
+  .openmap{ margin: 0; padding: 0; width: 21px; height: 21px; background-image: url('exsize2.svg'); background-size: 21px 21px; position: absolute; right: 10px; top: 10px; z-index: 1001 }
+  .openmap a{ margin: 0; padding: 0; width: 21px; height: 21px; display: block; text-decoration: none; }
   </style>
 </head>
 <body <?=(isset($_GET['big'])) ? 'style="background-color:#424862"' : ''?>>
 
   <div class="mymap">
     <?php if(!isset($_GET['big'])) : ?>
-    <div class="openmap"><a href="http://trade.404.ge/_plugins/jvectormap/index.php?big" target="_blank">&nbsp;</a></div>
+    <div class="openmap"><a href="/_plugins/jvectormap/index.php?big" target="_blank">&nbsp;</a></div>
   <?php endif; ?>
     <div class="searchMap">
       <div class="general-title"><?=$title?></div>

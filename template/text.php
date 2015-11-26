@@ -37,9 +37,9 @@
 		<div class="page_title_2">
 			<?=$data["language_data"]["attachedfiles"]?>
 		</div>
-		<div class="text_formats">
-			<p>If you want to find out more about trading statistics with Georgia, Please download the following brochure documents.</p>
-		</div>
+		<!-- <div class="text_formats">
+			<p></p>
+		</div> -->
 		<?php
 		foreach($data["text_documents"] as $val){ 
 			$ext = explode(".",$val->file);

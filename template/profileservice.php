@@ -17,7 +17,14 @@
 ?>
 <div class="container" id="container">
 	<div class="page_title_1">
-		Profile (Service provider)
+		<span class="profile-header-procent">Profile (<?=ucfirst($_SESSION["tradewithgeorgia_company_type"])?>)</span>
+
+		<div class="procent-box">
+			<div class="procent-publish" style="width:<?=$data["calculate"]["topublish"]?>%"></div>
+			<div class="procent-complete" style="width:<?=($data["calculate"]["tocomplete"])?>%"></div>
+			<div class="procent-text" style="left:<?=($data["calculate"]["tocomplete"]*5)?>px"><?=($data["calculate"]["tocomplete"])?>%</div>
+			<div class="procent-outertext"><?=(100-$data["calculate"]["topublish"])?>% left to published | <?=(100-$data["calculate"]["tocomplete"])?>% left to complete</div>
+		</div><div style="clear:both"></div>
 	</div>
 	<div class="row">
 		<!--first column START-->
