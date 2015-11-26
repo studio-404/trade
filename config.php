@@ -9,7 +9,7 @@ $c['allowes.ips'] = array('176.73.234.42'); // allowed ips when website is under
 $c['site.url'] = 'http://tradewithgeorgia.com/'; 
 $c["welcome.page.class"] = 'homepage';
 $c["welcome.page.slug"] = 'start';
-$c['site.name'] = 'Developer CMS';
+$c['site.name'] = 'Developer CMS'; 
 
 $c['admin.slug'] = 'tadmin';
 $c['folders.upload'] = DIR . 'files/';
