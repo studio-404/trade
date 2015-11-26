@@ -160,7 +160,7 @@
 				</div>
 				<div class="col-sm-2 no-float itemssss">
 					<ul class="text_formats">
-						<li><?=$retrieve_users_info->retrieveDb($val["su_certificates"])?></li>
+						<li><?=$ctext->cut($retrieve_users_info->retrieveDb($val["su_certificates"]),35)?></li>
 					</ul>
 				</div>
 			</div>	

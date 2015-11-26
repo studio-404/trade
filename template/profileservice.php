@@ -22,7 +22,7 @@
 		<div class="procent-box">
 			<div class="procent-publish" style="width:<?=$data["calculate"]["topublish"]?>%"></div>
 			<div class="procent-complete" style="width:<?=($data["calculate"]["tocomplete"])?>%"></div>
-			<div class="procent-text" style="left:<?=($data["calculate"]["tocomplete"]*5)?>px"><?=($data["calculate"]["tocomplete"])?>%</div>
+			<div class="procent-text" style="left:<?=($data["calculate"]["tocomplete"]*5)-10?>px"><?=($data["calculate"]["tocomplete"])?>%</div>
 			<div class="procent-outertext"><?=(100-$data["calculate"]["topublish"])?>% left to published | <?=(100-$data["calculate"]["tocomplete"])?>% left to complete</div>
 		</div><div style="clear:both"></div>
 	</div>
@@ -229,14 +229,14 @@
 		<!--Fourth colum START-->
 		<div class="col-sm-3">
 			<div class="form-group">
-				<label>Company Logo</label> 
+				<label>Company Logo <font color="red">*</font></label> 
 				<div class="upload_img_tmp">
 					<?php
 					$logo = (!empty($_SESSION["user_data"]["picture"])) ? WEBSITE.'image?f='.WEBSITE.'files/usersimage/'.$_SESSION["user_data"]["picture"].'&w=300&h=170' : TEMPLATE.'img/img_upload.png';
 					?>
-					<img src="<?=$logo?>" class="img-responsive" id="userLogo" width="100%" alt="" />
+					<img src="<?=$logo?>" class="img-responsive" id="profile_logo" width="100%" alt="" />
 				</div>
-				<form action="" method="post" enctype="multipart/form-data" id="uploadImageForm">
+				<form action="" method="post" enctype="multipart/form-data" id="uploadDocuments">
 					<div class="btn btn-upload btn-block"> 
 						<span id="txtFupload">UPLOAD LOGO</span> <input type="file" name="inputUserLogo" class="input_type_file" accept="image/*" id="inputUserLogo" />
 					</div>

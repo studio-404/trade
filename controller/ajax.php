@@ -25,8 +25,8 @@ class ajax extends connection{
 			if(is_array($email2)){ $email2 = $email2[0]; }else{ $email2 = "none"; }
 			$hash = ustring::random(18);
 			$msg = '<div style="margin:0; padding:0; width:100%;"><img src="'.TEMPLATE.'img/mailheader2.png" width="100%" alt="Mail header"/></div>';
-			$msg .= '<p style="font-size:14px; font-family:roboto">Hello dear user, you have registered to our website: <b>'.WEBSITE.'</b>; To complete registration follow the link: </font></p>';
-			$msg .= '<p><a href="'.WEBSITE.'en/start?popup=true&email='.$email2.'&hash='.$hash.'">'.WEBSITE.'en/start?popup=true&email='.$email2.'&hash='.$hash.'</a></p>';
+			$msg .= '<p style="font-size:14px; font-family:roboto">Hello dear user, you have registered to our website: <b>'.WEBSITE.'</b></font></p>';
+			//$msg .= '<p><a href="'.WEBSITE.'en/start?popup=true&email='.$email2.'&hash='.$hash.'">'.WEBSITE.'en/start?popup=true&email='.$email2.'&hash='.$hash.'</a></p>';
 			
 			$sql = 'SELECT `id` FROM `studio404_users` WHERE `username`=:email AND `status`!=:status';
 			$prepare = $conn->prepare($sql);
@@ -61,6 +61,7 @@ class ajax extends connection{
 
 				$send_email = new send_email(); 
 				$send_email->send($host,$user,$pass,$from,$fromname,$email1,"::Registration::",$msg); 
+				echo WEBSITE.'en/start?popup=true&email='.$email2.'&hash='.$hash;
 			}
 		endif;
 

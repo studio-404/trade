@@ -22,7 +22,7 @@
 		<div class="procent-box">
 			<div class="procent-publish" style="width:<?=$data["calculate"]["topublish"]?>%"></div>
 			<div class="procent-complete" style="width:<?=($data["calculate"]["tocomplete"])?>%"></div>
-			<div class="procent-text" style="left:<?=($data["calculate"]["tocomplete"]*5)?>px"><?=($data["calculate"]["tocomplete"])?>%</div>
+			<div class="procent-text" style="left:<?=($data["calculate"]["tocomplete"]*5)-10?>px"><?=($data["calculate"]["tocomplete"])?>%</div>
 			<div class="procent-outertext"><?=(100-$data["calculate"]["topublish"])?>% left to published | <?=(100-$data["calculate"]["tocomplete"])?>% left to complete</div>
 		</div><div style="clear:both"></div>
 	</div>

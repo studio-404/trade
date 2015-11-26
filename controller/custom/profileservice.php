@@ -99,7 +99,7 @@ class profileservice extends connection{
 			$_SESSION["user_data"]["exportmarkets"] = $fetch["export_markets_id"];
 		}
 
-		$data["calculate"] = calculate::filled($_SESSION["user_data"]);
+		$data["calculate"] = calculate::filled($_SESSION["user_data"],"service");
 
 		
 		$service_sql = 'SELECT `id`,`idx`,`title`,`products`,`long_description`, `visibility`, `admin_com` FROM `studio404_module_item` WHERE `module_idx`=:module_idx AND `insert_admin`=:insert_admin AND `status`!=:one ORDER BY `date` DESC LIMIT 5';

@@ -80,7 +80,9 @@ iframe{ margin: 0 !important; padding: 0 !important; border: 0 !important; width
 
 #header_contact {
 	color:#fff;
-	background:url('../img/header_tel_icon.png') no-repeat right;
+	background:url('../img/header_tel_icon.svg') no-repeat right;
+	background-size: 25px 25px;
+	background-position: center right;
 	padding:2px 30px 2px 0;
 	margin-top:10px;
 }
@@ -1387,7 +1389,7 @@ table tr td p{ margin-bottom: 0px !important }
 .text_formats ul li{ padding: 0; margin: 0 0 0 15px; width: 100%; position: relative; line-height: 25px; }
 .text_formats ul li:hover{ text-decoration: underline; }
 .text_formats ul li:after{ margin: 0; padding: 0; content: ''; width: 10px; height: 10px; position: absolute; top: 6px; left: -15px; background-image: url('../img/bullet.jpg'); background-size: 10px 10px; background-repeat: no-repeat; }
-
+.homepageEventRegister{ cursor: pointer; }
 @media (max-width: 992px){
 	#header{ min-height: 120px !important; }
 	.export_menu ul li {

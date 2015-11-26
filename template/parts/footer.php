@@ -62,7 +62,7 @@
 			</div>
 			<div class="col-sm-4 padding_0">
 				<li><?=$data["language_data"]["supportby"]?>:</li>
-				<a href="#"><img src="<?=TEMPLATE?>img/donor_org.png"/></a>
+				<a href="https://www.giz.de" target="_blank"><img src="<?=TEMPLATE?>img/donor_org.png"/></a>
 			</div>
 			<div class="col-sm-2 padding_0 text-right getsadze_design">
 				<a href="http://getsadze.co.uk/en/home" target="_blank">

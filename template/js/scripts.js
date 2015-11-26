@@ -76,10 +76,11 @@ $(document).on("click","#register_catalog",function(e){
 				$(".emailaddress1_exists").fadeIn("slow");
 			}else{
 				console.log(data);
-				$(".modal-title small").hide();
-				$("#first-step").hide();
-				$(".modal-body ul").hide();
-				$("#second-step").show(); 				
+				// $(".modal-title small").hide();
+				// $("#first-step").hide();
+				// $(".modal-body ul").hide();
+				// $("#second-step").show(); 	
+				location.href = data;			
 			}
 		});
 	}
@@ -1346,35 +1347,38 @@ $(document).on("click",".usersigned",function(){
 	$('#message_popup').modal('toggle');			
 });
 
+$(document).on("click",".homepageEventRegister",function(){
+	location.href = "http://"+document.domain+"/en/about-us/events"; 	
+});
+
 $(document).on("click",".eventRegister",function(){
-	location.href = "http://"+document.domain+"/en/about-us/events"; 
-	// var datax = $(this).data("homepage");
-	// if(datax=="true"){
-	// 	location.href= "http://"+document.domain+"/en/about-us/events";
-	// }else{
-	// 	$("#insertText").html("Please wait..."); 
-	// 	$('#message_popup').modal('toggle');
-	// 	var eid = $(this).data("eventid"); 
-	// 	$.post("http://"+document.domain+"/en/ajax", {
-	// 		loadevents:true
-	// 	}, function(r){
-	// 		var obj = jQuery.parseJSON(r); 
-	// 		var opt = '';
-	// 		if(obj.length > 0){
-	// 			for(var i=0; i<obj.length; i++){
-	// 				opt += '<option value="'+obj[i]["smi_idx"]+'">'+obj[i]["smi_title"]+'</option>'; 
-	// 			}
-	// 			$("#chooseEvent").html(opt); 
-	// 			if(eid){
-	// 				$("#chooseEvent").val(eid); 
-	// 			}
-	// 			$('#message_popup').modal('toggle');
-	// 			$('#register_for_event').modal('toggle');	
-	// 		}else{
-	// 			$("#insertText").html("Sorry there is no event at the moment!"); 
-	// 		}
-	// 	});
-	// }
+	var datax = $(this).data("homepage");
+	if(datax=="true"){
+		location.href= "http://"+document.domain+"/en/about-us/events";
+	}else{
+		$("#insertText").html("Please wait..."); 
+		$('#message_popup').modal('toggle');
+		var eid = $(this).data("eventid"); 
+		$.post("http://"+document.domain+"/en/ajax", {
+			loadevents:true
+		}, function(r){
+			var obj = jQuery.parseJSON(r); 
+			var opt = '';
+			if(obj.length > 0){
+				for(var i=0; i<obj.length; i++){
+					opt += '<option value="'+obj[i]["smi_idx"]+'">'+obj[i]["smi_title"]+'</option>'; 
+				}
+				$("#chooseEvent").html(opt); 
+				if(eid){
+					$("#chooseEvent").val(eid); 
+				}
+				$('#message_popup').modal('toggle');
+				$('#register_for_event').modal('toggle');	
+			}else{
+				$("#insertText").html("Sorry there is no event at the moment!"); 
+			}
+		});
+	}
 	
 });
 
