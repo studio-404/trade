@@ -146,7 +146,7 @@ $ctext = new ctext();
 			}
 			?>
 			</div>
-		</div>
+		</div> 
 		
 		<div class="page_title_4">Top Exports Product</div>
 		
@@ -170,10 +170,16 @@ $ctext = new ctext();
 						<a href="<?=$val->url?>">
 							<div class="product_item">
 								<div class="image"><img src="<?=WEBSITE?>image?f=<?=WEBSITE_.$val->image?>&amp;w=365&amp;h=275" class="img-responsive" alt="" /></div>
+								<?php
+								if($val->title) :
+								?>
 								<div class="text">
 									<?=$ctext->cut(strip_tags($val->title),45)?><br />
 									<?=$ctext->cut(strip_tags($val->desc),55)?>
 								</div>
+								<?php
+								endif; 
+								?>
 							</div>
 						</a>	
 					</div>
