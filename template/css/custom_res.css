@@ -106,7 +106,7 @@
 	.navbar-trade .nav > li:last-child a {background:none;}
 	
 	.logo_text {font-size:40px !important; margin-top:20px !important;} 
-	.logo_text img{height:65px;margin-top: -5px;}
+	.logo_text img{ margin-top: -5px; margin-bottom: 5px; }
 	#footer_div_2 > #footer_2 {text-align:center;}
 	#sidebar {width:100% !important;}
 	#content {width:100% !important; padding-left:0 !important}

@@ -1816,6 +1816,7 @@ class ajax extends connection{
 						$result[$x]["date"] = date("d M Y",$val["date"]);  
 						$result[$x]["slug"] = $val["slug"];  
 						$result[$x]["pic"] = $val["pic"];  
+						$result[$x]["event_booth"] = $val["event_booth"];  
 						$result[$x]["title"] = $ctext->cut($val["title"],30);  						
 						$x++; 
 					}
