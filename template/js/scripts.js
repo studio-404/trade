@@ -373,7 +373,7 @@ $(document).on("click","#save_changes",function(){
 		$('#message_popup').modal('toggle'); 
 		return false;
 	}else if(mobile!='' && isMobile(mobile)!=true){
-		$("#requiredx_mobile").fadeIn("slow");
+		$("#wrong_mobilenumber1").fadeIn("slow");
 		$("#insertText").html("Please check mobile number field !"); 
 		$('#message_popup').modal('toggle'); 
 		return false;
@@ -2674,6 +2674,7 @@ function highlight_words(word, element) {
 
 function submitme(e,hit_id){ 
 	if (e.keyCode == 13) {
-        $("#"+hit_id).click();
+        //$("#"+hit_id).click();
+        $("#"+hit_id).one('click');
     }
 }
