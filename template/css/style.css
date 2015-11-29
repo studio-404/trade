@@ -100,6 +100,7 @@ iframe{ margin: 0 !important; padding: 0 !important; border: 0 !important; width
 	color:#ffffff;
 	font-size:17px;
 	background:url('../img/live_chat_icon.svg') no-repeat right;
+	background-size: 25px 25px;
 	padding:2px 30px 2px 0;
 }
 #live_chat_div a {color:#fff; text-decoration:none;}

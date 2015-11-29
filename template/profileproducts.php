@@ -358,8 +358,9 @@
 		</div>
 	</form>
 	</div>
-	<hr>
+	
 	<?php if($data["calculate"]["topublish"]>=100) { ?>
+	<hr>
 	<div class="page_title_1">
 		Add New Products <span style="font-size:10px; color:#555555">( * Add as many product as you have )</span>
 	</div>

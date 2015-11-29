@@ -18,9 +18,10 @@ class ajax extends connection{
 	public function requests($c){
 		$conn = $this->conn($c); 
 
-		if(Input::method("POST","sendemail1") && Input::method("POST","email1") && isset($_COOKIE["password1"])) : 
+		if(Input::method("POST","sendemail1") && Input::method("POST","email1") && isset($_COOKIE["password1"]) && Input::method("POST","lc")==$_SESSION['protect_x']) : 
 			$sendemail1 = Input::method("POST","sendemail1");
 			$email1 = Input::method("POST","email1");
+			$password1 = $_COOKIE["password1"];
 			$email2 = explode("@",$email1);
 			if(is_array($email2)){ $email2 = $email2[0]; }else{ $email2 = "none"; }
 			$hash = ustring::random(18);
@@ -48,6 +49,22 @@ class ajax extends connection{
 					":password"=>$_COOKIE["password1"]
 				));
 
+				$ip = get_ip::ip();				
+				$companyUserTypes = array("manufacturer","serviceprovider","company","individual");
+				foreach($companyUserTypes as $ctype) :
+					$sql2 = 'INSERT INTO `studio404_users` SET `registered_date`=:registered_date, `registered_ip`=:registered_ip, `username`=:email, `password`=:password, `company_type`=:company_type, `user_type`=:user_type, `allow`=:allow';
+					$prepare2 = $conn->prepare($sql2);
+					$prepare2->execute(array(
+						":registered_date"=>time(), 
+						":registered_ip"=>$ip, 
+						":email"=>$email1, 
+						":password"=>md5($password1), 
+						":company_type"=>$ctype, 
+						":user_type"=>'website', 
+						":allow"=>2 
+					));
+				endforeach;
+
 				$sql = 'SELECT `host`,`user`,`pass`,`from`,`fromname` FROM `studio404_newsletter` WHERE `id`=1';
 				$prepare = $conn->prepare($sql); 
 				$prepare->execute(); 
@@ -61,7 +78,7 @@ class ajax extends connection{
 
 				$send_email = new send_email(); 
 				$send_email->send($host,$user,$pass,$from,$fromname,$email1,"::Registration::",$msg); 
-				echo WEBSITE.'en/start?popup=true&email='.$email2.'&hash='.$hash;
+				echo $_SESSION['protect_x'];
 			}
 		endif;
 

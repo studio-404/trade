@@ -58,10 +58,10 @@ $ctext = new ctext();
 			<li><label><input type="checkbox" id="check_service" class="checkboxsearch" name="check_service" value="services" /> Services</label></li>
 		</div>
 		<div class="col-sm-5 home_search_input padding_0">
-			<input type="text" class="form-control hpsv" id="hpsv" placeholder="Search By Name Or Phrase"/>
+			<input type="text" class="form-control hpsv" id="hpsv" placeholder="Search By Name Or Phrase" onkeypress="submitme(event,'hitsearchhome')" />
 		</div>
 		<div class="col-sm-2 padding_0" style="padding-left:5px;">
-			<button class="btn btn-block btn-sm btn-yellow searchButtonHomepage">SEARCH</button>
+			<button class="btn btn-block btn-sm btn-yellow searchButtonHomepage" id="hitsearchhome">SEARCH</button>
 		</div>
 	</div>
 </div>
@@ -219,8 +219,8 @@ $ctext = new ctext();
 						<div class="text">get new products and bussines enquires straight in your email inbox. </div>
 						<div class="form-group">
 							<div class="input-group"> 
-								<input type="text" class="input_home" name="spe_val" id="spe_val" placeholder="Your Email Address" value="" />
-								<div class="input-group-addon btn-home subscribeproductsenquires">Subscribe</div>
+								<input type="text" class="input_home" name="spe_val" id="spe_val" onkeypress="submitme(event,'hitsubscribe')" placeholder="Your Email Address" value="" />
+								<div class="input-group-addon btn-home subscribeproductsenquires" id="hitsubscribe">Subscribe</div>
 							</div>
 						</div>
 					</div>
@@ -231,8 +231,8 @@ $ctext = new ctext();
 						<div class="text">And Join our Community to gain access to our services for companies interested in finding business partners.</div>
 						<div class="form-group">
 							<div class="input-group"> 
-								<input type="text" class="input_home" id="rnu_val" name="rnu_val" placeholder="Your Email Address" value="" />
-								<div class="input-group-addon btn-home <?=(isset($_SESSION["tradewithgeorgia_username"])) ? 'usersigned' : 'registernewuser'?>">Register</div>
+								<input type="text" class="input_home" id="rnu_val" name="rnu_val" placeholder="Your Email Address" value="" onkeypress="submitme(event,'hitregister')" />
+								<div class="input-group-addon btn-home <?=(isset($_SESSION["tradewithgeorgia_username"])) ? 'usersigned' : 'registernewuser'?>" id="hitregister">Register</div>
 							</div>
 						</div>
 					</div>

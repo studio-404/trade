@@ -27,22 +27,30 @@
 						</div> -->
 						<div class="form-group">
 							<label for="emailaddress1"><?=$data["language_data"]["emailaddress"]?></label>
-							<input type="text" class="form-control" name="emailaddress" value="" id="emailaddress1" autocomplete="off" />
+							<input type="text" class="form-control" name="emailaddress" value="" id="emailaddress1" autocomplete="off" onkeypress="submitme(event,'register_catalog')" />
 							<div class="error_message emailaddress1_message"><?=$data["language_data"]["pleasecheckemail"]?> !</div>
 							<div class="error_message emailaddress1_required"><?=$data["language_data"]["emailrequired"]?> !</div>
 							<div class="error_message emailaddress1_exists"><?=$data["language_data"]["emailalreadyregistered"]?> !</div>
 						</div>
 						<div class="form-group">
 							<label for="password1"><?=$data["language_data"]["password"]?></label>
-							<input type="password" name="password" id="password1" class="form-control" value="" autocomplete="off" />
+							<input type="password" name="password" id="password1" class="form-control" value="" autocomplete="off" onkeypress="submitme(event,'register_catalog')" />
 							<div class="error_message password1_length_message"><?=$data["language_data"]["passwordmust620"]?> !</div>
 							<div class="error_message password1_required"><?=$data["language_data"]["passwordrequired"]?> !</div>
 						</div>
 						<div class="form-group">
 							<label for="repeatpassword1"><?=$data["language_data"]["repeatpassword"]?></label>
-							<input type="password" class="form-control" name="repeatpassword" id="repeatpassword1" value="" autocomplete="off" />
+							<input type="password" class="form-control" name="repeatpassword" id="repeatpassword1" value="" autocomplete="off" onkeypress="submitme(event,'register_catalog')" />
 							<div class="error_message repeatpassword1_match_message"><?=$data["language_data"]["passwordmatchproblem"]?> !</div>
 						</div>
+						<div class="form-group">
+							<label for="login_captcha"><?=$data["language_data"]["captchavalue"]?></label>
+							<input type="text" name="login_captcha" id="login_captcha" class="form-control" value="" autocomplete="off" onkeypress="submitme(event,'register_catalog')" />
+							<div class="error_message register_captcha_required"><?=$data["language_data"]["captcharquired"]?> !</div>
+							<div style="clear:both"></div>
+							<img src="<?=WEBSITE?>protect.php" alt="" style="float:left; margin-top:15px; margin-bottom:15px; border:solid 1px #3895ce; width:95px; height:35px;" class="protectimage" />
+						</div>
+						<div style="clear:both"></div>
 						
 						<input type="checkbox" name="agree" id="agree1" style="float:left; margin-right:5px; "/>
 						<div class="text_formats"><font onclick="$('#agree1').click()"><?=$data["language_data"]["byclickuseragreement"]?></font> <a href="<?=WEBSITE.LANG?>/user-agreement" target="_blank"><?=$data["language_data"]["useragreement"]?>.</a> </div>

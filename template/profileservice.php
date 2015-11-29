@@ -329,6 +329,10 @@
 		</div>
 		<!--Describtion field END-->
 	</div>
+
+	<?php
+	if($data["calculate"]["topublish"]==100) :
+	?>
 	<hr>
 	
 	<div class="page_title_1">
@@ -373,16 +377,13 @@
 			</div>
 		</div>
 		
+		
 		<hr>
 		
 		<div class="page_title_1">
 			Services
 		</div>
-		<?php
-		// echo "<pre>"; 
-		// print_r($data["myservices"]); 
-		// echo "</pre>";
-		?>
+
 		<div class="col-sm-12 padding_0">
 			
 			<?php
@@ -418,7 +419,7 @@
 			<a href="javascript:;" class="gray_link loadmore" data-type="profileservicelist"  data-from="5" data-load="10" style="padding:0">Load more »</a>
 			<?php endif; ?>
 		</div>
-		
+		<?php endif; ?>
 	</div>
 <?php 
 $make = phparray_to_jsarray::sectorSelects();

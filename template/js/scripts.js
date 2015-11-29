@@ -18,20 +18,20 @@ $(document).ready(function(){
 		$("."+thisData).html("<ul>"+htmlLoad+"</ul>");
 	});
 
-	var tk = urlParamiters();
-	if(tk['popup']=="true"){
-		$("#insertText").html("Please wait..."); 
-		$('#message_popup').modal('toggle'); 
-		$.post("http://"+document.domain+"/en/ajax", { finalregister:"true", e:tk['email'], h:tk["hash"]  }, function(d){
-			history.pushState("", document.title, "/");
-			if(d=="Done"){
-				$('#message_popup').modal('toggle'); 
-				$('#login_popup').modal('toggle'); 
-			}else{
-				$("#insertText").html("Unknown error occurred ! Please try it again later."); 
-			}
-		});
-	}
+	// var tk = urlParamiters();
+	// if(tk['popup']=="true"){
+	// 	$("#insertText").html("Please wait..."); 
+	// 	$('#message_popup').modal('toggle'); 
+	// 	$.post("http://"+document.domain+"/en/ajax", { finalregister:"true", e:tk['email'], h:tk["hash"]  }, function(d){
+	// 		history.pushState("", document.title, "/");
+	// 		if(d=="Done"){
+	// 			$('#message_popup').modal('toggle'); 
+	// 			$('#login_popup').modal('toggle'); 
+	// 		}else{
+	// 			$("#insertText").html("Unknown error occurred ! Please try it again later."); 
+	// 		}
+	// 	});
+	// }
 	var par = urlParamiters();
 	if(par["search"]!=""){
 		highlight_words(par["search"], $(".text_formats li"));
@@ -47,6 +47,7 @@ $(document).on("click","#register_catalog",function(e){
 	var emailaddress1 = $("#emailaddress1").val();
 	var password1 = $("#password1").val();
 	var repeatpassword1 = $("#repeatpassword1").val();
+	var login_captcha = $("#login_captcha").val();
 	
 	if(document.getElementById("agree1").checked){
 		var agree1 = 1;
@@ -65,23 +66,27 @@ $(document).on("click","#register_catalog",function(e){
 		$(".password1_length_message").fadeIn("slow");
 	}else if(password1!=repeatpassword1){
 		$(".repeatpassword1_match_message").fadeIn("slow");
+	}else if(login_captcha==""){
+		$(".register_captcha_required").fadeIn("slow");
 	}else if(agree1==2){
 		$(".agree_required").fadeIn("slow");
 	}else{ 
 		setCookie("emailaddress1", emailaddress1, "1");
 		setCookie("password1", password1, "1");
 		setCookie("repeatpassword1", repeatpassword1, "1");
-		$.post("http://"+document.domain+"/en/ajax",{ sendemail1:true, email1:emailaddress1 },function(data){
+		$(".modal-body").html("<h3 class='modal-title' id='modal-register'>Register</h3><p>Please wait...</p>");
+		$.post("http://"+document.domain+"/en/ajax",{ sendemail1:true, email1:emailaddress1, lc:login_captcha },function(data){
 			if(data=="Error"){
-				$(".emailaddress1_exists").fadeIn("slow");
+				$(".modal-body").html("<h3 class='modal-title' id='modal-register'>Register</h3><p>Email Exists !</p>");
 			}else{
-				console.log(data);
-				// $(".modal-title small").hide();
-				// $("#first-step").hide();
-				// $(".modal-body ul").hide();
-				// $("#second-step").show(); 	
-				location.href = data;			
-			}
+				$.post("http://"+document.domain+"/en/ajax",{ logintry:true, lg:'manufacturer', e:emailaddress1, p:password1, c:data }, function(dx){
+					if(dx=="Done"){
+						location.href = "/en/profile-products"; 
+					}else{
+						$(".modal-body").html("<h3 class='modal-title' id='modal-register'>Register</h3><p>Error occurred !</p>");
+					}
+				}); 
+			} 
 		});
 	}
 	
@@ -2664,5 +2669,11 @@ function highlight_words(word, element) {
               $(this).replaceWith(content);
             });
         });
+    }
+}
+
+function submitme(e,hit_id){ 
+	if (e.keyCode == 13) {
+        $("#"+hit_id).click();
     }
 }

@@ -23,10 +23,10 @@
 				$placeholder = "Search Company";
 			}
 			?>
-			<input type="text" class="form-control" id="svalue" placeholder="<?=$placeholder?>" value="<?=$data["get_search"]?>" />
+			<input type="text" class="form-control" id="svalue" placeholder="<?=$placeholder?>" value="<?=$data["get_search"]?>" onkeypress="submitme(event,'hitsearchexportcat')" />
 		</div>
 		<div class="col-sm-2 padding_0" style="padding-left:5px;" id="serachMe">
-			<button class="btn btn-block btn-sm btn-yellow">SEARCH</button>
+			<button class="btn btn-block btn-sm btn-yellow" id="hitsearchexportcat">SEARCH</button>
 		</div>
 		<script type="text/javascript"> 
 		$(document).on("click","#serachMe",function(){
