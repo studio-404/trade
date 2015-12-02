@@ -203,9 +203,15 @@
 							<div class="col-sm-12 col-md-7 col-xs-12 col-gl-7 product_info padding_0">
 								<ul>
 									<li><span><?=$val["title"]?></span> - HS <?=$val["hscode"]?> </li>
+									<?php if($val["packaging"]) : ?>
 									<li><span>Packiging: </span><?=$val["packaging"]?></li>
+									<?php endif; ?>
+									<?php if($val["shelf_life"]) : ?>
 									<li><span>Shelf life: </span><?=$val["shelf_life"]?> </li>
+									<?php endif; ?>
+									<?php if($val["awards"]) :?>
 									<li><span>Awards: </span><?=$val["awards"]?></li>
+									<?php endif; ?>
 									<li style="margin-top:15px;"><a href="javascript:;" class="readmore" data-pid="<?=$val["id"]?>">View describtion</a></li>
 								</ul>
 							</div>
@@ -217,7 +223,7 @@
 					<div class="appends"></div>
 					<div style="clear:both"></div>
 					<div class="loader">Please wait...</div>
-					<a href="javascript:;" class="gray_link loadmore" data-type="userspagemanufacturer"  data-from="5" data-load="10">Load more »</a>
+					<a href="javascript:;" class="gray_link loadmore" data-type="userspagemanufacturer"  data-from="5" data-load="10" style="padding:0">Load more »</a>
 
 
 				</div>
