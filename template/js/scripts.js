@@ -1338,13 +1338,13 @@ $(document).on("click",".subscribeproductsenquires",function(){
 	}
 });
 
-$(document).on("click",".readmore",function(e){
-	var par = urlParamiters(); 
-	var p = $(this).data("pid");
-	if(parseInt(par["i"])){
-		getReadmoreInfo(par["i"],p);
-	}
-});
+// $(document).on("click",".readmore",function(e){
+// 	var par = urlParamiters(); 
+// 	var p = $(this).data("pid");
+// 	if(parseInt(par["i"])){
+// 		getReadmoreInfo(par["i"],p);
+// 	}
+// });
 
 
 $(document).on("click",".usersigned",function(){	

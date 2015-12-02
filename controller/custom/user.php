@@ -44,6 +44,12 @@ class user extends connection{
 		$model_template_userstatements = new model_template_userstatements();
 		$data["userstatements"] = $model_template_userstatements->stats($c,Input::method("GET","t"),Input::method("GET","i"));
 		
+		/* productinside */
+		if(Input::method("GET","p")){
+			$productinside = $cache->index($c,"productinside");
+			$data["productinside"] = json_decode($productinside); 
+		}
+
 		$doerror = false;
 		/*company*/
 		if(Input::method("GET","t")=="manufacturer" || Input::method("GET","t")=="serviceprovider" || Input::method("GET","t")=="company" || Input::method("GET","t")=="individual"){

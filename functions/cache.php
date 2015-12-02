@@ -5,7 +5,10 @@ class cache extends connection{
 		$get_slug_from_url = new get_slug_from_url();
 		$slug = $get_slug_from_url->slug();
 		$slug_ = str_replace(array("/","\\"), array("",""), strip_tags(urlencode($slug))); 
-		$cache_file = "_cache/".$type.$slug_.LANG_ID.".json"; 
+		if(Input::method("GET","i") && Input::method("GET","p")){
+			$proin = "proinside".Input::method("GET","p");
+		}else{ $proin = ""; }
+		$cache_file = "_cache/".$type.$proin.$slug_.LANG_ID.".json"; 
 		if(file_exists($cache_file)){
 			$output = @file_get_contents($cache_file); 
 		}else{
@@ -1227,6 +1230,28 @@ class cache extends connection{
 				":lang"=>LANG_ID 
 			)); 			
 			$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC); 
+			break;
+			case "productinside":
+			$sql = 'SELECT 
+			`studio404_module_item`.*, 
+			(SELECT `studio404_users`.`company_type` FROM `studio404_users` WHERE `studio404_users`.`id`=`studio404_module_item`.`insert_admin`) AS com_type, 
+			(SELECT `studio404_users`.`namelname` FROM `studio404_users` WHERE `studio404_users`.`id`=`studio404_module_item`.`insert_admin`) AS com_name, 
+			(SELECT `studio404_pages`.`title` FROM `studio404_pages` WHERE `studio404_pages`.`idx`=`studio404_module_item`.`hscode`) AS hscode_title 
+			FROM 
+			 `studio404_module_item`
+			 WHERE 
+			 `studio404_module_item`.`insert_admin`='.(int)Input::method("GET","i").' AND 
+			 `studio404_module_item`.`id`='.(int)Input::method("GET","p").' AND 
+			 `studio404_module_item`.`status`!=:one
+			';
+			$prepare = $conn->prepare($sql); 
+			$prepare->execute(array(
+				":one"=>1
+			));
+			if($prepare->rowCount()>0){
+				$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
+				//$picture = ($fetch["picture"]) ? WEBSITE.'image?f='.WEBSITE.'files/usersproducts/'.$fetch["picture"].'&w=175&h=175' : '';
+			}	
 			break;
 		}
 		if(count($fetch)){
