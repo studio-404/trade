@@ -7,14 +7,14 @@
 				<div class="boxarea">
 				 	<div class="form-group">
 						<label for="recoveremail">Registered email</label>
-						<input type="text" class="form-control" name="recoveremail" value="" id="recoveremail" autocomplete="off" />
+						<input type="text" class="form-control" name="recoveremail" value="" id="recoveremail" autocomplete="off" onkeypress="submitme(event,'recover_submit')" />
 						<div class="error_message recover_email_required">Email is required!</div>
 						<div class="error_message recover_emailcorrect_required">Please check email filed!</div>
 					</div>
 
 					<div class="form-group">
 						<label for="recovercaptcha"><?=$data["language_data"]["captchavalue"]?></label>
-						<input type="text" name="recovercaptcha" id="recovercaptcha" class="form-control" value="" autocomplete="off" />
+						<input type="text" name="recovercaptcha" id="recovercaptcha" class="form-control" value="" autocomplete="off" onkeypress="submitme(event,'recover_submit')" />
 						<div class="error_message recover_captcha_required"><?=$data["language_data"]["captcharquired"]?> !</div>
 						<div style="clear:both"></div>
 						<img src="<?=WEBSITE?>protect.php" alt="" style="float:left; margin-top:15px; border:solid 1px #3895ce; width:95px; height:35px;" class="protectimage" />

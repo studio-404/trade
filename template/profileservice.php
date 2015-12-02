@@ -17,7 +17,7 @@
 ?>
 <div class="container" id="container">
 	<div class="page_title_1">
-		<span class="profile-header-procent">Profile (<?=ucfirst($_SESSION["tradewithgeorgia_company_type"])?>)</span>
+		<span class="profile-header-procent">Profile ( <span title="Service Provider" style="cursor:pointer">Service Provider</span> <a href="javascript:;" data-changeto="ex" title="Change to exporter" class="changeprofiletype"><img src="<?=TEMPLATE?>img/change.svg" width="25" height="25" alt="Exp Icon" /></a> )</span>
 
 		<div class="procent-box">
 			<div class="procent-publish" style="width:<?=$data["calculate"]["topublish"]?>%"></div>
@@ -232,9 +232,17 @@
 				<label>Company Logo <font color="red">*</font></label> 
 				<div class="upload_img_tmp">
 					<?php
-					$logo = (!empty($_SESSION["user_data"]["picture"])) ? WEBSITE.'image?f='.WEBSITE.'files/usersimage/'.$_SESSION["user_data"]["picture"].'&w=300&h=170' : TEMPLATE.'img/img_upload.png';
+					if(!empty($_SESSION["user_data"]["picture"])){
+						$img = WEBSITE."image?f=".WEBSITE."files/usersimage/".$_SESSION["user_data"]["picture"]."&amp;w=270&amp;h=160";
+						?>
+						<img src="<?=$img?>" data-oldimage="<?=$img?>" id="profile_logo" data-uploaded="image" class="img-responsive" width="100%" alt="" />
+						<?php
+					}else{
 					?>
-					<img src="<?=$logo?>" class="img-responsive" id="profile_logo" width="100%" alt="" />
+						<img src="<?=TEMPLATE?>img/img_upload.png" id="profile_logo" data-uploaded="noimage" class="img-responsive" width="100%" alt="" />
+					<?php
+					}
+					?>
 				</div>
 				<form action="" method="post" enctype="multipart/form-data" id="uploadDocuments">
 					<div class="btn btn-upload btn-block"> 
@@ -242,6 +250,7 @@
 					</div>
 				</form> 
 				<font class="error-msg" style="padding:5px 15px 0 0;" id="imageWarning">Please select 300x170 px photo or system resizes it itself !</font>
+				<font class="error-msg companylogo_required">Company logo is required !</font>
 			</div>
 		</div>
 		<!--Fourth colum START-->
@@ -377,7 +386,7 @@
 			</div>
 		</div>
 		
-		
+		<?php if($data["count"]>0) : ?>
 		<hr>
 		
 		<div class="page_title_1">
@@ -419,7 +428,7 @@
 			<a href="javascript:;" class="gray_link loadmore" data-type="profileservicelist"  data-from="5" data-load="10" style="padding:0">Load more »</a>
 			<?php endif; ?>
 		</div>
-		<?php endif; ?>
+		<?php endif; endif; ?>
 	</div>
 <?php 
 $make = phparray_to_jsarray::sectorSelects();

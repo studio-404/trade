@@ -2371,6 +2371,20 @@ $(document).on("click","#askToAddCertificate",function(){
 	}
 });
 
+
+$(document).on("click",".changeprofiletype",function(){
+	var type = $(this).data("changeto");
+	$("#insertText").html("Please wait..."); 
+	$('#message_popup').modal('toggle');
+	$.post("http://"+document.domain+"/en/ajax", { changeusertype:"true", t:type }, function(result){
+		if(result!="Error" && result!=""){
+			location.href = result;
+		}else{
+			$("#insertText").html("Something wrong ! We cant change user type."); 
+		}
+	});
+});
+
 function copyMe(e){ 
 	SelectText(e); 
 	window.getSelection(); 
@@ -2674,7 +2688,12 @@ function highlight_words(word, element) {
 
 function submitme(e,hit_id){ 
 	if (e.keyCode == 13) {
-        //$("#"+hit_id).click();
-        $("#"+hit_id).one('click');
+        $("#"+hit_id).click();
+    }
+}
+
+function submitmeonce(e,hit_id){ 
+	if (e.keyCode == 13) {
+       $("#"+hit_id).trigger("click");
     }
 }

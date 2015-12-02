@@ -1380,7 +1380,7 @@ table tr td p{ margin-bottom: 0px !important }
 .showLevel1{ display: none; }
 .or{ display: none; }
 .hideDesktop{ display: none; }
-.page_title_1 .profile-header-procent{ margin:0; padding: 0; max-width:250px; display: block; float: left;}
+.page_title_1 .profile-header-procent{ margin:0; padding: 0; max-width:300px; display: block; float: left;}
 .procent-box{ margin:10px 0 0 50px; padding:0; width:500px; height:10px; border-radius: 10px; background-color: #e6e4e5; float: left; position: relative; }
 .procent-text{ margin: 0; padding: 0; width:80px; line-height: 25px; font-size: 12px; font-family: 'roboto'; position: absolute; top:-20px; left:150px; color:#fea100; }
 .procent-complete{ margin: 0; padding: 0; width: 150px; height: 10px; border-radius: 10px; background-color: #fea100; position: absolute; top:0; left: 0; z-index: 2; }

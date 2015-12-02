@@ -8,20 +8,20 @@
 			<div id="finalstep3">
 				<div class="form-group">
 					<label for="oldpass">Old password</label>
-					<input type="password" name="oldpass" id="oldpass" class="form-control" value="" autocomplete="off" />
+					<input type="password" name="oldpass" id="oldpass" class="form-control" value="" autocomplete="off" onkeypress="submitme(event,'change_pass')" />
 					<div class="error_message oldpass_message">Please check old password field !</div>
 					<div class="error_message oldpass_required">Old password is required !</div>
 				</div>
 				<div class="form-group">
 					<label for="newpass">New password</label>
-					<input type="password" name="newpass" id="newpass" class="form-control" value="" autocomplete="off" />
+					<input type="password" name="newpass" id="newpass" class="form-control" value="" autocomplete="off" onkeypress="submitme(event,'change_pass')" />
 					<div class="error_message newpass_message">Please check new password field !</div>
 					<div class="error_message newpass_minmax">New password must be greater then 6 and less then 20 character !</div>
 					<div class="error_message newpass_required">New password is required !</div>
 				</div>
 				<div class="form-group">
 					<label for="repass">Repeat password</label>
-					<input type="password" name="repass" id="repass" class="form-control" value="" autocomplete="off" />
+					<input type="password" name="repass" id="repass" class="form-control" value="" autocomplete="off" onkeypress="submitme(event,'change_pass')"  />
 					<div class="error_message repass_required">Passwords do not match !</div>
 				</div>
 				

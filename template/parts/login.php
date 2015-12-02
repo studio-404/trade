@@ -4,7 +4,7 @@
     <!-- Modal content-->
     <div class="modal-content">
 		<div class="modal-body">
-			<h3 class="modal-title"><?=$data["language_data"]["login"]?> <small data-toggle="modal" data-target="#register_popup" onclick="$('#login_popup').modal('hide')"><?=$data["language_data"]["register"]?></small></h3>
+			<h3 class="modal-title">Log In <small data-toggle="modal" data-target="#register_popup" onclick="$('#login_popup').modal('hide')"><?=$data["language_data"]["register"]?></small></h3>
 			<div id="finalstep3">
 				<div class="form-group">
 					<?php if(isset($_GET['hash'])) : ?>

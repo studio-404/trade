@@ -17,7 +17,7 @@
 ?>
 <div class="container" id="container">
 	<div class="page_title_1">
-		<span class="profile-header-procent">Profile (<?=ucfirst($_SESSION["tradewithgeorgia_company_type"])?>)</span>
+		<span class="profile-header-procent">Profile ( <span title="Product exporter" style="cursor:pointer">Product Exporter</span> <a href="javascript:;" data-changeto="sp" title="Change to service provider" class="changeprofiletype"><img src="<?=TEMPLATE?>img/change.svg" width="25" height="25" alt="Exp Icon" /></a> )</span>
 
 		<div class="procent-box">
 			<div class="procent-publish" style="width:<?=$data["calculate"]["topublish"]?>%"></div>
@@ -32,7 +32,7 @@
 		<div class="col-lg-3">
 			<div class="form-group">
 				<label>Username <font color="red">*</font></label>
-				<input type="text" class="form-control" value="<?=$_SESSION["tradewithgeorgia_username"]?>" readonly="readonly" onkeypress="submitme(event,'save_changes')" />
+				<input type="text" class="form-control" value="<?=$_SESSION["tradewithgeorgia_username"]?>" readonly="readonly" />
 			</div>
 			<div class="form-group ">
 				<label>Sector <font color="red">*</font></label>
@@ -104,7 +104,7 @@
 
 			<div class="form-group">
 				<label>Email <font color="red">*</font></label>
-				<input type="text" id="contactemail" name="contactemail" class="form-control" value="<?=($_SESSION["user_data"]["contactemail"]) ? htmlentities($_SESSION["user_data"]["contactemail"]) : ''?>" onkeypress="submitme(event,'save_changes')" />
+				<input type="text" id="contactemail" name="contactemail" class="form-control" value="<?=($_SESSION["user_data"]["contactemail"]) ? htmlentities($_SESSION["user_data"]["contactemail"]) : ''?>" />
 				<font class="error-msg" id="requiredx_contactemail">Please check contact email field !</font>
 			</div>
 			
@@ -115,7 +115,7 @@
 	<div class="col-lg-3">
 		<div class="form-group">
 			<label>Company Name <font color="red">*</font></label>
-			<input type="text" id="companyname" name="companyname" class="form-control" value="<?=($_SESSION["user_data"]["companyname"]) ? htmlentities($_SESSION["user_data"]["companyname"]) : ''?>" onkeypress="submitme(event,'save_changes')" />
+			<input type="text" id="companyname" name="companyname" class="form-control" value="<?=($_SESSION["user_data"]["companyname"]) ? htmlentities($_SESSION["user_data"]["companyname"]) : ''?>" />
 			<font class="error-msg" id="requiredx_companyname">Please fill company name field !</font>
 		</div>
 		
@@ -149,17 +149,17 @@
 
 		<div class="form-group">
 			<label>Number of Employees</label>
-			<input type="text" id="numemploy" name="numemploy" class="form-control" value="<?=($_SESSION["user_data"]["numemploy"]) ? htmlentities($_SESSION["user_data"]["numemploy"]) : ''?>" onkeypress="submitme(event,'save_changes')" />
+			<input type="text" id="numemploy" name="numemploy" class="form-control" value="<?=($_SESSION["user_data"]["numemploy"]) ? htmlentities($_SESSION["user_data"]["numemploy"]) : ''?>" />
 		</div>
 
 		<div class="form-group">
 				<label>Address</label>
-				<input type="text" id="address" name="address" class="form-control" value="<?=($_SESSION["user_data"]["address"]) ? htmlentities($_SESSION["user_data"]["address"]) : ''?>" onkeypress="submitme(event,'save_changes')" />
+				<input type="text" id="address" name="address" class="form-control" value="<?=($_SESSION["user_data"]["address"]) ? htmlentities($_SESSION["user_data"]["address"]) : ''?>" />
 			</div>
 
 		<div class="form-group">
 				<label>Web Page</label>
-				<input type="text" id="webaddress" name="webaddress" class="form-control" value="<?=($_SESSION["user_data"]["webaddress"]) ? htmlentities($_SESSION["user_data"]["webaddress"]) : ''?>" placeholder="www.yourwebsite.com" onkeypress="submitme(event,'save_changes')" />
+				<input type="text" id="webaddress" name="webaddress" class="form-control" value="<?=($_SESSION["user_data"]["webaddress"]) ? htmlentities($_SESSION["user_data"]["webaddress"]) : ''?>" placeholder="www.yourwebsite.com" />
 				<font class="error-msg" id="requiredx_webformat">Website mast start with www (www.yourwebsite.com) !</font>
 			</div>
 	</div>
@@ -169,7 +169,7 @@
 	<div class="col-lg-3">
 		<div class="form-group">
 			<label>Founded</label>
-			<input type="text" id="establishedin" name="establishedin" class="form-control" placeholder="Year" value="<?=($_SESSION["user_data"]["establishedin"]) ? htmlentities($_SESSION["user_data"]["establishedin"]) : ''?>" onkeypress="submitme(event,'save_changes')" />
+			<input type="text" id="establishedin" name="establishedin" class="form-control" placeholder="Year" value="<?=($_SESSION["user_data"]["establishedin"]) ? htmlentities($_SESSION["user_data"]["establishedin"]) : ''?>" />
 		</div>
 		
 		<div class="form-group">
@@ -228,7 +228,7 @@
 
 		<div class="form-group">
 			<label>Office Number</label>
-			<input type="text" id="officephone" name="officephone" class="form-control" value="<?=($_SESSION["user_data"]["officephone"]) ? htmlentities($_SESSION["user_data"]["officephone"]) : ''?>" onkeypress="submitme(event,'save_changes')" />
+			<input type="text" id="officephone" name="officephone" class="form-control" value="<?=($_SESSION["user_data"]["officephone"]) ? htmlentities($_SESSION["user_data"]["officephone"]) : ''?>" />
 		</div>	
 
 		<div class="form-group">
@@ -281,21 +281,21 @@
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Contact Person 1 <font color="red">*</font></label>
-						<input type="text" id="contactperson" name="contactperson" class="form-control" value="<?=($_SESSION["user_data"]["contactpersones"]) ? htmlentities($_SESSION["user_data"]["contactpersones"]) : ''?>" onkeypress="submitme(event,'save_changes')" />
+						<input type="text" id="contactperson" name="contactperson" class="form-control" value="<?=($_SESSION["user_data"]["contactpersones"]) ? htmlentities($_SESSION["user_data"]["contactpersones"]) : ''?>" />
 						<font class="error-msg" id="requiredx_contactperson1">Contact person is required !</font>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Position <font color="red">*</font></label>
-						<input type="text" id="ad_position1" name="ad_position1" class="form-control" value="<?=($_SESSION["user_data"]["ad_position1"]) ? htmlentities($_SESSION["user_data"]["ad_position1"]) : ''?>" onkeypress="submitme(event,'save_changes')" />
+						<input type="text" id="ad_position1" name="ad_position1" class="form-control" value="<?=($_SESSION["user_data"]["ad_position1"]) ? htmlentities($_SESSION["user_data"]["ad_position1"]) : ''?>" />
 						<font class="error-msg" id="requiredx_position1">Position is required !</font>
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Mobile Number <font color="red">*</font></label>
-						<input type="text" id="mobile" name="mobile" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" placeholder="+995 5** ** **" onkeypress="submitme(event,'save_changes')" />
+						<input type="text" id="mobile" name="mobile" class="form-control" value="<?=($_SESSION["user_data"]["mobiles"]) ? htmlentities($_SESSION["user_data"]["mobiles"]) : ''?>" placeholder="+995 5** ** **" />
 						<font class="error-msg" id="requiredx_mobilenumber1">Mobile number is required !</font>
 						<font class="error-msg" id="wrong_mobilenumber1">Please check mobile number field !</font>
 					</div>
@@ -303,32 +303,32 @@
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Email <font color="red">*</font></label>
-						<input type="text" id="ad_email1" name="ad_email1" class="form-control" value="<?=($_SESSION["user_data"]["ad_email1"]) ? htmlentities($_SESSION["user_data"]["ad_email1"]) : ''?>" onkeypress="submitme(event,'save_changes')" />
+						<input type="text" id="ad_email1" name="ad_email1" class="form-control" value="<?=($_SESSION["user_data"]["ad_email1"]) ? htmlentities($_SESSION["user_data"]["ad_email1"]) : ''?>" />
 						<font class="error-msg" id="requiredx_email1">Email is required !</font>
 					</div>
 				</div> 
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Contact Person 2</label>
-						<input type="text" id="ad_person2" name="ad_person2" class="form-control" value="<?=($_SESSION["user_data"]["ad_person2"]) ? htmlentities($_SESSION["user_data"]["ad_person2"]) : ''?>" onkeypress="submitme(event,'save_changes')" />
+						<input type="text" id="ad_person2" name="ad_person2" class="form-control" value="<?=($_SESSION["user_data"]["ad_person2"]) ? htmlentities($_SESSION["user_data"]["ad_person2"]) : ''?>" />
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Position</label>
-						<input type="text" id="ad_position2" name="ad_position2" class="form-control" value="<?=($_SESSION["user_data"]["ad_position2"]) ? htmlentities($_SESSION["user_data"]["ad_position2"]) : ''?>" onkeypress="submitme(event,'save_changes')" />
+						<input type="text" id="ad_position2" name="ad_position2" class="form-control" value="<?=($_SESSION["user_data"]["ad_position2"]) ? htmlentities($_SESSION["user_data"]["ad_position2"]) : ''?>" />
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Mobile Number</label>
-						<input type="text" id="ad_mobile2" name="ad_mobile2" class="form-control" value="<?=($_SESSION["user_data"]["ad_mobile2"]) ? htmlentities($_SESSION["user_data"]["ad_mobile2"]) : ''?>" placeholder="+995 5** ** **" onkeypress="submitme(event,'save_changes')" />
+						<input type="text" id="ad_mobile2" name="ad_mobile2" class="form-control" value="<?=($_SESSION["user_data"]["ad_mobile2"]) ? htmlentities($_SESSION["user_data"]["ad_mobile2"]) : ''?>" placeholder="+995 5** ** **" />
 					</div>
 				</div>
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="form-group">
 						<label>Email</label>
-						<input type="text" id="ad_email2" name="ad_email2" class="form-control" value="<?=($_SESSION["user_data"]["ad_email2"]) ? htmlentities($_SESSION["user_data"]["ad_email2"]) : ''?>" onkeypress="submitme(event,'save_changes')" />
+						<input type="text" id="ad_email2" name="ad_email2" class="form-control" value="<?=($_SESSION["user_data"]["ad_email2"]) ? htmlentities($_SESSION["user_data"]["ad_email2"]) : ''?>" />
 					</div>
 				</div>
 			</div>
@@ -387,22 +387,22 @@
 				</div>
 				<div class="form-group">
 					<label>Shelf Life</label>
-					<input type="text" id="shelf_life" name="shelf_life" class="form-control" value="" onkeypress="submitme(event,'post_product')" autocomplete="off" />
+					<input type="text" id="shelf_life" name="shelf_life" class="form-control" value="" autocomplete="off" />
 				</div>
 				<div class="form-group">
 					<label>Production Capacity</label>
-					<input type="text" id="productioncapasity" name="productioncapasity" class="form-control" value="" onkeypress="submitme(event,'post_product')" autocomplete="off" />
+					<input type="text" id="productioncapasity" name="productioncapasity" class="form-control" value="" autocomplete="off" />
 				</div>
 			</div>	
 			<div class="col-sm-3">
 				<div class="form-group">
 					<label>Name <font color="red">*</font></label>
-					<input type="text" id="product_name" name="product_name" class="form-control" value="" onkeypress="submitme(event,'post_product')" autocomplete="off" />
+					<input type="text" id="product_name" name="product_name" class="form-control" value="" autocomplete="off" />
 					<font class="error-msg" id="requiredx_add_productsname">Name is required !</font>
 				</div>
 				<div class="form-group">
 					<label>Packaging</label>
-					<input type="text" name="packinging" id="packinging" class="form-control" value="" onkeypress="submitme(event,'post_product')" autocomplete="off" />
+					<input type="text" name="packinging" id="packinging" class="form-control" value="" autocomplete="off" />
 				</div>
 				<div class="form-group">
 					<label>Product Analysis <span style="font-size:10px; color:#555555">PDF, DOC, DOCX, XLS, XLSX, JPG</span></label>
@@ -419,7 +419,7 @@
 				</div>
 				<div class="form-group">
 					<label>Awards</label>
-					<input type="text" class="form-control" name="awards" id="awards" value="" onkeypress="submitme(event,'post_product')" autocomplete="off" />
+					<input type="text" class="form-control" name="awards" id="awards" value="" autocomplete="off" />
 				</div>
 			</div>	
 			<div class="col-sm-3">

@@ -60,17 +60,17 @@ echo $title;
 <meta name="keywords" content="<?=$tags?>">
 <meta name="author" content="Studio 404, Niki Getsadze"/>
 <link type="text/plain" rel="author" href="<?php echo WEBSITE;?>humans.txt" />
-<link href="<?php echo TEMPLATE;?>css/bootstrap.css" type="text/css" rel="stylesheet"/>
-<link href="<?php echo TEMPLATE;?>css/bootstrap-theme.css" type="text/css" rel="stylesheet"/>
-<link href="<?php echo TEMPLATE;?>css/fonts.css" type="text/css" rel="stylesheet"/>
-<link href="<?php echo TEMPLATE;?>css/style.css" type="text/css" rel="stylesheet"/>
-<link href="<?php echo TEMPLATE;?>css/custom_res.css" type="text/css" rel="stylesheet"/> 
-<link href="<?php echo TEMPLATE;?>css/fonts.css" type="text/css" rel="stylesheet"/> 
+<link href="<?php echo TEMPLATE;?>css/bootstrap.css?v=<?=$c['websitevertion']?>" type="text/css" rel="stylesheet"/>
+<link href="<?php echo TEMPLATE;?>css/bootstrap-theme.css?v=<?=$c['websitevertion']?>" type="text/css" rel="stylesheet"/>
+<link href="<?php echo TEMPLATE;?>css/fonts.css?v=<?=$c['websitevertion']?>" type="text/css" rel="stylesheet"/>
+<link href="<?php echo TEMPLATE;?>css/style.css?v=<?=$c['websitevertion']?>" type="text/css" rel="stylesheet"/>
+<link href="<?php echo TEMPLATE;?>css/custom_res.css?v=<?=$c['websitevertion']?>" type="text/css" rel="stylesheet"/> 
+<link href="<?php echo TEMPLATE;?>css/fonts.css?v=<?=$c['websitevertion']?>" type="text/css" rel="stylesheet"/> 
 <link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,900' rel='stylesheet' type='text/css'>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="<?php echo TEMPLATE;?>js/bootstrap.js"></script>
-<script src="<?php echo TEMPLATE;?>js/responsive_menu.js"></script>
-<script src="<?php echo TEMPLATE;?>js/scripts.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js?v=<?=$c['websitevertion']?>"></script>
+<script src="<?php echo TEMPLATE;?>js/bootstrap.js?v=<?=$c['websitevertion']?>"></script>
+<script src="<?php echo TEMPLATE;?>js/responsive_menu.js?v=<?=$c['websitevertion']?>"></script>
+<script src="<?php echo TEMPLATE;?>js/scripts.js?v=<?=$c['websitevertion']?>"></script>
 </head>
 <body id="menu_responsive">
 	<!-- <div style="margin:0; padding:0; width:100%; text-align:center; background-color:#ffa100; color:white; line-height:25px; font-size:14px">Under Development</div> -->
@@ -90,8 +90,8 @@ include("addcertificate.php");
 			<div class="col-sm-12 text-right padding_0">			
 				<div id="members_area">	
 					<?php if(!isset($_SESSION["tradewithgeorgia_username"])) { ?>			
-					<a href="#" data-toggle="modal" data-target="#register_popup"><?=$data["language_data"]["register"]?></a> | 
-					<a href="#" data-toggle="modal" data-target="#login_popup"><?=$data["language_data"]["login"]?></a> | 
+					<a href="#" data-toggle="modal" data-target="#register_popup">Register</a> | 
+					<a href="#" data-toggle="modal" data-target="#login_popup">Log In</a> | 
 					<a href="#" data-toggle="modal" data-target="#recover_password"><?=$data["language_data"]["recoverpassword"]?></a>
 					<?php }else if(isset($_SESSION["tradewithgeorgia_company_type"])){ ?>
 					<a href="javascript:;">
@@ -106,7 +106,7 @@ include("addcertificate.php");
 						?>
 					</a> | 
 					<a href="<?=company_type::profilelink()?>"><?=$data["language_data"]["profile"]?></a> | 
-					<a href="javascipt:;" id="logoutbutton"><?=$data["language_data"]["logout"]?></a> 
+					<a href="javascipt:;" id="logoutbutton">Log Out</a> 
 					<?php } ?>
 				</div>
 			</div>

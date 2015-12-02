@@ -18,6 +18,89 @@ class ajax extends connection{
 	public function requests($c){
 		$conn = $this->conn($c); 
 
+		if(Input::method("POST","changeusertype")=="true" && Input::method("POST","t") && $_SESSION["tradewithgeorgia_user_id"]) :
+			$userid = $_SESSION["tradewithgeorgia_user_id"]; 
+			$typetochange = Input::method("POST","t"); 
+			if($typetochange=="sp"){
+				$findtype = "serviceprovider";
+				$url = WEBSITE.'en/profile-service';
+			}else{
+				$findtype = "manufacturer";
+				$url = WEBSITE.'en/profile-products';
+			}
+			
+			
+			
+			$sql = 'SELECT * FROM `studio404_users` WHERE `username`=:username AND `company_type`=:type';
+			$prepare = $conn->prepare($sql);
+			$prepare->execute(array(
+				":username"=>$_SESSION["tradewithgeorgia_username"], 
+				":type"=>$findtype
+			));
+			if($prepare->rowCount() > 0) {
+				$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
+				$_SESSION["tradewithgeorgia_company_type"] = $findtype;  
+				$_SESSION["tradewithgeorgia_user_id"] = $fetch["id"]; 
+
+				if($findtype=="manufacturer"){
+					$_SESSION["user_data"]["picture"] = $fetch["picture"]; // *
+					$_SESSION["user_data"]["companyname"] = $fetch["namelname"]; // *
+					$_SESSION["user_data"]["sector"] = $fetch["sector_id"]; // *
+					$_SESSION["user_data"]["subsector"] = $fetch["sub_sector_id"]; // *
+					$_SESSION["user_data"]["establishedin"] = $fetch["established_in"];
+					$_SESSION["user_data"]["productioncapasity"] = $fetch["production_capacity"];
+					$_SESSION["user_data"]["address"] = $fetch["address"];
+					$_SESSION["user_data"]["mobiles"] = $fetch["mobile"]; // *
+					$_SESSION["user_data"]["numemploy"] = $fetch["number_of_employes"];
+					$_SESSION["user_data"]["certificates"] = $fetch["certificates"];
+					$_SESSION["user_data"]["contactpersones"] = $fetch["contact_person"];
+					$_SESSION["user_data"]["officephone"] = $fetch["office_phone"];
+					$_SESSION["user_data"]["companysize"] = $fetch["company_size"];
+					$_SESSION["user_data"]["webaddress"] = $fetch["web_address"];
+					$_SESSION["user_data"]["ad_position1"] = $fetch["ad_position1"]; // *
+					$_SESSION["user_data"]["ad_email1"] = $fetch["ad_email1"]; //*
+					$_SESSION["user_data"]["ad_person2"] = $fetch["ad_person2"];
+					$_SESSION["user_data"]["ad_position2"] = $fetch["ad_person2"];
+					$_SESSION["user_data"]["ad_mobile2"] = $fetch["ad_mobile2"];
+					$_SESSION["user_data"]["ad_email2"] = $fetch["ad_email2"];
+					$_SESSION["user_data"]["ad_upload_catalog"] = $fetch["ad_upload_catalog"];
+					$_SESSION["user_data"]["contactemail"] = $fetch["email"]; // *
+					$_SESSION["user_data"]["about"] = $fetch["about"]; // *
+					$_SESSION["user_data"]["products"] = $fetch["products"];
+					$_SESSION["user_data"]["exportmarkets"] = $fetch["export_markets_id"];
+				}else{
+					$_SESSION["user_data"]["picture"] = $fetch["picture"];
+					$_SESSION["user_data"]["companyname"] = $fetch["namelname"];
+					$_SESSION["user_data"]["sector"] = $fetch["sector_id"];
+					$_SESSION["user_data"]["subsector"] = $fetch["sub_sector_id"];
+					$_SESSION["user_data"]["establishedin"] = $fetch["established_in"];
+					$_SESSION["user_data"]["productioncapasity"] = $fetch["production_capacity"];
+					$_SESSION["user_data"]["address"] = $fetch["address"];
+					$_SESSION["user_data"]["mobiles"] = $fetch["mobile"];
+					$_SESSION["user_data"]["numemploy"] = $fetch["number_of_employes"];
+					$_SESSION["user_data"]["certificates"] = $fetch["certificates"];
+					$_SESSION["user_data"]["contactpersones"] = $fetch["contact_person"];
+					$_SESSION["user_data"]["officephone"] = $fetch["office_phone"];
+					$_SESSION["user_data"]["companysize"] = $fetch["company_size"];
+					$_SESSION["user_data"]["webaddress"] = $fetch["web_address"];
+					$_SESSION["user_data"]["ad_position1"] = $fetch["ad_position1"];
+					$_SESSION["user_data"]["ad_email1"] = $fetch["ad_email1"];
+					$_SESSION["user_data"]["ad_person2"] = $fetch["ad_person2"];
+					$_SESSION["user_data"]["ad_position2"] = $fetch["ad_person2"];
+					$_SESSION["user_data"]["ad_mobile2"] = $fetch["ad_mobile2"];
+					$_SESSION["user_data"]["ad_email2"] = $fetch["ad_email2"];
+					$_SESSION["user_data"]["ad_upload_catalog"] = $fetch["ad_upload_catalog"];
+					$_SESSION["user_data"]["contactemail"] = $fetch["email"];
+					$_SESSION["user_data"]["about"] = $fetch["about"];
+					$_SESSION["user_data"]["products"] = $fetch["products"];
+					$_SESSION["user_data"]["exportmarkets"] = $fetch["export_markets_id"];
+				}
+				echo $url;
+			}else{
+				echo "Error";
+			}
+		endif;
+
 		if(Input::method("POST","sendemail1") && Input::method("POST","email1") && isset($_COOKIE["password1"]) && Input::method("POST","lc")==$_SESSION['protect_x']) : 
 			$sendemail1 = Input::method("POST","sendemail1");
 			$email1 = Input::method("POST","email1");
@@ -808,6 +891,9 @@ class ajax extends connection{
 
 		if(Input::method("POST","addproduct")=="true" && Input::method("POST","p") && Input::method("POST","pn") && Input::method("POST","d") && strlen(Input::method("POST","d")) <= 350)
 		{
+			if(isset($_SESSION["addproducttry"]) && $_SESSION["addproducttry"] == Input::method("POST","pn")){
+				echo "Error";
+			}
 			$topublish = calculate::filled($_SESSION["user_data"]);
 			if($topublish<100){ exit(); }
 			$products = (int)Input::method("POST","p");
@@ -904,6 +990,7 @@ class ajax extends connection{
 					echo "Error";
 				}else{
 					echo $maxidm;
+					$_SESSION["addproducttry"] = Input::method("POST","pn");
 				}
 			}
 		}
@@ -1081,7 +1168,11 @@ class ajax extends connection{
 		if(Input::method("POST","addservice")=="true" && Input::method("POST","t") && Input::method("POST","s") && Input::method("POST","d")){
 			$t = Input::method("POST","t");
 			$s = Input::method("POST","s");
-			$d = Input::method("POST","d"); 
+			$d = Input::method("POST","d");
+
+			if(isset($_SESSION["addproducttry"]) && $_SESSION["addproducttry"] == Input::method("POST","s")){
+				echo "Error";
+			} 
 
 			//select max idx
 			$sqlm = 'SELECT MAX(`idx`)+1 AS maxid FROM `studio404_module_item`';
@@ -1139,6 +1230,7 @@ class ajax extends connection{
 				":visibility"=>1, 
 				":status"=>0 
 			));
+			$_SESSION["addproducttry"] = Input::method("POST","s"); 
 			echo "Done";
 		}
 
