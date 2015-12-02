@@ -16,10 +16,18 @@
 			</li>
 			<li>  &gt;  </li>
 			<li>
-				<a href="javascript:;">
+				<a href="?t=<?=@$_GET['t']?>&amp;i=<?=@$_GET['i']?>">
 					<?=$data["fetch"]["namelname"]?>
 				</a>
 			</li>
+			<?php if(isset($_GET['p'])) : ?>
+			<li>  &gt;  </li>
+			<li>
+				<a href="?t=<?=@$_GET['t']?>&amp;i=<?=@$_GET['i']?>&amp;p=<?=@$_GET['p']?>">
+					<?=$data["productinside"]->title?>
+				</a>
+			</li>
+			<?php endif; ?>
 		</div>
 	
 	<div class="back_to"><a href="<?=WEBSITE.LANG?>/<?=(isset($_GET["t"]) && ($_GET["t"]=="individual" || $_GET["t"]=="company")) ? 'business-portal' : 'export-catalog'?>"><?=(isset($_GET["t"]) && ($_GET["t"]=="individual" || $_GET["t"]=="company")) ? 'Back to bussiness portal' : 'Back to catalog'?></a></div>
