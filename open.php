@@ -113,6 +113,7 @@ if(empty($LANG)){ // just domain name
 	$redirect = new redirect();
 	$redirect->go(WEBSITE.$main_language."/".$welcome_class);
 }
+
 /*
 insert log
 */
@@ -134,6 +135,7 @@ define('TEMPLATE', WEBSITE.$c["website.directory"].'/');
 define('MAIN_DIR', WEBSITE.LANG.'/');
 define('MAIN_PAGE', MAIN_DIR.$c["welcome.page.slug"]);
 define('ADMIN_SLUG',$c['admin.slug']);
+
 /*
 ** Controller function
 */

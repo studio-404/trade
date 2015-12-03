@@ -17,7 +17,7 @@
 ?>
 <div class="container" id="container">
 	<div class="page_title_1">
-		<span class="profile-header-procent">Profile ( <span title="Product exporter" style="cursor:pointer">Product Exporter</span> <a href="javascript:;" data-changeto="sp" title="Change to service provider" class="changeprofiletype"><img src="<?=TEMPLATE?>img/change.svg" width="25" height="25" alt="Exp Icon" /></a> )</span>
+		<span class="profile-header-procent">Profile ( <span title="Product exporter" style="cursor:pointer">Product</span> <a href="javascript:;" data-changeto="sp" title="Change to service provider" class="changeprofiletype"><img src="<?=TEMPLATE?>img/change.svg" width="25" height="25" alt="Exp Icon" /></a> )</span>
 
 		<div class="procent-box">
 			<div class="procent-publish" style="width:<?=$data["calculate"]["topublish"]?>%"></div>
@@ -232,10 +232,9 @@
 		</div>	
 
 		<div class="form-group">
-			<!-- <form action="" method="post"  enctype="multipart/form-data"> -->
-				<label>Attachment <span style="font-size:10px; color:#555555">PDF, DOC, DOCX, XLS, XLSX, JPG</span></label>
-				<input type="file" id="ad_upload_catalog" name="ad_upload_catalog" class="form-control" value="" />
-			<!-- </form> -->
+			<label>Attachment <span style="font-size:10px; color:#555555">PDF, DOC, DOCX, XLS, XLSX, JPG</span></label>
+			<input type="file" id="ad_upload_catalog" name="ad_upload_catalog" class="form-control" value="" />
+			
 			<?php if($_SESSION["user_data"]["ad_upload_catalog"]) : ?>
 			<div class="catalogpdf_block" style="margin:5px 0">
 				<a href="<?=WEBSITE?>files/document/<?=$_SESSION["user_data"]["ad_upload_catalog"]?>" target="_blank">View Attachment</a>

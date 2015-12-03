@@ -18,7 +18,7 @@ class get_page_type extends connection{
 		//get slug
 		$url_controll = new url_controll();
 		$slug = $url_controll->slugs();
-
+		
 		try{
 			$sql = 'SELECT `page_type` FROM `studio404_pages` WHERE `slug`=:slug AND `status`!=:status';
 			$prepare = $conn->prepare($sql);

@@ -4,7 +4,7 @@
     <!-- Modal content-->
     <div class="modal-content">
 		<div class="modal-body">
-			<h3 class="modal-title">Log In <small data-toggle="modal" data-target="#register_popup" onclick="$('#login_popup').modal('hide')"><?=$data["language_data"]["register"]?></small></h3>
+			<h3 class="modal-title">Log In <small data-toggle="modal" data-target="#register_popup" onclick="$('#login_popup').modal('hide')">Register as Exporter</small></h3>
 			<div id="finalstep3">
 				<div class="form-group">
 					<?php if(isset($_GET['hash'])) : ?>
@@ -29,6 +29,7 @@
 					<input type="password" name="password" id="password3" class="form-control" value="" autocomplete="off" onkeypress="submitme(event,'login_user')" />
 					<div class="error_message password3_required"><?=$data["language_data"]["passwordrequired"]?> !</div>
 				</div>
+				
 				<div class="form-group">
 					<label for="captcha"><?=$data["language_data"]["captchavalue"]?></label>
 					<input type="text" name="captcha" id="captcha" class="form-control" value="" autocomplete="off" onkeypress="submitme(event,'login_user')" />
@@ -39,7 +40,11 @@
 				<div style="clear:both"></div>
 				<div class="btn btn-block btn-yellow" style="font-size:19px; margin-top:15px;" id="login_user"><?=strtoupper($data["language_data"]["login"])?></div>
 			</div>
-			<div style="float:left; margin-top:15px; display:none" class="reloadbutton"><a href="javascript:;" id="reload"><?=$data["language_data"]["reload"]?></a></div>
+			<div style="float:left; margin-top:15px;">
+				<a href="javascript:;" id="reload"><?=$data["language_data"]["reload"]?></a> / 
+				<a href="javascript:;" data-toggle="modal" data-target="#recover_password" onclick="$('#login_popup').modal('hide')">Recover Password</a>
+			</div>
+
 		</div> 
     </div>
   </div>

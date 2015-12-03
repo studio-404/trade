@@ -40,9 +40,8 @@ if(Input::method("GET","t")=="serviceprovider"){
 		<p><strong>Packiging: </strong> <span><?php echo $data["productinside"]->packaging; ?></span></p>
 		<p><strong>Shelf Life: </strong> <span><?php echo $data["productinside"]->shelf_life; ?></span></p>
 		<p><strong>Awards: </strong> <span><?php echo $data["productinside"]->awards; ?></span></p>
-		<p><strong>Awards: </strong> <span><?php echo $data["productinside"]->awards; ?></span></p>
 		<p><strong>Description: </strong> <p><?php echo $data["productinside"]->long_description; ?></p></p>
-		<p><strong>Product Analysis: </strong> <p><?php echo '<a href="'.WEBSITE.'files/document/'.$data["productinside"]->productanalisis.'" target="_blank">PDF</a>'; ?></p></p>
+		<p><strong>Product Analysis: </strong> <p><?php echo '<a href="'.WEBSITE.'files/document/'.$data["productinside"]->productanalisis.'" target="_blank">Load file</a>'; ?></p></p>
 	</div>
 	<?php
 }

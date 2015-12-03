@@ -989,8 +989,8 @@ ul.text_formats_ul.contact_text:before {
 
 .text_formats,
 li.text_formats {list-style:none;	font-size:15px;}
-.text_formats span,
-li.text_formats span {font-weight:bold;}
+/*.text_formats span, li.text_formats span {font-weight:bold;}*/
+#sidebar li.text_formats span {font-weight:bold;}
 .text_formats p{margin-bottom:20px;}
 .text_formats img {float:left; margin-right:13px;}
 

@@ -31,7 +31,7 @@ class ajax extends connection{
 			
 			
 			
-			$sql = 'SELECT * FROM `studio404_users` WHERE `username`=:username AND `company_type`=:type';
+			$sql = 'SELECT * FROM `studio404_users` WHERE `username`=:username AND `company_type`=:type AND `status`!=1';
 			$prepare = $conn->prepare($sql);
 			$prepare->execute(array(
 				":username"=>$_SESSION["tradewithgeorgia_username"], 

@@ -91,8 +91,8 @@ include("addcertificate.php");
 				<div id="members_area">	
 					<?php if(!isset($_SESSION["tradewithgeorgia_username"])) { ?>			
 					<a href="#" data-toggle="modal" data-target="#register_popup">Register</a> | 
-					<a href="#" data-toggle="modal" data-target="#login_popup">Log In</a> | 
-					<a href="#" data-toggle="modal" data-target="#recover_password"><?=$data["language_data"]["recoverpassword"]?></a>
+					<a href="#" data-toggle="modal" data-target="#login_popup">Log In</a> 
+					<!-- <a href="#" data-toggle="modal" data-target="#recover_password"><?=$data["language_data"]["recoverpassword"]?></a> -->
 					<?php }else if(isset($_SESSION["tradewithgeorgia_company_type"])){ ?>
 					<a href="javascript:;">
 					<?php 

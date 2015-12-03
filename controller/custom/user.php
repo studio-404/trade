@@ -104,6 +104,7 @@ class user extends connection{
 				`studio404_users`.`ad_position2`, 
 				`studio404_users`.`ad_mobile2`, 
 				`studio404_users`.`ad_email2`, 
+				`studio404_users`.`ad_upload_catalog`, 
 				`studio404_users`.`about` 
 				';	
 			}else if(Input::method("GET","t")=="company"){

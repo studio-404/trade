@@ -1,6 +1,6 @@
 <?php if($data["get_type"]=="manufacturer") : ?>
 			<ul class="text_formats_ul">
-				<li class="text_formats"><span>Company description</span></li>
+				<li class="text_formats"><b>Company description</b></li>
 				<li class="text_formats">
 					<?=nl2br(strip_tags($data["fetch"]["about"]))?>
 				</li>
@@ -53,7 +53,7 @@
 
 		<?php if($data["get_type"]=="serviceprovider") : ?>
 			<ul class="text_formats_ul">
-				<li class="text_formats"><span>About</span></li>
+				<li class="text_formats"><b>About</b></li>
 				<li class="text_formats">
 					<?=nl2br(strip_tags($data["fetch"]["about"]))?>
 				</li>

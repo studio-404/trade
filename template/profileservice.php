@@ -17,7 +17,7 @@
 ?>
 <div class="container" id="container">
 	<div class="page_title_1">
-		<span class="profile-header-procent">Profile ( <span title="Service Provider" style="cursor:pointer">Service Provider</span> <a href="javascript:;" data-changeto="ex" title="Change to exporter" class="changeprofiletype"><img src="<?=TEMPLATE?>img/change.svg" width="25" height="25" alt="Exp Icon" /></a> )</span>
+		<span class="profile-header-procent">Profile ( <span title="Service Provider" style="cursor:pointer">Service</span> <a href="javascript:;" data-changeto="ex" title="Change to exporter" class="changeprofiletype"><img src="<?=TEMPLATE?>img/change.svg" width="25" height="25" alt="Exp Icon" /></a> )</span>
 
 		<div class="procent-box">
 			<div class="procent-publish" style="width:<?=$data["calculate"]["topublish"]?>%"></div>
@@ -28,6 +28,7 @@
 	</div>
 	<div class="row">
 		<!--first column START-->
+		<form action="" method="post" enctype="multipart/form-data" id="uploadDocuments">
 		<div class="col-lg-3">
 			<div class="form-group">
 				<label>Username <font color="red">*</font></label>
@@ -193,7 +194,7 @@
 			</div>
 
 			<div class="form-group">
-				<label>Certificates</label>
+				<label>Certificates <span style="font-size:10px; color:#555555"><a href="" data-toggle="modal" data-target="#addCertificate">Ask to add</a></span></label>
 				<div class="multiselectBox5">
 					<div class="selectBoxWithCheckbox5" data-toggle="drop_sector5">
 						<?=(count($sector_array5)>0) ? 'Selected '.count($sector_array5).' certificates' : 'Select'?>
@@ -219,10 +220,16 @@
 				<input type="text" id="officephone" name="officephone" class="form-control" value="<?=($_SESSION["user_data"]["officephone"]) ? htmlentities($_SESSION["user_data"]["officephone"]) : ''?>" />
 			</div>
 			
-			<!--<div class="form-group">
-				<label>Upload Catalogue <span style="font-size:10px; color:red">PDF</span></label>
-				<input type="file" id="attachment" name="attachment" class="form-control" value="" />
-			</div>-->
+			<div class="form-group">
+				<label>Attachment <span style="font-size:10px; color:#555555">PDF, DOC, DOCX, XLS, XLSX, JPG</span></label>
+				<input type="file" id="ad_upload_catalog" name="ad_upload_catalog" class="form-control" value="" />
+				
+				<?php if($_SESSION["user_data"]["ad_upload_catalog"]) : ?>
+				<div class="catalogpdf_block" style="margin:5px 0">
+					<a href="<?=WEBSITE?>files/document/<?=$_SESSION["user_data"]["ad_upload_catalog"]?>" target="_blank">View Attachment</a>
+				</div>
+				<?php endif; ?>
+			</div>
 		</div>
 		<!--Third colum END-->
 		
@@ -244,11 +251,11 @@
 					}
 					?>
 				</div>
-				<form action="" method="post" enctype="multipart/form-data" id="uploadDocuments">
+				<!-- <form action="" method="post" enctype="multipart/form-data" id="uploadDocuments"> -->
 					<div class="btn btn-upload btn-block"> 
 						<span id="txtFupload">UPLOAD LOGO</span> <input type="file" name="inputUserLogo" class="input_type_file" accept="image/*" id="inputUserLogo" />
 					</div>
-				</form> 
+				<<!-- /form> --> 
 				<font class="error-msg" style="padding:5px 15px 0 0;" id="imageWarning">Please select 300x170 px photo or system resizes it itself !</font>
 				<font class="error-msg companylogo_required">Company logo is required !</font>
 			</div>
@@ -336,6 +343,7 @@
 				<button class="btn btn-yellow" id="save_changes">SAVE CHANGES</button>
 			</div>
 		</div>
+		</form>
 		<!--Describtion field END-->
 	</div>
 

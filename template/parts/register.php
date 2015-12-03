@@ -4,7 +4,7 @@
     <!-- Modal content-->
     <div class="modal-content">
 		<div class="modal-body">
-			<h3 class="modal-title" id="modal-register"><?=$data["language_data"]["register"]?> <small data-toggle="modal" data-target="#login_popup" onclick="$('#register_popup').modal('hide')"><?=$data["language_data"]["login"]?></small></h3>
+			<h3 class="modal-title" id="modal-register">Register as Exporter <small data-toggle="modal" data-target="#login_popup" onclick="$('#register_popup').modal('hide')">Log In</small></h3>
 			<!-- <ul class="" role="tablist">
 				<li class="btn btn-block btn-blue active">
 					<a href="#export_catalogue" aria-controls="export_catalogue" role="tab" data-toggle="tab"><?=strtoupper($data["language_data"]["exportcatalog"])?></a>

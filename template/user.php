@@ -129,7 +129,7 @@
 			</ul>
 		<?php 
 		}
-		if($data["get_type"]=="manufacturer" && $data["fetch"]["ad_upload_catalog"]) : ?>
+		if($data["fetch"]["ad_upload_catalog"]) : ?>
 		<ul class="text_formats_ul">
 			<li class="text_formats"><span>Attachment</span></li>
 			<li class="text_formats"><a href="<?=WEBSITE?>files/document/<?=$data["fetch"]["ad_upload_catalog"]?>" target="_blank">View Attachment</a></li>
