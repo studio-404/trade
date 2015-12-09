@@ -40,6 +40,10 @@ $(document).ready(function(){
 	setInterval(function(){ getDate('#widget')},1000 );
 });
 
+$(document).on("click",".logasuser-administrator",function(result){
+	alert("OMG, You clicked me :) ");
+});
+
 
 function askBeforeDelete(type,idx) {
 	var x = confirm("Would you like to delete item?");

@@ -130,17 +130,17 @@
 	<a href="<?=WEBSITE.LANG?>/user?t=<?=$val["su_companytype"]?>&amp;i=<?=$val["su_id"]?>">	
 		<div class="filter_content">
 			<?php
-				if($val["su_companytype"]=="manufacturer"){
-					$userXtype = "Product manufacturer";
-				}else if($val["su_companytype"]=="serviceprovider"){
-					$userXtype = "Service provider";
-				}else if($val["su_companytype"]=="company"){
-					$userXtype = "Company";
-				}else if($val["su_companytype"]=="individual"){
-					$userXtype = "Individual";
-				}
+				// if($val["su_companytype"]=="manufacturer"){
+				// 	$userXtype = "Product";
+				// }else if($val["su_companytype"]=="serviceprovider"){
+				// 	$userXtype = "Service";
+				// }else if($val["su_companytype"]=="company"){
+				// 	$userXtype = "Company";
+				// }else if($val["su_companytype"]=="individual"){
+				// 	$userXtype = "Individual";
+				// }
 				?>
-			<div class="names"><?=$val["su_namelname"]?> <font color="#f2f2f2">( <?=$userXtype?> )</font></div>
+			<div class="names"><?=$val["su_namelname"]?> </div>
 			<div class="content_divs">
 				<div class="col-sm-2 no-float itemssss"><img src="<?=$logo?>" class="img-responsive"></div>
 				<div class="col-sm-2 no-float itemssss">

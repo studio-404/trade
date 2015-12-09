@@ -16,8 +16,15 @@
 		}
 ?>
 <div class="container" id="container">
+	<?php
+	if($_SESSION["user_data"]["allow"]==1):
+	?>
+	<center style="margin:10px 0px; padding:0;"><font style="font-size:18px; color:red; text-aling:center; font-weigth:bold">Sorry, You are disallowed by website administrator !</font></center>
+	<?php
+	endif;
+	?>
 	<div class="page_title_1">
-		<span class="profile-header-procent">Profile ( <span title="Product exporter" style="cursor:pointer">Product</span> <a href="javascript:;" data-changeto="sp" title="Change to service provider" class="changeprofiletype"><img src="<?=TEMPLATE?>img/change.svg" width="25" height="25" alt="Exp Icon" /></a> )</span>
+		<span class="profile-header-procent">Profile N<?=$_SESSION["user_data"]["id"]?> ( <span title="Product exporter" style="cursor:pointer">Product</span> <a href="javascript:;" data-changeto="sp" title="Change to service provider" class="changeprofiletype"><img src="<?=TEMPLATE?>img/change.svg" width="25" height="25" alt="Exp Icon" /></a> )</span>
 
 		<div class="procent-box">
 			<div class="procent-publish" style="width:<?=$data["calculate"]["topublish"]?>%"></div>
@@ -254,7 +261,7 @@
 			<div class="upload_img_tmp">
 				<?php
 				if(!empty($_SESSION["user_data"]["picture"])){
-					$img = WEBSITE."image?f=".WEBSITE."files/usersimage/".$_SESSION["user_data"]["picture"]."&amp;w=270&amp;h=160";
+					$img = WEBSITE."image?f=".WEBSITE."files/usersimage/".$_SESSION["user_data"]["picture"]."&amp;w=290&amp;h=160";
 					?>
 					<img src="<?=$img?>" data-oldimage="<?=$img?>" id="profile_logo" data-uploaded="image" class="img-responsive" width="100%" alt="" />
 					<?php

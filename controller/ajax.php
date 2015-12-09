@@ -289,7 +289,7 @@ class ajax extends connection{
 						":password"=>md5($p), 
 						":company_type"=>$t, 
 						":user_type"=>'website', 
-						":allow"=>2
+						":allow"=>1
 					));
 					endforeach;
 					echo "Done";
@@ -305,14 +305,13 @@ class ajax extends connection{
 			}else{
 				$e = Input::method("POST","e");
 				$p = Input::method("POST","p");
-				$sql = 'SELECT * FROM `studio404_users` WHERE `username`=:username AND `company_type`=:companyType AND `password`=:password AND `user_type`=:user_type AND `allow`=:two AND `status`!=:one'; 
+				$sql = 'SELECT * FROM `studio404_users` WHERE `username`=:username AND `company_type`=:companyType AND `password`=:password AND `user_type`=:user_type AND `status`!=:one'; 
 				$prepare = $conn->prepare($sql); 
 				$prepare->execute(array(
 					":username"=>$e, 
 					":password"=>md5($p), 
 					":user_type"=>'website', 
 					":companyType"=>Input::method("POST","lg"), 
-					":two"=>2, 
 					":one"=>1 
 				));
 				if($prepare->rowCount() > 0){

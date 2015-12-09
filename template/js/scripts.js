@@ -657,28 +657,40 @@ $(document).on("change","#inputUserLogo",function(e){
 	var files = e.target.files;
 	var nowFile = $("#profile_logo").data("oldimage");
 	 
-	var plz = "http://"+document.domain+"/template/img/plz.jpg";  
-	$("#profile_logo").attr({ "src" : plz }); 
+	var noerror = false;
 	var ex = files[0].name.split(".");
 	var extLast = ex[ex.length - 1].toLowerCase();
-	console.log(extLast);
-	if(extLast!="jpeg" && extLast!="jpg" && extLast!="png" && extLast!="gif"){
-		$('#message_popup').modal('toggle'); 
-		$("#insertText").html("Please choose jpeg, jpg, gif or png file !"); 
-		$("#profile_logo").attr({ "src" : nowFile }); 
-		return false;
-	}else if(files[0].size > 1000000){
-		$('#message_popup').modal('toggle'); 
-		$("#insertText").html("File size must be under 1 MB !"); 
-		$("#profile_logo").attr({ "src" : nowFile }); 
-		return false;
-	}else if(files[0].name){
-		$("#profile_logo").attr({ "src" : URL.createObjectURL(e.target.files[0]) }); 
-		$("#profile_logo").data("uploaded","image"); 
-		//$("#uploadImageForm").submit();
-		// $('#message_popup').modal('toggle'); 
-		// $("#insertText").html("Please wait !"); 
-	}
+
+
+	var reader = new FileReader();
+    var image  = new Image();
+    reader.readAsDataURL(files[0]); 
+    reader.onload = function(_file) {
+        image.src = _file.target.result;              // url.createObjectURL(file);
+        image.onload = function() {
+            var w = this.width,
+                h = this.height,
+                t = files[0].type,                           // ext only: // file.type.split('/')[1],
+                n = files[0].name,
+                s = ~~(files[0].size/1024);
+            console.log(w+'x'+h+' '+s+' '+t+' '+n);
+            if(w!=300 || h!=170 || s > 1024 || t != "image/jpeg"){
+            	$('#message_popup').modal('toggle'); 
+				$("#insertText").html("File size must be  300x170 pixels, (JPG) format and should not exceed 1MB");
+            }else{
+            	var plz = "http://"+document.domain+"/template/img/plz.jpg";  
+				$("#profile_logo").attr({ "src" : plz }); 
+				$("#profile_logo").attr({ "src" : URL.createObjectURL(e.target.files[0]) }); 
+				$("#profile_logo").data("uploaded","image"); 
+            }
+        };
+        image.onerror= function() {
+            $('#message_popup').modal('toggle'); 
+			$("#insertText").html("This is not right format !");
+			return false; 
+        };    
+    };
+
 });
 
 $(document).on("click","#change_pass",function(){
@@ -801,22 +813,36 @@ $(document).on("change","#productfile",function(e){
 	var files = e.target.files;
 	var ex = files[0].name.split(".");
 	var extLast = ex[ex.length - 1].toLowerCase();
+
+
+	var reader = new FileReader();
+    var image  = new Image();
+    reader.readAsDataURL(files[0]); 
+    reader.onload = function(_file) {
+        image.src = _file.target.result;              // url.createObjectURL(file);
+        image.onload = function() {
+            var w = this.width,
+                h = this.height,
+                t = files[0].type,                           // ext only: // file.type.split('/')[1],
+                n = files[0].name,
+                s = ~~(files[0].size/1024);
+            console.log(w+'x'+h+' '+s+' '+t+' '+n);
+            if(w!=300 || h!=170 || s > 1024 || t != "image/jpeg"){
+            	$('#message_popup').modal('toggle'); 
+				$("#insertText").html("File size must be  300x170 pixels, (JPG) format and should not exceed 1MB");
+            }else{
+            	var plz = "http://"+document.domain+"/template/img/plz.jpg";  
+				$("#product_picture").attr({ "src" : plz }); 
+				$("#product_picture").attr({ "src" : URL.createObjectURL(e.target.files[0]) }); 
+            }
+        };
+        image.onerror= function() {
+            $('#message_popup').modal('toggle'); 
+			$("#insertText").html("This is not right format !");
+			return false; 
+        };    
+    };
 	
-	if(extLast!="jpeg" && extLast!="jpg"){
-		$('#message_popup').modal('toggle'); 
-		$("#insertText").html("Please choose jpg file !"); 
-		return false;
-	}else if(files[0].size > 1000000){
-		$('#message_popup').modal('toggle'); 
-		$("#insertText").html("File size must be under 1 MB !"); 
-		return false;
-	}else if(files[0].name){
-		// $("#uploadImageForm").submit();
-		// $('#message_popup').modal('toggle'); 
-		// $("#insertText").html("Please wait !"); 
-		var tmppath = URL.createObjectURL(e.target.files[0]);
-    	$("#product_picture").attr('src',tmppath);  
-	}
 });
 
 $(document).on("click",".delete-product",function(e){
@@ -1680,7 +1706,7 @@ $(document).on("click",".loadmore",function(){
 					insert += '<div class="names">'+obj[i].title+'</div>';
 					insert += '<div class="content_divs">';
 					if(obj[i].picture!=""){
-						insert += '<div class="col-sm-2 no-float itemssss">p<img src="http://'+document.domain+'/image?f=http://'+document.domain+'/files/usersproducts/'+obj[i].picture+'&w=175&h=175" class="img-responsive" width="100%" alt="" /></div>';
+						insert += '<div class="col-sm-2 no-float itemssss">p<img src="http://'+document.domain+'/image?f=http://'+document.domain+'/files/usersproducts/'+obj[i].picture+'&w=196&h=172" class="img-responsive" width="100%" alt="" /></div>';
 					}else{
 						insert += '<div class="col-sm-2 no-float itemssss"><img src="http://'+document.domain+'/template/img/p.png" class="img-responsive" width="100%" alt="" /></div>';
 					}

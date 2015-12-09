@@ -16,7 +16,7 @@
 						<div class="col-sm-12 col-md-12 col-xs-12 col-gl-12 product_item" style="margin-bottom:10px;">
 							<div class="col-sm-12 col-md-3 col-xs-12 col-lg-3 padding_0">
 								<?php
-								$picture = ($val["picture"]) ? WEBSITE.'image?f='.WEBSITE.'files/usersproducts/'.$val["picture"].'&w=175&h=175' : '';
+								$picture = ($val["picture"]) ? WEBSITE.'image?f='.WEBSITE.'files/usersproducts/'.$val["picture"].'&w=196&h=172' : '';
 								?>
 								<div class="image"><img src="<?=$picture?>" class="img-responsive" alt="" /></div>
 							</div>	
@@ -53,7 +53,7 @@
 
 		<?php if($data["get_type"]=="serviceprovider") : ?>
 			<ul class="text_formats_ul">
-				<li class="text_formats"><b>About</b></li>
+				<li class="text_formats"><b>Company Description</b></li>
 				<li class="text_formats">
 					<?=nl2br(strip_tags($data["fetch"]["about"]))?>
 				</li>

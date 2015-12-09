@@ -33,7 +33,7 @@ deny from 188.129.129.222
 deny from 188.143.232.11
 deny from 119.157.148.123
 deny from 93.80.116.134
-deny from 78.139.137.159
+#deny from 78.139.137.159 Univercity
 deny from 196.44.98.54
 deny from 37.146.69.247
 deny from 190.98.162.22
@@ -60,3 +60,11 @@ deny from 109.101.104.181
 deny from 80.196.166.198
 deny from 176.9.139.131
 deny from 184.168.46.66
+deny from 37.146.67.60
+deny from 82.177.94.173 
+deny from 222.186.34.187
+deny from 95.25.4.133
+deny from 109.92.85.86
+deny from 95.25.6.144
+deny from 178.79.24.36
+#deny from 95.104.119.230

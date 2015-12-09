@@ -210,7 +210,8 @@ class exportcatalog extends connection{
 			`studio404_module_item`.`visibility`=:two AND 
 			`studio404_module_item`.`status`!=:one AND 
 			`studio404_module_item`.`insert_admin`=`studio404_users`.`id` AND 
-			`studio404_users`.`status`!=:one  
+			`studio404_users`.`status`!=:one AND   
+			`studio404_users`.`allow`!=:one 
 			'.$orderBy.' '.$limit.'
 			';
 			$prepare = $conn->prepare($sql); 
@@ -287,7 +288,8 @@ class exportcatalog extends connection{
 			`studio404_module_item`.`visibility`=:two AND 
 			`studio404_module_item`.`status`!=:one AND 
 			`studio404_module_item`.`insert_admin`=`studio404_users`.`id` AND 
-			`studio404_users`.`status`!=:one  
+			`studio404_users`.`status`!=:one AND 
+			`studio404_users`.`allow`!=:one 
 			'.$orderBy.' '.$limit.'
 			';
 			$prepare = $conn->prepare($sql); 

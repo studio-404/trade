@@ -73,6 +73,7 @@ iframe{ margin: 0 !important; padding: 0 !important; border: 0 !important; width
 	  color: #fff;
 	  font-family: bebas_Neue_bold;
 	  margin-top: 12px;
+	  margin-left: -10px;
 }
 
 #header_2 .logo_text a {color:#fff; text-decoration:none;}
@@ -1396,7 +1397,10 @@ table tr td p{ margin-bottom: 0px !important }
 .text_formats ol li:hover{ text-decoration: none; }
 .text_formats ol li:after{ margin: 0; padding: 0; content: ''; width: 10px; height: 10px; position: absolute; top: 7px; left: -15px; background-image: url('../img/arrow2.svg'); background-size: 10px 10px; background-repeat: no-repeat; }
 .homepageEventRegister{ cursor: pointer; }
+#insideProductImage{ cursor:pointer; max-width:300px; min-height:170px; }
 @media (max-width: 992px){
+	#insideProductImage{ max-width: 100% !important; min-height: auto !important; }
+	.productDescriptionInside{ margin: 20px 0 0 0; padding: 0; }
 	#header{ min-height: 120px !important; }
 	.export_menu ul li {
 	  display: table-cell;

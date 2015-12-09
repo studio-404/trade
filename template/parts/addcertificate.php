@@ -1,4 +1,3 @@
-
 <!--START ADDcertificates POPUP -->
 <div id="addCertificate" class="modal fade" role="dialog">
   <div class="modal-dialog" style="width:340px;">

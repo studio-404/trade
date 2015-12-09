@@ -42,8 +42,7 @@ class model_template_upload_user_logo extends connection{
 				 		":ad_upload_catalog"=>$fileName
 				 	));
 				 	$_SESSION["user_data"]["ad_upload_catalog"] = $fileName;
-				 	echo "aaaaaaaaaaaaaaa";
-        			//return 1;
+				 	//return 1;
     			}else{
     				//return 2; 
     			}

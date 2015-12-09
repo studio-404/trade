@@ -59,6 +59,7 @@ echo $title;
 <meta name="description" content="<?=htmlentities(strip_tags($desc))?>">
 <meta name="keywords" content="<?=$tags?>">
 <meta name="author" content="Studio 404, Niki Getsadze"/>
+<link rel="icon" type="image/gif" href="<?php echo TEMPLATE;?>img/favicon.ico?v=<?=$c['websitevertion']?>" />
 <link type="text/plain" rel="author" href="<?php echo WEBSITE;?>humans.txt" />
 <link href="<?php echo TEMPLATE;?>css/bootstrap.css?v=<?=$c['websitevertion']?>" type="text/css" rel="stylesheet"/>
 <link href="<?php echo TEMPLATE;?>css/bootstrap-theme.css?v=<?=$c['websitevertion']?>" type="text/css" rel="stylesheet"/>
@@ -73,17 +74,17 @@ echo $title;
 <script src="<?php echo TEMPLATE;?>js/scripts.js?v=<?=$c['websitevertion']?>"></script>
 </head>
 <body id="menu_responsive">
-	<!-- <div style="margin:0; padding:0; width:100%; text-align:center; background-color:#ffa100; color:white; line-height:25px; font-size:14px">Under Development</div> -->
 <?php 
 /* captcha code generation */
 $_SESSION['protect_x'] = uid::captcha(2).ustring::random(2); 
+include("analitics.php"); 
 include("login.php");
 include("register.php");
 include("recover_password.php");
 include("message.php");
 include("addcertificate.php");
 ?>
-<center>Website Is Under Development</center>
+<!-- <center>Website Is Under Development</center> -->
 <header id="header" class="container-fluid" style="padding:0;">
 	<div class="container">
 		<div id="header_line">
@@ -129,9 +130,11 @@ include("addcertificate.php");
 					<img src="<?=TEMPLATE?>img/enterprise_georgia.svg" width="118" height="74" alt="Enterprise Georgia Logo" />
 				</a>
 			</div>
+			<div style="clear:both"></div>
 		</div>
+		<div style="clear:both"></div>
 	</div>
-
+	<div style="clear:both"></div>
 </header>
 
 <!-- START MAIN MENU -->

@@ -5,14 +5,28 @@
 			<div class="col-sm-9 padding_0">
 				<div id="footer_links">
 					<?php
-					//echo $data["footer_menu"];
+						$get_page_title = new get_page_title();
+						$get_sub_menus_by_idx = new get_sub_menus_by_idx();
+						$first = $get_sub_menus_by_idx->sub_menu($_SESSION["c"],3,'footer_first.json');
+						$fcount = count($first);
+
+						$second = $get_sub_menus_by_idx->sub_menu($_SESSION["c"],6,'footer_second.json');
+						$scount = count($second);
+
+						$third = $get_sub_menus_by_idx->sub_menu($_SESSION["c"],7,'footer_third.json');
+						$tcount = count($second);
 					?>
 
 					<ul>
-						<span>Country profile: &nbsp;</span>
-						<li><a href="<?=WEBSITE.LANG?>/country-profile/facts-about-georgia">Facts about Georgia</a></li> / 
-						<li><a href="<?=WEBSITE.LANG?>/country-profile/why-trade-with-Georgia">Why trade with Georgia</a></li> / 
-						<li><a href="<?=WEBSITE.LANG?>/country-profile/doing-bussiness-in-Georgia">Doing bussiness in Georgia</a></li>
+						<span><?=$get_page_title->get($_SESSION["c"],3)?>: &nbsp;</span>
+						<?php
+						$x = 0;
+						foreach ($first as $val) {
+							echo '<li><a href="'.WEBSITE.LANG.'/'.htmlentities($val['slug']).'">'.$val['title'].'</a></li>';
+							if($x<($fcount-1)){ echo " / "; }
+							$x++;
+						}
+						?>
 					</ul>
 					<ul>
 						<span>Export catalog: &nbsp;</span>
@@ -22,11 +36,26 @@
 						<!-- <li><a href="<?=WEBSITE.LANG?>/en/business-portal">Enquires</a></li> -->
 					</ul>
 					<ul>
-						<span>About us: &nbsp;</span>
-						<li><a href="<?=WEBSITE.LANG?>/about-us/our-services">Our services</a></li> / 
-						<li><a href="<?=WEBSITE.LANG?>/about-us/events">Events</a></li> / 
-						<li><a href="<?=WEBSITE.LANG?>/about-us/news">News</a></li> / 
-						<li><a href="<?=WEBSITE.LANG?>/about-us/contact-us">Contact us</a></li>
+						<span><?=$get_page_title->get($_SESSION["c"],6)?>: &nbsp;</span>
+						<?php
+						$x = 0;
+						foreach ($second as $val) {
+							echo '<li><a href="'.WEBSITE.LANG.'/'.htmlentities($val['slug']).'">'.$val['title'].'</a></li>';
+							if($x<($scount-1)){ echo " / "; }
+							$x++;
+						}
+						?>
+					</ul>
+					<ul>
+						<span><?=$get_page_title->get($_SESSION["c"],7)?>: &nbsp;</span>
+						<?php
+						$x = 0;
+						foreach ($third as $val) {
+							echo '<li><a href="'.WEBSITE.LANG.'/'.htmlentities($val['slug']).'">'.$val['title'].'</a></li>';
+							if($x<($tcount-1)){ echo " / "; }
+							$x++;
+						}
+						?>
 					</ul>	
 
 				</div>

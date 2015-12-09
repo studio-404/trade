@@ -65,7 +65,7 @@ class profileproducts extends connection{
 		$data["components"] = json_decode($components);  
 
 		if(!isset($_SESSION["user_data"]["companyname"]) && isset($_SESSION["tradewithgeorgia_username"])){
-			$sql = 'SELECT * FROM `studio404_users` WHERE `id`=:companyId AND `username`=:username AND `allow`!=:one AND `status`!=:one';
+			$sql = 'SELECT * FROM `studio404_users` WHERE `id`=:companyId AND `username`=:username AND `status`!=:one';
 			$prepare = $conn->prepare($sql);
 			$prepare->execute(array(
 				":username"=>$_SESSION["tradewithgeorgia_username"], 
@@ -73,6 +73,8 @@ class profileproducts extends connection{
 				":one"=>1
 			));
 			$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
+			$_SESSION["user_data"]["id"] = $fetch["id"]; // *
+			$_SESSION["user_data"]["allow"] = $fetch["allow"]; // *
 			$_SESSION["user_data"]["picture"] = $fetch["picture"]; // *
 			$_SESSION["user_data"]["companyname"] = $fetch["namelname"]; // *
 			$_SESSION["user_data"]["sector"] = $fetch["sector_id"]; // *

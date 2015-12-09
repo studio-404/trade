@@ -16,8 +16,15 @@
 		}
 ?>
 <div class="container" id="container">
+	<?php
+	if($_SESSION["user_data"]["allow"]==1):
+	?>
+	<center style="margin:10px 0px; padding:0;"><font style="font-size:18px; color:red; text-aling:center; font-weigth:bold">Sorry, You are disallowed by website administrator !</font></center>
+	<?php
+	endif;
+	?>
 	<div class="page_title_1">
-		<span class="profile-header-procent">Profile ( <span title="Service Provider" style="cursor:pointer">Service</span> <a href="javascript:;" data-changeto="ex" title="Change to exporter" class="changeprofiletype"><img src="<?=TEMPLATE?>img/change.svg" width="25" height="25" alt="Exp Icon" /></a> )</span>
+		<span class="profile-header-procent">Profile N<?=$_SESSION["user_data"]["id"]?> ( <span title="Service Provider" style="cursor:pointer">Service</span> <a href="javascript:;" data-changeto="ex" title="Change to exporter" class="changeprofiletype"><img src="<?=TEMPLATE?>img/change.svg" width="25" height="25" alt="Exp Icon" /></a> )</span>
 
 		<div class="procent-box">
 			<div class="procent-publish" style="width:<?=$data["calculate"]["topublish"]?>%"></div>
@@ -255,7 +262,7 @@
 					<div class="btn btn-upload btn-block"> 
 						<span id="txtFupload">UPLOAD LOGO</span> <input type="file" name="inputUserLogo" class="input_type_file" accept="image/*" id="inputUserLogo" />
 					</div>
-				<<!-- /form> --> 
+				<!-- /form> --> 
 				<font class="error-msg" style="padding:5px 15px 0 0;" id="imageWarning">Please select 300x170 px photo or system resizes it itself !</font>
 				<font class="error-msg companylogo_required">Company logo is required !</font>
 			</div>

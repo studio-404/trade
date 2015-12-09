@@ -1,5 +1,5 @@
 <?php if(!defined("DIR")){ exit(); }
-class usefulllinks extends connection{
+class usefullinks extends connection{
 	function __construct($c){
 		$this->template($c);
 	}

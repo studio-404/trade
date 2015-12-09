@@ -48,6 +48,7 @@
 						<span class="cell">Date</span>
 						<span class="cell"><?=($data["active"]=="users") ? 'Username' : 'Name'?></span>
 						<span class="cell"><?=($data["active"]=="users") ? 'User type' : 'Username'?></span>
+						<span class="cell" style="width:100px">To Complete</span>
 						<span class="cell" style="width:100px">Action</span>
 					</div>					
 					<?=$data['table']?>

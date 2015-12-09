@@ -19,6 +19,8 @@ class model_admin_editnewsitem extends connection{
 			$event_when = (isset($_POST['event_when'])) ? $_POST["event_when"] : '';
 			$event_fee = (isset($_POST['event_fee'])) ? $_POST["event_fee"] : '';
 			$event_website = (isset($_POST['event_website'])) ? $_POST["event_website"] : '';
+			$visibility = (isset($_POST['visibility']) && $_POST['visibility']=="true") ? 2 : 1;
+			
 			// update main columns
 			$sql = 'UPDATE `studio404_module_item` SET 
 			`title`=:smi_title, 
@@ -30,7 +32,8 @@ class model_admin_editnewsitem extends connection{
 			`videourl`=:smi_videourl, 
 			`short_description`=:smi_short_description, 
 			`long_description`=:smi_long_description, 
-			`tags`=:smi_tags 
+			`tags`=:smi_tags, 
+			`visibility`=:smi_visibility 
 			WHERE 
 			`idx`=:smi_idx AND 
 			`lang`=:lang AND 
@@ -50,7 +53,8 @@ class model_admin_editnewsitem extends connection{
 				":smi_tags"=>$_POST['tags'], 
 				":lang"=>LANG_ID,
 				":status"=>1,
-				":smi_idx"=>$_GET['newsidx']
+				":smi_idx"=>$_GET['newsidx'],
+				":smi_visibility"=>$visibility 
 			));
 
 			//update every language columne
