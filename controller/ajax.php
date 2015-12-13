@@ -18,6 +18,22 @@ class ajax extends connection{
 	public function requests($c){
 		$conn = $this->conn($c); 
 
+		if(Input::method("POST","logAsAdministrator")=="true" && Input::method("POST","uid") && Input::method("POST","ut") && Input::method("POST","un")){
+			unset($_SESSION["user_data"]); 
+			unset($_SESSION["tradewithgeorgia_username"]); 
+			unset($_SESSION["tradewithgeorgia_company_type"]); 
+			unset($_SESSION["tradewithgeorgia_user_id"]); 
+			unset($_SESSION["tradewithgeorgia_user_namelname"]); 
+			
+			$_SESSION["tradewithgeorgia_username"] = Input::method("POST","un"); 
+			$_SESSION["tradewithgeorgia_company_type"] = Input::method("POST","ut"); 
+			$_SESSION["tradewithgeorgia_user_id"] = Input::method("POST","uid"); 
+			if(!empty(Input::method("POST","nln"))){
+				$_SESSION["tradewithgeorgia_user_namelname"] = Input::method("POST","nln"); 
+			}
+			echo "Done";
+		}
+
 		if(Input::method("POST","changeusertype")=="true" && Input::method("POST","t") && $_SESSION["tradewithgeorgia_user_id"]) :
 			$userid = $_SESSION["tradewithgeorgia_user_id"]; 
 			$typetochange = Input::method("POST","t"); 

@@ -41,7 +41,20 @@ $(document).ready(function(){
 });
 
 $(document).on("click",".logasuser-administrator",function(result){
-	alert("OMG, You clicked me :) ");
+	var userid = $(this).data("userid");
+	var usertype = $(this).data("usertype");
+	var username = $(this).data("username");
+	var namelname = $(this).data("namelname");
+	$.post("http://"+document.domain+"/en/ajax", { logAsAdministrator:true, uid:userid, ut:usertype, un:username, nln:namelname  },function(result){
+		if(result=="Done"){
+			if(usertype=="serviceprovider"){
+				var url = "http://"+document.domain+"/en/profile-service";
+			}else{
+				var url = "http://"+document.domain+"/en/profile-products";
+			}
+   			window.open(url , '_blank');
+		}
+	});
 });
 
 

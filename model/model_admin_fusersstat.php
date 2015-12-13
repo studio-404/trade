@@ -396,7 +396,7 @@ class model_admin_fusersstat extends connection{
 					$out .= '<span class="cell">'.$tocomplete["tocomplete"].'%</span>';
 					$out .= '<span class="cell">';
 					if($rows['company_type']=="manufacturer" || $rows['company_type']=="serviceprovider"){
-						$out .= '<a href="javascript:void(0)" title="Log as User" class="logasuser-administrator" data-userid="'.$rows['id'].'" data-usertype="'.$rows['company_type'].'"><i class="fa fa-unlock-alt"></i></a>';//p08H6UcO4
+						$out .= '<a href="javascript:void(0)" title="Log as User" class="logasuser-administrator" data-userid="'.$rows['id'].'" data-usertype="'.$rows['company_type'].'" data-username="'.$rows['username'].'" data-namelname="'.$rows['namelname'].'"><i class="fa fa-unlock-alt"></i></a>';
 					}else{
 						$out .= '<a href="javascript:void(0)" title="Log as User" style="opacity:0.4"><i class="fa fa-unlock-alt"></i></a>';//p08H6UcO4
 					}

@@ -1,5 +1,6 @@
 <?php
 $config = include 'config/config.php';
+if(!isset($_SESSION['user404'])){ exit(); }
 //TODO switch to array
 extract($config, EXTR_OVERWRITE);
 
