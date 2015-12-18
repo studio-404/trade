@@ -7,7 +7,7 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . open.php [QSA,L]
 
 # choose opener file
-DirectoryIndex open.php 
+DirectoryIndex open.php
 
 # block access to some sensible files
 <Files ~ "^sftp-config.json|.git|.htaccess|config.php|functions|backup|controller|model|view|_plugins|_temporaty">

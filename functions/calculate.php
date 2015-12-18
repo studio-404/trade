@@ -4,7 +4,7 @@ class calculate {
 
 		if($type=="product"){
 			if($session){
-				$tocomplete = @(count(array_filter($session)) * 4) + 4;
+				$tocomplete = @(count(array_filter($session)) * 4) - 4;
 
 				$topublish = 10; 
 				if($session["picture"]!=""){
@@ -52,7 +52,7 @@ class calculate {
 			}
 		}else if($type=="service"){
 
-			$tocomplete = @(count(array_filter($session)) * 4) + 8;
+			$tocomplete = @(count(array_filter($session)) * 4) - 4;
 
 			$topublish = 0; 
 

@@ -84,12 +84,12 @@ include("recover_password.php");
 include("message.php");
 include("addcertificate.php");
 ?>
-<!-- <center>Website Is Under Development</center> -->
+<center style="width:100%; height:35px; font-size:16px; color:white; line-height:35px; font-family:roboto; position:absolute; top:0; text-align:center; z-index:1000">Website Is Under Development</center>
 <header id="header" class="container-fluid" style="padding:0;">
 	<div class="container">
 		<div id="header_line">
 			<div class="col-sm-12 text-right padding_0">			
-				<div id="members_area">	
+				<div id="members_area" style="position:relative; z-index:1001">	
 					<?php if(!isset($_SESSION["tradewithgeorgia_username"])) { ?>			
 					<a href="#" data-toggle="modal" data-target="#register_popup">Register</a> | 
 					<a href="#" data-toggle="modal" data-target="#login_popup">Log In</a> 

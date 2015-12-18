@@ -63,11 +63,12 @@ $first = array_slice($data["event_list"], 0, 1);
 		<div class="text_formats">
 			<?=$first[0]["short_description"]?>
 		</div>
-		
+		<?php if($first[0]["long_description"]) :?>
 		<div class="event_prog">
 			<div class="title">Participants</div>
 			<?=$first[0]["long_description"]?>
 		</div>
+		<?php endif; ?>
 		<?php if($first[0]["expiredate"] > time()) : ?>	
 		<div class="btn btn-yellow eventRegister" data-homepage="false" data-eventid="<?=$first[0]["idx"]?>" style="margin-top:30px;">REGISTER FOR  THIS EVENT</div>
 		<?php endif; ?>

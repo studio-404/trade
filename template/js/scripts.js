@@ -268,7 +268,6 @@ $(document).on("click","#save_changes",function(){
 	//alert("shevide"); 
 	var companyname = $("#companyname").val(); 
 	var establishedin = $("#establishedin").val(); 
-	var productioncapasity = $("#productioncapasity").val(); 
 	var address = $("#address").val(); 
 	var mobile = $("#mobile").val(); 
 	var numemploy = $("#numemploy").val(); 
@@ -392,7 +391,6 @@ $(document).on("click","#save_changes",function(){
 			p_sector:JSON.stringify(sector), 
 			p_subsector:JSON.stringify(subsector), 
 			p_establishedin:establishedin, 
-			p_productioncapasity:productioncapasity, 
 			p_address:address, 
 			p_mobiles:mobile, 
 			p_numemploy:numemploy, 
@@ -419,6 +417,7 @@ $(document).on("click","#save_changes",function(){
 				//location.reload();
 				$("#uploadDocuments").submit();
 			} 
+			console.log(d);
 		});
 	}
 });
@@ -1629,6 +1628,7 @@ $(document).on("click",".loadmore",function(){
 
 	if(type=="companylist"){
 		$(this).hide();
+		
 		$(".loader").fadeIn("slow"); 
 		$.post("http://"+document.domain+"/en/ajax",{
 			loadmore:true, 
@@ -1655,22 +1655,42 @@ $(document).on("click",".loadmore",function(){
 					insert += '<div class="col-sm-2 no-float itemssss"><img src="http://'+document.domain+'/image?f=http://'+document.domain+'/files/usersimage/'+obj[i].su_picture+'&w=150&h=75" class="img-responsive" alt="logo" /></div>';
 					insert += '<div class="col-sm-2 no-float itemssss">';
 					insert += '<ul class="text_formats">';
-					insert += '<li>'+obj[i].su_sub_sector_id+'</li>';
+					if(obj[i].su_sub_sector_id.length > 35){
+						var subst = obj[i].su_sub_sector_id.substring(0, 35)+"...";
+					}else{
+						var subst = obj[i].su_sub_sector_id;
+					}
+					insert += '<li>'+subst+'</li>';
 					insert += '</ul>';
 					insert += '</div>';
 					insert += '<div class="col-sm-2 no-float itemssss">';
 					insert += '<ul class="text_formats">';
-					insert += '<li>'+obj[i].su_products+'</li>';
+					if(obj[i].su_products.length > 35){
+						var subst2 = obj[i].su_products.substring(0, 35)+"...";
+					}else{
+						var subst2 = obj[i].su_products;
+					}
+					insert += '<li>'+subst2+'</li>';
 					insert += '</ul>';
 					insert += '</div>';
 					insert += '<div class="col-sm-4 no-float itemssss">';
 					insert += '<ul class="text_formats">';
-					insert += '<li>'+obj[i].su_export_markets_id+'</li>';
+					if(obj[i].su_export_markets_id.length > 35){
+						var subst3 = obj[i].su_export_markets_id.substring(0, 35)+"...";
+					}else{
+						var subst3 = obj[i].su_export_markets_id;
+					}
+					insert += '<li>'+subst3+'</li>';
 					insert += '</ul>';
 					insert += '</div>';
 					insert += '<div class="col-sm-2 no-float itemssss">';
 					insert += '<ul class="text_formats">';
-					insert += '<li>'+obj[i].su_certificates+'</li>';
+					if(obj[i].su_certificates.length > 35){
+						var subst4 = obj[i].su_certificates.substring(0, 35)+"...";
+					}else{
+						var subst4 = obj[i].su_certificates;
+					}
+					insert += '<li>'+subst4+'</li>';
 					insert += '</ul>';
 					insert += '</div>';
 					insert += '</div>';
@@ -1706,7 +1726,7 @@ $(document).on("click",".loadmore",function(){
 					insert += '<div class="names">'+obj[i].title+'</div>';
 					insert += '<div class="content_divs">';
 					if(obj[i].picture!=""){
-						insert += '<div class="col-sm-2 no-float itemssss">p<img src="http://'+document.domain+'/image?f=http://'+document.domain+'/files/usersproducts/'+obj[i].picture+'&w=196&h=172" class="img-responsive" width="100%" alt="" /></div>';
+						insert += '<div class="col-sm-2 no-float itemssss"><img src="http://'+document.domain+'/image?f=http://'+document.domain+'/files/usersproducts/'+obj[i].picture+'&w=196&h=172" class="img-responsive" width="100%" alt="" /></div>';
 					}else{
 						insert += '<div class="col-sm-2 no-float itemssss"><img src="http://'+document.domain+'/template/img/p.png" class="img-responsive" width="100%" alt="" /></div>';
 					}
@@ -2029,7 +2049,7 @@ $(document).on("click",".loadmore",function(){
 				$(".appends").append(insert);
 				$(".loadmore").show(); 
 			}else{
-				$(".appends").append("<p style=\"width:100%; clear:both\">Sorry, there is no more data!</p>");
+				$(".appends").append("<p style=\"width:100%; clear:both; padding:0 10px;\">Sorry, there is no more data!</p>");
 			}
 		});
 	}else if(type=="newslist"){

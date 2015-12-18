@@ -19,7 +19,7 @@
 	<?php
 	if($_SESSION["user_data"]["allow"]==1):
 	?>
-	<center style="margin:10px 0px; padding:0;"><font style="font-size:18px; color:red; text-aling:center; font-weigth:bold">Sorry, You are disallowed by website administrator !</font></center>
+	<center style="margin:10px 0px; padding:0;"><font style="font-size:18px; color:red; text-aling:center; font-weigth:bold">Sorry, You are disallowed by website administrator, Changes will not be saved !</font></center>
 	<?php
 	endif;
 	?>
@@ -360,7 +360,7 @@
 				</div>
 			</div>
 			<div class="col-sm-3">
-				<button class="btn btn-yellow" id="save_changes">SAVE CHANGES</button>
+				<button type="button" class="btn btn-yellow" id="save_changes">SAVE CHANGES</button>
 			</div>
 		</div>
 	</form>

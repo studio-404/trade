@@ -457,7 +457,6 @@ class ajax extends connection{
 		if(Input::method("POST","changeprofile")=="true" && $_SESSION["tradewithgeorgia_username"] && strlen(Input::method("POST","p_about")) <= 350){
 			$p_companyname = strip_tags(Input::method("POST","p_companyname")); 
 			$p_establishedin = strip_tags(Input::method("POST","p_establishedin"));
-			$p_productioncapasity = strip_tags(Input::method("POST","p_productioncapasity"));
 			$p_address = strip_tags(Input::method("POST","p_address"));
 			$p_mobiles = strip_tags(Input::method("POST","p_mobiles"));
 			$p_numemploy = strip_tags(Input::method("POST","p_numemploy"));
@@ -474,18 +473,6 @@ class ajax extends connection{
 			$p_ad_mobile2 = strip_tags(Input::method("POST","p_ad_mobile2"));
 			$p_ad_email2 = strip_tags(Input::method("POST","p_ad_email2"));
 
-			// if(Input::method("POST","p_ad_upload_catalog")!=""){
-			// 	$extention = explode(".",Input::method("POST","p_ad_upload_catalog")); 
-			// 	$ext = strtolower(end($extention)); 
-			// 	if($ext=="pdf"){
-			// 		$str = file_get_contents("php://input");
-			// 		$p_ad_upload_catalog = md5(time())."manu.pdf";
-			// 		$path = DIR.'/files_pre/'.$p_ad_upload_catalog;
-			// 		$path2 = DIR.'/files/document/'.$p_ad_upload_catalog;
-			// 		file_put_contents($path, $str);
-			// 		rename($path, $path2);
-			// 	}
-			// }
 			
 			$p_contactemail = strip_tags(Input::method("POST","p_contactemail"));
 			$p_about = strip_tags(nl2br(Input::method("POST","p_about")));
@@ -506,18 +493,11 @@ class ajax extends connection{
 			$p_certificates = json_decode(Input::method("POST","p_certificates"));
 			$p_certificates = implode(",", $p_certificates); 
 
-			// $str = file_get_contents("php://input");
-			// if($str){
-			// 	$filename = md5(time()).".jpg";
-			// 	$path = 'testu/'.$filename;
-			// 	file_put_contents($path, $str);
-			// }
 			$sql = 'UPDATE `studio404_users` SET 
 			`namelname`=:namelname, 
 			`sector_id`=:sector_id, 
 			`sub_sector_id`=:sub_sector_id, 
 			`established_in`=:established_in, 
-			`production_capacity`=:production_capacity, 
 			`address`=:address, 
 			`mobile`=:mobile, 
 			`number_of_employes`=:number_of_employes, 
@@ -548,7 +528,6 @@ class ajax extends connection{
 				":sector_id"=>$p_sector, 
 				":sub_sector_id"=>$p_subsector, 
 				":established_in"=>$p_establishedin, 
-				":production_capacity"=>$p_productioncapasity, 
 				":address"=>$p_address, 
 				":mobile"=>$p_mobiles, 
 				":number_of_employes"=>$p_numemploy, 
@@ -571,12 +550,10 @@ class ajax extends connection{
 				":companyId"=>$_SESSION["tradewithgeorgia_user_id"],  
 				":one"=>1
 			));
-
 			$_SESSION["user_data"]["companyname"] = $p_companyname;
 			$_SESSION["user_data"]["sector"] = $p_sector;
 			$_SESSION["user_data"]["subsector"] = $p_subsector;
 			$_SESSION["user_data"]["establishedin"] = $p_establishedin;
-			$_SESSION["user_data"]["productioncapasity"] = $p_productioncapasity;
 			$_SESSION["user_data"]["address"] = $p_address;
 			$_SESSION["user_data"]["mobiles"] = $p_mobiles;
 			$_SESSION["user_data"]["numemploy"] = $p_numemploy;
@@ -597,7 +574,6 @@ class ajax extends connection{
 			$_SESSION["user_data"]["about"] = $p_about;
 			$_SESSION["user_data"]["products"] = $p_products;
 			$_SESSION["user_data"]["exportmarkets"] = $p_exportmarkets;
-
 			echo "Done";
 		}
 
@@ -661,17 +637,18 @@ class ajax extends connection{
 			`export_markets_id`=:export_markets_id 
 			WHERE 
 			`username`=:username AND 
+			`company_type`=:company_type AND 
 			`id`=:companyId AND 
 			`allow`!=:one AND 
 			`status`!=:one 
 			';
+
 			$prepare = $conn->prepare($sql); 
 			$prepare->execute(array(
 				":namelname"=>$p_companyname, 
 				":sector_id"=>$p_sector, 
 				":sub_sector_id"=>$p_subsector, 
 				":established_in"=>$p_establishedin, 
-				":production_capacity"=>$p_productioncapasity, 
 				":address"=>$p_address, 
 				":mobile"=>$p_mobiles, 
 				":number_of_employes"=>$p_numemploy, 
@@ -692,31 +669,33 @@ class ajax extends connection{
 				":export_markets_id"=>$p_exportmarkets, 
 				":username"=>$_SESSION["tradewithgeorgia_username"], 
 				":companyId"=>$_SESSION["tradewithgeorgia_user_id"], 
+				":company_type"=>$_SESSION["tradewithgeorgia_company_type"], 
 				":one"=>1
 			));
-
-			$_SESSION["user_data"]["companyname"] = $p_companyname;
-			$_SESSION["user_data"]["sector"] = $p_sector;
-			$_SESSION["user_data"]["establishedin"] = $p_establishedin;
-			$_SESSION["user_data"]["address"] = $p_address;
-			$_SESSION["user_data"]["mobiles"] = $p_mobiles;
-			$_SESSION["user_data"]["numemploy"] = $p_numemploy;
-			$_SESSION["user_data"]["contactpersones"] = $p_contactpersones;
-			$_SESSION["user_data"]["officephone"] = $p_officephone;
-			$_SESSION["user_data"]["companysize"] = $p_companysize;
-			$_SESSION["user_data"]["webaddress"] = $p_webaddress;
-
-			$_SESSION["user_data"]["ad_position1"] = $p_ad_position1;
-			$_SESSION["user_data"]["ad_email1"] = $p_ad_email1;
-			$_SESSION["user_data"]["ad_person2"] = $p_ad_person2;
-			$_SESSION["user_data"]["ad_position2"] = $p_ad_position2;
-			$_SESSION["user_data"]["ad_mobile2"] = $p_ad_mobile2;
-			$_SESSION["user_data"]["ad_email2"] = $p_ad_email2;
-			
-			$_SESSION["user_data"]["contactemail"] = $p_contactemail;
-			$_SESSION["user_data"]["about"] = $p_about;
 		
-			echo "Done";
+				$_SESSION["user_data"]["companyname"] = $p_companyname;
+				$_SESSION["user_data"]["sector"] = $p_sector;
+				$_SESSION["user_data"]["establishedin"] = $p_establishedin;
+				$_SESSION["user_data"]["address"] = $p_address;
+				$_SESSION["user_data"]["mobiles"] = $p_mobiles;
+				$_SESSION["user_data"]["numemploy"] = $p_numemploy;
+				$_SESSION["user_data"]["contactpersones"] = $p_contactpersones;
+				$_SESSION["user_data"]["officephone"] = $p_officephone;
+				$_SESSION["user_data"]["companysize"] = $p_companysize;
+				$_SESSION["user_data"]["webaddress"] = $p_webaddress;
+
+				$_SESSION["user_data"]["ad_position1"] = $p_ad_position1;
+				$_SESSION["user_data"]["ad_email1"] = $p_ad_email1;
+				$_SESSION["user_data"]["ad_person2"] = $p_ad_person2;
+				$_SESSION["user_data"]["ad_position2"] = $p_ad_position2;
+				$_SESSION["user_data"]["ad_mobile2"] = $p_ad_mobile2;
+				$_SESSION["user_data"]["ad_email2"] = $p_ad_email2;
+				
+				$_SESSION["user_data"]["contactemail"] = $p_contactemail;
+				$_SESSION["user_data"]["about"] = $p_about;
+				echo "Done";
+			
+			
 		}
 
 

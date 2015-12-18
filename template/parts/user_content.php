@@ -1,6 +1,6 @@
 <?php if($data["get_type"]=="manufacturer") : ?>
 			<ul class="text_formats_ul">
-				<li class="text_formats"><b>Company description</b></li>
+				<li class="text_formats"><b>Company Description</b></li>
 				<li class="text_formats">
 					<?=nl2br(strip_tags($data["fetch"]["about"]))?>
 				</li>

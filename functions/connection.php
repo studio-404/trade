@@ -14,7 +14,7 @@ class connection
 		try{
 			$host = 'mysql:host='.$c['database.hostname'].';dbname='.$c['database.name'].";charset=utf8"; 
 			$this->HANDLER = new PDO($host,$c['database.username'],$c['database.password']); 
-			$this->HANDLER->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+			$this->HANDLER->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$this->HANDLER->exec("set names utf8"); 
 		}catch(PDOException $e){
 			//$e->getMessage();
