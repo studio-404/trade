@@ -29,7 +29,7 @@
 						?>
 					</ul>
 					<ul>
-						<span>Export catalog: &nbsp;</span>
+						<span><?=$data["language_data"]["exportcatalog"]?>: &nbsp;</span>
 						<li><a href="<?=WEBSITE.LANG?>/export-catalog">Companies</a></li> / 
 						<li><a href="<?=WEBSITE.LANG?>/export-catalog?view=products">Products</a></li> / 
 						<li><a href="<?=WEBSITE.LANG?>/export-catalog?view=services">Services</a></li> 

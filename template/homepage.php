@@ -227,7 +227,7 @@ $ctext = new ctext();
 				</div>
 				<div class="col-sm-4">
 					<div class="item">
-						<div class="title">Register for Suppliers database</div>
+						<div class="title"><?=$data["language_data"]["registerforsuppliersdatabase"]?></div>
 						<div class="text">And Join our Community to gain access to our services for companies interested in finding business partners.</div>
 						<div class="form-group">
 							<div class="input-group"> 

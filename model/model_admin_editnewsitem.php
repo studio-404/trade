@@ -19,6 +19,7 @@ class model_admin_editnewsitem extends connection{
 			$event_when = (isset($_POST['event_when'])) ? $_POST["event_when"] : '';
 			$event_fee = (isset($_POST['event_fee'])) ? $_POST["event_fee"] : '';
 			$event_website = (isset($_POST['event_website'])) ? $_POST["event_website"] : '';
+			$event_registration = (isset($_POST['event_registration'])) ? $_POST["event_registration"] : 'on';
 			$visibility = (isset($_POST['visibility']) && $_POST['visibility']=="true") ? 2 : 1;
 			
 			// update main columns
@@ -29,6 +30,7 @@ class model_admin_editnewsitem extends connection{
 			`event_when`=:smi_event_when, 
 			`event_fee`=:smi_event_fee, 
 			`event_website`=:smi_event_website, 
+			`event_registration`=:smi_event_registration, 
 			`videourl`=:smi_videourl, 
 			`short_description`=:smi_short_description, 
 			`long_description`=:smi_long_description, 
@@ -47,6 +49,7 @@ class model_admin_editnewsitem extends connection{
 				":smi_event_when"=>$event_when, 
 				":smi_event_fee"=>$event_fee, 
 				":smi_event_website"=>$event_website, 
+				":smi_event_registration"=>$event_registration, 
 				":smi_videourl"=>$_POST['videourl'], 
 				":smi_short_description"=>$_POST['short_description'], 
 				":smi_long_description"=>$_POST['long_description'], 

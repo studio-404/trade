@@ -69,8 +69,17 @@
 			<div class="title" style="padding:10px 0;">Participants</div>
 			<?=$first[0]->long_description?>
 		</div>
-		<?php if($first[0]->date > time()) : ?>
+
+		<?php
+		if($first[0]->event_registration=="on") :
+		?>
 		<div class="btn btn-yellow eventRegister" data-homepage="false" data-eventid="<?=$first[0]->idx?>" style="margin-top:30px;">REGISTER FOR  THIS EVENT</div>
+		<?php endif; ?>
+
+		<?php
+		if($first[0]->event_registration=="off") :
+		?>
+		<div class="btn btn-yellow" style="margin-top:30px; background-color:#b5b6b8">REGISTRATION IS FINISHED</div>
 		<?php endif; ?>
 
 		<hr class="line_effect">

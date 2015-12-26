@@ -1336,6 +1336,7 @@ class ajax extends connection{
 			`studio404_module`.`status`!=:status AND 
 			`studio404_module`.`idx`=`studio404_module_item`.`module_idx` AND 
 			`studio404_module_item`.`date`>:current AND 
+			`studio404_module_item`.`event_registration`="on" AND 
 			`studio404_module_item`.`lang`=:lang AND 
 			`studio404_module_item`.`status`!=:status 
 			ORDER BY 

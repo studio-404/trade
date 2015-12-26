@@ -70,6 +70,7 @@ class edit_page_interface extends connection{
 				`studio404_module_item`.`event_when` AS smi_event_when,  
 				`studio404_module_item`.`event_fee` AS smi_event_fee, 
 				`studio404_module_item`.`event_website` AS smi_event_website, 
+				`studio404_module_item`.`event_registration` AS smi_event_registration, 
 				`studio404_module_item`.`videourl` AS smi_videourl,  
 				`studio404_module_item`.`short_description` AS smi_short_description,  
 				`studio404_module_item`.`long_description` AS smi_long_description,  
@@ -690,6 +691,15 @@ class edit_page_interface extends connection{
 
 			$out .= '<label for="event_website">Event Web page: </label>';
 			$out .= '<input type="text" name="event_website" id="event_website" value="'.htmlentities($fetch["smi_event_website"]).'" autocomplete="off">';
+
+			if($fetch["smi_event_registration"]=="on"){ $on = ' selected="selected"'; $off=''; }
+			else if($fetch["smi_event_registration"]=="off"){ $off = ' selected="selected"'; $on=''; }
+			
+			$out .= '<label for="event_registration">Event Registering: </label>';
+			$out .= '<select name="event_registration" id="event_registration">';
+			$out .= '<option value="on"'.$on.'>On</option>';
+			$out .= '<option value="off"'.$off.'>Off</option>';
+			$out .= '</select>';
 		}
 
 
