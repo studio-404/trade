@@ -1663,7 +1663,7 @@ $(document).on("click",".loadmore",function(){
 					insert += '<li>'+subst+'</li>';
 					insert += '</ul>';
 					insert += '</div>';
-					insert += '<div class="col-sm-2 no-float itemssss">';
+					insert += '<div class="col-sm-3 no-float itemssss">';
 					insert += '<ul class="text_formats">';
 					if(obj[i].su_products.length > 35){
 						var subst2 = obj[i].su_products.substring(0, 35)+"...";
@@ -1673,10 +1673,10 @@ $(document).on("click",".loadmore",function(){
 					insert += '<li>'+subst2+'</li>';
 					insert += '</ul>';
 					insert += '</div>';
-					insert += '<div class="col-sm-4 no-float itemssss">';
+					insert += '<div class="col-sm-3 no-float itemssss">';
 					insert += '<ul class="text_formats">';
-					if(obj[i].su_export_markets_id.length > 35){
-						var subst3 = obj[i].su_export_markets_id.substring(0, 35)+"...";
+					if(obj[i].su_export_markets_id.length > 100){
+						var subst3 = obj[i].su_export_markets_id.substring(0, 100)+"...";
 					}else{
 						var subst3 = obj[i].su_export_markets_id;
 					}

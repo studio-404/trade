@@ -79,7 +79,7 @@
 					<?php endforeach; ?>					
 				</ul>
 			</div>
-			<div class="col-sm-2 filter_cols<?=(isset($_GET['products']) && !empty($_GET['products'])) ? ' selected' : ''?>">
+			<div class="col-sm-3 filter_cols<?=(isset($_GET['products']) && !empty($_GET['products'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					Activity <span class="caret"></span> <?=(isset($_GET['products']) && !empty($_GET['products'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="products"></div>' : ''?>
 				</a>
@@ -95,7 +95,7 @@
 					<?php endforeach; ?>					
 				</ul>
 			</div>
-			<div class="col-sm-4 filter_cols<?=(isset($_GET['exportmarkets']) && !empty($_GET['exportmarkets'])) ? ' selected' : ''?>">
+			<div class="col-sm-3 filter_cols<?=(isset($_GET['exportmarkets']) && !empty($_GET['exportmarkets'])) ? ' selected' : ''?>">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					Exporting <span class="caret"></span> <?=(isset($_GET['exportmarkets']) && !empty($_GET['exportmarkets'])) ? '<div class="clearFilter" title="Clear filter" data-clearMe="exportmarkets"></div>' : ''?>
 				</a>
@@ -129,17 +129,7 @@
 	?>
 	<a href="<?=WEBSITE.LANG?>/user?t=<?=$val["su_companytype"]?>&amp;i=<?=$val["su_id"]?>">	
 		<div class="filter_content">
-			<?php
-				// if($val["su_companytype"]=="manufacturer"){
-				// 	$userXtype = "Product";
-				// }else if($val["su_companytype"]=="serviceprovider"){
-				// 	$userXtype = "Service";
-				// }else if($val["su_companytype"]=="company"){
-				// 	$userXtype = "Company";
-				// }else if($val["su_companytype"]=="individual"){
-				// 	$userXtype = "Individual";
-				// }
-				?>
+			
 			<div class="names"><?=$val["su_namelname"]?> </div>
 			<div class="content_divs">
 				<div class="col-sm-2 no-float itemssss"><img src="<?=$logo?>" class="img-responsive"></div>
@@ -148,14 +138,14 @@
 					<li><?=$ctext->cut($retrieve_users_info->retrieveDb($val["su_sub_sector_id"]),35)?></li>
 					</ul>
 				</div>
-				<div class="col-sm-2 no-float itemssss">
+				<div class="col-sm-3 no-float itemssss">
 					<ul class="text_formats">
 						<li><?=$ctext->cut($retrieve_users_info->retrieveDb($val["su_products"]),35)?></li>
 					</ul>
 				</div>
-				<div class="col-sm-4 no-float itemssss">
+				<div class="col-sm-3 no-float itemssss">
 					<ul class="text_formats">
-						<li><?=$ctext->cut($retrieve_users_info->retrieveDb($val["su_export_markets_id"]),35)?></li>
+						<li><?=$ctext->cut($retrieve_users_info->retrieveDb($val["su_export_markets_id"]),100)?></li>
 					</ul>
 				</div>
 				<div class="col-sm-2 no-float itemssss">
