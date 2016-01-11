@@ -60,6 +60,7 @@ main .center .content .search { width: 100%; position: relative; }
 main .center .content .searchTerm { float: left; width: 100%; border: 3px solid #ef4836; padding: 5px; height: 20px; border-radius: 5px; outline: none; color: #9DBFAF; }
 main .center .content .searchTerm:focus{ color: #ef4836; }
 main .center .content .searchButton { position: absolute; right: -50px; width: 40px; height: 36px; opacity: 0; cursor: pointer; }
+main .center .content .SearchTooManyData { position: absolute; right: -50px; width: 40px; height: 36px; opacity: 0; cursor: pointer; }
 main .center .content .search:before { position: absolute; right: -50px; width: 40px; height: 36px; line-height: 36px; background: #ef4836; text-align: center; color: #fff; border-radius: 5px; font-family: 'FontAwesome'; content: '\f002'; }
 main .center .content .wrap{ margin-right: 50px; width: 250px; float: right; font-family: 'roboto' }
 main .center .content .cell a{ color: #717171; padding: 0 2px; text-align: center; text-decoration: none; }

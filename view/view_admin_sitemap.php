@@ -29,6 +29,18 @@
 				<div class="button">
 					<a href="?action=addSitemapItem&amp;super=<?=$_GET['super']?>"><i class="fa fa-plus-circle"></i> <span>Add</span></a>
 				</div>
+				<?php 
+				if($data['count']>250){
+				?>
+				<div class="wrap">
+					<div class="search">
+						<input type="text" class="searchTerm" value="" placeholder="Too many data, Search By Title">
+						<input type="submit" class="SearchTooManyData" data-super="<?=(isset($_GET['super'])) ? $_GET['super'] : 0?>" data-token="<?=$_SESSION["token"]?>">
+					</div>
+				</div>
+				<?php
+				}
+				?>
 
 				<!-- <div class="button" style="margin-left:10px">
 					<a href="javascript:;" onclick="startDraging('1,2')" style="background:#555555"><i class="fa fa-arrows"></i> <span>Start Draging</span></a>

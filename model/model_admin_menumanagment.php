@@ -27,10 +27,30 @@ class model_admin_menumanagment extends connection{
 	public function select_sub($c){
 		$out = array();
 		$conn = $this->conn($c);
-		$sql = 'SELECT * FROM `studio404_pages` WHERE `menu_type`!=:menu_type AND `cid`=:cid AND `status`!=:status AND `lang`=:lang ORDER BY `position` ASC';
-		$exe_array = array(":cid"=>$_GET['super'], ":menu_type"=>"super", ":status"=>1, ":lang"=>LANG_ID);
-		$out['table'] = $this->table_sub($c,$sql,$exe_array);
-		$out['pager'] = '';
+		$sqlCount = 'SELECT COUNT(`id`) AS cc FROM `studio404_pages` WHERE `menu_type`!=:menu_type AND `cid`=:cid AND `status`!=:status AND `lang`=:lang';
+		$prepare = $conn->prepare($sqlCount);
+		$prepare->execute(array(
+			":cid"=>$_GET['super'], 
+			":menu_type"=>"super",
+			":status"=>1,
+			":lang"=>LANG_ID
+		));
+		$fetchCount = $prepare->fetch(PDO::FETCH_ASSOC);
+	
+		if($fetchCount["cc"] < 250){
+			$sql = 'SELECT * FROM `studio404_pages` WHERE `menu_type`!=:menu_type AND `cid`=:cid AND `status`!=:status AND `lang`=:lang ORDER BY `position` ASC';
+			$exe_array = array(":cid"=>$_GET['super'], ":menu_type"=>"super", ":status"=>1, ":lang"=>LANG_ID);
+			$out['table'] = $this->table_sub($c,$sql,$exe_array);
+			$out['pager'] = '';
+		}else{
+			$o = '<div class="TooManyDataElement">';
+			$o .= '<div class="row"><span class="cell">Too Many Data To Load ..</span></div>';
+			$o .= '</div>';
+
+			$out['table'] = $o;
+			$out['pager'] = '';
+		}
+		$out['count'] = $fetchCount["cc"];
 		return $out;
 	}
 

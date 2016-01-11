@@ -34,6 +34,24 @@ class ajax extends connection{
 			echo "Done";
 		}
 
+		if(Input::method("POST","searchTooManyData")=="true"){
+			$s = Input::method("POST","s");
+			$super = Input::method("POST","super");
+			$searchLike = (is_numeric($s)) ? '"'.$s.'%"' : '"%'.$s.'%"';
+			$sql = 'SELECT `idx`,`title`,`cid` FROM `studio404_pages` WHERE `title` LIKE '.$searchLike.' AND `cid`=:cid AND `status`!=1';
+			
+			$prepare = $conn->prepare($sql);
+			$prepare->execute(array(
+				":cid"=>$super
+			));
+			if($prepare->rowCount() > 0){
+				$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC);
+				echo json_encode($fetch); 
+			}else{
+				echo "Empty";
+			}
+		}
+
 		if(Input::method("POST","changeusertype")=="true" && Input::method("POST","t") && $_SESSION["tradewithgeorgia_user_id"]) :
 			$userid = $_SESSION["tradewithgeorgia_user_id"]; 
 			$typetochange = Input::method("POST","t"); 

@@ -57,6 +57,37 @@ $(document).on("click",".logasuser-administrator",function(result){
 	});
 });
 
+$(document).on("click",".SearchTooManyData",function(){
+	var searchTerm = $(".searchTerm").val(); 
+	var token = $(this).attr("data-token");
+	var params = urlParamiters();
+	$(".lev-1").remove();
+	$(".TooManyDataElement").html("<div class=\"row\"><span class=\"cell\">Please wait...</span></div>");
+	$.post("http://"+document.domain+"/en/ajax", { searchTooManyData:true, s:searchTerm, super:params['super']  },function(result){
+		console.log(result);
+		if(result=="Empty"){
+			$(".TooManyDataElement").html("<div class=\"row\"><span class=\"cell\">There is no such data !</span></div>");
+		}else{
+			var obj = JSON.parse(result);
+			var out = '';
+			for(var i = 0; i < obj.length; i++){
+				out += '<div class="row lev-1" style="background-color:#ffffff">';
+				out += '<span class="cell primary">Hidden</span>';
+				out += '<span class="cell">Hidden</span>';
+				out += '<span class="cell">'+obj[i].title+'</span>';
+				out += '<span class="cell">Hidden</span>';
+				out += '<span class="cell">'+obj[i].idx+'</span>';
+				out += '<span class="cell">';
+				out += '<a href="?action=editSitemap&amp;super='+obj[i].cid+'&amp;id='+obj[i].idx+'&amp;token='+token+'" title="Edit page"><i class="fa fa-pencil-square-o"></i></a>';
+				out += '</span>';
+				out += '</div>';
+			}
+			$(".TooManyDataElement").hide();
+			$("#table").append(out);
+		}
+	});
+});
+
 
 function askBeforeDelete(type,idx) {
 	var x = confirm("Would you like to delete item?");

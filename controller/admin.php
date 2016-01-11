@@ -136,6 +136,7 @@ class admin extends connection{
 				$admin_list = $model_admin_menumanagment->select_sub($c);
 				$data['table'] = $admin_list['table'];
 				$data['pager'] = $admin_list['pager'];
+				$data['count'] = $admin_list['count'];
 
 				@include("view/view_admin_sitemap.php"); 
 			}else if(isset($action) && $action=="addSitemapItem"){
