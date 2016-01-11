@@ -71,17 +71,17 @@ $first = array_slice($data["event_list"], 0, 1);
 		<?php endif; ?>
 		<?php if($first[0]["expiredate"] > time()) : ?>	
 
-		<?php
-		if($first[0]["event_registration"]=="on") :
-		?>
-		<div class="btn btn-yellow eventRegister" data-homepage="false" data-eventid="<?=$first[0]["idx"]?>" style="margin-top:30px;">REGISTER FOR  THIS EVENT</div>
-		<?php endif; ?>
+			<?php
+			if($first[0]["event_registration"]=="on") :
+			?>
+			<div class="btn btn-yellow eventRegister" data-homepage="false" data-eventid="<?=$first[0]["idx"]?>" style="margin-top:30px;">REGISTER FOR  THIS EVENT</div>
+			<?php endif; ?>
 
-		<?php
-		if($first[0]["event_registration"]=="off") :
-		?>
-		<div class="btn btn-yellow" style="margin-top:30px; background-color:#b5b6b8">REGISTRATION IS FINISHED</div>
-		<?php endif; ?>
+			<?php
+			if($first[0]["event_registration"]=="off") :
+			?>
+			<div class="btn btn-yellow" style="margin-top:30px; background-color:#b5b6b8">REGISTRATION IS FINISHED</div>
+			<?php endif; ?>
 
 		<?php endif; ?>
 		<hr class="line_effect">

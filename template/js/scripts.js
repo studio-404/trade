@@ -1675,20 +1675,28 @@ $(document).on("click",".loadmore",function(){
 					insert += '</div>';
 					insert += '<div class="col-sm-3 no-float itemssss">';
 					insert += '<ul class="text_formats">';
-					if(obj[i].su_export_markets_id.length > 100){
-						var subst3 = obj[i].su_export_markets_id.substring(0, 100)+"...";
+					if(typeof obj[i].su_export_markets_id != 'undefined' && obj[i].su_export_markets_id!=null){
+						if(obj[i].su_export_markets_id.length > 100){
+							var subst3 = obj[i].su_export_markets_id.substring(0, 100)+"...";
+						}else{
+							var subst3 = obj[i].su_export_markets_id;
+						}
 					}else{
-						var subst3 = obj[i].su_export_markets_id;
+						var subst3 = '';
 					}
 					insert += '<li>'+subst3+'</li>';
 					insert += '</ul>';
 					insert += '</div>';
 					insert += '<div class="col-sm-2 no-float itemssss">';
 					insert += '<ul class="text_formats">';
-					if(obj[i].su_certificates.length > 35){
-						var subst4 = obj[i].su_certificates.substring(0, 35)+"...";
+					if(typeof obj[i].su_certificates != 'undefined' && obj[i].su_certificates!=null){
+						if(obj[i].su_certificates.length > 35){
+							var subst4 = obj[i].su_certificates.substring(0, 35)+"...";
+						}else{
+							var subst4 = obj[i].su_certificates;
+						}
 					}else{
-						var subst4 = obj[i].su_certificates;
+						var subst4 = '';
 					}
 					insert += '<li>'+subst4+'</li>';
 					insert += '</ul>';

@@ -49,6 +49,7 @@ if(!empty($data["news_general"][0]["title"])){
 echo $title; 
 ?> - Trade with Georgia</title>
 <!-- FB Meta tags (start) -->
+<meta property="fb:app_id" content="552933334875517" />
 <meta property="og:title" content="<?=htmlentities(strip_tags($title))?> - Enterprise Georgia" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="<?=WEBSITE_.$_SERVER['REQUEST_URI']?>"/>

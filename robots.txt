@@ -1,0 +1,5 @@
+User-agent:*
+Disallow:/_plugins/
+Disallow:/_temporary/
+Disallow:/_backup/
+sitemap: http://tradewithgeorgia.com/sitemap.php
