@@ -316,12 +316,7 @@ $(document).on("click","#save_changes",function(){
 
 	//alert(document.getElementById("inputUserLogo").files.length + " " + picture_load);
 	var picture_load = $("#profile_logo").data("uploaded");
-	if(picture_load == "noimage"){
-		$(".companylogo_required").fadeIn("slow");
-		$("#insertText").html("Please fill/select all required fields !"); 
-		$('#message_popup').modal('toggle'); 
-		return false;
-	}else if(companyname==""){
+	if(companyname==""){
 		$("#requiredx_companyname").fadeIn("slow");
 		$("#insertText").html("Please fill/select all required fields !"); 
 		$('#message_popup').modal('toggle'); 

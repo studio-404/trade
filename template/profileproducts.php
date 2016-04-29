@@ -261,7 +261,7 @@
 		<input type="hidden" name="t" value="<?=$_SESSION["token_generator"]?>" />
 		<input type="hidden" name="pi" id="pi" class="pi" value="" />
 		<div class="form-group">
-			<label>Company logo <font color="red">*</font> <span style="font-size:10px; color:#555555">JPG (Dimensions 300x170)</span></label> 
+			<label>Company logo <!-- <font color="red">*</font> --> <span style="font-size:10px; color:#555555">JPG (Dimensions 300x170)</span></label> 
 			<div class="upload_img_tmp">
 				<?php
 				if(!empty($_SESSION["user_data"]["picture"])){

@@ -6,10 +6,10 @@ class calculate extends connection{
 			if($session){
 				$tocomplete = @(count(array_filter($session)) * 4) - 4;
 
-				$topublish = 10; 
-				if($session["picture"]!=""){
-					$topublish += 10; 
-				}
+				$topublish = 10; // username
+				// if($session["picture"]!=""){
+				// 	$topublish += 10; 
+				// }
 
 				if($session["companyname"]!=""){
 					$topublish += 10; 
@@ -27,15 +27,7 @@ class calculate extends connection{
 					$topublish += 10; 
 				}
 
-				if($session["mobiles"]!=""){
-					$topublish += 10; 
-				}
-
-				if($session["ad_position1"]!=""){
-					$topublish += 10; 
-				}
-
-				if($session["ad_email1"]!=""){
+				if($session["contactemail"]!=""){
 					$topublish += 10; 
 				}
 
@@ -43,7 +35,18 @@ class calculate extends connection{
 					$topublish += 10; 
 				}
 
-				
+				if($session["ad_position1"]!=""){
+					$topublish += 10; 
+				}
+
+				if($session["mobiles"]!=""){
+					$topublish += 10; 
+				}
+
+				if($session["ad_email1"]!=""){
+					$topublish += 10; 
+				}				
+
 				$out["topublish"] = $topublish;
 				$out["tocomplete"] = $tocomplete;
 			}else{
@@ -54,18 +57,14 @@ class calculate extends connection{
 
 			$tocomplete = @(count(array_filter($session)) * 4) - 4;
 
-			$topublish = 0; 
+			$topublish = 10; 
 
 			
-			if($session["picture"]!=""){
-				$topublish += 10; 
-			}
+			// if($session["picture"]!=""){
+			// 	$topublish += 10; 
+			// }
 
 			if($session["companyname"]!=""){
-				$topublish += 10; 
-			}
-
-			if($session["contactemail"]!=""){
 				$topublish += 10; 
 			}
 
@@ -78,6 +77,10 @@ class calculate extends connection{
 			}
 
 			if($session["products"]!=""){
+				$topublish += 10; 
+			}
+
+			if($session["contactemail"]!=""){
 				$topublish += 10; 
 			}
 
@@ -96,6 +99,7 @@ class calculate extends connection{
 			if($session["ad_email1"]!=""){
 				$topublish += 10; 
 			}
+			
 			$out["topublish"] = $topublish;
 			$out["tocomplete"] = $tocomplete;
 		}

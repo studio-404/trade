@@ -247,7 +247,7 @@
 		<!--Fourth colum START-->
 		<div class="col-sm-3">
 			<div class="form-group">
-				<label>Company Logo <font color="red">*</font></label> 
+				<label>Company Logo <!-- <font color="red">*</font> --></label> 
 				<div class="upload_img_tmp">
 					<?php
 					if(!empty($_SESSION["user_data"]["picture"])){

@@ -106,7 +106,7 @@ include("addcertificate.php");
 					<a href="#" data-toggle="modal" data-target="#login_popup">Log In</a> 
 					<!-- <a href="#" data-toggle="modal" data-target="#recover_password"><?=$data["language_data"]["recoverpassword"]?></a> -->
 					<?php }else if(isset($_SESSION["tradewithgeorgia_company_type"])){ ?>
-					<a href="javascript:;">
+					<a href="javascript:void(0);" onclick="return false">
 					<?php 
 						if($_SESSION["user_data"]["companyname"]){
 							echo $_SESSION["user_data"]["companyname"];
@@ -118,7 +118,7 @@ include("addcertificate.php");
 						?>
 					</a> | 
 					<a href="<?=company_type::profilelink()?>"><?=$data["language_data"]["profile"]?></a> | 
-					<a href="javascipt:;" id="logoutbutton">Log Out</a> 
+					<a href="javascipt:void(0);" id="logoutbutton" onclick="return false">Log Out</a> 
 					<?php } ?>
 				</div>
 			</div>
