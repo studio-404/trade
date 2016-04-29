@@ -21,9 +21,26 @@
 			@include("view/parts/breadcrups.php");
 			?>
 			<div class="content">
-				<div class="button" style="visibility:hidden">
-					<a href="?action=addComponents"><i class="fa fa-plus-circle"></i> <span>Add</span></a>
-				</div>
+				
+					<?php
+					if(!Input::method("GET","groupload")):
+					?>
+					<div class="button">
+						<a href="?action=vectormap&amp;groupload=true"><i class="fa fa-cubes"></i> <span>Groups</span></a>
+					</div>
+					<?php endif; ?>
+
+					<?php
+					if(Input::method("GET","groupload")):
+					?>
+						<div class="button">
+							<a href="?action=vectormap"><i class="fa fa-cube"></i> <span>Seperate</span></a>
+						</div>
+						<div class="button" style="margin-left:10px; background-color:green">
+							<a href="?action=vectormap&amp;addGroup=true"><i class="fa fa-plus-circle"></i> <span>Add Group</span></a>
+						</div>
+					<?php endif; ?>
+				
 				<div class="wrap">
 					<div class="search">
 					<input type="text" class="searchTerm" value="" placeholder="Country code or name">

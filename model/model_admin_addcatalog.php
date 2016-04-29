@@ -74,6 +74,7 @@ class model_admin_addcatalog extends connection{
 				// get page type
 				$get_page_type = new get_page_type();
 				$page_type = $get_page_type->type($_SESSION["C"],$_GET['catalogidx']);
+				echo $page_type." ".$_GET['catalogidx'];
 				$datex = strtotime($_POST['date']);
 				$expiredate = strtotime($_POST['expiredate']);
 				try{

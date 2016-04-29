@@ -13,13 +13,15 @@ class profileenquires extends connection{
 	public function template($c){
 		$conn = $this->conn($c); // connection
 
-		// upload function 
-		// $model_template_upload_user_logo = new model_template_upload_user_logo();
-		// $upload = $model_template_upload_user_logo->upload($c);
+		$tradewithgeorgia_user_id = (isset($_SESSION["tradewithgeorgia_user_id"])) ? $_SESSION["tradewithgeorgia_user_id"] : ""; 
 		
 		$cache = new cache();
 		$text_general = $cache->index($c,"text_general");
 		$data["text_general"] = json_decode($text_general,true);
+
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
 
 		/* sector */
 		$sector = $cache->index($c,"sector");
@@ -64,7 +66,7 @@ class profileenquires extends connection{
 			$prepare = $conn->prepare($sql);
 			$prepare->execute(array(
 				":username"=>$_SESSION["tradewithgeorgia_username"], 
-				":companyId"=>$_SESSION["tradewithgeorgia_user_id"], 
+				":companyId"=>$tradewithgeorgia_user_id, 
 				":one"=>1
 			));
 			$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
@@ -117,14 +119,14 @@ class profileenquires extends connection{
 		ORDER BY `studio404_module_item`.`date` DESC LIMIT 5';
 		$prepare_product = $conn->prepare($products_sql);
 		$prepare_product->execute(array(
-			":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"], 
+			":insert_admin"=>$tradewithgeorgia_user_id, 
 			":module_idx"=>5, 
 			":one"=>1
 		));
 		$data["myenquire"] = $prepare_product->fetchAll(PDO::FETCH_ASSOC); 
 
 		$db_count = new db_count();
-		$session_user_id = (int)$_SESSION["tradewithgeorgia_user_id"];
+		$session_user_id = (int)$tradewithgeorgia_user_id;
 		$data["count"] = $db_count->retrieve($c,'studio404_module_item',' `status`!=1 AND `module_idx`=5 AND `insert_admin`='.$session_user_id);
 
 		@include($c["website.directory"]."/profileenquires.php"); 

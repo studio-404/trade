@@ -21,6 +21,15 @@ class cache extends connection{
 	public function recreate_cache($c,$type,$cache_file){
 		$conn = $this->conn($c);
 		switch($type){
+			case "contact_page_data":
+			$sql = 'SELECT * FROM `studio404_users` WHERE `id`=:id AND `user_type`=:user_type';	
+			$prepare = $conn->prepare($sql); 
+			$prepare->execute(array(
+				":id"=>1, 
+				":user_type"=>"administrator" 
+			)); 
+			$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC); 
+			break;
 			case "homepage_general": 
 			$get_slug_from_url = new get_slug_from_url();
 			$slug = $get_slug_from_url->slug();
@@ -67,6 +76,16 @@ class cache extends connection{
 			$prepare = $conn->prepare($sql); 
 			$prepare->execute(array(
 				":slug"=>$slug, 
+				":status"=>1, 
+				":visibility"=>1, 
+				":lang"=>LANG_ID 
+			)); 
+			$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC); 
+			break;
+			case "footernavigation": 
+			$sql = 'SELECT `idx`,`title` FROM `studio404_pages` WHERE `cid`=1 AND `footermenu`=1 AND `lang`=:lang AND `visibility`!=:visibility AND `status`!=:status ORDER BY `position` ASC';	
+			$prepare = $conn->prepare($sql); 
+			$prepare->execute(array(
 				":status"=>1, 
 				":visibility"=>1, 
 				":lang"=>LANG_ID 
@@ -804,7 +823,7 @@ class cache extends connection{
 				$f = $prepare3->fetchAll(PDO::FETCH_ASSOC);
 				$f = $f[0]; 
 			}
-
+			$f['idx'] = (!empty($f['idx'])) ? $f['idx'] : 0;
 			$sql2 = 'SELECT * FROM `studio404_pages` WHERE `cid`=:cid AND `status`!=:status AND `menu_type`!=:super AND `lang`=:lang AND `visibility`!=:visibility ORDER BY `position` ASC';	
 			$prepare2 = $conn->prepare($sql2); 
 			$prepare2->execute(array(
@@ -1253,8 +1272,42 @@ class cache extends connection{
 				//$picture = ($fetch["picture"]) ? WEBSITE.'image?f='.WEBSITE.'files/usersproducts/'.$fetch["picture"].'&w=175&h=175' : '';
 			}	
 			break;
+			case "vectormap_new":
+			// $sql = 'SELECT * FROM `vectormap_new`';
+			// $prepare = $conn->prepare($sql); 
+			// $prepare->execute();
+			// if($prepare->rowCount()>0){
+			// 	$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC); 
+			// }else{
+			// 	$fetch = array();
+			// }
+
+			$sql = 'SELECT `idx` AS id, `title` AS code, `text` AS title, `shorttitle` AS data, `keywords` AS color  FROM `studio404_pages` WHERE `cid`=6335 AND `status`!=1 AND `visibility`!=1';
+			$prepare = $conn->prepare($sql); 
+			$prepare->execute();
+			if($prepare->rowCount()>0){
+				$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC); 
+			}else{
+				$fetch = array();
+			}
+
+			break;
+			case "mapfilter":
+			$sql = 'SELECT (SELECT `title` FROM `studio404_pages` WHERE `idx`=:cid) AS mainTitle, `idx`,`title` FROM `studio404_pages` WHERE `cid`=:cid AND `visibility`!=:one AND `status`!=:one';
+			$prepare = $conn->prepare($sql); 
+			$prepare->execute(array(
+				":cid"=>6318, 
+				":one"=>1 
+			));
+			if($prepare->rowCount()>0){
+				$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC); 
+				
+			}else{
+				$fetch = array();
+			}
+			break;
 		}
-		if(count($fetch)){
+		if(!empty($fetch) && count($fetch)){
 			$fh = @fopen($cache_file, 'w') or die("Error opening output file");
 			@fwrite($fh, json_encode($fetch,JSON_UNESCAPED_UNICODE));
 			@fclose($fh);

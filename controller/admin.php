@@ -98,17 +98,17 @@ class admin extends connection{
 				$data["user_rights"] = $model_admin_userrights->select_userright($c);
 
 				@include("view/view_admin_editAdminRights.php");
-			}else if($_GET['action']=="log"){
+			}else if(isset($_GET['action']) && $_GET['action']=="log"){
 				$data["website_title"] = "Logs / Admin Panel - v: ".$c['cmsversion'];
 				$model_admin_logs = new model_admin_logs();
 				$admin_logs = $model_admin_logs->select_admin_logs($c);
 				$data['table'] = $admin_logs['table'];
 				$data['pager'] = $admin_logs['pager'];
 				@include("view/view_admin_log.php");
-			}else if($_GET['action']=="textConverter"){
+			}else if(isset($_GET['action']) && $_GET['action']=="textConverter"){
 				$data["website_title"] = "Text converter / Admin Panel - v: ".$c['cmsversion'];
 				@include("view/view_admin_textconverter.php");
-			}else if($_GET['action']=="menuManagment"){
+			}else if(isset($_GET['action']) && $_GET['action']=="menuManagment"){
 				$data["website_title"] = "Page managment/ Admin Panel - v: ".$c['cmsversion'];
 				$model_admin_selectLanguage = new model_admin_selectLanguage();
 				$data["language_select"] = $model_admin_selectLanguage->select_option($c);
@@ -429,10 +429,13 @@ class admin extends connection{
 				
 				$model_admin_selectLanguage = new model_admin_selectLanguage();
 				$data["language_select"] = $model_admin_selectLanguage->select_option($c);
-
 				$model_admin_vectormap = new model_admin_vectormap();
-				$map = $model_admin_vectormap->select($c);
-
+				if(!Input::method("GET","groupload")):				
+				$map = $model_admin_vectormap->select($c,0);
+				endif;
+				if(Input::method("GET","groupload")):				
+				$map = $model_admin_vectormap->select($c,1);
+				endif;
 				$data['table'] = $map['table'];
 				$data['pager'] = $map['pager'];
 
@@ -516,8 +519,15 @@ class admin extends connection{
 				$data["website_title"] = "Add comments / Admin Panel - v: ".$c['cmsversion'];
 
 				@include("view/view_admin_addComments.php");
+			}else if(isset($action) && $action=="loadnewsletter"){
+				$data["website_title"] = "Newsletters / Admin Panel - v: ".$c['cmsversion'];
+				$model_admin_emailsended = new model_admin_emailsended();
+				$news_list = $model_admin_emailsended->select_list($c);
+				$data['table'] = $news_list['table'];
+				$data['pager'] = $news_list['pager'];
+				@include("view/view_admin_loadnewsletters.php");
 			}else if(isset($action) && $action=="fusersstat"){
-				$data["website_title"] = "Front users & statements  / Admin Panel - v: ".$c['cmsversion'];
+				$data["website_title"] = "Users & Products & Services  / Admin Panel - v: ".$c['cmsversion'];
 				$model_admin_selectLanguage = new model_admin_selectLanguage();
 				$data["language_select"] = $model_admin_selectLanguage->select_option($c);
 				$model_admin_fusersstat = new model_admin_fusersstat();
@@ -543,10 +553,10 @@ class admin extends connection{
 					}
 				}
 				$db_counter = new db_counter();
-				$data["user_count"] = $db_counter->sq($c,'`id`','`studio404_users`','`user_type`="website" AND `status`!=1'); 
+				$data["user_count"] = $db_counter->sq($c,'`id`','`studio404_users`','`user_type`="website" AND (`company_type`="manufacturer" OR `company_type`="serviceprovider") AND `status`!=1'); 
 				$data["product_count"] = $db_counter->sq($c,'`id`','`studio404_module_item`','`module_idx`=3 AND `status`!=1'); 
 				$data["service_count"] = $db_counter->sq($c,'`id`','`studio404_module_item`','`module_idx`=4 AND `status`!=1'); 
-				$data["enquire_count"] = $db_counter->sq($c,'`id`','`studio404_module_item`','`module_idx`=5 AND `status`!=1'); 
+				//$data["enquire_count"] = $db_counter->sq($c,'`id`','`studio404_module_item`','`module_idx`=5 AND `status`!=1'); 
 				
 				
 				if(isset($_GET["load"]) && $_GET["load"]=="products"){

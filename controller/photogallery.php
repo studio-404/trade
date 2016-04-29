@@ -11,6 +11,10 @@ class photogallery extends connection{
 		$text_general = $cache->index($c,"text_general");
 		$data["text_general"] = json_decode($text_general,true);
 
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
+
 		/* gallery folder */
 		$photo_gallery_list = $cache->index($c,"photo_gallery_list");
 		$data["photo_gallery_list"] = json_decode($photo_gallery_list); 

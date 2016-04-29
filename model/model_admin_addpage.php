@@ -69,16 +69,18 @@ class model_admin_addpage extends connection{
 				
 				$background = '';
 				if(isset($_POST['background'])){
-					$expl = explode("/",$_POST['background']);				
-					$from = DIR.$expl[1]."/".end($expl);
-					$To = DIR.'files/background/'.end($expl);
-					if(file_exists($from)){	
-						if(@copy($from,$To)){
-							@unlink($from);
-							$background = explode(DIR,$To);
-							$background = $background[1];
+					$expl = explode("/",$_POST['background']);	
+					if(count($expl)>1){			
+						$from = DIR.$expl[1]."/".end($expl);
+						$To = DIR.'files/background/'.end($expl);
+						if(file_exists($from)){	
+							if(@copy($from,$To)){
+								@unlink($from);
+								$background = explode(DIR,$To);
+								$background = $background[1];
+							}
 						}
-					}				
+					}
 				}
 				/*
 				** media maxidx and max position

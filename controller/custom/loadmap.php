@@ -13,6 +13,10 @@ class loadmap{
 		$languages = $cache->index($c,"languages");
 		$data["languages"] = json_decode($languages); 
 
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
+
 		/* language variables */
 		$language_data = $cache->index($c,"language_data");
 		$language_data = json_decode($language_data);
@@ -38,6 +42,14 @@ class loadmap{
 		/* components */
 		$components = $cache->index($c,"components");
 		$data["components"] = json_decode($components); 
+
+		//vectormap_new
+		$vectormap_new = $cache->index($c,"vectormap_new");
+		$data["vectormap_new"] = json_decode($vectormap_new, true); 
+
+		// mapfilter
+		$mapfilter = $cache->index($c,"mapfilter");
+		$data["mapfilter"] = json_decode($mapfilter, true); 
 
 		$include = WEB_DIR."/loadmap.php";
 		if(file_exists($include)){

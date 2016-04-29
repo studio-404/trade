@@ -15,6 +15,10 @@ class user extends connection{
 		$languages = $cache->index($c,"languages");
 		$data["languages"] = json_decode($languages); 
 
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
+
 		/* language variables */
 		$language_data = $cache->index($c,"language_data");
 		$language_data = json_decode($language_data);

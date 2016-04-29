@@ -15,6 +15,10 @@ class team extends connection{
 		$team_list = $cache->index($c,"team_list");
 		$data["team_list"] = json_decode($team_list); 
 
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
+
 		/* languages */
 		$languages = $cache->index($c,"languages");
 		$data["languages"] = json_decode($languages); 

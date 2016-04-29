@@ -17,6 +17,10 @@ class usefullinks extends connection{
 		$text_documents = $cache->index($c,"text_documents");
 		$data["text_documents"] = json_decode($text_documents);
 
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
+
 		/* languages */
 		$languages = $cache->index($c,"languages");
 		$data["languages"] = json_decode($languages); 

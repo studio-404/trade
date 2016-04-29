@@ -133,7 +133,7 @@ class model_admin_userrights extends connection{
 			$token = md5(sha1(time()));
 			$_SESSION['token'] = $token;
 			while($rows = $query->fetch()){
-				$logtime = ($rows['logtime']) ? date("d/m/Y H:s",$rows['logtime']) : "Not logged";
+				$logtime = (!empty($rows['logtime'])) ? date("d/m/Y H:s",$rows['logtime']) : "Not logged";
 				$out .= '<div class="row">';
 				$out .= '<span class="cell primary">'.$rows['name'].'</span>';
 				$out .= '<span class="cell">

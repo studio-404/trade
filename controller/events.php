@@ -13,8 +13,9 @@ class events extends connection{
 		$data["text_general"] = json_decode($text_general,true);
 
 
-		// $events_general = $cache->index($c,"events_general");
-		// $data["events_general"] = json_decode($events_general);
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
 
 		$event_list = $cache->index($c,"event_list");
 		$data["event_list"] = json_decode($event_list, true); 

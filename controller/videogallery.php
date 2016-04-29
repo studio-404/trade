@@ -15,7 +15,9 @@ class videogallery extends connection{
 		$videogallery_general = $cache->index($c,"videogallery_general");
 		$data["videogallery_general"] = json_decode($videogallery_general);
 
-		//$data["videogallery_files"] = $cache->index($c,"videogallery_files");
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
 
 		/* languages */
 		$languages = $cache->index($c,"languages");

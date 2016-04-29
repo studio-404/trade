@@ -22,29 +22,78 @@
 				@include("view/parts/breadcrups.php");
 			?>
 			<div class="content">
+				<?php
+				if(!isset($_GET['loadtickets'])){
+				?>
 				<div class="button">
 					<a href="?action=addNews&amp;newsidx=<?=$_GET['id']?>&amp;type=<?=$_GET['type']?>&amp;super=<?=$_GET['super']?>"><i class="fa fa-plus-circle"></i> <span>Add</span></a>
 				</div>
-
 				<div class="wrap">
 					<div class="search">
 					<input type="text" class="searchTerm" placeholder="What are you looking for?">
 					<input type="submit" class="searchButton">
 					</div>
 				</div>
+				<?php
+				}else{
+					?>
+					<div class="wrap" style="margin-bottom:20px;">
+						<div class="search">
+						<input type="text" class="searchTerm" placeholder="Enter Ticket Id" value="<?=(isset($_GET['search']) ? $_GET['search'] : '')?>" />
+						<input type="submit" class="searchButton">
+						</div>
+					</div>
+					<?php
+				}
+				?>			
 
 				<div id="table">
 					<div class="header-row row">
-						<span class="cell primary">Vis.</span>
-						<span class="cell">Id</span>
-						<span class="cell">Date</span>
-						<span class="cell">title</span>
-						<span class="cell">tags</span>
-						<span class="cell" style="width:100px">Action</span>
+						<?php
+						if(isset($_GET['loadtickets']) && is_numeric($_GET['loadtickets'])){
+							?>
+							<span class="cell primary">Ticket ID</span>
+							<span class="cell">Date</span>
+							<span class="cell">First &amp; Last Name</span>
+							<span class="cell">Email</span>
+							<span class="cell">Mobile</span>
+							<span class="cell">Action</span>
+							<?php
+						}else{
+						?>
+							<span class="cell primary">Vis.</span>
+							<span class="cell">Id</span>
+							<span class="cell">Date</span>
+							<?php
+							if(isset($_GET['type']) && $_GET['type']=="eventpage"){
+								echo '<span class="cell">Expire Date</span>';
+							}
+							?>
+							<span class="cell">title</span>
+							<?php
+							if(isset($_GET['type']) && $_GET['type']=="eventpage"){
+								echo '<span class="cell">Registration</span>';
+								echo '<span class="cell">Members</span>';
+							}
+							?>
+							<span class="cell">tags</span>
+							<span class="cell" style="width:100px">Action</span>
+						<?php
+						}
+						?>
 					</div>					
 					<?=$data['table']?>
 				</div>
 			<?=$data['pager']?>
+			<?php
+			if(isset($_GET['type']) && $_GET['type']=="eventpage" && $_GET['loadtickets']){
+				?>
+				<p style="margin:20px 0px;">
+					<a href="<?=WEBSITE?>en/tadmin?action=newsModule&amp;type=eventpage&amp;id=<?=$_GET['id']?>&amp;super=<?=$_GET['super']?>&amp;loadtickets=<?=$_GET['loadtickets']?>&amp;token=<?=$_GET['token']?>&amp;csv=true" target="_blank" style="color:#ef4836">Export Tickets</a> 
+				</p>
+				<?php
+			}
+			?>			
 		</div>
 	</main>
 	<div class="clearfix"></div>

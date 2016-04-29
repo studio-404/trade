@@ -1,9 +1,18 @@
 <?php
+try{
+  $host = 'mysql:host=mysql1.tradewithgeorgia.com;dbname=tradegeorgia;charset=utf8'; 
+  $HANDLER = new PDO($host,"tradegeorgia","georgiadbtrade"); 
+  $HANDLER->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  $HANDLER->exec("set names utf8"); 
+}catch(PDOException $e){
+  die("Sorry, Database connection problem.."); 
+}
 if(isset($_GET['title'])){
   $title = urldecode($_GET['title']);
 }else{
-  $title = "nope";
+  $title = "Trade Map";
 }
+setlocale(LC_MONETARY,"en_US");
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,9 +56,19 @@ if(isset($_GET['title'])){
   .openmap{ margin: 0; padding: 0; width: 21px; height: 21px; background-image: url('exsize2.svg'); background-size: 21px 21px; position: absolute; right: 10px; top: 10px; z-index: 1001 }
   .openmap a{ margin: 0; padding: 0; width: 21px; height: 21px; display: block; text-decoration: none; }
   </style>
+  <?php 
+$sql1 = 'SELECT `idx`,`title`,`code`,`export`,`import`,`trade_regime`,`colorcode`,`countrygroups` FROM `studio404_vectormap` WHERE `group`=0 AND `lang`=5';
+$prepare1 = $HANDLER->prepare($sql1);
+$prepare1->execute();
+$fetch1 = $prepare1->fetchAll(PDO::FETCH_NUM); 
+
+$sql2 = 'SELECT `title`,`code`,`trade_regime`,`colorcode` FROM `studio404_vectormap` WHERE `group`=1 AND `lang`=5';
+$prepare2 = $HANDLER->prepare($sql2);
+$prepare2->execute();
+$fetch2 = $prepare2->fetchAll(PDO::FETCH_NUM); 
+?>
 </head>
 <body <?=(isset($_GET['big'])) ? 'style="background-color:#424862"' : ''?>>
-
   <div class="mymap">
     <?php if(!isset($_GET['big'])) : ?>
     <div class="openmap"><a href="/_plugins/jvectormap/index.php?big" target="_blank">&nbsp;</a></div>
@@ -66,13 +85,12 @@ if(isset($_GET['title'])){
       
       </div>
 
-      <div class="traderegimes">
+      <div class="traderegimes content_regime_box">
 
         <div class="title">Trade regimes</div>
-        <div class="content">
-          <label class="input unchecked" data-type="traderegime" id="freetrade">Free trade </label>
-          <label class="input unchecked" data-type="traderegime" id="gsp">GSP+ </label>
-          <label class="input unchecked" data-type="traderegime" id="ongoing">On going free trade negotiation </label>
+        <div class="content content_regime">
+          <label class="input unchecked" data-type="traderegime" id="freetrade" style="width:100%">Free trade </label>
+          <label class="input unchecked" data-type="traderegime" id="ongoing" style="width:100%">On going free trade negotiation </label>
         </div>
 
       </div>
@@ -80,15 +98,23 @@ if(isset($_GET['title'])){
 
     </div>
     <div id="map1"></div>
+    <!-- Ukraine And Uzbekistan associative members START  -->
+    <div class="assoc" style="display:none; width:160px; height:20px; position:relative; z-index:10000; margin-top:-20px; top:-20px; left:20px;">
+      <div style="width:20px; height:20px; float:left; background-color:#ace6f0"></div>
+      <div style="width:120px; height:20px; font-size:12px; line-height:20px; float:left; margin-left:10px; color:white; font-family: roboto">Associate States</div>
+    </div>
+    <!-- Ukraine And Uzbekistan associative members END  -->
+
+    <!-- Ukraine And Uzbekistan associative members START  -->
+    <div class="all_data" style="display:none; width:160px; position:absolute; right:20px; bottom:-160px; border:solid 1px #ace6f0">
+      <p style="margin:10px 0px; height:20px; font-size:18px; line-height:20px; margin-left:10px; color:white; font-family: roboto">Total</p>
+      <p style="margin:5px 0px; height:20px; font-size:12px; line-height:20px; margin-left:10px; color:white; font-family: roboto" id="totalexport">Export: 0</p>
+      <p style="margin:5px 0px; height:20px; font-size:12px; line-height:20px; margin-left:10px; color:white; font-family: roboto" id="totalimport">Import: 0</p>      
+    </div>
+    <!-- Ukraine And Uzbekistan associative members END  -->
   </div>
   <script type="text/javascript" charset="utf-8">
     jQuery.noConflict();
-    // var countryGroups = new Array();
-    // var countryGroups_color = new Array();
-
-    // countryGroups[0] = new Array('Russia','Canada');
-    // countryGroups_color[0] = "#dddddd"; 
-
     jQuery(function(){
       var $ = jQuery;
        var mapx = $('#map1').vectorMap({
@@ -122,13 +148,15 @@ if(isset($_GET['title'])){
         }, 
         onRegionTipShow: function(e, el, code){ 
           var exportArray = expFunction();
-          var insertHtml = (exportArray[code]) ? exportArray[code] : '0';
+          var insertHtml = (exportArray[code]) ? parseFloat(exportArray[code]).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') : '0.00';
+
+          // console.log(parseFloat(exportArray[code]));
 
           var importArray = impFunction();
-          var insertHtml2 = (importArray[code]) ? importArray[code] : '0';
+          var insertHtml2 = (importArray[code]) ? parseFloat(importArray[code]).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') : '0.00';
 
           var tradeRArray = tradeFunction();
-          var insertHtml3 = (tradeRArray[code]) ? tradeRArray[code] : '0';
+          var insertHtml3 = (tradeRArray[code]) ? tradeRArray[code] : 'Not Defind';
 
           var loadx = '<b style="font-size:12px; font-family:\'Roboto-Regular\'">'+el.html()+" - "+code+'</b>';
           loadx += '<br />';
@@ -147,39 +175,32 @@ if(isset($_GET['title'])){
       var type = jQuery(this).data("type");
       var idx = jQuery(this).attr("id"); 
       var mapx = jQuery('#map1').vectorMap('get', 'mapObject');
-     
+      jQuery(".assoc").hide();
+      jQuery(".all_data").hide();
       if(type=="viewby"){
           if(idx=="country"){
             resetColors();
+            var ihtml = '<label class="input unchecked" data-type="traderegime" id="freetrade" style="width:100%">Free trade </label><label class="input unchecked" data-type="traderegime" id="ongoing" style="width:100%">On going free trade negotiation </label>';
+            jQuery(".content_regime_box .title").html("Trade Regimes");
+            jQuery(".content_regime").html(ihtml);
             jQuery("#freetrade").attr({"class":"input unchecked"});
-            jQuery("#gsp").attr({"class":"input unchecked"});
             jQuery("#ongoing").attr({"class":"input unchecked"});
-
             jQuery("#country").attr({"class":"input checked"});
             jQuery("#groups").attr({"class":"input unchecked"});
           }else if(idx=="groups"){
             resetColors();
-            jQuery("#freetrade").attr({"class":"input unchecked"});
-            jQuery("#gsp").attr({"class":"input unchecked"});
-            jQuery("#ongoing").attr({"class":"input unchecked"});
-
+            var ihtml = '<label class="input unchecked" data-type="groupname" id="efta" style="width:100%">EFTA</label>';
+            ihtml += '<label class="input unchecked" data-type="groupname" id="cis" style="width:100%">CIS</label>';
+            ihtml += '<label class="input unchecked" data-type="groupname" id="eu" style="width:100%">EU</label>';
+            jQuery(".content_regime_box .title").html("Group Name (s)");
+            jQuery(".content_regime").html(ihtml);
+            
+            
             jQuery("#country").attr({"class":"input unchecked"});
             jQuery("#groups").attr({"class":"input checked"});
-
-            var countryGroups = countryGroupsx(); 
-            var colorArr = Array('#34c529','#ecda0d','#92a5fb','#666666','#333333');
-            var vvv = new Array();
-            for(i=0; i<countryGroups.length; i++){
-              for(n=0; n<countryGroups[i].length; n++){
-                  console.log(countryGroups[i][n] +" "+ colorArr[i]);
-                  var contryCode = countryGroups[i][n].toString();
-                  var contryColor = colorArr[i].toString();
-                  vvv[contryCode] = contryColor;
-                  
-              }
-            }
+                     
             
-            mapx.series.regions[0].setValues(vvv);
+            //mapx.series.regions[0].setValues(vvv);
           }
 
       }else if(type=="traderegime"){
@@ -199,17 +220,6 @@ if(isset($_GET['title'])){
             }
             mapx.series.regions[0].setValues(vvv2);
 
-          }else if(idx == "gsp"){
-            resetColors();
-            var onlyGspx = onlyGsp(); 
-            var vvv3 = new Array();
-            for (var k in onlyGspx) {
-                vvv3[k] = onlyGspx[k];
-            }
-            mapx.series.regions[0].setValues(vvv3);
-            jQuery("#freetrade").attr({"class":"input unchecked"});
-            jQuery("#gsp").attr({"class":"input checked"});
-            jQuery("#ongoing").attr({"class":"input unchecked"});
           }else if(idx == "ongoing"){
             resetColors();
             var onlyongoingx = onlyongoing(); 
@@ -222,45 +232,155 @@ if(isset($_GET['title'])){
             jQuery("#gsp").attr({"class":"input unchecked"});
             jQuery("#ongoing").attr({"class":"input checked"});
           }
+      }else if(type=="groupname"){
+        jQuery(".all_data").show();
+        resetColors();
+        if(idx=="efta"){
+           jQuery("#efta").attr({"class":"input checked"});
+           jQuery("#cis").attr({"class":"input unchecked"});
+           jQuery("#eu").attr({"class":"input unchecked"});
+           var onlyEfta = (function() {
+               var out = Array();
+              <?php 
+                $x = 0;
+                $allCountries = array();
+                foreach ($fetch2 as $value) : 
+                // if($x==0){ $x=1; continue; }
+                if($value[1]!="EFTA"){ continue; }
+                $explode = explode(",",$value[0]);
+                foreach ($explode as $v) {
+              ?>
+                  out["<?=trim($v)?>"] = "#fea100";
+              <?php 
+                  $allCountries[] = trim($v);
+                }
+                $x++; 
+                endforeach; 
+                $totalimport = 0;
+                $totalexport = 0;
+                foreach ($fetch1 as $value) : 
+                  if(in_array($value[2], $allCountries)){
+                    $totalimport += $value[4];
+                    $totalexport += $value[3];
+                  }
+                endforeach;
+              $e = str_replace("USD","",money_format('%i',$totalexport));
+              $im = str_replace("USD","",money_format('%i',$totalimport));
+              ?>
+              jQuery("#totalexport").text("Export: <?=$e?>");
+              jQuery("#totalimport").text("Import: <?=$im?>");
+              return out;
+            })(); 
+            var vvv2 = new Array();
+            for (var k in onlyEfta) {
+                vvv2[k] = onlyEfta[k];
+            }
+            mapx.series.regions[0].setValues(vvv2);
+        }else if(idx=="cis"){
+          jQuery("#efta").attr({"class":"input unchecked"});
+          jQuery("#cis").attr({"class":"input checked"});
+          jQuery("#eu").attr({"class":"input unchecked"});
+          var onlyCiS = (function() {
+               var out = Array();
+              <?php 
+                $x = 0;
+                $allCountries = array();
+                foreach ($fetch2 as $value) : 
+                // if($x==0){ $x=1; continue; }
+                if($value[1]!="CIS"){ continue; }
+                $explode = explode(",",$value[0]);
+                foreach ($explode as $v) {
+              ?>
+                  out["<?=trim($v)?>"] = "#fea100";
+              <?php 
+                  $allCountries[] = trim($v);
+                }
+                $x++; 
+                endforeach; 
+                $totalimport = 0;
+                $totalexport = 0;
+                foreach ($fetch1 as $value) : 
+                  if(in_array($value[2], $allCountries)){
+                    $totalimport += $value[4];
+                    $totalexport += $value[3];
+                  }
+                endforeach;
+                $e = str_replace("USD","",money_format('%i',$totalexport));
+              $im = str_replace("USD","",money_format('%i',$totalimport));
+              ?>
+              jQuery("#totalexport").text("Export: <?=$e?>");
+              jQuery("#totalimport").text("Import: <?=$im?>");
+              /* Ukraine And Uzbekistan associative members START */
+              jQuery(".assoc").show();
+              out["UA"] = "#ace6f0";
+              out["UZ"] = "#ace6f0";
+              /* Ukraine And Uzbekistan associative members END */
+              return out;
+            })(); 
+            var vvv2 = new Array();
+            for (var k in onlyCiS) {
+                vvv2[k] = onlyCiS[k];
+            }
+            mapx.series.regions[0].setValues(vvv2);
+        }else if(idx=="eu"){
+          jQuery("#efta").attr({"class":"input unchecked"});
+          jQuery("#cis").attr({"class":"input unchecked"});
+          jQuery("#eu").attr({"class":"input checked"});
+
+          var onlyEu = (function() {
+               var out = Array();
+              <?php 
+                $x = 0;
+                $allCountries = array();
+                foreach ($fetch2 as $value) : 
+                if($value[1]!="EU"){ continue; }
+                $explode = explode(",",$value[0]);
+                foreach ($explode as $v) {
+              ?>
+                  out["<?=trim($v)?>"] = "#fea100";
+              <?php 
+                  $allCountries[] = trim($v);
+                }
+                $x++; 
+                endforeach; 
+                $totalimport = 0;
+                $totalexport = 0;
+                foreach ($fetch1 as $value) : 
+                  if(in_array($value[2], $allCountries)){
+                    $totalimport += $value[4];
+                    $totalexport += $value[3];
+                  }
+                endforeach;
+                $e = str_replace("USD","",money_format('%i',$totalexport));
+                $im = str_replace("USD","",money_format('%i',$totalimport));
+              ?>
+              jQuery("#totalexport").text("Export: <?=$e?>");
+              jQuery("#totalimport").text("Import: <?=$im?>");
+              return out;
+            })(); 
+            var vvv2 = new Array();
+            for (var k in onlyEu) {
+                vvv2[k] = onlyEu[k];
+            }
+            mapx.series.regions[0].setValues(vvv2);
+        }
       }
   });
-<?php
-  $csv = array_map('str_getcsv', file('../../files/manager/vectormapdata.csv'));
-  // echo '<pre>';
-  // print_r($csv); 
-  // echo '</pre>';
-  
-  ?>
+
 /* TRADE REGIME START */
   function onlyFreeTrades(){
     var out = Array();
     <?php 
     $x = 0;
-    foreach ($csv as $value) : 
-      if($x==0){ $x=1; continue; }
-      if($value[5]!="Free Trade"){ continue; }
+    foreach ($fetch1 as $value) : 
+      if(trim($value[5])!="Free trade"){ continue; }
     ?>
       out["<?=$value[2]?>"] = "#fea100";
     <?php 
     $x++; 
     endforeach; 
     ?>
-    return out;
-  }
-
-  function onlyGsp(){
-    var out = Array();
-    <?php 
-    $x = 0;
-    foreach ($csv as $value) : 
-      if($x==0){ $x=1; continue; }
-      if($value[5]!="GSP+"){ continue; }
-    ?>
-      out["<?=$value[2]?>"] = "#fea100";
-    <?php 
-    $x++; 
-    endforeach; 
-    ?>
+     console.log(out);
     return out;
   }
 
@@ -268,9 +388,9 @@ if(isset($_GET['title'])){
     var out = Array();
     <?php 
     $x = 0;
-    foreach ($csv as $value) : 
-      if($x==0){ $x=1; continue; }
-      if($value[5]!="On going free trade negotiation"){ continue; }
+    foreach ($fetch1 as $value) : 
+      // if($x==0){ $x=1; continue; }
+      if($value[5]!="Ongoing Free Trade Negotiation"){ continue; }
     ?>
       out["<?=$value[2]?>"] = "#fea100";
     <?php 
@@ -286,8 +406,8 @@ if(isset($_GET['title'])){
     var out = Array();
     <?php 
     $x = 0;
-    foreach ($csv as $value) : 
-      if($x==0){ $x=1; continue; }
+    foreach ($fetch1 as $value) : 
+      // if($x==0){ $x=1; continue; }
     ?>
       out["<?=$value[2]?>"] = "<?=$value[3]?>";
     <?php 
@@ -299,8 +419,8 @@ if(isset($_GET['title'])){
     var out = Array();
     <?php 
     $x = 0;
-    foreach ($csv as $value) : 
-      if($x==0){ $x=1; continue; }
+    foreach ($fetch1 as $value) : 
+      // if($x==0){ $x=1; continue; }
     ?>
       out["<?=$value[2]?>"] = "<?=$value[4]?>";
     <?php 
@@ -312,8 +432,8 @@ if(isset($_GET['title'])){
     var out = Array();
     <?php 
     $x = 0;
-    foreach ($csv as $value) : 
-      if($x==0){ $x=1; continue; }
+    foreach ($fetch1 as $value) : 
+      // if($x==0){ $x=1; continue; }
     ?>
       out["<?=$value[2]?>"] = "<?=$value[5]?>";
     <?php 
@@ -322,16 +442,6 @@ if(isset($_GET['title'])){
     return out;
   }
   /* MAIN DATA END */
-
-  /* COUNTRY GROUP START */
-  function countryGroupsx(){
-    var out = Array();
-    // out[0] = Array('KZ','RU'); 
-    // out[1] = Array('CN','IN','AU'); 
-    return out;
-  }
-  /* COUNTRY GROUP END */
-
 
 /* RESET COLORS START */
   function resetColors(){

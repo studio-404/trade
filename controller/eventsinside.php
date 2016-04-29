@@ -12,6 +12,10 @@ class eventsinside extends connection{
 		$eventsinside_general = $cache->index($c,"eventsinside_general");
 		$data["eventsinside_general"] = json_decode($eventsinside_general);
 
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
+
 
 		$events_general = $cache->index($c,"events_general");
 		$data["events_general"] = json_decode($events_general);

@@ -16,7 +16,11 @@ class struqtura extends connection{
 
 		$structure_array = new structure_array();
 		$data["structure"] = $structure_array->mk($structure);		
-		$data["structure_m"] = $structure;		
+		$data["structure_m"] = $structure;
+
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
 
 		/* languages */
 		$languages = $cache->index($c,"languages");

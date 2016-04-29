@@ -40,10 +40,9 @@
 						$left_menu = json_decode($left_menu);
 						$data["left_menu"] = $model_template_main_menu->left($left_menu);
 
-						/* breadcrups */
-						// $breadcrups = $cache->index($c,"breadcrups");
-						// $breadcrups = json_decode($breadcrups);
-						//$data["left_menu"] = $model_template_main_menu->left($left_menu);
+						/* contact_page_data */
+						$contact_page_data = $cache->index($c,"contact_page_data");
+						$data["contact_data"] = json_decode($contact_page_data,true); 
 
 						/* languages */
 						$hidden_team_list = $cache->index($c,"hidden_team_list");

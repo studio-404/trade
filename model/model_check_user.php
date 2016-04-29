@@ -4,7 +4,7 @@ class model_check_user extends connection{
 	public $out;
 	public function user($c)
 	{
-		if(isset($_POST['username'],$_POST['password'],$_POST["captcha"]) && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty($_POST["captcha"]) && ($_POST["captcha"]==$_SESSION['encoded']))
+		if(isset($_POST['username'],$_POST['password'],$_POST["captcha"],$_SESSION['encoded']) && !empty($_POST["username"]) && !empty($_POST["password"]) && !empty($_POST["captcha"]) && ($_POST["captcha"]==$_SESSION['encoded']))
 		{
 			$user = strip_tags($_POST['username']);
 			$pass = md5($_POST['password']);

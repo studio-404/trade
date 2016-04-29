@@ -5,7 +5,8 @@ class model_admin_requests extends connection{
 	}
 
 	public function requestx($c){
-		if( (isset($_POST) && count($_POST) > 0) || isset($_GET['down']) || isset($_GET['up']) ){
+		$data = "";
+		if( (isset($_POST) && count($_POST) > 0) || isset($_GET['down']) || isset($_GET['up']) || isset($_GET['remove']) ){
 			$files = glob(DIR.'_cache/*'); // get all file names
 			foreach($files as $file){ // iterate files
 				if(is_file($file))
@@ -49,7 +50,7 @@ class model_admin_requests extends connection{
 			$data["outMessage"] = $model_admin_menageemails->outMessage;
 		}
 
-		if($_POST['admin_change_profile']){
+		if(isset($_POST['admin_change_profile'])){
 			$model_admin_profile = new model_admin_profile();
 			$model_admin_profile->updateMe($c);
 			$data["outMessage"] = $model_admin_profile->outMessage;

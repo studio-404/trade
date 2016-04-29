@@ -24,6 +24,10 @@ class profileproducts extends connection{
 		$text_general = $cache->index($c,"text_general");
 		$data["text_general"] = json_decode($text_general,true);
 
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
+
 		$text_documents = $cache->index($c,"text_documents");
 		$data["text_documents"] = json_decode($text_documents);
 
@@ -106,6 +110,10 @@ class profileproducts extends connection{
 
 		// calculate
 		$data["calculate"] = calculate::filled($_SESSION["user_data"]);
+
+		$pre = (100-$data["calculate"]["tocomplete"]);
+		$calculate = new calculate();
+		$calculate->updatedata($c,$_SESSION["user_data"]["id"],$pre);
 
 		// select products
 		$products_sql = 'SELECT 

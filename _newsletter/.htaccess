@@ -1,0 +1,25 @@
+RewriteCond %{REQUEST_FILENAME} !-f [OR] 
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule . index.php [QSA,L]
+
+# choose opener file
+DirectoryIndex index.php 
+
+# block access to some sensible files
+<Files ~ "^.htaccess|config.php|functions|backup|controller|model|view|_plugins|_temporaty">
+  Order allow,deny
+  Deny from all
+</Files>
+
+<IfModule php5_module>
+    php_flag session.cookie_httponly on
+</IfModule>
+
+# force non-www domain
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+<Files 403.shtml>
+order allow,deny
+allow from all
+</Files>

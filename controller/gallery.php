@@ -10,8 +10,9 @@ class gallery extends connection{
 
 		$cache = new cache();
 
-		// $text_general = $cache->index($c,"text_general");
-		// $data["text_general"] = json_decode($text_general,true);
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
 
 		$files_ = $cache->index($c,"files_");
 		$data["files_"] = json_decode($files_);

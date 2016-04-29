@@ -1,7 +1,8 @@
 <?php if(!defined("DIR")){ exit(); }
 class unsubscribe extends connection{
 	function __construct($c,$encr){
-        $this->remove($c,$encr); 
+        echo "a";
+        //$this->remove($c,$encr); 
     }
 
     public function remove($c,$encr){

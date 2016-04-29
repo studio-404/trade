@@ -1,5 +1,5 @@
 <?php if(!defined("DIR")){ exit(); }
-class calculate {
+class calculate extends connection{
 	public static function filled($session,$type = "product"){
 
 		if($type=="product"){
@@ -101,5 +101,15 @@ class calculate {
 		}
 		return $out;
 	} 
+
+	public function updatedata($c,$id,$per){
+		$conn = $this->conn($c);
+		$update = 'UPDATE `studio404_users` SET `tocomplete`=:tocomplete WHERE `id`=:id'; 
+		$prepare = $conn->prepare($update);
+		$prepare->execute(array(
+			":tocomplete"=>$per, 
+			":id"=>$id 
+		));
+	}
 }
 ?>

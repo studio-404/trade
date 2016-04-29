@@ -51,6 +51,7 @@
 					<div class="header-row row">
 						<span class="cell primary">Vis.</span>
 						<span class="cell primary">Pos.</span>
+						<span class="cell">Footer</span>
 						<span class="cell">Title</span>
 						<span class="cell">Page type</span>
 						<span class="cell">ID</span>

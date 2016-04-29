@@ -21,7 +21,7 @@ class model_admin_editnewsitem extends connection{
 			$event_website = (isset($_POST['event_website'])) ? $_POST["event_website"] : '';
 			$event_registration = (isset($_POST['event_registration'])) ? $_POST["event_registration"] : 'on';
 			$visibility = (isset($_POST['visibility']) && $_POST['visibility']=="true") ? 2 : 1;
-			
+			$video = (isset($_POST['videourl'])) ? $_POST['videourl'] : '';
 			// update main columns
 			$sql = 'UPDATE `studio404_module_item` SET 
 			`title`=:smi_title, 
@@ -50,7 +50,7 @@ class model_admin_editnewsitem extends connection{
 				":smi_event_fee"=>$event_fee, 
 				":smi_event_website"=>$event_website, 
 				":smi_event_registration"=>$event_registration, 
-				":smi_videourl"=>$_POST['videourl'], 
+				":smi_videourl"=>$video, 
 				":smi_short_description"=>$_POST['short_description'], 
 				":smi_long_description"=>$_POST['long_description'], 
 				":smi_tags"=>$_POST['tags'], 

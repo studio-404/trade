@@ -1,35 +1,9 @@
 <?php 
-// function my_session_start()
-// {
-// 	session_set_cookie_params(time()+6000,'/','tradewithgeorgia.com',false,true); 
-// 	//session_name("studio404");
-// 	if (ini_get('session.use_cookies') && isset($_COOKIE['PHPSESSID'])) {
-// 		$sessid = $_COOKIE['PHPSESSID'];
-// 	} elseif (!ini_get('session.use_only_cookies') && isset($_GET['PHPSESSID'])) {
-// 		$sessid = $_GET['PHPSESSID'];
-// 	} else {
-// 	session_start();
-// 		return false;
-// 	}
-// 	if (!preg_match('/^[a-z0-9]{32}$/', $sessid)) {
-// 		return false;
-// 	}
-// 	session_start();
-// 	return true;
-// }
-// my_session_start();  
 session_start();
+session_name("tradewithgeorgia");
+// set_error_handler("var_dump");
 
-/*check last activity*/
-if (!isset($_SESSION['CREATED'])) {
-    $_SESSION['CREATED'] = time();
-} else if (time() - $_SESSION['CREATED'] > 1800) {
-    // session started more than 30 minutes ago
-    session_regenerate_id(true);    // change session ID for the current session and invalidate old session ID
-    $_SESSION['CREATED'] = time();  // update creation time
-}
- 
-try{
+// try{
 header('X-Frame-Options: DENY');
 header("Content-type: text/html; charset=utf-8");
 
@@ -46,6 +20,21 @@ define('FLASH', WEBSITE.'flash/');
 define('IMG', WEBSITE.'images/');
 define('SCRIPTS', WEBSITE.'scripts/');
 define('STYLES', WEBSITE.'styles/');
+
+// Deny requesting GLOBALS
+if (ini_get('register_globals'))
+{
+    (isset($_REQUEST['GLOBALS']) OR isset($_FILES['GLOBALS'])) AND exit(1);
+    $global_variables = array_keys($GLOBALS);
+    $global_variables = array_diff($global_variables, array(
+                '_COOKIE', '_ENV', '_GET',
+                '_FILES', '_POST', '_REQUEST',
+                '_SERVER', '_SESSION', 'GLOBALS'
+            ));
+    foreach ($global_variables as $name)
+        unset($GLOBALS[$name]);
+}
+
 /*
 ** includs /home/geoweb/trade.404.ge/
 */
@@ -106,8 +95,9 @@ $get_ip = new get_ip();
 $ip = $get_ip->ip;
 
 if(empty($LANG)){ // just domain name
-	$redirect = new redirect();
-	$redirect->go(WEBSITE.$c['main.language']."/".$c["welcome.page.slug"]); 
+	// $redirect = new redirect();
+	// $redirect->go(WEBSITE.$c['main.language']."/".$c["welcome.page.slug"]); 
+	$LANG = $c['main.language']; 
 }else if(!in_array($LANG, $c['languages.array']) && $LANG != "image" && $LANG!=$c['admin.slug']){
 	$welcome_class = $c["welcome.page.slug"];
 	$main_language = $c['main.language'];
@@ -146,7 +136,7 @@ define('ADMIN_SLUG',$c['admin.slug']);
 ob_start(); 
 $controller = new controller($c);
 $controller->loadpage($obj,$c);
-}catch(Exception $e){
-	echo "Critical error !";
-}
+// }catch(Exception $e){
+// 	echo "Critical error !";
+// }
 ?>

@@ -14,6 +14,10 @@ class catalog extends connection{
 		$catalog_info_comments_list = $cache->index($c,"catalog_info_comments_list");
 		$data["catalog_info_comments_list"] = json_decode($catalog_info_comments_list);
 
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
+
 		/* languages */
 		$languages = $cache->index($c,"languages");
 		$data["languages"] = json_decode($languages); 

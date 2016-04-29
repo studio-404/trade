@@ -20,7 +20,7 @@ class model_template_pagination{
 		if($pagings>$item_per_page){
 			for($x=1;$x<=$pagings;$x++){
 				$active = (isset($pn) && $pn==$x) ? ' class="active"' : '';
-				$out[1] .= '<li'.$active.'><a href="'.$path.'?pn='.$x.'">'.$x.'</a></li>';
+				$out[1] .= '<li'.$active.'><a href="'.$path.'?v='.Input::method('GET','v').'&pn='.$x.'">'.$x.'</a></li>';
 			}
 		}
 		return $out;

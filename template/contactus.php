@@ -31,19 +31,14 @@
 		<div class="page_title_2">
 			Contact Details
 		</div>
-		<?php
-		// echo "<pre>";
-		// print_r($data["text_general"]); 
-		// echo "</pre>";
-		?>
 		<div class="contact_details">
 			<ul>
-				<li class="text_formats"><span>Tbilisi Office</span></li>
+				<li class="text_formats"><span><?=$data["contact_data"][0]["city"]?></span></li>
 				<li class="text_formats p100">
-					<?=$data["text_general"][0]["text"]?>
+					<p>Address: <?=$data["contact_data"][0]["address"]?></p>
+					<p>Hotline: <?=$data["contact_data"][0]["phone"]?></p>
+					<p>E-mail: <?=$data["contact_data"][0]["email"]?></p>					
 				</li>
-				<!-- <li class="text_formats">Tel: +995 32 2 99 10 44; +995 32 2 99 11 28; Fax +995 32 2 99 11 29</li>
-				<li class="text_formats">Hotline; +995 32 99 99 99 ; E-mail; info@eda.ge</li> -->
 			</ul>
 		</div>
 		
@@ -52,8 +47,7 @@
 		</div>
 		
 		<div class="row col-sm-12">
-			<!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d7098.94326104394!2d78.0430654485247!3d27.172909818538997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1385710909804" width="100%" height="150" frameborder="0" style="border:0"></iframe> -->
-			<iframe src="https://www.google.com/maps/d/u/1/embed?mid=zdKuQPLdBUUE.keTrYL0PFOaM&amp;z=18" width="100%" height="250" style="border:0; margin:0;"></iframe>
+			<iframe src="<?=$data["contact_data"][0]["iframemap"]?>" width="100%" height="250" style="border:0; margin:0;"></iframe>
 		</div>
 		
 	</div>

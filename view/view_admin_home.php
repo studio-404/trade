@@ -17,13 +17,55 @@
 	<?php
 	@include("view/parts/header.php");
 	?>
+	<script>
+(function(w,d,s,g,js,fs){
+  g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
+  js=d.createElement(s);fs=d.getElementsByTagName(s)[0];
+  js.src='https://apis.google.com/js/platform.js';
+  fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
+}(window,document,'script'));
+</script>
+<script>
+
+gapi.analytics.ready(function() {
+  gapi.analytics.auth.authorize({
+    container: 'embed-api-auth-container',
+    clientid: '152533385033-ub2a400tm0b4btrvp0mkb16igfo8h4i2.apps.googleusercontent.com'
+  });
+  var viewSelector = new gapi.analytics.ViewSelector({
+    container: 'view-selector-container'
+  });
+  viewSelector.execute();
+  var dataChart = new gapi.analytics.googleCharts.DataChart({
+    query: {
+      metrics: 'ga:users, ga:pageviews',
+      dimensions: 'ga:date',
+      'start-date': '30daysAgo',
+      'end-date': 'yesterday'
+    },
+    chart: {
+      container: 'chart-container',
+      type: 'LINE',
+      options: {
+        width: '100%', 
+      	fontSize: 16
+      }
+    }
+  });
+
+  viewSelector.on('change', function(ids) {
+    dataChart.set({query: {ids: ids}}).execute();
+  });
+
+});
+</script>
 	<main>
 		<div class="center">
 			<div class="content">
 
-				<div id="table">
+				<div id="table" style="width:39%; margin-right:1%; float:left">
 					<div class="header-row row">
-						<span class="cell primary">Welcome to Website: CMS version <?=$data['c']['cmsversion']?></span>
+						<span class="cell primary">CMS version <?=$data['c']['cmsversion']?></span>
 						<span class="cell">&nbsp;</span>
 					</div>
 					<div class="row">
@@ -86,6 +128,19 @@
 						</span>
 					</div>
 				</div>
+
+				<div id="table" style="width:59%; margin-left:1%; float:right">
+					<div class="header-row row">
+						<span class="cell primary">Google Analitics</span>
+						<span class="cell">&nbsp;</span>
+					</div>
+					<div class="row">
+						<div id="chart-container"></div>
+						<div id="view-selector-container"></div><br />
+						<div id="embed-api-auth-container"></div>
+					</div>
+				</div>
+				<div style="clear:both"></div>
 				
 				<div class="shortTable noneMargin">
 					<div id="table">

@@ -19,7 +19,11 @@
 	<?php
 	if($_SESSION["user_data"]["allow"]==1):
 	?>
-	<center style="margin:10px 0px; padding:0;"><font style="font-size:18px; color:red; text-aling:center; font-weigth:bold">Sorry, You are disallowed by website administrator, Changes will not be saved !</font></center>
+	<center style="margin:10px 0px; padding:0;">
+		<font style="font-size:18px; color:red; text-aling:center; font-weigth:bold">
+			Sorry, You are disallowed by website administrator !
+		</font>
+	</center>
 	<?php
 	endif;
 	?>
@@ -351,7 +355,7 @@
 				<div class="form-group">
 					<label>Company Description</label>
 					<textarea id="about" name="about" class="form-control"><?=($_SESSION["user_data"]["about"]) ? htmlentities($_SESSION["user_data"]["about"]) : ''?></textarea>
-					<div id="maxlength" style="width:100%; text-align:left; color:#555555"><?=strlen($_SESSION["user_data"]["about"])?> / 350</div>
+					<div id="maxlength" style="width:100%; text-align:left; color:#555555"><?=strlen($_SESSION["user_data"]["about"])?> / <?=$c["textarea.max.symbols"]?></div>
 				</div>
 			</div>
 			<div class="col-sm-9">
@@ -449,7 +453,7 @@
 					<div class="form-group">
 						<label>Product Description <font color="red">*</font></label>
 						<textarea class="form-control" id="product_description" name="product_description"></textarea>
-						<div id="maxlengthproduct" style="width:100%; text-align:left; color:#555555">0 / 350</div>
+						<div id="maxlengthproduct" style="width:100%; text-align:left; color:#555555">0 / <?=$c["textarea.max.symbols"]?></div>
 						<font class="error-msg" id="requiredx_add_describe">Description field is required !</font>
 					</div>				
 				</div>	

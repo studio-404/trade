@@ -67,7 +67,7 @@ class model_template_upload_user_logo extends connection{
 				 if (move_uploaded_file($_FILES["inputUserLogo"]["tmp_name"],$target_file)) {
 				 	$conn = $this->conn($c); 
 
-				 	$check = 'SELECT `picture` FROM `studio404_users` WHERE `id`=:companyId AND `username`=:username AND `allow`!=:one AND `status`!=:one'; 
+				 	$check = 'SELECT `picture` FROM `studio404_users` WHERE `id`=:companyId AND `username`=:username AND `status`!=:one'; 
 				 	$pre_check = $conn->prepare($check);
 				 	$pre_check->execute(array(
 				 		":username"=>$_SESSION["tradewithgeorgia_username"], 
@@ -80,7 +80,7 @@ class model_template_upload_user_logo extends connection{
 				 		@unlink($old_pic);
 				 	}
 
-				 	$sql = 'UPDATE `studio404_users` SET `picture`=:picture WHERE `id`=:companyId AND `username`=:username AND `allow`!=:one AND `status`!=:one'; 
+				 	$sql = 'UPDATE `studio404_users` SET `picture`=:picture WHERE `id`=:companyId AND `username`=:username AND `status`!=:one'; 
 				 	$prepare = $conn->prepare($sql); 
 				 	$prepare->execute(array(
 				 		":username"=>$_SESSION["tradewithgeorgia_username"], 

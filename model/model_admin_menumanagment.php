@@ -7,6 +7,7 @@ class model_admin_menumanagment extends connection{
 
 	public function select_menus($c){
 		$out = array();		
+
 		if(isset($_GET['search']) && !empty($_GET['search']) ){
 			$sql = 'SELECT * FROM `studio404_pages` WHERE `menu_type`=:menu_type AND `status`!=:status AND `title` LIKE :title AND `lang`=:lang';
 			$search = '%'.$_GET['search'].'%';
@@ -27,6 +28,21 @@ class model_admin_menumanagment extends connection{
 	public function select_sub($c){
 		$out = array();
 		$conn = $this->conn($c);
+		if(isset($_GET['footermenu'],$_GET['id']) && is_numeric($_GET['id'])){
+			if($_GET['footermenu']=="off"){
+				$sqlUpdateFooter = 'UPDATE `studio404_pages` SET `footermenu`=0 WHERE `idx`=:idx';
+			}else if($_GET['footermenu']=="on"){
+				$sqlUpdateFooter = 'UPDATE `studio404_pages` SET `footermenu`=1 WHERE `idx`=:idx';
+			}
+			$prepareUpdate = $conn->prepare($sqlUpdateFooter); 
+			$prepareUpdate->execute(array(
+				":idx"=>$_GET['id']
+			));
+			$files = glob(DIR . "_cache/*"); 
+			array_map('unlink', $files);
+			redirect::url(WEBSITE.LANG."/".$c['admin.slug']."?action=".$_GET['action']."&super=".$_GET['super']); 
+		}
+
 		$sqlCount = 'SELECT COUNT(`id`) AS cc FROM `studio404_pages` WHERE `menu_type`!=:menu_type AND `cid`=:cid AND `status`!=:status AND `lang`=:lang';
 		$prepare = $conn->prepare($sqlCount);
 		$prepare->execute(array(
@@ -173,6 +189,11 @@ class model_admin_menumanagment extends connection{
 				}
 				$out .= '</span>';
 				
+				if($rows['footermenu']==0){
+					$out .= '<span class="cell"><a href="?action=sitemap&super='.@$_GET['super'].'&footermenu=on&id='.$rows['idx'].'" title="turned off"><i class="fa fa-toggle-off" style="color:red"></i></a></span>';
+				}else{
+					$out .= '<span class="cell"><a href="?action=sitemap&super='.@$_GET['super'].'&footermenu=off&id='.$rows['idx'].'" title="turned on"><i class="fa fa-toggle-on" style="color:green"></i></a></span>';
+				}
 				$out .= '<span class="cell">'.$tabSpace[$tab].'<a href="?action=editSitemap&super='.$_GET['super'].'&id='.$rows['idx'].'&token='.$_SESSION['token'].'">'.$rows['title'].'</a><br /> <a href="'.WEBSITE.LANG."/".$rows['slug'].'" class="slugs" target="_blank">'.WEBSITE.LANG."/".$rows['slug'].'</a></span>';
 				$out .= '<span class="cell">'.$rows['page_type'].'</span>';
 				$out .= '<span class="cell">'.$rows['idx'].'</span>';

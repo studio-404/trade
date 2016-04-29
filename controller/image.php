@@ -32,7 +32,8 @@ class image extends connection{
 			ini_set("gd.jpeg_ignore_warning", 1);
 			if (file_exists($file_path))
 			{
-			    header("location: " .WEBSITE. $file_path);
+			    header('Content-type:image/png');
+				readfile(WEBSITE. $file_path);
 			}
 			else
 			{
@@ -41,7 +42,8 @@ class image extends connection{
 				@copy($without, $src);
 				$this->make_thumb($src, $w, $h, $file_path,$ext);
 				@unlink($src);
-				header("location: " .WEBSITE. $file_path);
+				header('Content-type:image/png');
+				readfile(WEBSITE. $file_path);
 			}
 		}catch(Exception $e){
 				die();
@@ -106,26 +108,12 @@ class image extends connection{
 	}
 
 	public function ImageToBlackAndWhite($im) {
-		try
-		{
-			// for ($x = imagesx($im); $x--;) {
-		 //        for ($y = imagesy($im); $y--;) {
-		 //            $rgb = imagecolorat($im, $x, $y);
-		 //            $r = ($rgb >> 16) & 0xFF;
-		 //            $g = ($rgb >> 8 ) & 0xFF;
-		 //            $b = $rgb & 0xFF;
-		 //            $gray = ($r + $g + $b) / 3;
-		 //            if ($gray < 0xFF) {
-		 //                imagesetpixel($im, $x, $y, 0xFFFFFF);
-		 //            }else{
-		 //                imagesetpixel($im, $x, $y, 0x000000);
-		 //            }
-		 //        }
-		 //    }
-		 //    imagefilter($im, IMG_FILTER_NEGATE);
+		try{
 			imagefilter($im, IMG_FILTER_GRAYSCALE);
 			imagefilter($im, IMG_FILTER_CONTRAST, -100);
-		}catch(Exception $e){ die(); }
+		}catch(Exception $e){ 
+			die(); 
+		}
 	}
 }
 ?>

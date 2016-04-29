@@ -51,7 +51,7 @@ class edit_page_interface extends connection{
 			$this->out[1] .= $this->content_form($fetch);
 			$this->out[1] .= '</div>';
 			$this->out[1] .= '<div id="tabs-3">';
-			$this->out[1] .= $this->content_images($fetch2,$c);
+			$this->out[1] .= $this->content_images($fetch,$c);
 			$this->out[1] .= '</div>';
 			$this->out[1] .= '<div id="tabs-4">';
 			$this->out[1] .= $this->content_files($fetch,$c);
@@ -850,7 +850,7 @@ class edit_page_interface extends connection{
 					<a href="#" style="color:white"><i class="fa fa-arrows"></i><span id="dragText">Start sorting</span></a>
 				</div><div class="clearfix"></div>';
 		$out .= '<input type="file" name="bgfile2" id="bgfile2" style="position:absolute; visibility:hidden" />';
-		$out .= '<div class="dropArea">';
+		$out .= '<div class="dropArea" data-dlang="'.LANG_ID.'">';
 		$out .= '<div class="Droptitle">Drag and drop file (pdf,doc,docx,xls,xlsx,zip,rar) <span id="progress">0%</span></div>';
 		$out .= '<div class="dragElements" id="dragElements">';
 		//select files
@@ -919,7 +919,7 @@ class edit_page_interface extends connection{
 					<a href="#" style="color:white"><i class="fa fa-arrows"></i><span id="dragText">Start sorting</span></a>
 				</div><div class="clearfix"></div>';
 		$out .= '<input type="file" name="bgfile2" id="bgfile2" style="position:absolute; visibility:hidden" />';
-		$out .= '<div class="dropArea">';
+		$out .= '<div class="dropArea" data-dlang="'.LANG_ID.'">';
 		$out .= '<div class="Droptitle">Drag and drop file (pdf,doc,docx,xls,xlsx,zip,rar) <span id="progress">0%</span></div>';
 		$out .= '<div class="dragElements" id="dragElements">';
 		//select files
@@ -987,14 +987,14 @@ class edit_page_interface extends connection{
 		$out = '<div class="button makeFileDragable2" style="background-color:green; float:left">
 					<a href="#" style="color:white"><i class="fa fa-arrows"></i><span id="dragText2">Start sorting</span> </a>
 				</div>';	
-		if($_GET["type"]=='videogallerypage'){
+		if(isset($_GET["type"]) && $_GET["type"]=='videogallerypage'){
 			$out .= '<div class="button addYtVideo" style="background-color:green; float:left; margin-left:10px;">
 					<a href="#" style="color:white"><i class="fa fa-plus"></i><span id="dragText2">Add youtube video</span> </a>
 				</div>';	
 		}
 		$out .= '<div class="clearfix"></div>';
 		$out .= '<input type="file" name="bgfile3" id="bgfile3" style="position:absolute; visibility:hidden" />';
-		$out .= '<div class="dropArea2">';
+		$out .= '<div class="dropArea2" data-dlang="'.LANG_ID.'">';
 		$out .= '<div class="Droptitle2">
 				Drag and drop photo ('.$ext.') 
 				<span id="progress2">0%</span>

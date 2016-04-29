@@ -6,7 +6,7 @@
 				</li>
 			</ul>	
 			<?php if(is_array($data["userstatements"])) { ?>
-			<div class="yellow_title_19">Product</div>
+			<div class="yellow_title_19">Product (s)</div>
 			<div class="product_more_item">
 				<div class="products white_bg">
 					

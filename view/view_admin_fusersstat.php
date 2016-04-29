@@ -23,17 +23,17 @@
 			?>
 			<div class="content">
 			<div class="button">
-				<a href="?action=fusersstat&amp;load=users" <?=($data["active"]=="users") ? 'class="active"' : ''?>><i class="fa fa-users"></i> <span>Users (<?=$data["user_count"]?>)</span></a>
+				<a href="?action=fusersstat&amp;load=users" <?=($data["active"]=="users") ? 'class="active"' : ''?>><i class="fa fa-users"></i> <span>Users</span></a>
 			</div>
 			<div class="button" style="margin-left:10px;">
-				<a href="?action=fusersstat&amp;load=products" <?=($data["active"]=="products") ? 'class="active"' : ''?>><i class="fa fa-list-alt"></i> <span>Products (<?=$data["product_count"]?>)</span></a>
+				<a href="?action=fusersstat&amp;load=products" <?=($data["active"]=="products") ? 'class="active"' : ''?>><i class="fa fa-list-alt"></i> <span>Products </span></a>
 			</div>
 			<div class="button" style="margin-left:10px;">
-				<a href="?action=fusersstat&amp;load=services" <?=($data["active"]=="services") ? 'class="active"' : ''?>><i class="fa fa-list-alt"></i> <span>Services (<?=$data["service_count"]?>)</span></a>
+				<a href="?action=fusersstat&amp;load=services" <?=($data["active"]=="services") ? 'class="active"' : ''?>><i class="fa fa-list-alt"></i> <span>Services</span></a>
 			</div>
-			<div class="button" style="margin-left:10px;">
+			<!-- <div class="button" style="margin-left:10px;">
 				<a href="?action=fusersstat&amp;load=enquires" <?=($data["active"]=="enquires") ? 'class="active"' : ''?>><i class="fa fa-list-alt"></i> <span>Enquires (<?=$data["enquire_count"]?>)</span></a>
-			</div>
+			</div> -->
 
 				<div class="wrap">
 					<div class="search">
@@ -54,7 +54,11 @@
 					<?=$data['table']?>
 				</div>
 			<?=$data['pager']?>
+		<div style="clear:both"></div>
+		<p style="margin:20px 0 0 0"><a href="<?=WEBSITE?>en/export-catalog?view=companies&amp;csv=true" target="_blank" style="color:#ef4836">Export CSV - Companies</a> | <a href="<?=WEBSITE?>en/export-catalog?view=products&amp;csv=true" target="_blank" style="color:#ef4836">Export CSV - Products</a> | <a href="<?=WEBSITE?>en/export-catalog?view=services&amp;csv=true" target="_blank" style="color:#ef4836">Export CSV - Services</a></p>
+		
 		</div>
+		
 	</main>
 	<div class="clearfix"></div>
 	<?php

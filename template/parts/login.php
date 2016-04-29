@@ -35,7 +35,11 @@
 					<input type="text" name="captcha" id="captcha" class="form-control" value="" autocomplete="off" onkeypress="submitme(event,'login_user')" />
 					<div class="error_message captcha_required"><?=$data["language_data"]["captcharquired"]?> !</div>
 					<div style="clear:both"></div>
-					<img src="<?=WEBSITE?>protect.php" alt="" style="float:left; margin-top:15px; border:solid 1px #3895ce; width:95px; height:35px;" class="protectimage" />
+					<?php 
+						$_SESSION['protect_login'] = uid::captcha(2).ustring::random(2); 
+						setcookie("protect_login", md5($_SESSION['protect_login']), time() + 86400, "/", "tradewithgeorgia.com");
+					?>
+					<img src="<?=WEBSITE?>protect.php?t=login" alt="" style="float:left; margin-top:15px; border:solid 1px #3895ce; width:95px; height:35px;" class="protectimage" />
 				</div>
 				<div style="clear:both"></div>
 				<div class="btn btn-block btn-yellow" style="font-size:19px; margin-top:15px;" id="login_user"><?=strtoupper($data["language_data"]["login"])?></div>

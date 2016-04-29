@@ -5,64 +5,13 @@
 			<div class="col-sm-9 padding_0">
 				<div id="footer_links">
 					<?php
-						$get_page_title = new get_page_title();
-						$get_sub_menus_by_idx = new get_sub_menus_by_idx();
-						$first = $get_sub_menus_by_idx->sub_menu($_SESSION["c"],3,'footer_first.json');
-						$fcount = count($first);
-
-						$second = $get_sub_menus_by_idx->sub_menu($_SESSION["c"],6,'footer_second.json');
-						$scount = count($second);
-
-						$third = $get_sub_menus_by_idx->sub_menu($_SESSION["c"],7,'footer_third.json');
-						$tcount = count($second);
+					$model_template_footer_navigation = new model_template_footer_navigation();
+					echo $model_template_footer_navigation->select_all($c);
 					?>
-
-					<ul>
-						<span><?=$get_page_title->get($_SESSION["c"],3)?>: &nbsp;</span>
-						<?php
-						$x = 0;
-						foreach ($first as $val) {
-							echo '<li><a href="'.WEBSITE.LANG.'/'.htmlentities($val['slug']).'">'.$val['title'].'</a></li>';
-							if($x<($fcount-1)){ echo " / "; }
-							$x++;
-						}
-						?>
-					</ul>
-					<ul>
-						<span><?=$data["language_data"]["exportcatalog"]?>: &nbsp;</span>
-						<li><a href="<?=WEBSITE.LANG?>/export-catalog">Companies</a></li> / 
-						<li><a href="<?=WEBSITE.LANG?>/export-catalog?view=products">Products</a></li> / 
-						<li><a href="<?=WEBSITE.LANG?>/export-catalog?view=services">Services</a></li> 
-						<!-- <li><a href="<?=WEBSITE.LANG?>/en/business-portal">Enquires</a></li> -->
-					</ul>
-					<ul>
-						<span><?=$get_page_title->get($_SESSION["c"],6)?>: &nbsp;</span>
-						<?php
-						$x = 0;
-						foreach ($second as $val) {
-							echo '<li><a href="'.WEBSITE.LANG.'/'.htmlentities($val['slug']).'">'.$val['title'].'</a></li>';
-							if($x<($scount-1)){ echo " / "; }
-							$x++;
-						}
-						?>
-					</ul>
-					<ul>
-						<span><?=$get_page_title->get($_SESSION["c"],7)?>: &nbsp;</span>
-						<?php
-						$x = 0;
-						foreach ($third as $val) {
-							echo '<li><a href="'.WEBSITE.LANG.'/'.htmlentities($val['slug']).'">'.$val['title'].'</a></li>';
-							if($x<($tcount-1)){ echo " / "; }
-							$x++;
-						}
-						?>
-					</ul>	
-
 				</div>
 			</div>
 			<div class="col-sm-3 text-right padding_0" id="footer_fb">
-				
-					<?php
+				<?php
 					foreach($data["components"] as $val){
 						if($val->com_name != "social networks"){ continue; }
 					?>
@@ -72,18 +21,16 @@
 						</a>
 					<?php
 					}
-					?>
-
-				
+					?>				
 			</div>
 		</div>	
 	</div>	
 	<div id="footer_div_2">
 		<div id="footer_2" class="container">
 			<div class="col-sm-4 padding_0">
-				<li><?=$data["language_data"]["officelabel"]?>:</li>
-				<li><?=$data["language_data"]["officevalue"]?></li>
-				<li><?=$data["language_data"]["hotlinevalue"]?></li>
+				<li><?=$data["contact_data"][0]["city"]?></li>
+				<li><?=$data["contact_data"][0]["address"]?></li>
+				<li><?=$data["contact_data"][0]["phone"]?></li>
 			</div>
 			<div class="col-sm-2 padding_0">
 				<li id="chatStatus">Offline</li>
@@ -91,7 +38,7 @@
 			</div>
 			<div class="col-sm-4 padding_0">
 				<li><?=$data["language_data"]["supportby"]?>:</li>
-				<a href="https://www.giz.de" target="_blank"><img src="<?=TEMPLATE?>img/donor_org.png"/></a>
+				<a href="https://www.giz.de" target="_blank"><img src="<?=TEMPLATE?>img/donor_org.png" style="width:250px;"/></a>
 			</div>
 			<div class="col-sm-2 padding_0 text-right getsadze_design">
 				<a href="http://getsadze.co.uk/en/home" target="_blank">

@@ -7,7 +7,7 @@ class model_admin_profile extends connection{
 
 	public function selectAdminProfile($c){
 		$conn = $this->conn($c);
-		$sql = 'SELECT `namelname`,`email`, `phone`, `mobile` FROM `studio404_users` WHERE `username`=:username AND `status`!=:status';
+		$sql = 'SELECT `namelname`,`email`, `phone`, `address`, `city`, `iframemap` FROM `studio404_users` WHERE `username`=:username AND `status`!=:status';
 		$query = $conn->prepare($sql);
 		if (!$query) {
 			print_r($dbh->errorInfo());
@@ -26,18 +26,22 @@ class model_admin_profile extends connection{
 			$conn = $this->conn($c);
 			$email = strip_tags($_POST['email']);
 			$phone = strip_tags($_POST['phone']);
-			$mobile = strip_tags($_POST['mobile']);
+			$city = strip_tags($_POST['city']);
+			$address = strip_tags($_POST['address']);
 			$namelname = strip_tags($_POST['namelname']);
+			$iframemap = strip_tags($_POST['iframemap']);
 			
-			$sql = 'UPDATE `studio404_users` SET `namelname`=:namelname, `email`=:email, `phone`=:phone, `mobile`=:mobile WHERE `username`=:username AND `status`!=:status';
+			$sql = 'UPDATE `studio404_users` SET `namelname`=:namelname, `email`=:email, `phone`=:phone, `address`=:address, `city`=:city, `iframemap`=:iframemap WHERE `username`=:username AND `status`!=:status';
 			$query = $conn->prepare($sql);
 			$query->execute(array(
 				":username"=>$_SESSION["user404"], 
 				":status"=>1, 
 				":namelname"=>$namelname,
 				":email"=>$email,
-				":phone"=>$phone,
-				":mobile"=>$mobile
+				":address"=>$address,
+				":city"=>$city,
+				":phone"=>$phone, 
+				":iframemap"=>$iframemap  
 			));
 			$this->outMessage = 1;
 

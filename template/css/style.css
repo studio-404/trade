@@ -112,7 +112,7 @@ iframe{ margin: 0 !important; padding: 0 !important; border: 0 !important; width
 .navbar-trade{
 	
 	border-radius:0;
-	min-height:48px;
+	/*min-height:48px;*/
 	border:none;
 	margin-top:-25px;
 	z-index:99;
@@ -1228,7 +1228,7 @@ height:25px; width:25px; z-index:999999999999999999999999999;
 		padding-bottom:20px;
 		-moz-box-shadow:-9px -4px 4px -5px #ddd, -5px 0px 5px -5px #333;
 		-webkit-box-shadow:-9px -4px 4px -5px #ddd, -5px 0px 5px -5px #333;
-		box-shadow:-9px -4px 4px -5px #ddd, -5px 0px 5px -5px #333;  
+		box-shadow:-9px -4px 4px -5px #ddd, -5px 0px 5px -5px #333;
 	}
 	 
 	#slide-nav.navbar-inverse #navbar-height-col {
@@ -1399,7 +1399,62 @@ table tr td p{ margin-bottom: 0px !important }
 .homepageEventRegister{ cursor: pointer; }
 #insideProductImage{ cursor:pointer; max-width:300px; min-height:170px; }
 .loader{ padding: 0 10px; }
+.mymap{ position: relative; min-height: 600px;  }
+.mymap svg{ /*position: absolute;*/ z-index: 1000;  }
+.tooltip {
+	display: none;
+	position: absolute;
+	background-color: #292929;
+	border: solid 1px #CDCDCD;
+	padding: 3px;
+	color: #ffffff;
+	font-size: 14px;
+	font-family: 'Roboto';
+	z-index: 1010;
+	opacity: 1;
+}
+.tooltip p{
+	padding: 3px;
+	color: #ffffff;
+	font-size: 14px;
+	font-family: 'Roboto';
+	margin: 0;
+}
+.mymap{ margin:0; padding:0; border:0; width:100%; position: relative; background: #424862; }
+.openmap{ margin: 0; padding: 0; width: 21px; height: 21px; background-image: url('/_plugins/jvectormap/exsize2.svg'); background-size: 21px 21px; position: absolute; right: 10px; top: 10px; z-index: 1001 }
+.openmap a{ margin: 0; padding: 0; width: 21px; height: 21px; display: block; text-decoration: none; }
+.searchMap{ margin:0; padding: 0; border: 0; width: 100%; background: #424862; min-height: 140px; }
+.searchMap .general-title{ padding: 10px; font-size: 26px; line-height: 26px; color: #ffffff; font-weight: bold; }
+.searchMap .viewby{ margin: 10px; padding: 5px; width: calc(100% - 20px); float: left; border: solid 1px #fea100; }
+.searchMap .viewby .title{ margin: 0; padding: 0; color:#fea100; font-size: 16px; }
+.searchMap .viewby .content{ margin: 5px 0 0 0; padding: 0; color:#ffffff; }
+.searchMap .viewby .content .input{ margin: 0 10px 0 0; font-size: 14px; padding: 0 0 0 30px; float: left; position: relative; cursor: pointer; }
+.searchMap .viewby .content .input:hover{ color: #fea100; }
+
+.searchMap .viewby .content .checked::after{ content:" "; margin:0; padding: 0; width: 14px; height: 14px; background-image: url('/_plugins/jvectormap/checked.png'); background-repeat: no-repeat; background-position: center center; position: absolute; top: 3px; left: 3px }
+.searchMap .viewby .content .unchecked::after{ content:" "; margin:0; padding: 0; width: 14px; height: 14px; background-image: url('/_plugins/jvectormap/uncheked.png'); background-repeat: no-repeat; background-position: center center; position: absolute; top: 3px; left: 3px; }
+.searchMap .traderegimes{ margin: 10px; padding: 5px; width: calc(100% - 20px); float: left; border: solid 1px #fea100; }
+.searchMap .traderegimes .title{ margin: 0; padding: 0; color:#fea100; }
+.searchMap .traderegimes .content{ margin: 5px 0 0 0; padding: 0; color:#ffffff; }
+.searchMap .traderegimes .content .input2{ margin: 0 10px 0 0; padding: 0 0 0 30px; float: left; position: relative; cursor: pointer; }
+.searchMap .traderegimes .content .input2:hover{ color: #fea100; }
+.searchMap .traderegimes .content .checked::after{ content:" "; margin:0; padding: 0; width: 14px; height: 14px; background-image: url('/_plugins/jvectormap/checked.png'); background-repeat: no-repeat; background-position: center center; position: absolute; top: 3px; left: 3px }
+.searchMap .traderegimes .content .unchecked::after{ content:" "; margin:0; padding: 0; width: 14px; height: 14px; background-image: url('/_plugins/jvectormap/uncheked.png'); background-repeat: no-repeat; background-position: center center; position: absolute; top: 3px; left: 3px; }
+
+/* Map Mobile Version */
+.mobileMapBox{ margin: 0; padding: 0; width: 100%; clear: both; display: none; }
+.mobileMapBox .mobileMapBox-title{ margin: 10px 0; padding: 0; width: 100%; font-size: 18px; font-family: roboto; }
+.mobileMapBox .mobileMapBox-selectBox{ margin: 10px 0; padding: 0; width: 100%; }
+.mobileMapBox .mobileMapBox-selectBox label{ margin: 10px 0; padding: 0; width: 100%; }
+.mobileMapBox .mobileMapBox-selectBox select{ margin: 0; padding: 0; width: 100%; height: 35px; }
+.mobileMapBox .mobileMapBox-viewBySub{ margin: 10px 0; padding: 0; width: 100%; }
+.mobileMapBox .mobileMapBox-viewBySub .mobileMapBox-viewBySublabel{ margin: 10px 0; padding: 0; width: 100%; }
+.mobileMapBox .mobileMapBox-viewBySub .mobileMapBox-viewBySubSelector{ margin: 0; padding: 0; width: 100%; height: 35px; }
+.mobileMapBox table{ margin: 20px 0 0 0; padding: 0; width: 100%; }
+
 @media (max-width: 992px){
+	.mymap{ display: none; }
+	.mobileMapBox{ display: block; }
 	#insideProductImage{ max-width: 100% !important; min-height: auto !important; }
 	.productDescriptionInside{ margin: 20px 0 0 0; padding: 0; }
 	#header{ min-height: 120px !important; }

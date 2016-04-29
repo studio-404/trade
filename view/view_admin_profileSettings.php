@@ -47,12 +47,24 @@
 					<input type="text" name="username" id="username" value="<?=$_SESSION["user404"]?>" disabled="disabled" />
 					<label for="email">Firstname Lastname:</label>
 					<input type="text" name="namelname" id="namelname" value="<?=htmlentities($data["profile"]["namelname"])?>" />
+					
+					<label for="city">City:</label>
+					<input type="text" name="city" id="city" value="<?=htmlentities($data["profile"]["city"])?>" />
+
+					<label for="address">Address:</label>
+					<input type="text" name="address" id="address" value="<?=htmlentities($data["profile"]["address"])?>" />
+
+					<label for="phone">Hotline:</label>
+					<input type="text" name="phone" id="phone" value="<?=htmlentities($data["profile"]["phone"])?>" />
+
 					<label for="email">Email:</label>
 					<input type="text" name="email" id="email" value="<?=htmlentities($data["profile"]["email"])?>" />
-					<label for="phone">Phone:</label>
-					<input type="text" name="phone" id="phone" value="<?=htmlentities($data["profile"]["phone"])?>" />
-					<label for="mobile">Mobile:</label>
-					<input type="text" name="mobile" id="mobile" value="<?=htmlentities($data["profile"]["mobile"])?>" />
+
+					<label for="iframemap">Map iframe Link:</label>
+					<input type="text" name="iframemap" id="iframemap" value="<?=htmlentities($data["profile"]["iframemap"])?>" />
+					
+					
+					
 					<div class="label">
 						<a href="?action=changePassword">Change password</a>
 					</div>

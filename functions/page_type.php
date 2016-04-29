@@ -51,7 +51,7 @@ class page_type extends connection{
 			$nums_module = $prepare_module->rowCount();
 			if($nums_module){
 				$fetch_module = $prepare_module->fetch(PDO::FETCH_ASSOC);
-				$out = $fetch_module["page_type"];
+				$out = $fetch_module["module_pagetype"];
 			}
 		}
 		return $out;

@@ -24,6 +24,10 @@ class profileservice extends connection{
 		$text_documents = $cache->index($c,"text_documents");
 		$data["text_documents"] = json_decode($text_documents);
 
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
+
 		/* languages */
 		$languages = $cache->index($c,"languages");
 		$data["languages"] = json_decode($languages); 
@@ -102,6 +106,9 @@ class profileservice extends connection{
 		}
 
 		$data["calculate"] = calculate::filled($_SESSION["user_data"],"service");
+		$pre = (100-$data["calculate"]["tocomplete"]);
+		$calculate = new calculate();
+		$calculate->updatedata($c,$_SESSION["user_data"]["id"],$pre);
 
 		
 		$service_sql = 'SELECT `id`,`idx`,`title`,`products`,`long_description`, `visibility`, `admin_com` FROM `studio404_module_item` WHERE `module_idx`=:module_idx AND `insert_admin`=:insert_admin AND `status`!=:one ORDER BY `date` DESC LIMIT 5';

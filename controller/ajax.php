@@ -34,6 +34,76 @@ class ajax extends connection{
 			echo "Done";
 		}
 
+		if(Input::method("POST","resetMapTitles")=="true"){
+			$j = json_decode(Input::method("POST","maparr"),true); 
+			$filter = array_filter($j);
+			$sql = 'SELECT `title`,`code` FROM `vectormap_new` WHERE find_in_set(cast(`code` as char), :code)';
+			$prepare = $conn->prepare($sql);
+			$prepare->execute(array(
+				":code"=>implode(",",$filter)
+			));
+			if($prepare->rowCount() > 0){
+				$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC);
+				echo json_encode($fetch); 
+			}else{
+				echo "Empty";
+			}
+		}
+
+		if(Input::method("POST","mapfilter")=="true" && Input::method("POST","t")){
+			$chosenid = Input::method("POST","c"); 
+			if(Input::method("POST","t")=="viewby"){
+				$sql = 'SELECT `idx`,`title`,`shorttitle` FROM `studio404_pages` WHERE `cid`=:cid AND `visibility`!=:one AND `status`!=:one';
+				$prepare = $conn->prepare($sql); 
+				$prepare->execute(array(
+					":cid"=>$chosenid, 
+					":one"=>1 
+				));
+				if($prepare->rowCount()>0){
+					$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC); 	
+					echo json_encode($fetch);			
+				}else{
+					echo "Empty";
+				}
+			}else if(Input::method("POST","t")=="traderegime"){
+				$sql = 'SELECT 
+				`studio404_module_item`.`title` AS smi_title, 
+				`studio404_module_item`.`long_description` AS smi_long_description, 
+				`studio404_module_item`.`tags` AS smi_color 
+				FROM 
+				`studio404_module_attachment`,`studio404_module`,`studio404_module_item` 
+				WHERE 
+				`studio404_module_attachment`.`connect_idx`=:connect_idx AND 
+				`studio404_module_attachment`.`lang`=:five AND 
+				`studio404_module_attachment`.`status`!=:one AND 
+				`studio404_module_attachment`.`idx`=`studio404_module`.`idx` AND 
+				`studio404_module`.`lang`=:five AND 
+				`studio404_module`.`status`!=:one AND 
+				`studio404_module`.`idx`=`studio404_module_item`.`module_idx` AND 
+				`studio404_module_item`.`lang`=:five AND 
+				`studio404_module_item`.`visibility`!=:one AND 
+				`studio404_module_item`.`status`!=:one 
+				ORDER BY `studio404_module_item`.`idx` ASC
+				';
+				$prepare = $conn->prepare($sql); 
+				$prepare->execute(array(
+					":connect_idx"=>$chosenid, 
+					":five"=>5, 
+					":one"=>1
+				));
+				if($prepare->rowCount()>0){
+					$fetch = $prepare->fetchAll(PDO::FETCH_ASSOC); 	
+					echo json_encode($fetch);			
+				}else{
+					echo "Empty";
+				}
+			}else{
+				echo "Empty";
+			}
+			
+			exit();
+		}
+
 		if(Input::method("POST","searchTooManyData")=="true"){
 			$s = Input::method("POST","s");
 			$super = Input::method("POST","super");
@@ -75,6 +145,7 @@ class ajax extends connection{
 				$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
 				$_SESSION["tradewithgeorgia_company_type"] = $findtype;  
 				$_SESSION["tradewithgeorgia_user_id"] = $fetch["id"]; 
+				$_SESSION["user_data"]["id"] = $fetch["id"]; 
 
 				if($findtype=="manufacturer"){
 					$_SESSION["user_data"]["picture"] = $fetch["picture"]; // *
@@ -134,9 +205,9 @@ class ajax extends connection{
 				echo "Error";
 			}
 		endif;
-
-		if(Input::method("POST","sendemail1") && Input::method("POST","email1") && isset($_COOKIE["password1"]) && Input::method("POST","lc")==$_SESSION['protect_x']) : 
-			$sendemail1 = Input::method("POST","sendemail1");
+		
+		if(Input::method("POST","sendemail1") && Input::method("POST","email1") && isset($_COOKIE["password1"]) && Input::method("POST","lc")==$_SESSION['protect_register']) : 
+			$sendemail1 = strtolower(Input::method("POST","sendemail1"));
 			$email1 = Input::method("POST","email1");
 			$password1 = $_COOKIE["password1"];
 			$email2 = explode("@",$email1);
@@ -178,7 +249,7 @@ class ajax extends connection{
 						":password"=>md5($password1), 
 						":company_type"=>$ctype, 
 						":user_type"=>'website', 
-						":allow"=>2 
+						":allow"=>1 
 					));
 				endforeach;
 
@@ -195,7 +266,7 @@ class ajax extends connection{
 
 				$send_email = new send_email(); 
 				$send_email->send($host,$user,$pass,$from,$fromname,$email1,"::Registration::",$msg); 
-				echo $_SESSION['protect_x'];
+				echo $_SESSION['protect_login'];
 			}
 		endif;
 
@@ -334,10 +405,10 @@ class ajax extends connection{
 		if(Input::method("POST","logintry")) :
 			if(!Input::method("POST","lg") || !Input::method("POST","e") || !Input::method("POST","p") || !Input::method("POST","c")){
 				echo "Error empty";
-			}else if(Input::method("POST","c")!=$_SESSION['protect_x']){
+			}else if(Input::method("POST","c")!=$_SESSION['protect_login']){
 				echo "Error code";
 			}else{
-				$e = Input::method("POST","e");
+				$e = strtolower(Input::method("POST","e"));
 				$p = Input::method("POST","p");
 				$sql = 'SELECT * FROM `studio404_users` WHERE `username`=:username AND `company_type`=:companyType AND `password`=:password AND `user_type`=:user_type AND `status`!=:one'; 
 				$prepare = $conn->prepare($sql); 
@@ -472,7 +543,7 @@ class ajax extends connection{
 			}
 		}
 
-		if(Input::method("POST","changeprofile")=="true" && $_SESSION["tradewithgeorgia_username"] && strlen(Input::method("POST","p_about")) <= 350){
+		if(Input::method("POST","changeprofile")=="true" && $_SESSION["tradewithgeorgia_username"]){
 			$p_companyname = strip_tags(Input::method("POST","p_companyname")); 
 			$p_establishedin = strip_tags(Input::method("POST","p_establishedin"));
 			$p_address = strip_tags(Input::method("POST","p_address"));
@@ -495,6 +566,7 @@ class ajax extends connection{
 			$p_contactemail = strip_tags(Input::method("POST","p_contactemail"));
 			$p_about = strip_tags(nl2br(Input::method("POST","p_about")));
 			
+
 			$p_products = json_decode(Input::method("POST","p_products"));
 			$p_products = implode(",", $p_products); 
 
@@ -537,7 +609,6 @@ class ajax extends connection{
 			WHERE 
 			`username`=:username AND 
 			`id`=:companyId AND 
-			`allow`!=:one AND 
 			`status`!=:one 
 			';
 			$prepare = $conn->prepare($sql); 
@@ -592,7 +663,7 @@ class ajax extends connection{
 			$_SESSION["user_data"]["about"] = $p_about;
 			$_SESSION["user_data"]["products"] = $p_products;
 			$_SESSION["user_data"]["exportmarkets"] = $p_exportmarkets;
-			echo "Done";
+			echo "Done";			
 		}
 
 	
@@ -854,10 +925,6 @@ class ajax extends connection{
 		 		":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"]
 		 	));
 		 	$ch_fetch = $pre_check->fetch(PDO::FETCH_ASSOC); 
-		 	// if(!empty($ch_fetch["picture"])){
-		 	// 	$old_pic = DIR . 'files/usersproducts/'.$ch_fetch["picture"]; 
-		 	// 	@unlink($old_pic);
-		 	// }
 
 		 	$update_pos = 'UPDATE `studio404_module_item` SET `position`=`position`-1 WHERE `status`!=1 AND `position`>'.$ch_fetch['position'].' AND `module_idx`=4 ';
 		 	$query = $conn->query($update_pos); 
@@ -882,10 +949,6 @@ class ajax extends connection{
 		 		":insert_admin"=>$_SESSION["tradewithgeorgia_user_id"]
 		 	));
 		 	$ch_fetch = $pre_check->fetch(PDO::FETCH_ASSOC); 
-		 	// if(!empty($ch_fetch["picture"])){
-		 	// 	$old_pic = DIR . 'files/usersproducts/'.$ch_fetch["picture"]; 
-		 	// 	@unlink($old_pic);
-		 	// }
 
 		 	$update_pos = 'UPDATE `studio404_module_item` SET `position`=`position`-1 WHERE `status`!=1 AND `position`>'.$ch_fetch['position'].' AND `module_idx`=5 ';
 		 	$query = $conn->query($update_pos); 
@@ -901,7 +964,7 @@ class ajax extends connection{
 			echo "Done"; 
 		}
 
-		if(Input::method("POST","addproduct")=="true" && Input::method("POST","p") && Input::method("POST","pn") && Input::method("POST","d") && strlen(Input::method("POST","d")) <= 350)
+		if(Input::method("POST","addproduct")=="true" && Input::method("POST","p") && Input::method("POST","pn") && Input::method("POST","d") && strlen(Input::method("POST","d")) <= $c["textarea.max.symbols"])
 		{
 			if(isset($_SESSION["addproducttry"]) && $_SESSION["addproducttry"] == Input::method("POST","pn")){
 				echo "Error";
@@ -1373,52 +1436,29 @@ class ajax extends connection{
 		}
 
 		if(Input::method("POST","regEvent")=="true" && Input::method("POST","ei") && Input::method("POST","n") && Input::method("POST","e") && Input::method("POST","m")){
-			$event = 'SELECT `title` FROM `studio404_module_item` WHERE `idx`=:idx';
+			$event = 'SELECT `title` FROM `studio404_module_item` WHERE `idx`=:idx AND `status`!=:one';
 			$prepare_e = $conn->prepare($event); 
 			$prepare_e->execute(array(
-				":idx"=>(int)Input::method("POST","ei")
+				":idx"=>(int)Input::method("POST","ei"), 
+				":one"=>1
 			));
-			$fetch_e = $prepare_e->fetch(PDO::FETCH_ASSOC); 
-
-			$sql = 'SELECT `host`,`user`,`pass`,`from`,`fromname` FROM `studio404_newsletter` WHERE `id`=1';
-			$prepare = $conn->prepare($sql); 
-			$prepare->execute(); 
-			$fetch = $prepare->fetch(PDO::FETCH_ASSOC); 
-			
-			$host = $fetch["host"]; 
-			$user = $fetch["user"]; 
-			$pass = $fetch["pass"]; 
-			$where_to_send = $fetch["from"]; 
-			$subject = "::Event registration:: - Trade with georgia"; 
-
-			$from = Input::method("POST","e"); 
-			$fromname = Input::method("POST","n"); 
-			$mobile = Input::method("POST","m"); 
-
-			$uid = new uid();
-			$event_ticket_id = $uid->generate(6);
-
-			$message = '';
-			$message .= '<div style="margin:0; padding:0; width:100%;"><img src="'.TEMPLATE.'img/mailheader.png" width="100%" alt="Mail header"/></div>';
-			$message .= '<b>Send time: </b>'.date("d/m/Y H:m:s")."<br />";
-			$message .= '<b>Tickit: </b> #'.$event_ticket_id."<br />";
-			$message .= '<b>Company or Person Name: </b>'.$fromname."<br />";
-			$message .= '<b>Event: </b>'.$fetch_e["title"]."<br />";
-			$message .= '<b>Email address: </b>'.$from."<br />";
-			$message .= '<b>Mobile / Phone number: </b>'.$mobile."<br />";
-			$message .= '<b>Sender IP: </b>'.get_ip::ip()."<br />";
-
-			$message2 = '';
-			$message2 .= '<div style="margin:0; padding:0; width:100%;"><img src="'.TEMPLATE.'img/mailheader.png" width="100%" alt="Mail header"/></div>';
-			$message2 .= '<b>Send time: </b>'.date("d/m/Y H:m:s")."<br />";
-			$message2 .= '<b>Tickit: </b> #'.$event_ticket_id."<br />";
-			$message2 .= 'You have successfully registered for the event: <b>'.$fetch_e["title"]."</b> <br />";
-
-
-			$send_email = new send_email(); 
-			$send_email->send($host,$user,$pass,$from,$fromname,$where_to_send,$subject,$message); 
-			$send_email->send($host,$user,$pass,$fetch["from"],$fetch["fromname"],Input::method("POST","e"),$subject,$message2); 
-			echo "Done"; 
+			if($prepare_e->rowCount()>0){
+				$uid = new uid();
+				$event_ticket_id = $uid->generate(8);
+				$token = $uid->generate(12);
+				$insert = 'INSERT INTO `studio404_event_tickets` SET `date`=:datex, `uid`=:uid, `event_id`=:event_id, `namelname`=:namelname, `email`=:email, `mobile`=:mobile, `token`=:token';
+				$insert_pre = $conn->prepare($insert); 
+				$insert_pre->execute(array(
+					":datex"=>time(), 
+					":uid"=>$event_ticket_id, 
+					":event_id"=>(int)Input::method("POST","ei"), 
+					":namelname"=>Input::method("POST","n"), 
+					":email"=>Input::method("POST","e"), 
+					":mobile"=>Input::method("POST","m"), 
+					":token"=>$token
+				));
+			}
+			echo WEBSITE."en/about-us/events/ticket?id=".$event_ticket_id."&token=".$token; 
 		}
 
 		if(Input::method("POST","sendmsgtouser")=="true" && is_numeric(Input::method("POST","i")) && Input::method("POST","n") && Input::method("POST","c") && Input::method("POST","e") && Input::method("POST","cn") && Input::method("POST","m")){
@@ -1607,7 +1647,7 @@ class ajax extends connection{
 				$products = ($products && is_numeric($products)) ? ' FIND_IN_SET('.$products.',`studio404_users`.`products`) AND ' : '';
 				$exportmarkets = ($exportmarkets && is_numeric($exportmarkets)) ? ' FIND_IN_SET('.$exportmarkets.',`studio404_users`.`export_markets_id`) AND ' : '';
 				$certificates = ($certificate && is_numeric($certificate)) ? ' FIND_IN_SET('.$certificate.',`studio404_users`.`certificates`) AND ' : '';
-				$search = (!empty($search)) ? '`studio404_users`.`namelname` LIKE "%'.$search.'%" AND ' : '';
+				$search = (!empty($search)) ? '`studio404_users`.`namelname` LIKE "'.$search.'%" OR `studio404_users`.`namelname` LIKE "%'.$search.'" OR MATCH(`studio404_users`.`namelname`) AGAINST ("'.$search.'") AND ' : ''; 
 				 
 				$sql = 'SELECT 
 				`studio404_users`.`id` AS su_id,
@@ -1673,7 +1713,17 @@ class ajax extends connection{
 				$orderBy = ' ORDER BY `studio404_module_item`.`id` DESC';
 				$subsectors = ($subsector && is_numeric($subsector)) ? ' FIND_IN_SET('.$subsector.',`studio404_module_item`.`sub_sector_id`) AND ' : '';
 				$products = ($products && is_numeric($products)) ? ' FIND_IN_SET('.$products.',`studio404_module_item`.`products`) AND ' : '';
-				$search = (!empty($search)) ? '`studio404_module_item`.`title` LIKE "%'.$search.'%" AND ' : '';
+				$search = (!empty($search)) ? '
+				(`studio404_module_item`.`title` LIKE "'.$search.'%" OR 
+				`studio404_module_item`.`title` LIKE "%'.$search.'" OR 
+				MATCH(`studio404_module_item`.`title`) AGAINST ("'.$search.'") OR 
+				`studio404_users`.`namelname` LIKE "%'.$search.'" OR 
+				`studio404_users`.`namelname` LIKE "'.$search.'%" OR 
+				MATCH(`studio404_users`.`namelname`) AGAINST ("'.$search.'") OR 
+				`studio404_module_item`.`long_description` LIKE "'.$search.'%" OR 
+				`studio404_module_item`.`long_description` LIKE "%'.$search.'" OR 
+				MATCH(`studio404_module_item`.`long_description`) AGAINST ("'.$search.'")) AND 
+				' : '';
 				 
 				$sql = 'SELECT 
 				`studio404_module_item`.`id`, 
@@ -1744,7 +1794,16 @@ class ajax extends connection{
 				$orderBy = ' ORDER BY `studio404_module_item`.`id` DESC';
 				$subsectors = ($subsector && is_numeric($subsector)) ? ' FIND_IN_SET('.$subsector.',`studio404_module_item`.`sub_sector_id`) AND ' : '';
 				$services = ($products && is_numeric($products)) ? ' FIND_IN_SET('.$products.',`studio404_module_item`.`products`) AND ' : '';
-				$search = (!empty($search)) ? '`studio404_module_item`.`long_description` LIKE "%'.$search.'%" AND ' : '';
+				$search = (!empty($search)) ? '
+				(`studio404_module_item`.`title` LIKE "'.$search.'%" OR 
+				`studio404_module_item`.`title` LIKE "%'.$search.'" OR 
+				MATCH(`studio404_module_item`.`title`) AGAINST ("'.$search.'") OR 
+				`studio404_module_item`.`long_description` LIKE "'.$search.'%" OR 
+				`studio404_module_item`.`long_description` LIKE "%'.$search.'" OR 
+				MATCH(`studio404_module_item`.`long_description`) AGAINST ("'.$search.'") OR 
+				`studio404_users`.`namelname` LIKE "'.$search.'%" OR 
+				`studio404_users`.`namelname` LIKE "%'.$search.'" OR 
+				MATCH(`studio404_users`.`namelname`) AGAINST ("'.$search.'")) AND ' : '';
 				 
 				$sql = 'SELECT 
 				`studio404_module_item`.`id`, 

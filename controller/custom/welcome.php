@@ -13,6 +13,10 @@ class welcome extends connection{
 			$components = $cache->index($c,"components");
 			$data["components"] = json_decode($components); 
 
+			/* contact_page_data */
+			$contact_page_data = $cache->index($c,"contact_page_data");
+			$data["contact_data"] = json_decode($contact_page_data,true); 
+
 			/* language variables */
 			$language_data = $cache->index($c,"language_data");
 			$language_data = json_decode($language_data);

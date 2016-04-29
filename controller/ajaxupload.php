@@ -50,6 +50,7 @@ class ajaxupload extends connection{
 			`studio404_gallery_attachment`.`connect_idx`=:connect_idx AND 
 			`studio404_gallery_attachment`.`status`!=:status AND 
 			`studio404_gallery_attachment`.`pagetype`=:page_type AND 
+			`studio404_gallery_attachment`.`lang`=:lang AND 
 			`studio404_gallery_attachment`.`idx`=`studio404_gallery`.`idx` AND 
 			`studio404_gallery`.`status`!=:status
 			';
@@ -57,17 +58,17 @@ class ajaxupload extends connection{
 			$prepare->execute(array(
 				":connect_idx"=>$pageidx, 
 				":page_type"=>$page_type,
+				":lang"=>(int)$_GET['l'],
 				":status"=>1
 			));
-			//echo "here we are !".$page_type;
+
 			$fetch = $prepare->fetch(PDO::FETCH_ASSOC);
 			if($fetch['sg_idx']){
-
 				// select max idx gallery photo
 				try{
 					$sql2 = 'SELECT `id`, MAX(`idx`) as maxid FROM `studio404_gallery_file` WHERE `lang`=:lang AND `status`!=:status'; 
 					$prepare2 = $conn->prepare($sql2);  
-					$prepare2->execute(array( "lang"=>LANG_ID, ":status"=>1));
+					$prepare2->execute(array( "lang"=>(int)$_GET['l'], ":status"=>1));
 					$fetch2 = $prepare2->fetch(PDO::FETCH_ASSOC);
 					$maxid = ($fetch2['maxid']) ? $fetch2['maxid']+1 : 1;
 					$fileid = $fetch2['id'];
@@ -81,7 +82,7 @@ class ajaxupload extends connection{
 					$prepare3 = $conn->prepare($sql3);
 					$prepare3->execute(array(
 						":media_type"=>'document', 
-						":lang"=>LANG_ID, 
+						":lang"=>(int)$_GET['l'], 
 						":gallery_idx"=>$fetch['sg_idx'], 
 						":status"=>1
 					));
@@ -91,60 +92,59 @@ class ajaxupload extends connection{
 					$maxpos = 1;
 				}
 				
-				$model_admin_selectLanguage = new model_admin_selectLanguage();
-				$languages = $model_admin_selectLanguage->select_languages($_SESSION["C"]); 
+				 
 				// move file to file folder
 				$path_new = "files/document/".$timegenerate.".".$_GET["extention"];
 				if(@copy($path,$path_new)){
 					@unlink($path);
 				}
 				$filesize = @filesize($path_new);
-				foreach($languages as $lang){
-					//insert gallery photo
-					$sql4 = 'INSERT INTO `studio404_gallery_file` SET 
-					`idx`=:idx, 
-					`date`=:datex,
-					`gallery_idx`=:gallery_idx, 
-					`file`=:file, 
-					`media_type`=:media_type, 
-					`title`=:title, 
-					`description`=:description, 
-					`filesize`=:filesize, 
-					`insert_admin`=:insert_admin, 
-					`position`=:position, 
-					`lang`=:lang, 
-					`status`=:status 
-					';
-					$prepare4 = $conn->prepare($sql4);
-					$prepare4->execute(array(
-						":idx"=>$maxid, 
-						":datex"=>time(), 
-						":gallery_idx"=>$fetch['sg_idx'], 
-						":file"=>$path_new, 
-						":media_type"=>"document", 
-						":title"=>"Not defined", 
-						":description"=>"Not defined", 
-						":filesize"=>$filesize, 
-						":insert_admin"=>$_SESSION["user404_id"],
-						":position"=>$maxpos,
-						":lang"=>$lang['id'], 
-						":status"=>0
-					));
-				}
+			
+				//insert gallery photo
+				$sql4 = 'INSERT INTO `studio404_gallery_file` SET 
+				`idx`=:idx, 
+				`date`=:datex,
+				`gallery_idx`=:gallery_idx, 
+				`file`=:file, 
+				`media_type`=:media_type, 
+				`title`=:title, 
+				`description`=:description, 
+				`filesize`=:filesize, 
+				`insert_admin`=:insert_admin, 
+				`position`=:position, 
+				`lang`=:lang, 
+				`status`=:status 
+				';
+				$prepare4 = $conn->prepare($sql4);
+				$prepare4->execute(array(
+					":idx"=>$maxid, 
+					":datex"=>time(), 
+					":gallery_idx"=>$fetch['sg_idx'], 
+					":file"=>$path_new, 
+					":media_type"=>"document", 
+					":title"=>"Not defined", 
+					":description"=>"Not defined", 
+					":filesize"=>$filesize, 
+					":insert_admin"=>$_SESSION["user404_id"],
+					":position"=>$maxpos,
+					":lang"=>(int)$_GET['l'], 
+					":status"=>0
+				));
+
 				//get inserted file id with current language
 				$sql5 = 'SELECT `id`,`position` FROM `studio404_gallery_file` WHERE `media_type`=:media_type AND `idx`=:idx AND `lang`=:lang AND `status`!=:status';
 				$prepare5 = $conn->prepare($sql5);
 				$prepare5->execute(array(
 					":media_type"=>'document', 
 					":idx"=>$maxid, 
-					":lang"=>LANG_ID, 
+					":lang"=>(int)$_GET['l'], 
 					":status"=>1
 				));
 				$fetch5 = $prepare5->fetch(PDO::FETCH_ASSOC);
 				
 				$out = '<div class="filebox" style="background-color:'.$color_array[$_GET['extention']].'" id="flexbox-'.$maxid.'">';
 				$out .= '<div class="action_panel">';
-				$out .= '<a href="/'.$path.'" target="_blank"><i class="fa fa-eye"></i></a>';
+				$out .= '<a href="/'.$path_new.'" target="_blank"><i class="fa fa-eye"></i></a>';
 				$out .= '<a href="javascript:;" onclick="openPromt(\''.$maxid.'\')"><i class="fa fa-pencil-square-o"></i></a>';
 				$out .= '<a href="javascript:;" onclick="removeFile(\''.$maxid.'\')"><i class="fa fa-times"></i></a>';
 				$out .= '</div>';
@@ -161,24 +161,30 @@ class ajaxupload extends connection{
 				":id"=>$_GET['id']
 			));
 		}else if(isset($_GET['idx'],$_GET['idxes2'])){
-			$sql = 'UPDATE `studio404_gallery_file` SET `status`=:status WHERE `idx`=:idx';
+			$sql = 'UPDATE `studio404_gallery_file` SET `status`=:status WHERE `idx`=:idx AND lang=:lang AND `media_type`=:media_type';
 			$prepare = $conn->prepare($sql);
 			$prepare->execute(array(
 				":status"=>1, 
-				":idx"=>$_GET['idx']
+				":media_type"=>"document", 
+				":idx"=>$_GET['idx'],
+				":lang"=>$_GET['l']
 			));
+
 			$position=1;
-			foreach($_GET['idxes2'] as $idx){
-				$sql2 = 'UPDATE `studio404_gallery_file` SET `position`=:position WHERE `media_type`=:media_type AND `idx`=:idx AND `status`!=:status';
+			$unserialize = unserialize($_GET['idxes2']); 
+			foreach($unserialize as $idx){
+				$sql2 = 'UPDATE `studio404_gallery_file` SET `position`=:position WHERE `media_type`=:media_type AND `idx`=:idx AND `lang`=:lang AND `status`!=:status';
 				$prepare2 = $conn->prepare($sql2);
 				$prepare2->execute(array(
 					":media_type"=>"document", 
 					":position"=>$position, 
 					":idx"=>$idx, 
-					":status"=>1
+					":status"=>1,
+					":lang"=>$_GET["l"]
 				));
 				$position++; 
 			}
+			echo "Done";
 		}else if(isset($_GET['idx'],$_GET['idxes3'])){
 			$media_type = (isset($_GET["media_type"]) && $_GET["media_type"]=="video") ? "video" : "photo";
 			$sql = 'UPDATE `studio404_gallery_file` SET `status`=:status WHERE `idx`=:idx';
@@ -217,7 +223,8 @@ class ajaxupload extends connection{
 		}else if(isset($_GET['idxes_photos'])){
 			$position=1;
 			$media_type = (isset($_GET["type"]) && $_GET["type"]=="videogallerypage") ? "video" : "photo";
-			foreach($_GET['idxes_photos'] as $idx){
+			$unserialize = unserialize($_GET['idxes_photos']);
+			foreach($unserialize as $idx){
 				$sql = 'UPDATE `studio404_gallery_file` SET `position`=:position WHERE `media_type`=:media_type AND `idx`=:idx AND `status`!=:status';
 				$prepare = $conn->prepare($sql);
 				$prepare->execute(array(
@@ -287,46 +294,42 @@ class ajaxupload extends connection{
 					$maxpos = 1;
 				}
 				
-				$model_admin_selectLanguage = new model_admin_selectLanguage();
-				$languages = $model_admin_selectLanguage->select_languages($_SESSION["C"]); 
 				// move file to file folder
 				$path_new = "files/".$media_type."/".$timegenerate.".".$_GET["extention"];
 				if(@copy($path,$path_new)){
 					@unlink($path);
 				}
 				$filesize = @filesize($path_new);
-				foreach($languages as $lang){
-					//insert gallery photo
-					$sql4 = 'INSERT INTO `studio404_gallery_file` SET 
-					`idx`=:idx, 
-					`date`=:datex,
-					`gallery_idx`=:gallery_idx, 
-					`file`=:file, 
-					`media_type`=:media_type, 
-					`title`=:title, 
-					`description`=:description, 
-					`filesize`=:filesize, 
-					`insert_admin`=:insert_admin, 
-					`position`=:position, 
-					`lang`=:lang, 
-					`status`=:status 
-					';
-					$prepare4 = $conn->prepare($sql4);
-					$prepare4->execute(array(
-						":idx"=>$maxid, 
-						":datex"=>time(), 
-						":gallery_idx"=>$fetch['sg_idx'], 
-						":file"=>$path_new, 
-						":media_type"=>$media_type, 
-						":title"=>"Not defined", 
-						":description"=>"Not defined", 
-						":filesize"=>$filesize, 
-						":insert_admin"=>$_SESSION["user404_id"], 
-						":position"=>$maxpos,
-						":lang"=>$lang['id'], 
-						":status"=>0
-					));
-				}
+				//insert gallery photo
+				$sql4 = 'INSERT INTO `studio404_gallery_file` SET 
+				`idx`=:idx, 
+				`date`=:datex,
+				`gallery_idx`=:gallery_idx, 
+				`file`=:file, 
+				`media_type`=:media_type, 
+				`title`=:title, 
+				`description`=:description, 
+				`filesize`=:filesize, 
+				`insert_admin`=:insert_admin, 
+				`position`=:position, 
+				`lang`=:lang, 
+				`status`=:status 
+				';
+				$prepare4 = $conn->prepare($sql4);
+				$prepare4->execute(array(
+					":idx"=>$maxid, 
+					":datex"=>time(), 
+					":gallery_idx"=>$fetch['sg_idx'], 
+					":file"=>$path_new, 
+					":media_type"=>$media_type, 
+					":title"=>"Not defined", 
+					":description"=>"Not defined", 
+					":filesize"=>$filesize, 
+					":insert_admin"=>$_SESSION["user404_id"], 
+					":position"=>$maxpos,
+					":lang"=>(int)$_GET['l'], 
+					":status"=>0
+				));
 				//get inserted file id with current language
 				$sql5 = 'SELECT `id`,`position` FROM `studio404_gallery_file` WHERE `media_type`=:media_type AND `idx`=:idx AND `lang`=:lang AND `status`!=:status';
 				$prepare5 = $conn->prepare($sql5);
@@ -406,40 +409,35 @@ class ajaxupload extends connection{
 					$maxpos = 1;
 				}
 				
-				$model_admin_selectLanguage = new model_admin_selectLanguage();
-				$languages = $model_admin_selectLanguage->select_languages($_SESSION["C"]); 
-				foreach($languages as $lang){
-					//insert gallery photo
-					$sql4 = 'INSERT INTO `studio404_gallery_file` SET 
-					`idx`=:idx, 
-					`date`=:datex,
-					`gallery_idx`=:gallery_idx, 
-					`file`=:file, 
-					`media_type`=:media_type, 
-					`title`=:title, 
-					`description`=:description, 
-					`filesize`=:filesize, 
-					`insert_admin`=:insert_admin, 
-					`position`=:position, 
-					`lang`=:lang, 
-					`status`=:status 
-					';
-					$prepare4 = $conn->prepare($sql4);
-					$prepare4->execute(array(
-						":idx"=>$maxid, 
-						":datex"=>time(), 
-						":gallery_idx"=>$fetch['sg_idx'], 
-						":file"=>$_POST['youtubeLink'], 
-						":media_type"=>$media_type, 
-						":title"=>"Not defined", 
-						":description"=>"Not defined", 
-						":filesize"=>"0", 
-						":insert_admin"=>$_SESSION["user404_id"], 
-						":position"=>$maxpos,
-						":lang"=>$lang['id'], 
-						":status"=>0
-					));
-				}
+				$sql4 = 'INSERT INTO `studio404_gallery_file` SET 
+				`idx`=:idx, 
+				`date`=:datex,
+				`gallery_idx`=:gallery_idx, 
+				`file`=:file, 
+				`media_type`=:media_type, 
+				`title`=:title, 
+				`description`=:description, 
+				`filesize`=:filesize, 
+				`insert_admin`=:insert_admin, 
+				`position`=:position, 
+				`lang`=:lang, 
+				`status`=:status 
+				';
+				$prepare4 = $conn->prepare($sql4);
+				$prepare4->execute(array(
+					":idx"=>$maxid, 
+					":datex"=>time(), 
+					":gallery_idx"=>$fetch['sg_idx'], 
+					":file"=>$_POST['youtubeLink'], 
+					":media_type"=>$media_type, 
+					":title"=>"Not defined", 
+					":description"=>"Not defined", 
+					":filesize"=>"0", 
+					":insert_admin"=>$_SESSION["user404_id"], 
+					":position"=>$maxpos,
+					":lang"=>(int)$_GET['l'], 
+					":status"=>0
+				));
 				//get inserted file id with current language
 				$sql5 = 'SELECT `id`,`position` FROM `studio404_gallery_file` WHERE `media_type`=:media_type AND `idx`=:idx AND `lang`=:lang AND `status`!=:status';
 				$prepare5 = $conn->prepare($sql5);

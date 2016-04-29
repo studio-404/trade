@@ -2,10 +2,7 @@
 	@include("parts/header.php"); 
 	@include("parts/contactuser.php"); 
 	@include("parts/readmore.php"); 
-
 ?>
-
-
 <div class="container">
 	<div class="breadcrumbs">
 		<div class="your_are_here">Your are here: </div>
@@ -195,12 +192,4 @@
 		?>
 	</div>
 </div>
-<script type="text/javascript" charset="utf-8">
-$(document).ready(function(){
-	// var par = urlParamiters();
-	// if(par["i"] && par["p"]){
-	// 	getReadmoreInfo(par["i"],par["p"]);
-	// }
-});
-</script>
 <?php @include("parts/footer.php"); ?>

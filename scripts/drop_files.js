@@ -3,7 +3,18 @@ function upload_filev(idx){
 	var this_box = $("#flexbox2-"+idx);
 	hidden_input.click();
 
+
+
 	hidden_input.on('change',function(e){
+		var dlang = $(".dropArea").data("dlang");
+		if(typeof(dlang)=="undefined" || dlang==null || dlang==""){
+			dlang = $(".dropArea2").data("dlang");
+		}
+
+		if(typeof(dlang)=="undefined" || dlang==null || dlang==""){
+			dlang = MAIN_LANGUAGE_ID;
+		}
+
 		e.stopPropagation();
 		e.preventDefault();
 		var files = e.target.files;
@@ -27,7 +38,7 @@ function upload_filev(idx){
 
 		xhr = new XMLHttpRequest();
 		// initiate request
-		xhr.open('post','/en/ajaxupload?extention='+extLast+'&videoimage='+idx+'&token='+par['token'],true);
+		xhr.open('post','/en/ajaxupload?extention='+extLast+'&videoimage='+idx+'&l='+dlang+'&token='+par['token'],true);
 		//set header
 		xhr.setRequestHeader('Content-Type','multipart/form-data');
 		xhr.setRequestHeader('X-File-Name',file.name);
@@ -68,18 +79,7 @@ function upload_filev(idx){
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+///////////////////////////////////////////////////////////////////////////
 
 $(function(){
 	var f_obj = $(".dropArea");
@@ -139,6 +139,16 @@ $(function(){
 	});
 
 	function upload_file(file){
+		var dlang = $(".dropArea").data("dlang");
+		if(typeof(dlang)=="undefined" || dlang==null || dlang==""){
+			dlang = $(".dropArea2").data("dlang");
+		}
+
+		if(typeof(dlang)=="undefined" || dlang==null || dlang==""){
+			dlang = MAIN_LANGUAGE_ID;
+		}
+
+
 		var fileName = file.name;
 		var ex = fileName.split(".");
 		var extLast = ex[ex.length - 1].toLowerCase();
@@ -155,7 +165,7 @@ $(function(){
 		else{ var newsidx = "false"; }
 		xhr = new XMLHttpRequest();
 		// initiate request
-		xhr.open('post','/en/ajaxupload?extention='+extLast+'&pageidx='+par['id']+"&newsidx="+newsidx+"&token="+par['token'],true);
+		xhr.open('post','/en/ajaxupload?extention='+extLast+'&pageidx='+par['id']+"&newsidx="+newsidx+"&l="+dlang+"&token="+par['token'],true);
 		//set header
 		xhr.setRequestHeader('Content-Type','multipart/form-data');
 		xhr.setRequestHeader('X-File-Name',file.name);
@@ -249,6 +259,17 @@ var f_obj2 = $(".dropArea2");
 	});
 
 	function upload_file2(file){
+		var dlang = $(".dropArea").data("dlang");
+		if(typeof(dlang)=="undefined" || dlang==null || dlang==""){
+			dlang = $(".dropArea2").data("dlang");
+		}
+
+		if(typeof(dlang)=="undefined" || dlang==null || dlang==""){
+			dlang = MAIN_LANGUAGE_ID;
+		}
+
+
+
 		var fileName = file.name;
 		var ex = fileName.split(".");
 		var extLast = ex[ex.length - 1].toLowerCase();
@@ -268,7 +289,7 @@ var f_obj2 = $(".dropArea2");
 
 		if(par["type"]!="videogallerypage"){ media="true"; }
 		// initiate request
-		xhr.open('post','/en/ajaxupload?extention='+extLast+'&pageidx='+par['id']+"&newsidx="+newsidx+"&media="+media+"&token="+par['token'],true);
+		xhr.open('post','/en/ajaxupload?extention='+extLast+'&pageidx='+par['id']+"&newsidx="+newsidx+"&media="+media+"&l="+dlang+"&token="+par['token'],true);
 		//set header
 		xhr.setRequestHeader('Content-Type','multipart/form-data');
 		xhr.setRequestHeader('X-File-Name',file.name);

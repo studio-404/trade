@@ -1,3 +1,5 @@
+var MAIN_LANGUAGE_ID = 5;
+
 $(document).ready(function(){
 
 	$(".searchButton").click(function(){
@@ -79,6 +81,7 @@ $(document).on("click",".SearchTooManyData",function(){
 				out += '<span class="cell">'+obj[i].idx+'</span>';
 				out += '<span class="cell">';
 				out += '<a href="?action=editSitemap&amp;super='+obj[i].cid+'&amp;id='+obj[i].idx+'&amp;token='+token+'" title="Edit page"><i class="fa fa-pencil-square-o"></i></a>';
+				out += '<a href="javascript:;" onclick="deleteComfirm(\'?action=sitemap&amp;super='+obj[i].cid+'&amp;id='+obj[i].idx+'&amp;remove=true&amp;token='+token+'\')" title="Remove page"><i class="fa fa-times"></i></a>';
 				out += '</span>';
 				out += '</div>';
 			}
@@ -131,6 +134,15 @@ function openPromt2(maxidx){
 }
 
 function removeFile(maxidx){
+	var dlang = $(".dropArea").data("dlang");
+	if(typeof(dlang)=="undefined" || dlang==null || dlang==""){
+		dlang = $(".dropArea2").data("dlang");
+	}
+
+	if(typeof(dlang)=="undefined" || dlang==null || dlang==""){
+		dlang = MAIN_LANGUAGE_ID;
+	}
+
 	$("#flexbox-"+maxidx).fadeOut("slow").remove();
 	var send_idx_array = new Array();
 	$("main .center .content .dropArea .dragElements .filebox").each(function(index){
@@ -141,12 +153,22 @@ function removeFile(maxidx){
 		}
 	}); 
 	if(send_idx_array==""){ send_idx_array=maxidx; }
-	$.get("/en/ajaxupload",{ idx:maxidx, idxes2:send_idx_array }, function(data){
+	var ser = serialize(send_idx_array);
+	$.get("/en/ajaxupload",{ idx:maxidx, idxes2:ser, l:dlang }, function(data){
 		console.log(data);
 	});
 }
 
 function removeFile2(maxidx){
+	var dlang = $(".dropArea").data("dlang");
+	if(typeof(dlang)=="undefined" || dlang==null || dlang==""){
+		dlang = $(".dropArea2").data("dlang");
+	}
+
+	if(typeof(dlang)=="undefined" || dlang==null || dlang==""){
+		dlang = MAIN_LANGUAGE_ID;
+	}
+
 	$("#flexbox2-"+maxidx).fadeOut("slow").remove();
 	var send_idx_array = new Array();
 	$("main .center .content .dropArea2 .dragElements2 .filebox2").each(function(index){
@@ -157,12 +179,22 @@ function removeFile2(maxidx){
 		}
 	}); 
 	if(send_idx_array==""){ send_idx_array=maxidx; }
-	$.get("/en/ajaxupload",{ idx:maxidx, idxes3:send_idx_array }, function(data){
+
+	$.get("/en/ajaxupload",{ idx:maxidx, idxes3:send_idx_array, l:dlang }, function(data){
 		console.log(data);
 	});
 }
 
 function removeFile3(maxidx){
+	var dlang = $(".dropArea").data("dlang");
+	if(typeof(dlang)=="undefined" || dlang==null || dlang==""){
+		dlang = $(".dropArea2").data("dlang");
+	}
+
+	if(typeof(dlang)=="undefined" || dlang==null || dlang==""){
+		dlang = MAIN_LANGUAGE_ID;
+	}
+
 	$("#flexbox2-"+maxidx).fadeOut("slow").remove();
 	var send_idx_array = "empty";
 
@@ -175,7 +207,7 @@ function removeFile3(maxidx){
 		}
 	}); 
 	if(send_idx_array=="" || send_idx_array=="empty"){ send_idx_array=maxidx; }
-	$.get("/en/ajaxupload",{ idx:maxidx, idxes3:send_idx_array, media_type:"video" }, function(data){
+	$.get("/en/ajaxupload",{ idx:maxidx, idxes3:send_idx_array, media_type:"video", l:dlang }, function(data){
 		console.log(data);
 	});
 }
@@ -279,4 +311,97 @@ function SelectText(element) {
         selection.removeAllRanges();
         selection.addRange(range);
     }
+}
+
+function serialize(mixed_value) {
+	var val, key, okey,
+	ktype = '',
+	vals = '',
+	count = 0,
+	_utf8Size = function(str) {
+	var size = 0,
+	i = 0,
+	l = str.length,
+	code = '';
+	for (i = 0; i < l; i++) {
+	code = str.charCodeAt(i);
+	if (code < 0x0080) {
+	size += 1;
+	} else if (code < 0x0800) {
+	size += 2;
+	} else {
+	size += 3;
+	}
+	}
+	return size;
+	};
+	_getType = function(inp) {
+	var match, key, cons, types, type = typeof inp;
+
+	if (type === 'object' && !inp) {
+	return 'null';
+	}
+	if (type === 'object') {
+	if (!inp.constructor) {
+	return 'object';
+	}
+	cons = inp.constructor.toString();
+	match = cons.match(/(\w+)\(/);
+	if (match) {
+	cons = match[1].toLowerCase();
+	}
+	types = ['boolean', 'number', 'string', 'array'];
+	for (key in types) {
+	if (cons == types[key]) {
+	type = types[key];
+	break;
+	}
+	}
+	}
+	return type;
+	};
+	type = _getType(mixed_value);
+
+	switch (type) {
+	case 'function':
+	val = '';
+	break;
+	case 'boolean':
+	val = 'b:' + (mixed_value ? '1' : '0');
+	break;
+	case 'number':
+	val = (Math.round(mixed_value) == mixed_value ? 'i' : 'd') + ':' + mixed_value;
+	break;
+	case 'string':
+	val = 's:' + _utf8Size(mixed_value) + ':"' + mixed_value + '"';
+	break;
+	case 'array':
+	case 'object':
+	val = 'a';
+
+	for (key in mixed_value) {
+	if (mixed_value.hasOwnProperty(key)) {
+	ktype = _getType(mixed_value[key]);
+	if (ktype === 'function') {
+	continue;
+	}
+
+	okey = (key.match(/^[0-9]+$/) ? parseInt(key, 10) : key);
+	vals += this.serialize(okey) + this.serialize(mixed_value[key]);
+	count++;
+	}
+	}
+	val += ':' + count + ':{' + vals + '}';
+	break;
+	case 'undefined':
+	// Fall-through
+	default:
+	// if the JS object has a property which contains a null value, the string cannot be unserialized by PHP
+	val = 'N';
+	break;
+	}
+	if (type !== 'object' && type !== 'array') {
+	val += ';';
+	}
+	return val;
 }

@@ -234,22 +234,33 @@ class model_admin_fusersstat extends connection{
 		}
 
 		$out = array();		
+		$search2="";
 		if(isset($_GET['search']) && !empty($_GET['search']) ){
 			$search='%'.$_GET['search'].'%';
 			$search2= $_GET['search'];
 			$search_in = ' AND (`studio404_users`.`id`=:search2 OR `studio404_users`.`username` LIKE :search ) ';
 		}else{ $search='a'; $search_in = ' AND `studio404_users`.`id`!=:search AND `studio404_users`.`id`!=:search2';  }
+			/*
+			if($rows['company_type']=="manufacturer"){
+						$tocomplete["tocomplete"] = $rows['tocomplete']." ";
+						$typename = "Product";
+					}else if($rows['company_type']=="serviceprovider"){
+			*/
+
 			$sql = 'SELECT 
 			`studio404_users`.*
 			FROM 
 			`studio404_users`
 			WHERE 
+			(`studio404_users`.`company_type`=:manufacturer OR `studio404_users`.`company_type`=:serviceprovider) AND 
 			`studio404_users`.`user_type`=:website AND 
 			`studio404_users`.`status`!=:status '.$search_in.'
 			ORDER BY 
 			`studio404_users`.`id` DESC
 			';
 			$exe_array = array(
+				":manufacturer"=>"manufacturer", 
+				":serviceprovider"=>"serviceprovider", 
 				":website"=>"website", 
 				":status"=>1, 
 				":search"=>$search, 
@@ -370,18 +381,19 @@ class model_admin_fusersstat extends connection{
 			$query->execute($exe_array);
 			$token = md5(sha1(time()));
 			$_SESSION['token'] = $token;
-			$calculate = new calculate();
-			$calculate_pre = new calculate_pre();
+			// $calculate = new calculate();
+			// $calculate_pre = new calculate_pre();
+			$tocomplete = array(); 
 			while($rows = $query->fetch()){
 				$out .= '<div class="row">';
 				if($loadtype=="users"){
 					//print_r();
-					$session = $calculate_pre->calc($c,$rows['id']); 
+					//$session = $calculate_pre->calc($c,$rows['id']); 
 					if($rows['company_type']=="manufacturer"){
-						$tocomplete = $calculate::filled($session,"product"); 
+						$tocomplete["tocomplete"] = $rows['tocomplete']." ";
 						$typename = "Product";
 					}else if($rows['company_type']=="serviceprovider"){
-						$tocomplete = $calculate::filled($session,"service"); 
+						$tocomplete["tocomplete"] = $rows['tocomplete']." ";
 						$typename = "Service";
 					}else{
 						$tocomplete["tocomplete"] = "Nope ";
@@ -395,6 +407,7 @@ class model_admin_fusersstat extends connection{
 					$out .= '<span class="cell">'.$typename.'</span>';
 					$out .= '<span class="cell">'.$tocomplete["tocomplete"].'%</span>';
 					$out .= '<span class="cell">';
+					if(!isset($_GET['load'])){ $_GET['load']=""; }
 					if($rows['company_type']=="manufacturer" || $rows['company_type']=="serviceprovider"){
 						$out .= '<a href="javascript:void(0)" title="Log as User" class="logasuser-administrator" data-userid="'.$rows['id'].'" data-usertype="'.$rows['company_type'].'" data-username="'.$rows['username'].'" data-namelname="'.$rows['namelname'].'"><i class="fa fa-unlock-alt"></i></a>';
 					}else{

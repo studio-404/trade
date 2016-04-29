@@ -106,7 +106,7 @@
 							<div class="cls<?=$v?>"></div>
 							<div class="image">
 								<div class="play_icon" id="b<?=$v?>"></div>
-								<img src="<?=WEBSITE?>image?f=<?=WEBSITE.$val->filev?>&w=397&h=210" />
+								<img src="<?=WEBSITE?>image?f=<?=WEBSITE.$val->filev?>&amp;w=397&amp;h=210" />
 							</div>
 							<div class="text_formats">
 								<?=$val->title?>

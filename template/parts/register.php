@@ -48,7 +48,11 @@
 							<input type="text" name="login_captcha" id="login_captcha" class="form-control" value="" autocomplete="off" onkeypress="submitme(event,'register_catalog')" />
 							<div class="error_message register_captcha_required"><?=$data["language_data"]["captcharquired"]?> !</div>
 							<div style="clear:both"></div>
-							<img src="<?=WEBSITE?>protect.php" alt="" style="float:left; margin-top:15px; margin-bottom:15px; border:solid 1px #3895ce; width:95px; height:35px;" class="protectimage" />
+							<?php 
+							$_SESSION['protect_register'] = uid::captcha(2).ustring::random(2); 
+							setcookie("protect_register", md5($_SESSION['protect_register']), time() + 86400, "/", "tradewithgeorgia.com");
+							?>
+							<img src="<?=WEBSITE?>protect.php?t=register" alt="" style="float:left; margin-top:15px; margin-bottom:15px; border:solid 1px #3895ce; width:95px; height:35px;" class="protectimage" />
 						</div>
 						<div style="clear:both"></div>
 						

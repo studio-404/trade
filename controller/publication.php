@@ -13,6 +13,10 @@ class publication extends connection{
 
 		$publication_list = $cache->index($c,"publication_list");
 		$data["publication_list"] = json_decode($publication_list);
+
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
 		
 
 		/* languages */

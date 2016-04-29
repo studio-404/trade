@@ -1,10 +1,20 @@
 <?php
 session_start();
-$name = "images/s.png";
+if(isset($_GET['t']) && $_GET['t']=="login"){
+	$t = 'l';
+	$name = "images/l.png";
+	$string = $_SESSION['protect_login'];
+}elseif(isset($_GET['t']) && $_GET['t']=="register"){
+	$t = 'r';
+	$name = "images/r.png";
+	$string = $_SESSION['protect_register'];
+}elseif(isset($_GET['t']) && $_GET['t']=="recover"){
+	$t = 'rc';
+	$name = "images/rc.png";
+	$string = $_SESSION['protect_recover'];
+}
 $im = imagecreatefrompng($name);
-
 $im = imagecreate(100, 40);
-$string = $_SESSION['protect_x'];
 $bg = imagecolorallocate($im, 255, 255, 255);
 $red = imagecolorallocate($im, 56, 149, 206);
 $linecolor = imagecolorallocate($im, 254, 161, 0);
@@ -17,7 +27,7 @@ imagestring($im, 35, 30, 14, $string, $red);
 
 
 
-$filename = sha1("_".time().$_SERVER["REMOTE_ADDR"]).".png";
+$filename = sha1("_".time().$_SERVER["REMOTE_ADDR"]).$t.".png";
 $name = "thumbs/".$filename;
 imagepng($im,$name,9);
 $dir    = 'thumbs/';
@@ -26,7 +36,7 @@ foreach($files as $file)
 {
 	if($file!="." && $file!=".." && $file!=$filename)
 	{
-		$cerationTime = @filemtime($file);
+		$cerationTime = filemtime($dir.$file);
 		$now = time() - 3600;
 		if($cerationTime<$now)
 		{

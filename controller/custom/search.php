@@ -34,6 +34,10 @@ class search extends connection{
 		$data["main_menu"] = $model_template_main_menu->nav($menu_array,"header");
 		$data["footer_menu"] = $model_template_main_menu->nav($menu_array,"footer");
 
+		/* contact_page_data */
+		$contact_page_data = $cache->index($c,"contact_page_data");
+		$data["contact_data"] = json_decode($contact_page_data,true); 
+
 		/* components */
 		$components = $cache->index($c,"components");
 		$data["components"] = json_decode($components); 

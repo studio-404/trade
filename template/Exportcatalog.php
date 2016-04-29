@@ -23,15 +23,16 @@
 				$placeholder = "Search Company";
 			}
 			?>
-			<input type="text" class="form-control" id="svalue" placeholder="<?=$placeholder?>" value="<?=$data["get_search"]?>" onkeypress="submitme(event,'hitsearchexportcat')" />
+			<input type="text" class="form-control" id="svalue" placeholder="<?=$placeholder?>" value="<?=urldecode(stripslashes($searchQuery))?>" onkeypress="submitme(event,'hitsearchexportcat')" />
 		</div>
 		<div class="col-sm-2 padding_0" style="padding-left:5px;" id="serachMe">
 			<button class="btn btn-block btn-sm btn-yellow" id="hitsearchexportcat">SEARCH</button>
 		</div>
 		<script type="text/javascript"> 
 		$(document).on("click","#serachMe",function(){
-			var s = $("#svalue").val();
+			var s = $("#svalue").val();			
 			var u = "http://"+document.domain+"/<?=LANG?>/export-catalog?view=<?=$data['get_view']?>&sort=<?=$data['get_sort']?>&sector=<?=$data['get_sector']?>&certificate=<?=$data['get_certificate']?>&search="+s+"&pn=<?=$data['get_pn']?>";
+			console.log(u);
 			location.href = u;
 		});
 		</script>

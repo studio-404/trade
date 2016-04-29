@@ -10,7 +10,7 @@ if(!empty($data["news_general"][0]["title"])){
 	$desc =  $data["news_general"][0]["short_description"];
 	$first = array_slice($data["last_news_files"], 0, 1);
 	if($first[0]->file){ $shareImage = WEBSITE.'image?f='.WEBSITE.$first[0]->file.'&w=600&h=315'; }
-	else{ $shareImage = TEMPLATE.'img/logoshare.png';  }
+	else{ $shareImage = TEMPLATE.'img/logoshare.png?v=4';  }
 	$tags = $data["news_general"][0]["keywords"];
 }else if(!empty($data["event_list"])){
 	$first = array_slice($data["event_list"],0,1);
@@ -18,7 +18,7 @@ if(!empty($data["news_general"][0]["title"])){
 	$desc = $first[0]["short_description"];
 	$first = array_slice($data["event_list"], 0, 1);
 	if($first[0]["pic"]){ $shareImage = WEBSITE.'image?f='.WEBSITE.$first[0]["pic"].'&w=600&h=315'; }
-	else{ $shareImage = TEMPLATE.'img/logoshare.png';  }
+	else{ $shareImage = TEMPLATE.'img/logoshare.png?v=4';  }
 	$tags = $first[0]["keywords"];
 }else if(!empty($data["news_list"])){
 	$news_first = array_slice($data["news_list"],0,1);
@@ -26,40 +26,51 @@ if(!empty($data["news_general"][0]["title"])){
 	$desc = $news_first[0]->short_description; 	
 	$first = array_slice($data["last_news_files"], 0, 1);
 	if($first[0]->file){ $shareImage = WEBSITE.'image?f='.WEBSITE.$first[0]->file.'&w=600&h=315'; }
-	else{ $shareImage = TEMPLATE.'img/logoshare.png';  }
+	else{ $shareImage = TEMPLATE.'img/logoshare.png?v=4';  }
 	$tags = $news_first[0]->keywords;
 }else if(!empty($data["team_general"][0]["title"])){
 	$title = $data["team_general"][0]["title"];
 	$desc = $data["team_general"][0]["short_description"];
-	$shareImage = TEMPLATE.'img/logoshare.png';
+	$shareImage = TEMPLATE.'img/logoshare.png?v=4';
 	$tags = $data["team_general"][0]["keywords"];
 }else if(!empty($data["text_general"][0]["title"])){
 	$title = $data["text_general"][0]["title"]; 
 	$desc = $data["text_general"][0]["description"]; 
 	$first = array_slice($data["text_files"], 0, 1);
 	if($first[0]->file){ $shareImage = WEBSITE.'image?f='.WEBSITE.$first[0]->file.'&w=600&h=315'; }
-	else{ $shareImage = TEMPLATE.'img/logoshare.png'; }
+	else{ $shareImage = TEMPLATE.'img/logoshare.png?v=4'; }
 	$tags = $data["text_general"][0]["keywords"];
 }else{
 	$title = $data["language_data"]["mainpage"]; 
-	$desc = $title." - Enterprise Georgia"; 
-	$shareImage = TEMPLATE.'img/logoshare.png';
+	$desc = $title." - Trade With Georgia"; 
+	$shareImage = TEMPLATE.'img/logoshare.png?v=4';
 	$tags = $data["language_data"]["tags"];
+}
+if(Input::method("GET","t") && Input::method("GET","i") && $data["fetch"]["namelname"]!=""){
+	$title = htmlentities($data["fetch"]["namelname"]);
+	$shareImage = (!empty($data["fetch"]["picture"])) ? WEBSITE.'image?f='.WEBSITE.'files/usersimage/'.$data["fetch"]["picture"].'&w=600&h=315' : TEMPLATE.'img/logoshare.png?v=4';
+	
+	if(Input::method("GET","p") && $data["productinside"]->title!=""){
+		$title = htmlentities($data["productinside"]->title);
+		$shareImage = ($data["productinside"]->picture) ? WEBSITE.'image?f='.WEBSITE.'files/usersproducts/'.$data["productinside"]->picture.'&w=600&h=315' : TEMPLATE.'img/logoshare.png?v=4';
+	}
 }
 echo $title; 
 ?> - Trade with Georgia</title>
 <!-- FB Meta tags (start) -->
 <meta property="fb:app_id" content="552933334875517" />
-<meta property="og:title" content="<?=htmlentities(strip_tags($title))?> - Enterprise Georgia" />
+<meta property="og:title" content="<?=htmlentities(strip_tags($title))?> - Trade With Georgia" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="<?=WEBSITE_.$_SERVER['REQUEST_URI']?>"/>
 <meta property="og:image" content="<?=$shareImage?>" />
-<meta property="og:site_name" content="Enterprise Georgia"/>
+<meta property="og:image:width" content="600" />
+<meta property="og:image:height" content="315" />
+<meta property="og:site_name" content="Trade With Georgia"/>
 <meta property="og:description" content="<?=htmlentities(strip_tags($desc))?>"/>
 <!-- FB Meta tags (end)-->
 <meta name="description" content="<?=htmlentities(strip_tags($desc))?>">
 <meta name="keywords" content="<?=$tags?>">
-<meta name="author" content="Studio 404, Niki Getsadze"/>
+<meta name="author" content="Niki Getsadze, George Gvazava, Valerian Apkazava, Zviad Ruxadze" />
 <link rel="icon" type="image/gif" href="<?php echo TEMPLATE;?>img/favicon.ico?v=<?=$c['websitevertion']?>" />
 <link type="text/plain" rel="author" href="<?php echo WEBSITE;?>humans.txt" />
 <link href="<?php echo TEMPLATE;?>css/bootstrap.css?v=<?=$c['websitevertion']?>" type="text/css" rel="stylesheet"/>
@@ -77,7 +88,6 @@ echo $title;
 <body id="menu_responsive">
 <?php 
 /* captcha code generation */
-$_SESSION['protect_x'] = uid::captcha(2).ustring::random(2); 
 include("analitics.php"); 
 include("login.php");
 include("register.php");

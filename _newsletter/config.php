@@ -1,0 +1,11 @@
+<?php
+define("DIR",__DIR__);
+define("DATA_TIMEZONE","Asia/Tbilisi");
+define("DATABASE_HOSTNAME","mysql1.tradewithgeorgia.com");
+define("DATABASE_CHARSET","UTF8");
+define("DATABASE_NAME","tradegeorgia");
+define("DATABASE_USERNAME","tradegeorgia");
+define("DATABASE_PASSWORD","georgiadbtrade");
+define("NEWSLETTER_TABLE_NAME","studio404_newsletter_emails");
+define("DOCUMENT_ROOT",$_SERVER['DOCUMENT_ROOT']."/_newsletter/");
+?>
