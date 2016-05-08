@@ -43,7 +43,7 @@ iframe{ margin: 0 !important; padding: 0 !important; border: 0 !important; width
 	footer{ display: none; }
 }
 #header {
-	background:#0278c1 url('../img/header_bg.png') no-repeat center;
+	background:#0278c1 url('/en/load-public-files?datafrom=file&ext=jpg&dataid=5&sizetype=false') no-repeat center;
 	min-height:200px;
 }
 #header_line {
@@ -81,7 +81,7 @@ iframe{ margin: 0 !important; padding: 0 !important; border: 0 !important; width
 
 #header_contact {
 	color:#fff;
-	background:url('../img/header_tel_icon.svg') no-repeat right;
+	background:url('/en/load-public-files?datafrom=file&ext=svg&dataid=7&sizetype=false') no-repeat right;
 	background-size: 25px 25px;
 	background-position: center right;
 	padding:2px 30px 2px 0;
@@ -100,7 +100,7 @@ iframe{ margin: 0 !important; padding: 0 !important; border: 0 !important; width
 	font-weight:bold;
 	color:#ffffff;
 	font-size:17px;
-	background:url('../img/live_chat_icon.svg') no-repeat right;
+	background:url('/en/load-public-files?datafrom=file&ext=svg&dataid=6&sizetype=false') no-repeat right;
 	background-size: 25px 25px;
 	padding:2px 30px 2px 0;
 }
@@ -202,9 +202,9 @@ iframe{ margin: 0 !important; padding: 0 !important; border: 0 !important; width
 .export_companies a {color:#000; text-decoration:none;}
 .export_companies .filters_div div{border-right:solid #fea100 1px;}
 .export_companies .filters_div .active{background:#ffcf7c !important; position: relative; }
-.export_companies .filters_div .active .clearFilter{ margin: 0; padding: 0; width: 12px; height: 13px; position: absolute; right: 5px; top:6px; background-image: url('../img/clearfilter.png'); background-repeat: no-repeat; display: block; cursor: pointer; z-index: 1000; }
+.export_companies .filters_div .active .clearFilter{ margin: 0; padding: 0; width: 12px; height: 13px; position: absolute; right: 5px; top:6px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=10&sizetype=false'); background-repeat: no-repeat; display: block; cursor: pointer; z-index: 1000; }
 .export_companies .filters_div .selected{position: relative;}
-.export_companies .filters_div .selected .clearFilter{  margin: 0; padding: 0; width: 12px; height: 13px; position: absolute; right: 5px; top:6px; background-image: url('../img/clearfilter.png'); background-repeat: no-repeat; display: block; cursor: pointer; z-index: 1000; }
+.export_companies .filters_div .selected .clearFilter{  margin: 0; padding: 0; width: 12px; height: 13px; position: absolute; right: 5px; top:6px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=10&sizetype=false'); background-repeat: no-repeat; display: block; cursor: pointer; z-index: 1000; }
 .export_companies .filters_div .selected a{color:#f97900; text-decoration:underline;}
 .export_companies .filters_div .selected a .caret {color:#000}
 .export_companies .filters_div div:last-child {border:none;}
@@ -277,8 +277,8 @@ iframe{ margin: 0 !important; padding: 0 !important; border: 0 !important; width
 #home_slider .carousel-inner a:hover{ text-decoration: none; }
 #home_slider .carousel-control.left{background:none !important;}
 #home_slider .carousel-control.right{background:none !important;}
-.slider_arrow_left {width:23px; height:43px; background:url('../img/slider_arrow_left.png'); position:absolute; top:50%; margin-top:-22px; left:20px;}
-.slider_arrow_right {width:23px; height:43px; background:url('../img/slider_arrow_right.png'); position:absolute; top:50%; margin-top:-22px; right:20px;}
+.slider_arrow_left {width:23px; height:43px; background:url('/en/load-public-files?datafrom=file&ext=png&dataid=11&sizetype=false'); position:absolute; top:50%; margin-top:-22px; left:20px;}
+.slider_arrow_right {width:23px; height:43px; background:url('/en/load-public-files?datafrom=file&ext=png&dataid=12&sizetype=false'); position:absolute; top:50%; margin-top:-22px; right:20px;}
 .slider_info{ 
 	background:red;
 	font-size:18px;
@@ -366,8 +366,8 @@ iframe{ margin: 0 !important; padding: 0 !important; border: 0 !important; width
 }
 /*.page_title_3 > .icons {float:right; padding-top:2px;}*/
 .page_title_3 > .icons { margin:0; padding: 0; width: 50px; height:50px; position: absolute; right: 7px; top:2px; }
-.page_title_3 > .icons > .share {background:url('../img/share_icon.png') no-repeat; width:18px; height:18px; display:inline-block; margin-right:5px; cursor:pointer;}
-.page_title_3 > .icons > .print {background:url('../img/print.png') no-repeat; width:21px; height:21px; display:inline-block; margin-top:1px; cursor:pointer;}
+.page_title_3 > .icons > .share {background:url('/en/load-public-files?datafrom=file&ext=png&dataid=13&sizetype=false') no-repeat; width:18px; height:18px; display:inline-block; margin-right:5px; cursor:pointer;}
+.page_title_3 > .icons > .print {background:url('/en/load-public-files?datafrom=file&ext=png&dataid=14&sizetype=false') no-repeat; width:21px; height:21px; display:inline-block; margin-top:1px; cursor:pointer;}
 .page_title_3 .date {
 	background: #ffa100;
   float: left;
@@ -444,7 +444,7 @@ iframe{ margin: 0 !important; padding: 0 !important; border: 0 !important; width
 .breadcrumbs li a {color:#3895ce;}
 
 .back_to {margin-bottom:18px;}
-.back_to a{font-weight:bold; color:#3895ce; background:url('../img/back_to.png') no-repeat left; padding-left:23px;}
+.back_to a{font-weight:bold; color:#3895ce; background:url('/en/load-public-files?datafrom=file&ext=png&dataid=15&sizetype=false') no-repeat left; padding-left:23px;}
 
 
 .enquire {
@@ -635,7 +635,7 @@ table td:nth-child(odd) {
 
 #event_div {margin-top:20px; margin-bottom:35px;}
 #event_div .event_line_bg {
-	background:url('../img/event_line_bg.png') no-repeat left;
+	background:url('/en/load-public-files?datafrom=file&ext=png&dataid=16&sizetype=false') no-repeat left;
 	min-height:120px;
 }
 
@@ -738,7 +738,7 @@ table td:nth-child(odd) {
 
 .home_div_3 .item .title:after {
 	content:" ";
-	background:url('../img/link_icon.png'); 
+	background:url('/en/load-public-files?datafrom=file&ext=png&dataid=17&sizetype=false'); 
 	width:16px; 
 	height:16px;
 	position: absolute;
@@ -746,13 +746,13 @@ table td:nth-child(odd) {
     right: 5px;
 }
 
-.home_div_3 .trade_map {background:#1279bb url('../img/trade_map_bg.png') no-repeat left; background-size:100% 100%;}
-.home_div_3 .enterprise_georgia {background:#1279bb url('../img/enteprise_georgia_bg.png') no-repeat left; background-size:100% 100%;}
-.home_div_3 .produced_in_georgia {background:#1279bb url('../img/enteprise_georgia_bg.png') no-repeat left; background-size:100% 100%;}
+.home_div_3 .trade_map {background:#1279bb url('/en/load-public-files?datafrom=file&ext=png&dataid=18&sizetype=false') no-repeat left; background-size:100% 100%;}
+.home_div_3 .enterprise_georgia {background:#1279bb url('/en/load-public-files?datafrom=file&ext=png&dataid=19&sizetype=false') no-repeat left; background-size:100% 100%;}
+.home_div_3 .produced_in_georgia {background:#1279bb url('/en/load-public-files?datafrom=file&ext=png&dataid=19&sizetype=false') no-repeat left; background-size:100% 100%;}
 
 
 #trade_map_iframe {position:relative;}
-#map_fullscreen {position:absolute; top:10px; right:10px; width:16px; height:16px; background:url('../img/full_screen.png'); cursor:pointer;}
+#map_fullscreen {position:absolute; top:10px; right:10px; width:16px; height:16px; background:url('/en/load-public-files?datafrom=file&ext=png&dataid=20&sizetype=false'); cursor:pointer;}
 
 
 #home_products {margin-top:10px;}
@@ -775,7 +775,7 @@ table td:nth-child(odd) {
 } 
 #home_products .product_item .text:after {
 	content:" ";
-	background: url('../img/product_shadow.png') no-repeat center;
+	background: url('/en/load-public-files?datafrom=file&ext=png&dataid=21&sizetype=false') no-repeat center;
 	height:5px;
 	width:100%;
 	position:absolute;
@@ -1141,7 +1141,7 @@ body.slide-active {
     height: 3px;
     margin: 5px 0 0 0;
 }
-#slide-nav .navbar-toggle.slide-active  {position:absolute; background:url('../img/menu_x.png'); right:-48%; top:-25px; 
+#slide-nav .navbar-toggle.slide-active  {position:absolute; background:url('/en/load-public-files?datafrom=file&ext=png&dataid=22&sizetype=false'); right:-48%; top:-25px; 
 background-size:100% 100%;
 height:25px; width:25px; z-index:999999999999999999999999999; 
 	
@@ -1299,48 +1299,48 @@ height:25px; width:25px; z-index:999999999999999999999999999;
 .results ul li a{ margin: 0; padding: 0px; color: #555555; }
 .product_box{ margin-bottom: 10px; }
 
-.multiselectBox{ margin: 0; padding: 0; height: 34px; line-height: 34px; position: relative; cursor:pointer; outline: solid 1px #f2f2f2; background-image: url('../img/line.png'); background-repeat: repeat-x; }
+.multiselectBox{ margin: 0; padding: 0; height: 34px; line-height: 34px; position: relative; cursor:pointer; outline: solid 1px #f2f2f2; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=23&sizetype=false'); background-repeat: repeat-x; }
 .multiselectBox .selectBoxWithCheckbox{ margin: 0; padding: 0 12px; height: 34px; line-height: 34px; color:#3895ce; font-size: 15px; position: relative; display:block; }
-.multiselectBox .selectBoxWithCheckbox:after{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: left center; position: absolute; left:0px; }
-.multiselectBox .selectBoxWithCheckbox:before{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: right center; position: absolute; right: 0px; }
+.multiselectBox .selectBoxWithCheckbox:after{ content: ''; width: 1px; height: 34px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=24&sizetype=false'); background-repeat: no-repeat; background-position: left center; position: absolute; left:0px; }
+.multiselectBox .selectBoxWithCheckbox:before{ content: ''; width: 1px; height: 34px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=24&sizetype=false'); background-repeat: no-repeat; background-position: right center; position: absolute; right: 0px; }
 .multiselectBox .selectBoxWithCheckbox_dropdown{ margin: 0; padding: 0; line-height: 17px; max-height: 225px; position: absolute; top:32px; left:0; z-index: 1000; width: 100%; background-color: white; border: solid 1px #3895ce; border-top: none; overflow-y:auto; display: none; }
-.multiselectBox::after{ content: ''; width: 6px; height:6px; background-image: url('../img/drop.png'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
+.multiselectBox::after{ content: ''; width: 6px; height:6px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=25&sizetype=false'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
 .multiselectBox .selectBoxWithCheckbox_dropdown .selectItem{ margin: 0 10px; padding: 5px 0; line-height: 17px; border-bottom: 1px solid #f2f2f2; cursor: pointer; }
 .selectItem span{ color: #3895ce; }
 
 
-.multiselectBox2{ margin: 0; padding: 0; height: 34px; line-height: 34px; position: relative; cursor:pointer; outline: solid 1px #f2f2f2; background-image: url('../img/line.png'); background-repeat: repeat-x; }
+.multiselectBox2{ margin: 0; padding: 0; height: 34px; line-height: 34px; position: relative; cursor:pointer; outline: solid 1px #f2f2f2; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=23&sizetype=false'); background-repeat: repeat-x; }
 .multiselectBox2 .selectBoxWithCheckbox2{ margin: 0; padding: 0 12px; height: 34px; line-height: 34px; color:#3895ce; font-size: 15px; position: relative; }
-.multiselectBox2 .selectBoxWithCheckbox2:after{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: left center; position: absolute; left:0px; }
-.multiselectBox2 .selectBoxWithCheckbox2:before{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: right center; position: absolute; right: 0px; }
+.multiselectBox2 .selectBoxWithCheckbox2:after{ content: ''; width: 1px; height: 34px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=24&sizetype=false'); background-repeat: no-repeat; background-position: left center; position: absolute; left:0px; }
+.multiselectBox2 .selectBoxWithCheckbox2:before{ content: ''; width: 1px; height: 34px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=24&sizetype=false'); background-repeat: no-repeat; background-position: right center; position: absolute; right: 0px; }
 .multiselectBox2 .selectBoxWithCheckbox_dropdown2{ margin: 0; padding: 0; line-height: 17px; max-height: 225px; position: absolute; top:32px; left:0; z-index: 1000; width: 100%; background-color: white; border: solid 1px #3895ce; border-top: none; overflow-y:auto; display: none; }
-.multiselectBox2::after{ content: ''; width: 6px; height:6px; background-image: url('../img/drop.png'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
+.multiselectBox2::after{ content: ''; width: 6px; height:6px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=25&sizetype=false'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
 .multiselectBox2 .selectBoxWithCheckbox_dropdown2 .selectItem2{ margin: 0 10px; padding: 5px 0; line-height: 17px; border-bottom: 1px solid #f2f2f2; cursor: pointer; }
 
-.multiselectBox3{ margin: 0; padding: 0; height: 34px; line-height: 34px; position: relative; cursor:pointer; outline: solid 1px #f2f2f2; background-image: url('../img/line.png'); background-repeat: repeat-x; }
+.multiselectBox3{ margin: 0; padding: 0; height: 34px; line-height: 34px; position: relative; cursor:pointer; outline: solid 1px #f2f2f2; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=23&sizetype=false'); background-repeat: repeat-x; }
 .multiselectBox3 .selectBoxWithCheckbox3{ margin: 0; padding: 0 12px; height: 34px; line-height: 34px; color:#3895ce; font-size: 15px; position: relative; }
-.multiselectBox3 .selectBoxWithCheckbox3:after{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: left center; position: absolute; left:0px; }
-.multiselectBox3 .selectBoxWithCheckbox3:before{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: right center; position: absolute; right: 0px; }
+.multiselectBox3 .selectBoxWithCheckbox3:after{ content: ''; width: 1px; height: 34px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=24&sizetype=false'); background-repeat: no-repeat; background-position: left center; position: absolute; left:0px; }
+.multiselectBox3 .selectBoxWithCheckbox3:before{ content: ''; width: 1px; height: 34px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=24&sizetype=false'); background-repeat: no-repeat; background-position: right center; position: absolute; right: 0px; }
 .multiselectBox3 .selectBoxWithCheckbox_dropdown3{ margin: 0; padding: 0; line-height: 17px; max-height: 225px; position: absolute; top:32px; left:0; z-index: 1000; width: 100%; background-color: white; border: solid 1px #3895ce; border-top: none; overflow-y:auto; display: none; }
-.multiselectBox3::after{ content: ''; width: 6px; height:6px; background-image: url('../img/drop.png'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
+.multiselectBox3::after{ content: ''; width: 6px; height:6px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=25&sizetype=false'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
 .multiselectBox3 .selectBoxWithCheckbox_dropdown3 .selectItem3{ margin: 0 10px; padding: 5px 0; line-height: 17px; border-bottom: 1px solid #f2f2f2; cursor: pointer; }
 
-.multiselectBox4{ margin: 0; padding: 0; height: 34px; line-height: 34px; position: relative; cursor:pointer; outline: solid 1px #f2f2f2; background-image: url('../img/line.png'); background-repeat: repeat-x; }
+.multiselectBox4{ margin: 0; padding: 0; height: 34px; line-height: 34px; position: relative; cursor:pointer; outline: solid 1px #f2f2f2; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=23&sizetype=false'); background-repeat: repeat-x; }
 .multiselectBox4 .selectBoxWithCheckbox4{ margin: 0; padding: 0 12px; height: 34px; line-height: 34px; color:#3895ce; font-size: 15px; position: relative; }
-.multiselectBox4 .selectBoxWithCheckbox4:after{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: left center; position: absolute; left:0px; }
-.multiselectBox4 .selectBoxWithCheckbox4:before{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: right center; position: absolute; right: 0px; }
+.multiselectBox4 .selectBoxWithCheckbox4:after{ content: ''; width: 1px; height: 34px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=24&sizetype=false'); background-repeat: no-repeat; background-position: left center; position: absolute; left:0px; }
+.multiselectBox4 .selectBoxWithCheckbox4:before{ content: ''; width: 1px; height: 34px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=24&sizetype=false'); background-repeat: no-repeat; background-position: right center; position: absolute; right: 0px; }
 .multiselectBox4 .selectBoxWithCheckbox_dropdown4{ margin: 0; padding: 0; line-height: 17px; position: absolute; top:32px; left:0; z-index: 1000; width: 100%; background-color: white; border: solid 1px #3895ce; border-top: none; display: none; }
 .multiselectBox4 .selectBoxWithCheckbox_dropdown4 .loadCountriesExport{ margin: 0; padding: 0; max-height: 200px; overflow: auto; }
-.multiselectBox4::after{ content: ''; width: 6px; height:6px; background-image: url('../img/drop.png'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
+.multiselectBox4::after{ content: ''; width: 6px; height:6px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=25&sizetype=false'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
 .multiselectBox4 .selectBoxWithCheckbox_dropdown4 .selectItem4{ margin: 0 10px; padding: 5px 0; line-height: 17px; border-bottom: 1px solid #f2f2f2; cursor: pointer; }
 .selectItem44{ margin: 0 10px; padding: 5px 0; line-height: 17px; border-bottom: 1px solid #f2f2f2; cursor: pointer; }
 
-.multiselectBox5{ margin: 0; padding: 0; height: 34px; line-height: 34px; position: relative; cursor:pointer; outline: solid 1px #f2f2f2; background-image: url('../img/line.png'); background-repeat: repeat-x; }
+.multiselectBox5{ margin: 0; padding: 0; height: 34px; line-height: 34px; position: relative; cursor:pointer; outline: solid 1px #f2f2f2; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=23&sizetype=false'); background-repeat: repeat-x; }
 .multiselectBox5 .selectBoxWithCheckbox5{ margin: 0; padding: 0 12px; height: 34px; line-height: 34px; color:#3895ce; font-size: 15px; position: relative; }
-.multiselectBox5 .selectBoxWithCheckbox5:after{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: left center; position: absolute; left:0px; }
-.multiselectBox5 .selectBoxWithCheckbox5:before{ content: ''; width: 1px; height: 34px; background-image: url('../img/line2.png'); background-repeat: no-repeat; background-position: right center; position: absolute; right: 0px; }
+.multiselectBox5 .selectBoxWithCheckbox5:after{ content: ''; width: 1px; height: 34px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=24&sizetype=false'); background-repeat: no-repeat; background-position: left center; position: absolute; left:0px; }
+.multiselectBox5 .selectBoxWithCheckbox5:before{ content: ''; width: 1px; height: 34px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=24&sizetype=false'); background-repeat: no-repeat; background-position: right center; position: absolute; right: 0px; }
 .multiselectBox5 .selectBoxWithCheckbox_dropdown5{ margin: 0; padding: 0; line-height: 17px; max-height: 225px; position: absolute; top:32px; left:0; z-index: 1000; width: 100%; background-color: white; border: solid 1px #3895ce; border-top: none; overflow-y:auto; display: none; }
-.multiselectBox5::after{ content: ''; width: 6px; height:6px; background-image: url('../img/drop.png'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
+.multiselectBox5::after{ content: ''; width: 6px; height:6px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=25&sizetype=false'); background-repeat: no-repeat; position: absolute; top:14px; right: 10px; }
 .multiselectBox5 .selectBoxWithCheckbox_dropdown5 .selectItem5{ margin: 0 10px; padding: 5px 0; line-height: 17px; border-bottom: 1px solid #f2f2f2; cursor: pointer; }
 
 .subscribeproductsenquires, .registernewuser, .usersigned, .eventRegister{ cursor: pointer; }
@@ -1353,7 +1353,7 @@ table tr td p{ margin-bottom: 0px !important }
 .itemssss{ position: relative; }
 .itemssss:after{
 	content: " ";
-    background: url('../img/export_after_bg.png') no-repeat left;
+    background: url('/en/load-public-files?datafrom=file&ext=png&dataid=26&sizetype=false') no-repeat left;
     position: absolute;
     left: 0;
     top: 0;
@@ -1364,7 +1364,7 @@ table tr td p{ margin-bottom: 0px !important }
 }
 .itemssss:before{
 	content: " ";
-    background: url('../img/export_after_bg.png') no-repeat left;
+    background: url('/en/load-public-files?datafrom=file&ext=png&dataid=26&sizetype=false') no-repeat left;
     position: absolute;
     right: 0;
     top: 0;
@@ -1388,14 +1388,14 @@ table tr td p{ margin-bottom: 0px !important }
 .procent-publish{ margin: 0; padding: 0; width:250px; height: 10px; border-radius: 10px; background-color: #edd1a2; position: absolute; top: 0; left: 0; z-index: 1; }
 .procent-outertext{ margin: 0; padding: 0; width: 250px; line-height: 14px; font-size: 12px; color:#b9b9b9; font-family: 'roboto'; position: absolute; top: -2px; left: 520px; }
 .text_formats ul{ margin: 0; padding: 0; list-style-type: none; }
-.text_formats ul li{ padding: 0; margin: 0 0 0 15px; width: 100%; position: relative; line-height: 25px; }
+.text_formats ul li{ padding: 0; margin: 0 0 0 15px; position: relative; line-height: 25px; }
 .text_formats ul li:hover{ text-decoration: none; }
-.text_formats ul li:after{ margin: 0; padding: 0; content: ''; width: 10px; height: 10px; position: absolute; top: 6px; left: -15px; background-image: url('../img/bullet.svg'); background-size: 10px 10px; background-repeat: no-repeat; }
+.text_formats ul li:after{ margin: 0; padding: 0; content: ''; width: 10px; height: 10px; position: absolute; top: 6px; left: -15px; background-image: url('/en/load-public-files?datafrom=file&ext=svg&dataid=27&sizetype=false'); background-size: 10px 10px; background-repeat: no-repeat; }
 
 .text_formats ol{ margin: 0; padding: 0; list-style-type: none; }
 .text_formats ol li{ padding: 0; margin: 0 0 0 15px; width: 100%; position: relative; line-height: 25px; }
 .text_formats ol li:hover{ text-decoration: none; }
-.text_formats ol li:after{ margin: 0; padding: 0; content: ''; width: 10px; height: 10px; position: absolute; top: 7px; left: -15px; background-image: url('../img/arrow2.svg'); background-size: 10px 10px; background-repeat: no-repeat; }
+.text_formats ol li:after{ margin: 0; padding: 0; content: ''; width: 10px; height: 10px; position: absolute; top: 7px; left: -15px; background-image: url('/en/load-public-files?datafrom=file&ext=svg&dataid=28&sizetype=false'); background-size: 10px 10px; background-repeat: no-repeat; }
 .homepageEventRegister{ cursor: pointer; }
 #insideProductImage{ cursor:pointer; max-width:300px; min-height:170px; }
 .loader{ padding: 0 10px; }
@@ -1421,7 +1421,7 @@ table tr td p{ margin-bottom: 0px !important }
 	margin: 0;
 }
 .mymap{ margin:0; padding:0; border:0; width:100%; position: relative; background: #424862; }
-.openmap{ margin: 0; padding: 0; width: 21px; height: 21px; background-image: url('/_plugins/jvectormap/exsize2.svg'); background-size: 21px 21px; position: absolute; right: 10px; top: 10px; z-index: 1001 }
+.openmap{ margin: 0; padding: 0; width: 21px; height: 21px; background-image: url('/en/load-public-files?datafrom=file&ext=svg&dataid=29&sizetype=false'); background-size: 21px 21px; position: absolute; right: 10px; top: 10px; z-index: 1001 }
 .openmap a{ margin: 0; padding: 0; width: 21px; height: 21px; display: block; text-decoration: none; }
 .searchMap{ margin:0; padding: 0; border: 0; width: 100%; background: #424862; min-height: 140px; }
 .searchMap .general-title{ padding: 10px; font-size: 26px; line-height: 26px; color: #ffffff; font-weight: bold; }
@@ -1431,15 +1431,15 @@ table tr td p{ margin-bottom: 0px !important }
 .searchMap .viewby .content .input{ margin: 0 10px 0 0; font-size: 14px; padding: 0 0 0 30px; float: left; position: relative; cursor: pointer; }
 .searchMap .viewby .content .input:hover{ color: #fea100; }
 
-.searchMap .viewby .content .checked::after{ content:" "; margin:0; padding: 0; width: 14px; height: 14px; background-image: url('/_plugins/jvectormap/checked.png'); background-repeat: no-repeat; background-position: center center; position: absolute; top: 3px; left: 3px }
-.searchMap .viewby .content .unchecked::after{ content:" "; margin:0; padding: 0; width: 14px; height: 14px; background-image: url('/_plugins/jvectormap/uncheked.png'); background-repeat: no-repeat; background-position: center center; position: absolute; top: 3px; left: 3px; }
+.searchMap .viewby .content .checked::after{ content:" "; margin:0; padding: 0; width: 14px; height: 14px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=30&sizetype=false'); background-repeat: no-repeat; background-position: center center; position: absolute; top: 3px; left: 3px }
+.searchMap .viewby .content .unchecked::after{ content:" "; margin:0; padding: 0; width: 14px; height: 14px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=31&sizetype=false'); background-repeat: no-repeat; background-position: center center; position: absolute; top: 3px; left: 3px; }
 .searchMap .traderegimes{ margin: 10px; padding: 5px; width: calc(100% - 20px); float: left; border: solid 1px #fea100; }
 .searchMap .traderegimes .title{ margin: 0; padding: 0; color:#fea100; }
 .searchMap .traderegimes .content{ margin: 5px 0 0 0; padding: 0; color:#ffffff; }
 .searchMap .traderegimes .content .input2{ margin: 0 10px 0 0; padding: 0 0 0 30px; float: left; position: relative; cursor: pointer; }
 .searchMap .traderegimes .content .input2:hover{ color: #fea100; }
-.searchMap .traderegimes .content .checked::after{ content:" "; margin:0; padding: 0; width: 14px; height: 14px; background-image: url('/_plugins/jvectormap/checked.png'); background-repeat: no-repeat; background-position: center center; position: absolute; top: 3px; left: 3px }
-.searchMap .traderegimes .content .unchecked::after{ content:" "; margin:0; padding: 0; width: 14px; height: 14px; background-image: url('/_plugins/jvectormap/uncheked.png'); background-repeat: no-repeat; background-position: center center; position: absolute; top: 3px; left: 3px; }
+.searchMap .traderegimes .content .checked::after{ content:" "; margin:0; padding: 0; width: 14px; height: 14px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=30&sizetype=false'); background-repeat: no-repeat; background-position: center center; position: absolute; top: 3px; left: 3px }
+.searchMap .traderegimes .content .unchecked::after{ content:" "; margin:0; padding: 0; width: 14px; height: 14px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=31&sizetype=false'); background-repeat: no-repeat; background-position: center center; position: absolute; top: 3px; left: 3px; }
 
 /* Map Mobile Version */
 .mobileMapBox{ margin: 0; padding: 0; width: 100%; clear: both; display: none; }
@@ -1474,12 +1474,12 @@ table tr td p{ margin-bottom: 0px !important }
 	.hideInMobile{ display: none !important; }
 	.filters_in_mobile{ display: block; margin: 10px 0 0 0; padding: 0; height:38px; line-height: 38px; width: 100%; background-color: #fea100; text-align: center; font-size: 19px; font-weight: bold; font-family: 'Roboto'; color:white; position: relative; cursor: pointer; text-transform: uppercase; border-radius: 3px;   }
 	.filters_in_mobile span{ display: block; width: 100%; height: 35px; line-height: 35px; cursor: pointer; }
-	.filters_in_mobile .after{ width: 16px; height: 16px; position: absolute; right: 10px; top: 10px; background-image: url('../img/arrow.svg'); background-size: 16px 16px; background-repeat: no-repeat; background-position: center center; display: none; }
+	.filters_in_mobile .after{ width: 16px; height: 16px; position: absolute; right: 10px; top: 10px; background-image: url('/en/load-public-files?datafrom=file&ext=svg&dataid=32&sizetype=false'); background-size: 16px 16px; background-repeat: no-repeat; background-position: center center; display: none; }
 	.showLevel1{ margin: -2px 0 0 0; padding: 0; width: 100%; display: none; background-color: #ffe3b2; border:solid 1px #fea100; border-top:none;  }
 	.or{ margin:0 0 20px 0; padding:0; width:100%; height:18px; display:block; color: #c1c1c1; text-transform: uppercase; text-align: center; font-size: 22px; line-height: 18px; }
 	.hideDesktop{ display: block; }
 	.chooseMe{ margin: 0 20px; padding: 15px 0px; border-bottom:solid 1px #ffc562; color: #061c73; font-weight: bold; font-size: 16px; line-height: 18px; cursor: pointer; }
-	.downArrow{ margin:0; padding:0 10px; width: 13px; height:10px; background-image: url('../img/filterArrow.png'); background-size: 13px 6px; background-repeat: no-repeat; background-position: center center; display: inline-block; }
+	.downArrow{ margin:0; padding:0 10px; width: 13px; height:10px; background-image: url('/en/load-public-files?datafrom=file&ext=png&dataid=33&sizetype=false'); background-size: 13px 6px; background-repeat: no-repeat; background-position: center center; display: inline-block; }
 	.hidedUlli ul{ margin: 0; padding:0; list-style-type: none;}
 	.hidedUlli ul li{ margin: 0; padding:0; }
 	.hidedUlli ul li a{ margin: 0; padding:3px 20px; color:#4c5484; display: block; width: 100%; line-height: 22px; font-size: 16px; }

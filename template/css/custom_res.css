@@ -6,7 +6,7 @@
 	}
 	
 	.navbar-trade .nav > li.active a,
-	.navbar-trade .nav > li > a:hover {background: url('../img/menu_bg.png') bottom; background-size:auto 100%;}
+	.navbar-trade .nav > li > a:hover {background: url('/en/load-public-files?datafrom=file&ext=png&dataid=35&sizetype=false') bottom; background-size:auto 100%;}
 	.navbar-trade .nav > li.active a:after,
 	.navbar-trade .nav > li > a:hover:after {
 	 	
@@ -14,7 +14,7 @@
 	 
 	.navbar-trade .nav > li > a:before {
 		content:" ";
-		background:url('../img/menu_a_border.png');
+		background:url('/en/load-public-files?datafrom=file&ext=png&dataid=36&sizetype=false');
 		height:34px;
 		width:1px;
 		position:absolute;
@@ -99,7 +99,7 @@
 	.navbar-trade .nav > li > a:hover {opacity:0.7}
 	
 	.navbar-trade .nav > li > a {
-		background:url('../img/responsive_menu_line.png') no-repeat bottom ;
+		background:url('/en/load-public-files?datafrom=file&ext=png&dataid=37&sizetype=false') no-repeat bottom ;
 		background-size:100% auto;
 	}
 	

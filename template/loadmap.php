@@ -143,10 +143,11 @@ $(document).on("change",".mobileMapBox-viewBySub", function(){
 					for(var i = 0; i < obj.length; i++){
 						var code = obj[i].smi_title;
 						var descr = obj[i].smi_long_description;
-						// var colr = obj[i].smi_color;
+						var colr = obj[i].smi_color;
 						// nowTitle.push(code.toUpperCase());
 						// $("#code_" + code.toUpperCase()).css({ fill: colr });
-						$("#mobcode_" + code.toUpperCase()).text(obj[i].smi_long_description);
+						$("#mobcode_" + code.toUpperCase()).html(obj[i].smi_long_description);
+						$("#mobcode_" + code.toUpperCase()).css("background-color",colr);
 						
 					}
 				}

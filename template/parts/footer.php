@@ -38,11 +38,11 @@
 			</div>
 			<div class="col-sm-4 padding_0">
 				<li><?=$data["language_data"]["supportby"]?>:</li>
-				<a href="https://www.giz.de" target="_blank"><img src="<?=TEMPLATE?>img/donor_org.png" style="width:250px;"/></a>
+				<a href="https://www.giz.de" target="_blank"><img src="/<?=LANG?>/load-public-files?datafrom=file&amp;ext=png&amp;dataid=46&amp;sizetype=false" style="width:250px;"/></a>
 			</div>
 			<div class="col-sm-2 padding_0 text-right getsadze_design">
 				<a href="http://getsadze.co.uk/en/home" target="_blank">
-					<img src="<?=TEMPLATE?>img/getsadze_design.png"/>
+					<img src="/<?=LANG?>/load-public-files?datafrom=file&amp;ext=png&amp;dataid=47&amp;sizetype=false"/>
 				</a>
 			</div>
 		</div>

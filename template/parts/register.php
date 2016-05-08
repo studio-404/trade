@@ -5,26 +5,10 @@
     <div class="modal-content">
 		<div class="modal-body">
 			<h3 class="modal-title" id="modal-register">Register as Exporter <small data-toggle="modal" data-target="#login_popup" onclick="$('#register_popup').modal('hide')">Log In</small></h3>
-			<!-- <ul class="" role="tablist">
-				<li class="btn btn-block btn-blue active">
-					<a href="#export_catalogue" aria-controls="export_catalogue" role="tab" data-toggle="tab"><?=strtoupper($data["language_data"]["exportcatalog"])?></a>
-				</li>
-				<li class="btn btn-block btn-blue">
-					<a href="#bussines_enquires" aria-controls="bussines_enquires" role="tab" data-toggle="tab"><?=strtoupper($data["language_data"]["bussinesenquires"])?></a>
-				</li>
-			</ul> -->
 			 
 			<div class="tab-content" style="margin-top:10px">
 				<div role="tabpanel" class="tab-pane active" id="export_catalogue">
 					<div id="first-step">
-						<!-- <div class="form-group">
-							<label for="companytype1"><?=$data["language_data"]["companytype"]?></label>
-							<select class="form-control" name="companytype" id="companytype1">
-								<option value="manufacturer"><?=$data["language_data"]["manufacturing"]?></option>
-								<option value="serviceprovider"><?=$data["language_data"]["serviceprovider"]?></option>
-							</select>
-							<div class="error_message companytype1_required"><?=$data["language_data"]["companytyperequired"]?> !</div>
-						</div> -->
 						<div class="form-group">
 							<label for="emailaddress1"><?=$data["language_data"]["emailaddress"]?></label>
 							<input type="text" class="form-control" name="emailaddress" value="" id="emailaddress1" autocomplete="off" onkeypress="submitme(event,'register_catalog')" />

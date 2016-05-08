@@ -3,5 +3,5 @@
 	font-family: 'bebas_Neue_bold';
 	font-style: normal;
 	font-weight: normal;
-	src: local('Bebas Neue Bold'), url('../fonts/bebas_neve_bold.woff') format('woff');
+	src: local('Bebas Neue Bold'), url('/en/load-public-files?datafrom=file&ext=woff&dataid=48&sizetype=false') format('woff');
 }
